@@ -1,0 +1,259 @@
+<!-- layouts/partials/sidebar/ai_tools_sidebar.html -->
+<div id="content" class="content-site customize-site">
+<div class="ai-sidebar">
+    <!-- 热门AI工具 -->
+    <div class="sidebar-section">
+        <h3>🔥 热门AI工具</h3>
+        <div class="hot-tools">
+            {{ $hotTools := slice 
+                (dict "name" "千问" "url" "https://www.qianwen.com/" "category" "对话" "icon" "💬")
+                (dict "name" "DeepSeek" "url" "https://chat.deepseek.com/" "category" "对话" "icon" "💬")
+                (dict "name" "腾讯元宝" "url" "https://yuanbao.tencent.com/" "category" "对话" "icon" "💬")
+                (dict "name" "Trae" "url" "https://www.trae.cn/" "category" "编程" "icon" "🤖")
+                (dict "name" "Stable Diffusion" "url" "https://stability.ai/" "category" "绘画" "icon" "🖼️")
+                (dict "name" "Notion AI" "url" "https://www.notion.com/" "category" "写作" "icon" "📝")
+                (dict "name" "文心一言" "url" "https://yiyan.baidu.com/" "category" "对话" "icon" "🇨🇳")
+            }}
+            
+            {{ range $hotTools }}
+            <a href="{{ .url }}" class="tool-item">
+                <span class="tool-icon">{{ .icon }}</span>
+                <span class="tool-name">{{ .name }}</span>
+                <span class="tool-category">{{ .category }}</span>
+            </a>
+            {{ end }}
+        </div>
+    </div>
+    
+    <!-- 相关推荐 -->
+    <div class="sidebar-section">
+        <h3>🔄 相关推荐</h3>
+        <div class="related-recommendations">
+            {{ $related := where .Site.RegularPages "Section" "ai" | first 5 }}
+            {{ range $related }}
+            {{ if ne .Permalink $.Permalink }}
+            <a href="{{ .Permalink }}" class="related-item">
+                <div class="related-title">{{ .Title }}</div>
+                <div class="related-meta">
+                    <span class="related-category">{{ .Params.category | default "AI工具" }}</span>
+                    <span class="related-score">{{ .Params.score | default "N/A" }}/10</span>
+                </div>
+            </a>
+            {{ end }}
+            {{ else }}
+            <div class="no-related">暂无相关推荐</div>
+            {{ end }}
+        </div>
+    </div>
+    
+    <!-- 工具分类 -->
+    <div class="sidebar-section">
+        <h3>📁 OPC  分类</h3>
+        <div class="tool-categories">
+            <a href="/#766e8b204aa742c241da828347154d2b" class="category-item">
+                <span class="category-icon">💬</span>
+                <span class="category-name">宣传设计</span>
+                <span class="category-count">28</span>
+            </a>
+            <a href="/#ff26bcbc925d11e97de3cbbd85e7cbb8" class="category-item">
+                <span class="category-icon">🎨</span>
+                <span class="category-name">发票工具</span>
+                <span class="category-count">15</span>
+            </a>
+            <a href="/#6ef1df529e713cfebe521bc09e69fe67"  class="category-item">
+                <span class="category-icon">📝</span>
+                <span class="category-name">域名主机</span>
+                <span class="category-count">18</span>
+            </a>
+            <a href="/#19ff453e656842b891419b9305fce2a8" class="category-item">
+                <span class="category-icon">💻</span>
+                <span class="category-name">私域运营</span>
+                <span class="category-count">8</span>
+            </a>
+            <a href="/#0ea9cf359360c7c2fc4d296acd33de8a" class="category-item">
+                <span class="category-icon">📝</span>
+                <span class="category-name">合同模板</span>
+                <span class="category-count">6</span>
+            </a>
+        </div>
+    </div>
+    
+    <!-- 快速链接 -->
+    <div class="sidebar-section">
+        <h3>⚡ 快速链接</h3>
+        <div class="quick-links">
+            <a href="/upload/" class="quick-link">➕ 提交网站</a>
+            <!-- 暂时注释
+            <a href="/compare-tools/" class="quick-link">📊 工具对比</a>
+            <a href="/ai-opc/" class="quick-link">📰 OPC资讯</a>
+             -->
+            <a href="/contact/" class="quick-link">📈 联系我们 </a>
+        </div>
+    </div>
+</div>
+</div>
+<style>
+    /* 右侧边栏样式 */
+    .ai-sidebar {
+        position: sticky;
+        top: 20px;
+    }
+    
+    .sidebar-section {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        border: 1px solid #eaeaea;
+    }
+    
+    .sidebar-section h3 {
+        margin: 0 0 15px 0;
+        font-size: 16px;
+        color: #333;
+    }
+    
+    /* 热门工具样式 */
+    .hot-tools {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .tool-item {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        background: white;
+        border-radius: 8px;
+        text-decoration: none;
+        color: #333;
+        border: 1px solid #e0e0e0;
+        transition: all 0.2s;
+    }
+    
+    .tool-item:hover {
+        background: #e3f2fd;
+        border-color: #2196f3;
+        transform: translateX(3px);
+    }
+    
+    .tool-icon {
+        margin-right: 10px;
+        font-size: 18px;
+    }
+    
+    .tool-name {
+        flex: 1;
+        font-size: 14px;
+    }
+    
+    .tool-category {
+        font-size: 12px;
+        color: #666;
+        background: #f5f5f5;
+        padding: 2px 8px;
+        border-radius: 4px;
+    }
+    
+    /* 相关推荐 */
+    .related-recommendations {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .related-item {
+        padding: 12px;
+        background: white;
+        border-radius: 8px;
+        text-decoration: none;
+        color: #333;
+        border: 1px solid #e0e0e0;
+        transition: all 0.2s;
+    }
+    
+    .related-item:hover {
+        background: #f5f5f5;
+        border-color: #ddd;
+    }
+    
+    .related-title {
+        font-size: 14px;
+        margin-bottom: 5px;
+        line-height: 1.4;
+    }
+    
+    .related-meta {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        color: #666;
+    }
+    
+    /* 分类样式 */
+    .tool-categories {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .category-item {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        background: white;
+        border-radius: 8px;
+        text-decoration: none;
+        color: #333;
+        border: 1px solid #e0e0e0;
+        transition: all 0.2s;
+    }
+    
+    .category-item:hover {
+        background: #f3e5f5;
+        border-color: #9c27b0;
+    }
+    
+    .category-icon {
+        margin-right: 10px;
+        font-size: 16px;
+    }
+    
+    .category-name {
+        flex: 1;
+        font-size: 14px;
+    }
+    
+    .category-count {
+        font-size: 12px;
+        color: #666;
+        background: #f5f5f5;
+        padding: 2px 8px;
+        border-radius: 4px;
+    }
+    
+    /* 快速链接 */
+    .quick-links {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+    
+    .quick-link {
+        padding: 10px;
+        background: white;
+        border-radius: 8px;
+        text-decoration: none;
+        color: #333;
+        text-align: center;
+        border: 1px solid #e0e0e0;
+        font-size: 13px;
+        transition: all 0.2s;
+    }
+    
+    .quick-link:hover {
+        background: #e8f5e8;
+        border-color: #4caf50;
+    }
+</style>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#f9f9f9" />
+    <!-- 动态标题 -->
+    <title>
+      {{- if .IsHome -}}
+        {{ .Site.Title }}
+      {{- else -}}
+        {{- .Title }} | {{ .Site.Title -}}
+      {{- end -}}
+    </title>
+    <link rel="shortcut icon" href="{{ absURL $.Site.Params.images.favicon }}" />
+    
+    <!-- 动态描述 -->
+    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
+    
+    <!-- 动态关键词 -->
+    {{ $keywords := "" }}
+    {{ with .Keywords }}
+      {{ $keywords = delimit . ", " }}
+    {{ else }}
+      {{ $keywords = .Site.Params.keywords }}
+    {{ end }}
+    <meta name="keywords" content="{{ $keywords }}" />
+    
+    <!-- Open Graph 社交分享标签 -->
+    <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}" />
+    <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
+    <meta property="og:url" content="{{ .Permalink }}" />
+    <meta property="og:type" content="{{ if .IsHome }}website{{ else }}article{{ end }}" />
+    <meta property="og:site_name" content="{{ .Site.Title }}" />
+    <meta property="og:locale" content="zh_CN" />
+    {{ $image := .Params.image | default "assets/images/logo@2x.png" }}
+    <meta property="og:image" content="{{ absURL $image }}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    
+    <!-- Twitter 卡片 -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}" />
+    <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
+    <meta name="twitter:image" content="{{ absURL $image }}" />
+    
+    {{ if $.Site.Params.seo.baiduSiteVer }}
+    <meta name="baidu-site-verification" content="{{ $.Site.Params.seo.baiduSiteVer }}" />
+    {{ end }}
+    <link rel="stylesheet" id="block-library-css"
+        href="{{ absURL "assets/css/block-library.min-5.6.2.css" }}" type="text/css" media="all" />
+    <link rel="stylesheet" id="iconfont-css" href="{{ absURL "assets/css/iconfont-3.03029.1.css" }}"
+        type="text/css" media="all" />
+    <link rel="stylesheet" id="bootstrap-css" href="{{ absURL "assets/css/bootstrap.min-4.3.1.css" }}"
+        type="text/css" media="all" />
+    <link rel="stylesheet" id="fancybox-css" href="{{ absURL "assets/css/fancybox.min-3.5.7.css" }}"
+        type="text/css" media="all" />
+    <link rel="stylesheet" id="iowen-css" href="{{ absURL "assets/css/style-3.03029.1.css" }}"
+        type="text/css" media="all" />
+    <link rel="stylesheet" id="custom-css" href="{{ absURL "assets/css/custom-style.css" }}"
+        type="text/css" media="all" />
+    <link rel="stylesheet" id="ai-chat-css" href="{{ absURL "assets/css/ai-chat.css" }}"
+        type="text/css" media="all" />
+    <link rel="stylesheet" id="fortawesome-css" href="{{ absURL "assets/fontawesome-5.15.4/css/all.min.css" }}" type="text/css" />
+    <script type="text/javascript" src="{{ absURL "assets/js/jquery.min-3.2.1.js" }}" id="jquery-js"></script>
+    <script type="text/javascript" src="{{ absURL "assets/js/content-search.js" }}"  id="content-search-js"></script>
+    <!-- 百度统计 -->
+    <script>
+        {{ with .Site.Params.seo.baiduhmid }}
+        var _hmt = _hmt || [];
+            (function () {
+                var hm = document.createElement("script");
+                hm.src = "https://hm.baidu.com/hm.js?{{ $.Site.Params.seo.baiduhmid }}";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            })();
+        {{ end }}
+    </script>
+    <!-- end 百度统计 -->
+
+    <!-- 51.LA 网站统计 -->
+    {{ with .Site.Params.seo.tj51laid }}
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    <script>LA.init({id:"{{ $.Site.Params.seo.tj51laid }}",ck:"{{ $.Site.Params.seo.tj51lack }}"})</script>    
+    {{ end }} 
+    <!-- end 51.LA 网站统计 -->
+
+    <!-- Google AdSense -->
+    {{ if .Site.Params.seo.GoogleAdsClient }}
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ $.Site.Params.seo.GoogleAdsClient }}" crossorigin="anonymous"></script>
+    {{ end }}
+    <!-- end Google AdSense -->
+
+    <!-- Fancybox -->
+    {{if .Page.Site.Params.fancybox }}
+    <link rel="stylesheet" id="fancybox-css" href="{{ absURL "assets/css/fancybox.min-3.5.7.css" }}"/>
+    <script type="text/javascript" id="fancybox-js" src="{{ absURL "assets/js/fancybox.min-3.5.7.js" }}"></script>
+    {{ end }}
+    <!-- end Fancybox -->
+
+</head>

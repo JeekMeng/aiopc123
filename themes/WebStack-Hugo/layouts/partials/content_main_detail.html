@@ -1,0 +1,65 @@
+<div id="content" class="content-site customize-site">
+	<article class="ai-product-content">
+		<!-- 标题区域 -->
+		<header class="product-header">
+		    <h1>{{ index (split .Title " - ") 0 }}</h1>
+		    <div class="product-meta">
+			<span class="product-score"><i class="fas fa-star"></i> 评分: <strong>{{ .Params.score | default "N/A" }}</strong>/10</span>
+			<span class="product-category"><i class="fas fa-tag"></i> {{ .Params.category | default "AI工具" }}</span>
+			<span class="product-update"><i class="fas fa-calendar-alt"></i> 更新: {{ .Date.Format "2006-01-02" }}</span>
+			{{ if .Params.price }}
+			<span class="product-price"><i class="fas fa-dollar-sign"></i> {{ .Params.price }}</span>
+			{{ end }}
+			{{ if .Params.company }}
+			<span class="product-company"><i class="fas fa-building"></i> {{ .Params.company }}</span>
+			{{ end }}
+		    </div>
+
+		    <div class="tool-action-buttons">
+			    {{ if .Params.official_url }}
+			    <a href="{{ .Params.official_url }}" target="_blank" rel="noopener noreferrer" class="btn-primary">
+				<i class="fas fa-external-link-alt"></i> 链接直达
+			    </a>
+			    {{ end }}
+
+			    {{ if .Params.mobile_url }}
+			    <a href="{{ .Params.mobile_url }}" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+				<i class="fas fa-mobile-alt"></i> 手机查看
+			    </a>
+			    {{ end }}
+
+			    {{ if .Params.download_url }}
+			    <a href="{{ .Params.download_url }}" target="_blank" rel="noopener noreferrer" class="btn-primary">
+				<i class="fas fa-download"></i> 立即下载
+			    </a>
+			    {{ end }}
+		    </div>
+		</header>
+
+		<!-- 内容区域 -->
+		<div class="content-body">
+		    {{ .Content }}
+		</div>
+
+		<!-- 页脚信息 -->
+		<footer class="content-footer">
+		    <div class="footer-meta">
+			<span><i class="fas fa-history"></i> 最后更新: {{ .Lastmod.Format "2006-01-02" }}</span>
+			<span><i class="fas fa-eye"></i> 浏览次数: <span id="view-count"> 19 </span></span>
+			{{ if .Params.author }}
+			<span><i class="fas fa-user"></i> 作者: {{ .Params.author }}</span>
+			{{ end }}
+		    </div>
+		    {{ if .Params.tags }}
+		    <div class="footer-tags">
+			{{ range .Params.tags }}
+			<a href="/tags/{{ . | urlize }}/" class="tag">{{ . }}</a>
+			{{ end }}
+		    </div>
+		    {{ end }}
+		</footer>
+	</article>
+</div>
+
+
+

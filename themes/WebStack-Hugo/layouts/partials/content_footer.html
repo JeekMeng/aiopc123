@@ -1,0 +1,79 @@
+        <div class="footer-container">
+            <div class="footer-content">
+                <!-- 三栏布局 -->
+                <div class="footer-columns">
+                    <!-- 左栏：网站介绍声明 -->
+                    <div class="footer-column footer-about">
+                        <h4>关于我们</h4>
+                        <p><span class="site-name">AI一人公司导航网</span> 是一个通过AI工具，服务于快速实现一人公司创业的导航网站，提供一站式一人公司创业服务。</p>
+    <p>我们致力于打造最全面、最实用的AI 一人公司资源导航平台，帮助用户快速找到所需工具和学习资料，降低AI学习门槛，建立属于自己的超级个体。</p>
+                    </div>
+                    
+                    <!-- 中栏：免责声明 -->
+                    <div class="footer-column">
+                        <h4>免责声明</h4>
+                        <div class="disclaimer-content">
+                            <p>本站所有内容均来自互联网，仅供学习和参考使用，不构成任何投资或法律建议。</p>
+                            <p>本站不对所展示的任何外部链接网站内容负责，用户访问这些链接风险自负。</p>
+                            <p>如发现侵权内容，请及时联系我们（3994983718@qq.com）进行删除处理。</p>
+                            <p>用户在本站提交的信息，我们将在24小时内审核处理。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 右栏：二维码区域 -->
+                    <div class="footer-column qr-section">
+                        <h4>关注我们</h4>
+                        <div class="qr-container">
+                            <div class="qr-item">
+                                <h5>公众号</h5>
+                                <div class="qr-image">
+                                    <img src="{{ absURL "assets/images/蒙哥公众号.jpg" }}" alt="微信公众号二维码">
+                                </div>
+                                <p class="qr-desc">扫码关注公众号，获取最新资讯</p>
+                            </div>
+                            <div class="qr-item">
+                                <h5>联系我们</h5>
+                                <div class="qr-image">
+                                    <img src="{{ absURL "assets/images/蒙哥微信号.jpg" }}" alt="个人微信二维码">
+                                </div>
+                                <p class="qr-desc">添加微信，获取一对一咨询服务</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 保留原有的浮动工具按钮 -->
+        <footer class="main-footer footer-type-1 text-xs">
+            <div id="footer-tools" class="d-flex flex-column">
+                <a href="javascript:" id="go-to-up" class="btn rounded-circle go-up m-1" rel="go-top">
+                    <i class="fas fa-arrow-up"></i>
+                </a>
+                <!-- 右下角搜索  -->
+                <a href="javascript:" data-toggle="modal" data-target="#search-modal" class="btn rounded-circle m-1"
+                    rel="search" one-link-mark="yes">
+                    <i class="fas fa-search"></i>
+                </a>
+                <a href="/contact" class="btn rounded-circle kefu m-1" target="_blank" data-toggle="tooltip" data-placement="left" title="联系我们">
+                    <i class="fas fa-comment"></i>
+                </a>
+                <!-- 右下角搜索 end -->
+                {{ if $.Site.Params.nightMode }} 
+                <a href="javascript:" onclick="window.location.href='javascript:switchNightMode()'" class="btn rounded-circle switch-dark-mode m-1" id="yejian"
+                    data-toggle="tooltip" data-placement="left" title="夜间模式">
+                    <i class="fas fa-moon"></i>
+                </a>
+		{{ else }}
+		<a href="javascript:" onclick="window.location.href='javascript:switchNightMode()'" class="btn rounded-circle switch-dark-mode m-1" id="yejian"
+                    data-toggle="tooltip" data-placement="left" title="日间模式">
+                    <i class="fas fa-sun"></i>
+                </a>
+                {{ end }}
+            </div>
+            <div class="footer-inner">
+                <div class="footer-text" style="display: none;">{{ replace $.Site.Params.footer.copyright "{year}" now.Year | markdownify }}</div>
+            </div>
+        </footer>
+    </div><!-- main-content end -->
+</div><!-- page-container end -->

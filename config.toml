@@ -1,0 +1,87 @@
+baseURL               = "http://127.0.0.1:6000/"
+languageCode          = "zh-CN"
+title                 = "AI 一人公司导航 | AI助力一人公司全方位的落地服务导航网站"
+theme                 = "WebStack-Hugo"
+preserveTaxonomyNames = true
+disablePathToLower    = true
+hasCJKLanguage        = true
+publishDir            = "public"				# 站点静态文件保存目录
+
+
+[params]
+    # 网站副标题（用于SEO:首页 meta 描述）
+    subtitle     = "OPC一人公司专用导航，工商、财务、合同、设计、营销、办公一站式工具集"
+    # 全局关键词（用于SEO:英文逗号分隔）
+    keywords      = "OPC，一人公司，超级个体，AI工具"
+    author        = "蒙哥"
+    # (用于SEO)
+    description   = "OPC一人公司专用导航，工商、财务、合同、设计、营销、办公一站式工具集, 让您专注于产品本身"
+    upload        = "/upload/"                                  # 左侧导航栏的"网站提交"
+    about         = "/about/"	                                # 左侧导航栏的"关于导航"页面(./about)
+    repository    = "/introduce/"                               # 网站介绍 
+    enablePreLoad = true					# 网站完全打开前预加载动画
+    textPreLoad   = "欢迎来到AI一人公司导航网..."			# 预加载的动画文字, 只有当enablePreLoad=true时生效
+    expandSidebar = true					# 默认展开左侧边导航栏
+    logosPath     = "assets/images/logos"			# 网站每个导航地址logo存放地址
+    defaultLogo   = "assets/images/logos/default.webp"		# logo图片资源不存在或者错误时, 默认显示的logo; 该参数如为空,将会一直加载对应的logo,直至成功
+    nightMode     = false					# 默认站点为深色(夜间)模式
+    yiyan         = true                         		# 默认启用一言服务
+    fancybox      = true                                        # 使用 Fancybox 实现图片灯箱/放大功能
+
+[params.seo]    
+    baiduhmid       = ''	                                # 百度统计 hm.src 的 ID
+    baiduSiteVer    = ''			                        # 百度HTML标签验证(baidu-site-verification)
+    tj51laid        = ''                        		    # 51.LA 网站统计
+    tj51lack        = ''
+    GoogleAdsClient = ''					                # Google AdSense 
+
+[params.qweather]
+    key = "085791e805a24491b43b06cf58ab31e7"
+
+[params.images]
+    favicon           = "assets/images/bi-favicon.png"          # 浏览器头部图标
+    searchImageL      = "assets/images/bg-dna-light.png"		# 搜索部分浅色背景图
+    searchImageD      = "assets/images/bg-dna-dark.png"		# 搜索部分深色背景图
+    logoExpandLight   = "assets/images/bi-expand-dark.png"      # 左侧展开菜单栏 Logo 
+    logoExpandDark    = "assets/images/bi-expand-light.png"     # 左侧展开菜单栏 Logo
+    logoCollapseLight = "assets/images/bi-light.png"            # 左侧折叠菜单栏  
+    logoCollapseDark  = "assets/images/bi-dark.png"             # 左侧折叠菜单栏
+    
+[markup.goldmark.renderer]
+    unsafe = true
+
+[params.footer]
+    copyright = '本站内容源自互联网，如有内容侵犯了您的权益，请联系删除相关内容，联系邮箱：3994983718@qq.com <br/>&copy; 2025 - {year} By [AI 一人公司导航网](https://aiopc123.com)<br/>'
+
+[security]
+    # 禁用不安全的 HTML 标签/属性
+    enableInlineShortcodes = false
+[security.exec]
+    allow = ['^dart-sass-embedded$', '^go$', '^npx$', '^postcss$']
+[security.http]
+    # 限制 Hugo 可请求的外部域名
+    allow = ['^https://aiopc123.com$']
+# 限制 Markdown 中允许的 HTML 标签
+[security.markdown]
+    allowUnsafeLinks = false
+    enableRawHtml = false
+# 限制外部资源加载，防止XSS
+[security.headers]
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' https://cdn.jsdelivr.net;"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+
+# 新增：sitemap自动生成配置
+[sitemap]
+    changefreq = "weekly"
+    priority = 0.5
+    filename = "sitemap.xml"
+
+# 新增：robots.txt配置
+[outputFormats.RobotsTxt]
+    mediaType = "text/plain"
+    baseName = "robots"
+    isPlainText = true
+    notAlternative = true
+
+

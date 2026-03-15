@@ -1,0 +1,11 @@
+- item: 首页
+  icon: fa fa-home
+  link: "./"
+
+- item: AI 一人公司操作指南
+  icon: fa fa-book
+  link: /caozuozhinan/
+
+- item: 热门AI工具
+  icon: fa fa-book
+  link: /

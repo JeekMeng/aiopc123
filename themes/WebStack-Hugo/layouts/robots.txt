@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# 禁止爬虫访问的目录（可选）
+Disallow: /admin/
+Disallow: /private/
+
+# 站点地图地址（可选，和下面的 sitemap 配合）
+Sitemap: {{ .Site.BaseURL }}sitemap.xml

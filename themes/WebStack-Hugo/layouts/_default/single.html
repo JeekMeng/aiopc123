@@ -1,0 +1,40 @@
+{{ partial "header.html" . }}
+
+{{ partial "sidebar.html" . }}
+
+{{ partial "content_header.html" . }}
+
+<div id="content" class="content-site customize-site">
+	<div class='content_detail'>
+		{{ partial "content_main_detail.html" . }}
+	</div>
+	<div class="content_detail_right_sidebar">
+		{{ partial "content_right_sidebar.html" . }}
+	</div>
+</div>
+{{ partial "content_footer.html" . }}
+
+{{ partial "modal_search.html" . }}
+
+{{ partial "footer.html" . }}
+
+<style>
+	.content {
+	    display: flex;
+	    width: 100%;
+	}
+	.content-site {
+	    display: flex;
+	    width: 100%;
+	}
+
+	.content_detail {
+	    width: 70%;
+	    padding: 10px;
+	}
+
+	.content_detail_right_sidebar {
+	    width: 30%;
+	    padding: 10px;
+	}
+</style>
