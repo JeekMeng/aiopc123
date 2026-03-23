@@ -1,4 +1,4 @@
-baseURL               = "/"
+baseURL               = "https://www.aiopc123.com/"
 languageCode          = "zh-CN"
 title                 = "AI 一人公司导航 | AI助力一人公司全方位的落地服务导航网站"
 theme                 = "WebStack-Hugo"
