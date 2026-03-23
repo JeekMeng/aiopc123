@@ -1,0 +1,8 @@
+# 1. 解决子路径404（Hugo必备）
+/* /index.html 200
+
+# 2. 可选：如果需要强制HTTPS（防止HTTP访问）
+http://* https://www.aiopc123.com/$1 301
+
+# 3. 可选：主域跳转到www（和Cloudflare规则配合）
+https://aiopc123.com/* https://www.aiopc123.com/$1 301
