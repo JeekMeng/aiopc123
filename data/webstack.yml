@@ -27,6 +27,11 @@
       url: https://ollama.com
       description: 一键自动化，数据安全无忧。
 
+    - title: AutoClaw
+      logo: /opc-recommand/100023.png
+      url: https://autoglm.zhipuai.cn/autoclaw
+      description: 国产OpenClaw：AutoClaw（清华智谱）
+
 - taxonomy: OPC公司经营
   icon: fas fa-building
   list:
@@ -42,6 +47,11 @@
           url: /opc-company-operation/industrial-and-commercial-registration/200001
           description: 注册公司，财税无忧一站式
     
+        - title: 阿里云企业服务
+          logo: /opc-company-operation/industrial-and-commercial-registration/200004.png
+          url: /opc-company-operation/industrial-and-commercial-registration/200004
+          description: 云端方案，一键加速企业成长
+    
     - term: 记账报税
       links:
         - title: 自记账
@@ -55,7 +65,7 @@
           description: AI赋能财税，金蝶助您智赢未来
     
         - title: 浪潮云会计
-          logo: 
+          logo: default.webp
           url: /opc-company-operation/accounting-and-tax-reporting/200008
           description: 浪潮云会计，小微企业财务无忧首选
     
@@ -168,7 +178,7 @@
     - term: 品牌LOGO
       links:
         - title: 站酷（LOGO 设计）
-          logo: 
+          logo: default.webp
           url: /opc-product-design/brand-logo/200054
           description: 站酷，千万设计师的创意家园。
     
@@ -334,7 +344,7 @@
           description: 免费HTML模板，轻松打造专业网站
     
         - title: 阿里云速成美站
-          logo: 
+          logo: default.webp
           url: /opc-product-launch/website-templates/200109
           description: 阿里云速成美站，快速建站，模板丰富
     
@@ -535,7 +545,7 @@
           description: 汽车零部件专家，驱动未来出行
     
         - title: 业务本
-          logo: 
+          logo: default.webp
           url: /opc-customer-management/one-person-crm/200183
           description: 实时比分，尽在球探！
     
@@ -563,6 +573,11 @@
   list:
     - term: 兼职接单
       links:
+        - title: Freelancer
+          logo: /opc-job-recruitment/part-time-orders/200196.png
+          url: /opc-job-recruitment/part-time-orders/200196
+          description: 全球最大自由职业市场，秒速对接顶尖人才
+    
     - term: 远程工作
       links:
         - title: 电鸭社区
@@ -610,7 +625,7 @@
           description: 全球信息技术领航者，赋能未来。
     
         - title: 中软国际
-          logo: 
+          logo: default.webp
           url: /opc-job-recruitment/outsourcing-services/200212
           description: 中软国际，成就您的数字未来。
     
