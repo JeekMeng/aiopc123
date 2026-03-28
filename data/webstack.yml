@@ -27,6 +27,26 @@
       url: https://ollama.com
       description: 一键自动化，数据安全无忧。
 
+    - title: OpenClaw
+      logo: default.webp
+      url: https://openclaw.ai/
+      description: AI养龙虾，来OpenClaw。
+
+    - title: KimiClaw
+      logo: /opc-recommand/100020.png
+      url: https://www.kimi.com/bot
+      description: 国产OpenClaw：KimiClaw（月之暗面）
+
+    - title: Qclaw
+      logo: /opc-recommand/100021.png
+      url: https://qclawd.com/
+      description: 国产OpenClaw：QClaw（腾讯出品）
+
+    - title: ArkClaw
+      logo: default.webp
+      url: https://www.volcengine.com/product/arkclaw
+      description: 国产OpenClaw：ArkClaw（字节出品）
+
     - title: AutoClaw
       logo: /opc-recommand/100023.png
       url: https://autoglm.zhipuai.cn/autoclaw
