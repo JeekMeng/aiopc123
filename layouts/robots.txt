@@ -6,4 +6,4 @@ Disallow: /admin/
 Disallow: /private/
 
 # 站点地图地址（可选，和下面的 sitemap 配合）
-Sitemap: {{ .Site.BaseURL }}sitemap.xml
+Sitemap: {{ .Site.BaseURL | absURL }}sitemap.xml

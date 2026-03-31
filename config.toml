@@ -6,6 +6,7 @@ preserveTaxonomyNames = true
 disablePathToLower    = true
 hasCJKLanguage        = true
 publishDir            = "public"				# 站点静态文件保存目录
+enableRobotsTXT       = true           # 生成robots.txt
 
 
 [params]
@@ -70,18 +71,3 @@ publishDir            = "public"				# 站点静态文件保存目录
     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' https://cdn.jsdelivr.net;"
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
-
-# 新增：sitemap自动生成配置
-[sitemap]
-    changefreq = "weekly"
-    priority = 0.5
-    filename = "sitemap.xml"
-
-# 新增：robots.txt配置
-[outputFormats.RobotsTxt]
-    mediaType = "text/plain"
-    baseName = "robots"
-    isPlainText = true
-    notAlternative = true
-
-
