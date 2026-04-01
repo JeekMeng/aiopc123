@@ -312,6 +312,11 @@
           url: /opc-product-management/cloud-storage/200089
           description: 115，让数据安全随行，生活更智能。
     
+        - title: 夸克
+          logo: /opc-product-management/cloud-storage/200292.png
+          url: /opc-product-management/cloud-storage/200292
+          description: 网盘必选
+    
 - taxonomy: OPC产品上线
   icon: fas fa-running
   list:
@@ -326,6 +331,11 @@
           logo: /opc-product-launch/domain-host/200091.png
           url: /opc-product-launch/domain-host/200091
           description: 腾讯云，让企业智变未来
+    
+        - title: 万网
+          logo: /opc-product-launch/domain-host/200294.png
+          url: /opc-product-launch/domain-host/200294
+          description: 国内最大的域名注册商
     
     - term: 建站系统
       links:
@@ -390,6 +400,11 @@
           url: /opc-product-launch/seo-optimization/200113
           description: 百度搜索资源平台，让优质资源脱颖而出。
     
+        - title: 百度站长平台
+          logo: /opc-product-launch/seo-optimization/200289.png
+          url: /opc-product-launch/seo-optimization/200289
+          description: 国内站必须提交，SEO第一步，提交sitemap、监控收录
+    
     - term: 网站运维
       links:
         - title: 腾讯云 CVM
@@ -411,6 +426,16 @@
           logo: /opc-promotion-operation/traffic-acquisition/200123.png
           url: /opc-promotion-operation/traffic-acquisition/200123
           description: 弹幕互动，欢乐无限
+    
+        - title: 稀土掘金
+          logo: /opc-promotion-operation/traffic-acquisition/200285.png
+          url: /opc-promotion-operation/traffic-acquisition/200285
+          description: 质量比较高的内容社区
+    
+        - title: 简书
+          logo: /opc-promotion-operation/traffic-acquisition/200288.png
+          url: /opc-promotion-operation/traffic-acquisition/200288
+          description: 创作你的创作，发现无限可能
     
     - term: 自媒体运营
       links:
@@ -509,6 +534,11 @@
     
     - term: 数据统计
       links:
+        - title: GrowingIO
+          logo: /opc-promotion-operation/ai-data-statistics/200153.png
+          url: /opc-promotion-operation/ai-data-statistics/200153
+          description: 数据驱动增长，智能引领未来
+    
     - term: 多平台分发
       links:
         - title: 易媒助手
@@ -593,6 +623,11 @@
   list:
     - term: 兼职接单
       links:
+        - title: 一品威客
+          logo: /opc-job-recruitment/part-time-orders/200195.png
+          url: /opc-job-recruitment/part-time-orders/200195
+          description: 地区服务需求，一品威客一站解决
+    
         - title: Freelancer
           logo: /opc-job-recruitment/part-time-orders/200196.png
           url: /opc-job-recruitment/part-time-orders/200196
