@@ -32,8 +32,8 @@ enableRobotsTXT       = true           # 生成robots.txt
 [params.seo]    
     baiduhmid       = ''	                                # 百度统计 hm.src 的 ID
     baiduSiteVer    = ''			                        # 百度HTML标签验证(baidu-site-verification)
-    tj51laid        = ''                        		    # 51.LA 网站统计
-    tj51lack        = ''
+    tj51laid        = '3PVk9jBC9wwnlhnK'                   		    # 51.LA 网站统计
+    tj51lack        = '3PVk9jBC9wwnlhnK'
     GoogleAdsClient = ''					                # Google AdSense 
 
 [params.qweather]
