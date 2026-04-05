@@ -8,6 +8,11 @@ hasCJKLanguage        = true
 publishDir            = "public"				# 站点静态文件保存目录
 enableRobotsTXT       = true           # 生成robots.txt
 
+[taxonomies]
+  category = "categories"
+
+disableKinds = ["taxonomy", "term"]
+
 
 [params]
     # 网站副标题（用于SEO:首页 meta 描述）
