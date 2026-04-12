@@ -1,57 +1,3 @@
-
-- taxonomy: OPC常用推荐
-  icon: far fa-star
-  links:
-    - title: DeepSeek
-      logo: /opc-recommand/100002.png
-      url: https://chat.deepseek.com
-      description: 智能助手，编程写作全能伙伴
-
-    - title: 文小言
-      logo: /opc-recommand/100004.png
-      url: https://wenxin.baidu.com
-      description: 百度AI助手，办公学习全能伙伴
-
-    - title: 千问
-      logo: /opc-recommand/100006.png
-      url: https://www.qianwen.com/
-      description: 通义千问，你的全能AI助手。
-
-    - title: 通义灵码
-      logo: /opc-recommand/100008.png
-      url: https://lingma.aliyun.com
-      description: 阿里云智能编码，让开发更高效
-
-    - title: Ollama
-      logo: /opc-recommand/100014.png
-      url: https://ollama.com
-      description: 一键自动化，数据安全无忧。
-
-    - title: OpenClaw
-      logo: default.webp
-      url: https://openclaw.ai/
-      description: AI养龙虾，来OpenClaw。
-
-    - title: KimiClaw
-      logo: /opc-recommand/100020.png
-      url: https://www.kimi.com/bot
-      description: 国产OpenClaw：KimiClaw（月之暗面）
-
-    - title: Qclaw
-      logo: /opc-recommand/100021.png
-      url: https://qclawd.com/
-      description: 国产OpenClaw：QClaw（腾讯出品）
-
-    - title: ArkClaw
-      logo: default.webp
-      url: https://www.volcengine.com/product/arkclaw
-      description: 国产OpenClaw：ArkClaw（字节出品）
-
-    - title: AutoClaw
-      logo: /opc-recommand/100023.png
-      url: https://autoglm.zhipuai.cn/autoclaw
-      description: 国产OpenClaw：AutoClaw（清华智谱）
-
 - taxonomy: OPC公司经营
   icon: fas fa-building
   list:
@@ -61,147 +7,107 @@
           logo: /opc-company-operation/industrial-and-commercial-registration/200000.png
           url: /opc-company-operation/industrial-and-commercial-registration/200000
           description: 慧算账，让创业财税无忧。
-    
         - title: 好顺佳
           logo: /opc-company-operation/industrial-and-commercial-registration/200001.png
           url: /opc-company-operation/industrial-and-commercial-registration/200001
           description: 注册公司，财税无忧一站式
-    
         - title: 阿里云企业服务
           logo: /opc-company-operation/industrial-and-commercial-registration/200004.png
           url: /opc-company-operation/industrial-and-commercial-registration/200004
           description: 云端方案，一键加速企业成长
-    
     - term: 记账报税
       links:
         - title: 自记账
           logo: /opc-company-operation/accounting-and-tax-reporting/200005.png
           url: /opc-company-operation/accounting-and-tax-reporting/200005
           description: 零基础记账报税，省心省力省钱
-    
         - title: 金蝶小微企业云
           logo: /opc-company-operation/accounting-and-tax-reporting/200007.png
           url: /opc-company-operation/accounting-and-tax-reporting/200007
           description: AI赋能财税，金蝶助您智赢未来
-    
         - title: 浪潮云会计
           logo: default.webp
           url: /opc-company-operation/accounting-and-tax-reporting/200008
           description: 浪潮云会计，小微企业财务无忧首选
-    
     - term: 财税合规
       links:
-        - title: 国家税务总局
-          logo: /opc-company-operation/financial-compliance/200010.png
-          url: /opc-company-operation/financial-compliance/200010
-          description: 权威税务资讯，尽在指尖掌握。
-    
         - title: 企查查
           logo: /opc-company-operation/financial-compliance/200011.png
           url: /opc-company-operation/financial-compliance/200011
           description: 查企业，查老板，查风险，就上企查查！
-    
         - title: 天眼查
           logo: /opc-company-operation/financial-compliance/200012.png
           url: /opc-company-operation/financial-compliance/200012
           description: 天眼查，企业信息一目了然
-    
     - term: 合同法务
       links:
         - title: 法大大
           logo: /opc-company-operation/contract-law/200015.png
           url: /opc-company-operation/contract-law/200015
           description: 法大大，让签约更智能高效
-    
     - term: 五险一金
       links:
         - title: 易社保
           logo: /opc-company-operation/five-insurances-one-fund/200023.png
           url: /opc-company-operation/five-insurances-one-fund/200023
           description: 社保体检心理，一站全搞定
-    
         - title: 51 社保
           logo: /opc-company-operation/five-insurances-one-fund/200024.png
           url: /opc-company-operation/five-insurances-one-fund/200024
           description: 一站式社保，企业无忧之选
-    
     - term: 发票工具
       links:
         - title: 发票通
           logo: /opc-company-operation/invoice-tools/200027.png
           url: /opc-company-operation/invoice-tools/200027
           description: 发票全流程，轻松一键管理
-    
         - title: 百旺云票
           logo: /opc-company-operation/invoice-tools/200028.png
           url: /opc-company-operation/invoice-tools/200028
           description: 百望云，财税智能新引擎
-    
         - title: 航天信息
           logo: /opc-company-operation/invoice-tools/200029.png
           url: /opc-company-operation/invoice-tools/200029
           description: 航天信息，智造未来新高度。
-    
 - taxonomy: OPC产品设计
   icon: fas fa-pencil-ruler
   list:
-    - term: 宣传设计
-      links:
-        - title: 创客贴
-          logo: /opc-product-design/promotion-design/200030.png
-          url: /opc-product-design/promotion-design/200030
-          description: 会打字就能做设计，商用有版权
-    
     - term: 图片素材
       links:
         - title: 卓特视觉
           logo: /opc-product-design/image-materials/200038.png
           url: /opc-product-design/image-materials/200038
           description: 海量高清素材，创意无限可能
-    
         - title: 千库网
           logo: /opc-product-design/image-materials/200039.png
           url: /opc-product-design/image-materials/200039
           description: 海量正版素材，免费商用无忧。
-    
     - term: 字体图标
       links:
         - title: Iconfont
           logo: /opc-product-design/font-icons/200040.png
           url: /opc-product-design/font-icons/200040
           description: 阿里矢量图标库
-    
         - title: 字由
           logo: /opc-product-design/font-icons/200043.png
           url: /opc-product-design/font-icons/200043
           description: 免费字体，一键设计加速
-    
         - title: 猫啃网
           logo: /opc-product-design/font-icons/200044.png
           url: /opc-product-design/font-icons/200044
           description: 免费商用中文字体
-    
     - term: 视频剪辑
       links:
         - title: 达芬奇Resolve
           logo: /opc-product-design/video-editing/200046.png
           url: /opc-product-design/video-editing/200046
           description: 一站式创意流程，颠覆传统制作。
-    
-    - term: 视频剪辑
-      links:
-        - title: 达芬奇Resolve
-          logo: /opc-product-design/video-editing/200046.png
-          url: /opc-product-design/video-editing/200046
-          description: 一站式创意流程，颠覆传统制作。
-    
     - term: 品牌LOGO
       links:
         - title: 站酷（LOGO 设计）
           logo: default.webp
           url: /opc-product-design/brand-logo/200054
           description: 站酷，千万设计师的创意家园。
-    
 - taxonomy: OPC产品研发
   icon: fas fa-wrench
   list:
@@ -211,112 +117,87 @@
           logo: /opc-product-research/graph-text-typesetting/200055.png
           url: /opc-product-research/graph-text-typesetting/200055
           description: 一键排版，让公众号更出众
-    
         - title: 秀米
           logo: /opc-product-research/graph-text-typesetting/200056.png
           url: /opc-product-research/graph-text-typesetting/200056
           description: 秀米，让排版变简单，创意更出众。
-    
         - title: 壹伴
           logo: /opc-product-research/graph-text-typesetting/200057.png
           url: /opc-product-research/graph-text-typesetting/200057
           description: 一键排版，公众号运营更高效
-    
     - term: 视频生成
       links:
         - title: 来画
           logo: /opc-product-research/video-generation/200062.png
           url: /opc-product-research/video-generation/200062
           description: 动画创作，人人皆可上手。
-    
         - title: 万彩动画大师
           logo: /opc-product-research/video-generation/200063.png
           url: /opc-product-research/video-generation/200063
           description: 免费动画大师，轻松创作专业视频
-    
         - title: Synthesia
           logo: /opc-product-research/video-generation/200064.png
           url: /opc-product-research/video-generation/200064
           description: AI视频，一键生成全球内容
-    
     - term: 封面制作
       links:
         - title: 创客贴
           logo: /opc-product-research/cover-making/200065.png
           url: /opc-product-research/cover-making/200065
           description: 会打字就能做设计，商用有版权
-    
         - title: 美图设计室
           logo: /opc-product-research/cover-making/200069.png
           url: /opc-product-research/cover-making/200069
           description: AI设计，3秒出图
-    
 - taxonomy: OPC产品管理
   icon: fas fa-user-ninja
   list:
-    - term: 办公协同
-      links:
-        - title: 企业微信
-          logo: /opc-product-management/ai-office-collaboration/200072.png
-          url: /opc-product-management/ai-office-collaboration/200072
-          description: 高效办公，企业专属微信。
-    
     - term: 自动化OA
       links:
         - title: 泛微 OA
           logo: /opc-product-management/ai-automated-oa/200075.png
           url: /opc-product-management/ai-automated-oa/200075
           description: 泛微OA，让办公更智能高效
-    
         - title: 致远互联
           logo: /opc-product-management/ai-automated-oa/200076.png
           url: /opc-product-management/ai-automated-oa/200076
           description: 协同办公，致远互联，高效管理新选择。
-    
         - title: 蓝凌 OA
           logo: /opc-product-management/ai-automated-oa/200077.png
           url: /opc-product-management/ai-automated-oa/200077
           description: 智慧办公，让组织更高效。
-    
         - title: 明道云
           logo: /opc-product-management/ai-automated-oa/200078.png
           url: /opc-product-management/ai-automated-oa/200078
           description: 零代码，构建企业无限可能
-    
     - term: 项目管理
       links:
         - title: Trello
           logo: /opc-product-management/ai-project-management/200080.png
           url: /opc-product-management/ai-project-management/200080
           description: 协作无界，高效随心
-    
     - term: 网盘存储
       links:
         - title: 阿里云盘
           logo: /opc-product-management/cloud-storage/200085.png
           url: /opc-product-management/cloud-storage/200085
           description: 阿里云盘，安全备份，极速分享。
-    
         - title: 百度网盘
           logo: /opc-product-management/cloud-storage/200086.png
           url: /opc-product-management/cloud-storage/200086
           description: 海量存储，安全分享，随时随地。
-    
         - title: 坚果云
           logo: /opc-product-management/cloud-storage/200088.png
           url: /opc-product-management/cloud-storage/200088
           description: 随时随地，团队协作更高效
-    
         - title: 115 网盘
           logo: /opc-product-management/cloud-storage/200089.png
           url: /opc-product-management/cloud-storage/200089
           description: 115，让数据安全随行，生活更智能。
-    
         - title: 夸克
           logo: /opc-product-management/cloud-storage/200292.png
           url: /opc-product-management/cloud-storage/200292
           description: 网盘必选
-    
 - taxonomy: OPC产品上线
   icon: fas fa-running
   list:
@@ -326,92 +207,76 @@
           logo: /opc-product-launch/domain-host/200090.png
           url: /opc-product-launch/domain-host/200090
           description: 云上未来，智算无限
-    
         - title: 腾讯云
           logo: /opc-product-launch/domain-host/200091.png
           url: /opc-product-launch/domain-host/200091
           description: 腾讯云，让企业智变未来
-    
         - title: 万网
           logo: /opc-product-launch/domain-host/200294.png
           url: /opc-product-launch/domain-host/200294
           description: 国内最大的域名注册商
-    
     - term: 建站系统
       links:
         - title: 织梦 CMS
           logo: /opc-product-launch/website-building-system/200096.png
           url: /opc-product-launch/website-building-system/200096
           description: 织梦CMS，让建站更简单
-    
         - title: Z-Blog
           logo: /opc-product-launch/website-building-system/200097.png
           url: /opc-product-launch/website-building-system/200097
           description: 开源博客，轻松建站
-    
         - title: 乔拓云
           logo: /opc-product-launch/website-building-system/200099.png
           url: /opc-product-launch/website-building-system/200099
           description: 零技术，轻松建站，抢占网络先机。
-    
     - term: 静态建站
       links:
         - title: Jekyll
           logo: /opc-product-launch/static-website-building/200101.png
           url: /opc-product-launch/static-website-building/200101
           description: 轻松构建静态博客网站
-    
     - term: 网站模板
       links:
         - title: TemplateMo
           logo: /opc-product-launch/website-templates/200105.png
           url: /opc-product-launch/website-templates/200105
           description: 免费网页模板，即下即用
-    
         - title: HTMLTemplates
           logo: /opc-product-launch/website-templates/200106.png
           url: /opc-product-launch/website-templates/200106
           description: 免费HTML模板，轻松打造专业网站
-    
         - title: 阿里云速成美站
           logo: default.webp
           url: /opc-product-launch/website-templates/200109
           description: 阿里云速成美站，快速建站，模板丰富
-    
     - term: SEO优化
       links:
         - title: 站长工具
           logo: /opc-product-launch/seo-optimization/200110.png
           url: /opc-product-launch/seo-optimization/200110
           description: 站长必备，数据尽在掌握
-    
         - title: 5118 大数据
           logo: /opc-product-launch/seo-optimization/200111.png
           url: /opc-product-launch/seo-optimization/200111
           description: 挖掘关键词，排名更靠前
-    
         - title: 爱站网
           logo: /opc-product-launch/seo-optimization/200112.png
           url: /opc-product-launch/seo-optimization/200112
           description: 轻松查权重，优化更精准。
-    
         - title: 百度搜索资源平台
           logo: /opc-product-launch/seo-optimization/200113.png
           url: /opc-product-launch/seo-optimization/200113
           description: 百度搜索资源平台，让优质资源脱颖而出。
-    
         - title: 百度站长平台
           logo: /opc-product-launch/seo-optimization/200289.png
           url: /opc-product-launch/seo-optimization/200289
           description: 国内站必须提交，SEO第一步，提交sitemap、监控收录
-    
     - term: 网站运维
       links:
         - title: 腾讯云 CVM
           logo: /opc-product-launch/server-operation-and-maintenance/200116.png
           url: /opc-product-launch/server-operation-and-maintenance/200116
           description: 弹性云服务，按需计费省成本
-    
 - taxonomy: OPC推广运营
   icon: fas fa-shopping-cart
   list:
@@ -421,140 +286,108 @@
           logo: /opc-promotion-operation/traffic-acquisition/200119.png
           url: /opc-promotion-operation/traffic-acquisition/200119
           description: 发现生活，分享热爱
-    
         - title: B 站
           logo: /opc-promotion-operation/traffic-acquisition/200123.png
           url: /opc-promotion-operation/traffic-acquisition/200123
           description: 弹幕互动，欢乐无限
-    
         - title: 稀土掘金
           logo: /opc-promotion-operation/traffic-acquisition/200285.png
           url: /opc-promotion-operation/traffic-acquisition/200285
           description: 质量比较高的内容社区
-    
         - title: 简书
           logo: /opc-promotion-operation/traffic-acquisition/200288.png
           url: /opc-promotion-operation/traffic-acquisition/200288
           description: 创作你的创作，发现无限可能
-    
     - term: 自媒体运营
       links:
         - title: 西瓜数据
           logo: /opc-promotion-operation/we-media-operation/200125.png
           url: /opc-promotion-operation/we-media-operation/200125
           description: 数据驱动营销，精准投放更高效
-    
         - title: 易撰
           logo: /opc-promotion-operation/we-media-operation/200126.png
           url: /opc-promotion-operation/we-media-operation/200126
           description: 易撰，让内容创作快人一步
-    
         - title: 鸟哥笔记
           logo: /opc-promotion-operation/we-media-operation/200127.png
           url: /opc-promotion-operation/we-media-operation/200127
           description: 营销增长，鸟哥笔记一网打尽
-    
         - title: 梅花网
           logo: /opc-promotion-operation/we-media-operation/200128.png
           url: /opc-promotion-operation/we-media-operation/200128
           description: 营销灵感，一触即发
-    
     - term: 文案写作
       links:
         - title: 秘塔写作猫
           logo: /opc-promotion-operation/copywriting/200130.png
           url: /opc-promotion-operation/copywriting/200130
           description: 智能写作，灵感无限
-    
         - title: 彩云小梦
           logo: /opc-promotion-operation/copywriting/200131.png
           url: /opc-promotion-operation/copywriting/200131
           description: AI续写，开启你的平行世界
-    
         - title: 壹写作
           logo: /opc-promotion-operation/copywriting/200133.png
           url: /opc-promotion-operation/copywriting/200133
           description: 一键购得，轻松拥有
-    
     - term: 私域运营
       links:
-        - title: 企业微信
-          logo: /opc-promotion-operation/private-domain-operation/200134.png
-          url: /opc-promotion-operation/private-domain-operation/200134
-          description: 企业微信，高效办公新选择。
-    
         - title: 微盟
           logo: /opc-promotion-operation/private-domain-operation/200135.png
           url: /opc-promotion-operation/private-domain-operation/200135
           description: 微盟，驱动商家持续增长
-    
         - title: 小鹅通
           logo: /opc-promotion-operation/private-domain-operation/200137.png
           url: /opc-promotion-operation/private-domain-operation/200137
           description: 私域营销，从获客到转化全搞定
-    
     - term: 广告投放
       links:
         - title: 百度营销
           logo: /opc-promotion-operation/advertising/200140.png
           url: /opc-promotion-operation/advertising/200140
           description: 百度营销，让企业获客更轻松。
-    
         - title: 腾讯广告
           logo: /opc-promotion-operation/advertising/200141.png
           url: /opc-promotion-operation/advertising/200141
           description: 腾讯广告，精准触达亿万用户。
-    
         - title: 阿里妈妈
           logo: /opc-promotion-operation/advertising/200142.png
           url: /opc-promotion-operation/advertising/200142
           description: 让生意更聪明，增长更简单。
-    
         - title: 快手磁力引擎
           logo: /opc-promotion-operation/advertising/200143.png
           url: /opc-promotion-operation/advertising/200143
           description: 快手磁力引擎，引爆品牌新市井
-    
     - term: 数据分析
       links:
         - title: 蝉妈妈
           logo: /opc-promotion-operation/data-analysis/200144.png
           url: /opc-promotion-operation/data-analysis/200144
           description: 内容电商，数据驱动增长
-    
         - title: 灰豚数据
           logo: /opc-promotion-operation/data-analysis/200145.png
           url: /opc-promotion-operation/data-analysis/200145
           description: 数据驱动直播，灰豚助你领跑
-    
         - title: 克劳锐
           logo: /opc-promotion-operation/data-analysis/200148.png
           url: /opc-promotion-operation/data-analysis/200148
           description: 探索未知，发现无限可能
-    
     - term: 数据统计
       links:
         - title: GrowingIO
           logo: /opc-promotion-operation/ai-data-statistics/200153.png
           url: /opc-promotion-operation/ai-data-statistics/200153
           description: 数据驱动增长，智能引领未来
-    
     - term: 多平台分发
       links:
         - title: 易媒助手
           logo: /opc-promotion-operation/multi-platform-distribution/200155.png
           url: /opc-promotion-operation/multi-platform-distribution/200155
           description: 一键发布，全网营销，轻松打造品牌矩阵
-    
         - title: 微小宝
           logo: /opc-promotion-operation/multi-platform-distribution/200158.png
           url: /opc-promotion-operation/multi-platform-distribution/200158
           description: 百万用户信赖，私域流量专家
-    
-    - term: 评论互动
-      links:
-    - term: 涨粉工具
-      links:
 - taxonomy: OPC客户管理
   icon: fas fa-user-friends
   list:
@@ -564,60 +397,50 @@
           logo: /opc-customer-management/domestic-crm/200169.png
           url: /opc-customer-management/domestic-crm/200169
           description: 数字化协作，销售业绩飙升
-    
         - title: 销售易
           logo: /opc-customer-management/domestic-crm/200170.png
           url: /opc-customer-management/domestic-crm/200170
           description: 销售易CRM，500强企业信赖的营销服一体化平台
-    
         - title: 悟空 CRM
           logo: /opc-customer-management/domestic-crm/200172.png
           url: /opc-customer-management/domestic-crm/200172
           description: 开源CRM，智能驱动企业增长
-    
     - term: 跨境CRM
       links:
         - title: Salesforce
           logo: /opc-customer-management/cross-border-crm/200175.png
           url: /opc-customer-management/cross-border-crm/200175
           description: AI赋能，客户成功新纪元
-    
         - title: Freshworks
           logo: /opc-customer-management/cross-border-crm/200177.png
           url: /opc-customer-management/cross-border-crm/200177
           description: 轻松搞定IT与客服，高效无忧。
-    
     - term: 一人CRM
       links:
         - title: 简信 CRM
           logo: /opc-customer-management/one-person-crm/200180.png
           url: /opc-customer-management/one-person-crm/200180
           description: 汽车零部件专家，驱动未来出行
-    
         - title: 业务本
           logo: default.webp
           url: /opc-customer-management/one-person-crm/200183
           description: 实时比分，尽在球探！
-    
     - term: 专用CRM
       links:
         - title: 融 360
           logo: /opc-customer-management/special-crm/200188.png
           url: /opc-customer-management/special-crm/200188
           description: 一站式金融搜索，轻松找到最适合你的产品。
-    
     - term: 沟通工具
       links:
         - title: 企业微信
           logo: /opc-customer-management/communication-tools/200189.png
           url: /opc-customer-management/communication-tools/200189
           description: 微信办公，高效安全
-    
         - title: Zoom
           logo: /opc-customer-management/communication-tools/200193.png
           url: /opc-customer-management/communication-tools/200193
           description: 视频会议，协作无限。
-    
 - taxonomy: OPC求职招聘
   icon: fas fa-coffee
   list:
@@ -627,68 +450,56 @@
           logo: /opc-job-recruitment/part-time-orders/200195.png
           url: /opc-job-recruitment/part-time-orders/200195
           description: 地区服务需求，一品威客一站解决
-    
         - title: Freelancer
           logo: /opc-job-recruitment/part-time-orders/200196.png
           url: /opc-job-recruitment/part-time-orders/200196
           description: 全球最大自由职业市场，秒速对接顶尖人才
-    
     - term: 远程工作
       links:
         - title: 电鸭社区
           logo: /opc-job-recruitment/remote-work/200200.png
           url: /opc-job-recruitment/remote-work/200200
           description: 只工作，不上班，电鸭助你远程自由。
-    
         - title: 程序员客栈
           logo: /opc-job-recruitment/remote-work/200201.png
           url: /opc-job-recruitment/remote-work/200201
           description: 自由接单，成就技术梦想
-    
     - term: 人才雇佣
       links:
         - title: BOSS 直聘
           logo: /opc-job-recruitment/talent-employment/200206.png
           url: /opc-job-recruitment/talent-employment/200206
           description: 找工作，直接和老板谈！
-    
         - title: 猎聘
           logo: /opc-job-recruitment/talent-employment/200207.png
           url: /opc-job-recruitment/talent-employment/200207
           description: 猎聘在手，高薪职位轻松有！
-    
         - title: 拉勾网
           logo: /opc-job-recruitment/talent-employment/200208.png
           url: /opc-job-recruitment/talent-employment/200208
           description: 精准职位，一触即达
-    
     - term: 外包服务
       links:
         - title: 软通动力
           logo: /opc-job-recruitment/outsourcing-services/200209.png
           url: /opc-job-recruitment/outsourcing-services/200209
           description: 软通动力，让转型更可信赖
-    
         - title: 文思海辉
           logo: /opc-job-recruitment/outsourcing-services/200210.png
           url: /opc-job-recruitment/outsourcing-services/200210
           description: 数字化转型伙伴，IT创新领航者
-    
         - title: 东软集团
           logo: /opc-job-recruitment/outsourcing-services/200211.png
           url: /opc-job-recruitment/outsourcing-services/200211
           description: 全球信息技术领航者，赋能未来。
-    
         - title: 中软国际
           logo: default.webp
           url: /opc-job-recruitment/outsourcing-services/200212
           description: 中软国际，成就您的数字未来。
-    
         - title: 博彦科技
           logo: /opc-job-recruitment/outsourcing-services/200213.png
           url: /opc-job-recruitment/outsourcing-services/200213
           description: 数据智能驱动，转型未来无忧
-    
 - taxonomy: OPC政策解读
   icon: fas fa-torah
   list:
@@ -698,133 +509,193 @@
           logo: /opc-policy-interpretation/micro-enterprise-policies/200214.png
           url: /opc-policy-interpretation/micro-enterprise-policies/200214
           description: 市场监管，服务民生。
-    
     - term: 税收优惠
       links:
         - title: 国家税务总局
           logo: /opc-policy-interpretation/tax-incentives/200219.png
           url: /opc-policy-interpretation/tax-incentives/200219
           description: 权威税务资讯，一站式办税平台
-    
         - title: 会计网
           logo: /opc-policy-interpretation/tax-incentives/200221.png
           url: /opc-policy-interpretation/tax-incentives/200221
           description: 会计人的成长家园，始于1996年。
-    
     - term: 创业补贴
       links:
         - title: 国家政务服务平台
           logo: /opc-policy-interpretation/entrepreneurship-subsidies/200224.png
           url: /opc-policy-interpretation/entrepreneurship-subsidies/200224
           description: 一网通办，服务更便捷
-    
     - term: 地方扶持
       links:
         - title: 江苏政务服务网
           logo: /opc-policy-interpretation/local-support/200229.png
           url: /opc-policy-interpretation/local-support/200229
           description: 江苏政务，一网通办，服务到家。
-    
     - term: 行业新规
       links:
         - title: 中国政府网
           logo: /opc-policy-interpretation/industry-new-rules/200236.png
           url: /opc-policy-interpretation/industry-new-rules/200236
           description: 权威信息，一网打尽
-    
-    - term: 合规指南
-      links:
 - taxonomy: OPC资源中心
   icon: fas fa-book
   list:
-    - term: 合同模板
-      links:
     - term: 运营SOP
       links:
         - title: 运营管理
           logo: /opc-resource-center/operation-sop/200253.png
           url: /opc-resource-center/operation-sop/200253
           description: 运营管理，一站掌握
-    
-    - term: 话术资料
-      links:
     - term: 学习书籍
       links:
         - title: 当当网
           logo: /opc-resource-center/learning-books/200260.png
           url: /opc-resource-center/learning-books/200260
           description: 百万好书，正版低价，放心购！
-    
         - title: 亚马逊图书
           logo: /opc-resource-center/learning-books/200262.png
           url: /opc-resource-center/learning-books/200262
           description: 全球好物，一键到家
-    
         - title: 微信读书
           logo: /opc-resource-center/learning-books/200263.png
           url: /opc-resource-center/learning-books/200263
           description: 与好友共读，好书不孤独
-    
     - term: 课程资料
       links:
         - title: 网易云课堂
           logo: /opc-resource-center/course-materials/200264.png
           url: /opc-resource-center/course-materials/200264
           description: 悄悄变强大，职场学习新主场
-    
         - title: 腾讯课堂
           logo: /opc-resource-center/course-materials/200265.png
           url: /opc-resource-center/course-materials/200265
           description: 腾讯课堂，成就你的职业梦想
-    
         - title: 极客时间
           logo: /opc-resource-center/course-materials/200267.png
           url: /opc-resource-center/course-materials/200267
           description: 极客时间，AI学习新引擎
-    
         - title: 得到
           logo: /opc-resource-center/course-materials/200268.png
           url: /opc-resource-center/course-materials/200268
           description: 知识就在得到，终身学习新选择。
-    
     - term: 行业报告
       links:
         - title: 艾瑞咨询
           logo: /opc-resource-center/industry-reports/200269.png
           url: /opc-resource-center/industry-reports/200269
           description: 艾瑞咨询，让商业决策更精准。
-    
         - title: 易观分析
           logo: /opc-resource-center/industry-reports/200270.png
           url: /opc-resource-center/industry-reports/200270
           description: 易观分析，驱动企业增长新引擎
-    
     - term: 资源分享
       links:
         - title: 豆丁网
           logo: /opc-resource-center/resource-sharing/200275.png
           url: /opc-resource-center/resource-sharing/200275
           description: 海量文档，智慧共享
-    
         - title: 道客巴巴
           logo: /opc-resource-center/resource-sharing/200276.png
           url: /opc-resource-center/resource-sharing/200276
           description: 海量文档，随需随取
-    
     - term: 素材合集
       links:
         - title: 千图网
           logo: /opc-resource-center/material-collection/200279.png
           url: /opc-resource-center/material-collection/200279
           description: 海量正版商用素材，在线设计轻松搞定
-    
         - title: 包图网
           logo: /opc-resource-center/material-collection/200280.png
           url: /opc-resource-center/material-collection/200280
           description: 正版商用素材，会员免费畅享
-    
         - title: 摄图网
           logo: /opc-resource-center/material-collection/200281.png
           url: /opc-resource-center/material-collection/200281
           description: 高清正版图库，灵感触手可及
-    
+- taxonomy: OPC-AI赋能
+  icon: fas fa-tools
+  list:
+    - term: AI搜索工具
+      links:
+        - title: 豆包
+          logo: /opc-ai-center/search/200295.png
+          url: https://doubao.com
+          description: 豆包：AI全能助手，免费视频生成新体验
+        - title: DeepSeek
+          logo: /opc-ai-center/search/200296.png
+          url: https://chat.deepseek.com
+          description: 智能助手，编程创作全搞定
+        - title: 腾讯元宝
+          logo: /opc-ai-center/search/200297.png
+          url: https://yuanbao.tencent.com
+          description: 腾讯云上，轻松管理你的云资源
+        - title: 文心
+          logo: /opc-ai-center/search/200298.png
+          url: https://wenxin.baidu.com
+          description: 文心AI，让创作与办公更高效智能
+        - title: Kimi AI
+          logo: /opc-ai-center/search/200299.png
+          url: https://www.kimi.com
+          description: Kimi：像素到专家，高效搞定一切
+        - title: 千问
+          logo: /opc-ai-center/search/200300.png
+          url: https://www.qianwen.com/
+          description: 阿里千问，智能助手全能王
+    - term: AI龙虾助手
+      links:
+        - title: OpenClaw
+          logo: /opc-ai-center/openclaw/200305.png
+          url: https://openclaw.ai/
+          description: 官方OpenClaw，AI养龙虾
+        - title: Kimi Claw
+          logo: /opc-ai-center/openclaw/200306.png
+          url: https://www.kimi.com/bot
+          description: 国产OpenClaw：KimiClaw（月之暗面）
+        - title: Qclaw
+          logo: /opc-ai-center/openclaw/200307.png
+          url: https://qclawd.com/
+          description: 国产OpenClaw：QClaw（腾讯出品）
+        - title: AutoClaw（澳龙）
+          logo: /opc-ai-center/openclaw/200309.png
+          url: https://autoglm.zhipuai.cn/autoclaw
+          description: 国产OpenClaw：AutoClaw（清华智谱）
+    - term: AI办公工具
+      links:
+        - title: AiPPT
+          logo: /opc-ai-center/office/200310.png
+          url: /opc-ai-center/office/200310
+          description: AI赋能，轻松创作精美PPT
+        - title: ChatPPT
+          logo: /opc-ai-center/office/200311.png
+          url: /opc-ai-center/office/200311
+          description: AI一键生成PPT，高效办公新选择
+        - title: 笔格PPT
+          logo: /opc-ai-center/office/200312.png
+          url: /opc-ai-center/office/200312
+          description: AI智能PPT，高效创作新体验
+        - title: 课灵PPT
+          logo: /opc-ai-center/office/200313.png
+          url: /opc-ai-center/office/200313
+          description: 码上启航，编程梦想的起点
+        - title: ChatExcel
+          logo: /opc-ai-center/office/200314.png
+          url: /opc-ai-center/office/200314
+          description: AI对话式Excel，解放双手专注分析
+        - title: 飞书多维表格
+          logo: /opc-ai-center/office/200315.png
+          url: /opc-ai-center/office/200315
+          description: AI赋能，表格即系统，协作更高效。
+    - term: AI编程工具
+      links:
+        - title: Cursor
+          logo: /opc-ai-center/code-tools/200301.png
+          url: /opc-ai-center/code-tools/200301
+          description: AI编程，效率翻倍
+        - title: 通义灵码
+          logo: /opc-ai-center/code-tools/200302.png
+          url: /opc-ai-center/code-tools/200302
+          description: 让AI为你的代码加速
+        - title: TRAE
+          logo: /opc-ai-center/code-tools/200304.png
+          url: /opc-ai-center/code-tools/200304
+          description: AI编程，一键生成代码
