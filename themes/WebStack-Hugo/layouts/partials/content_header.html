@@ -1,10 +1,10 @@
 <div class="main-content flex-fill grid-bg">
     <div class="big-header-banner">
-        <div id="header" class="page-header sticky">
+        <div id="header" class="page-header{{ if not .IsHome }} not-home{{ end }}">
             <div class="navbar navbar-expand-md">
                 <div class="container-fluid p-0">
 
-                    <a href="" class="navbar-brand d-md-none" title="{{ .Site.Title }}">
+                    <a href="{{ "/" | relLangURL }}" class="navbar-brand" title="{{ .Site.Title }}">
                         <img src="{{ absURL $.Site.Params.images.logoCollapseLight }}" class="logo-light"
                             alt="{{ .Site.Title }}">
                         <img src="{{ absURL $.Site.Params.images.logoCollapseDark }}" class="logo-dark d-none"
