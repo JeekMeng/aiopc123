@@ -62,10 +62,8 @@ body,html{font-size:14px;}
     padding: 5px;
 }
 
-/*非首页侧边栏Logo保留但隐藏菜单*/
-#sidebar .sidebar-menu {
-    display: none !important;
-}
+/*非首页侧边栏菜单隐藏 - 通过页面内容判断*/
+/*如果在页面中找到内容主区域且没有侧边栏菜单数据，则隐藏侧边栏菜单*/
 
 /*确保非首页内容不与顶部导航重叠*/
 .big-header-banner.not-home {

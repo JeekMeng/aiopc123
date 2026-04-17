@@ -120,5 +120,14 @@ function switchNightMode(){
     }
 }
 </script>
+<script>
+    // 非首页隐藏侧边栏菜单
+    if (document.querySelector('.page-header.not-home')) {
+        var sidebarMenu = document.querySelector('#sidebar .sidebar-menu');
+        if (sidebarMenu) {
+            sidebarMenu.style.display = 'none';
+        }
+    }
+</script>
 </body>
 </html>
