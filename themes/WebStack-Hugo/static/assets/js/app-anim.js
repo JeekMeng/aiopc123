@@ -237,13 +237,7 @@
     }
     //返回顶部
     $(window).scroll(function () {
-        if ($(this).scrollTop() >= 50) {
-            $('#go-to-up').fadeIn(200);
-            $('.big-header-banner').addClass('header-bg');
-        } else {
-            $('#go-to-up').fadeOut(200);
-            $('.big-header-banner').removeClass('header-bg');
-        }
+
     });
     $('.go-up').click(function () {
         $('body,html').animate({
@@ -375,8 +369,8 @@
         if (!$('.header-mini-btn input[type="checkbox"]').prop("checked")) {
             $('.sidebar-nav').removeClass('mini-sidebar');
 	    //221024: 调整左导航展开时,点击图标锚定定位失效
-            //$('.sidebar-nav .change-href').attr('href','javascript:;');
-            $('.sidebar-menu ul ul').css("display", "none");
+            $('.sidebar-nav .change-href').attr('href','javascript:;');
+            //$('.sidebar-menu ul ul').css("display", "none");
 	    console.log('checked=true');
             if(isNoAnim){
 		console.log('isNoAnim=true');

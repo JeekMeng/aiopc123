@@ -1,16 +1,8 @@
 <div class="main-content flex-fill grid-bg">
-    <div class="big-header-banner">
+    <div class="big-header-banner header-bg">
         <div id="header" class="page-header{{ if not .IsHome }} not-home{{ end }}">
             <div class="navbar navbar-expand-md">
                 <div class="container-fluid p-0">
-
-                    <a href="{{ "/" | relLangURL }}" class="navbar-brand" title="{{ .Site.Title }}">
-                        <img src="{{ absURL $.Site.Params.images.logoCollapseLight }}" class="logo-light"
-                            alt="{{ .Site.Title }}">
-                        <img src="{{ absURL $.Site.Params.images.logoCollapseDark }}" class="logo-dark d-none"
-                            alt="{{ .Site.Title }}">
-                    </a>
-
                     <div class="collapse navbar-collapse order-2 order-md-1">
                         <div class="header-mini-btn">
                             <label>
@@ -21,7 +13,6 @@
                                     <path class="line--3" d="M0 60h62c18 0 18 20-17-5L31 45"></path>
                                 </svg>
                             </label>
-
                         </div>
 
                         <ul class="navbar-nav site-menu" style="margin-right: 16px;">
