@@ -15,6 +15,26 @@
           logo: /opc-company-operation/industrial-and-commercial-registration/200004.png
           url: /opc-company-operation/industrial-and-commercial-registration/200004
           description: 云端方案，一键加速企业成长
+        - title: 全国经营主体登记注册服务网
+          logo: /opc-company-operation/industrial-and-commercial-registration/200316.png
+          url: https://dj.samr.gov.cn/djfww/#/server_index
+          description: 国家入口，可查全国的情况
+        - title: 北京市企业服务e窗通平台
+          logo: /opc-company-operation/industrial-and-commercial-registration/200317.png
+          url: https://ect.scjgj.beijing.gov.cn/Index
+          description: 北京一人公司注册
+        - title: 江苏政务服务
+          logo: /opc-company-operation/industrial-and-commercial-registration/200319.png
+          url: https://www.jszwfw.gov.cn
+          description: 江苏一人公司注册
+        - title: 广东企业开办“一件事”服务专区
+          logo: /opc-company-operation/industrial-and-commercial-registration/200320.png
+          url: https://amr.gd.gov.cn/qykbzq/#/indexOpen?wbxt=openEnt
+          description: 广东一人公司注册
+        - title: 浙江政务服务网
+          logo: /opc-company-operation/industrial-and-commercial-registration/200321.png
+          url: https://www.zjzwfw.gov.cn
+          description: 浙江一人公司注册
     - term: 记账报税
       links:
         - title: 自记账
@@ -29,6 +49,18 @@
           logo: default.webp
           url: /opc-company-operation/accounting-and-tax-reporting/200008
           description: 浪潮云会计，小微企业财务无忧首选
+        - title: 自然人电子税务局
+          logo: /opc-company-operation/accounting-and-tax-reporting/200324.png
+          url: https://etax.chinatax.gov.cn/
+          description: 国家一人公司报税入口
+        - title: 12366 纳税服务平台
+          logo: /opc-company-operation/accounting-and-tax-reporting/200325.png
+          url: https://12366.chinatax.gov.cn/
+          description: 政策查询、办税指南、智能咨询、投诉建议
+        - title: 江苏省电子税务
+          logo: /opc-company-operation/accounting-and-tax-reporting/200326.png
+          url: https://etax.jiangsu.chinatax.gov.cn/
+          description: 江苏一人公司报税入口
     - term: 财税合规
       links:
         - title: 企查查
@@ -45,6 +77,22 @@
           logo: /opc-company-operation/contract-law/200015.png
           url: /opc-company-operation/contract-law/200015
           description: 法大大，让签约更智能高效
+        - title: 中国裁判文书网
+          logo: /opc-company-operation/contract-law/200327.png
+          url: https://wenshu.court.gov.cn
+          description: 检索合同纠纷、一人公司财产混同、股东连带责任等生效判例
+        - title: 全国合同示范文本库
+          logo: /opc-company-operation/contract-law/200328.png
+          url: http://htsfwb.samr.gov.cn/
+          description: 免费下载 500 + 官方合同模板（买卖、租赁、服务、技术、网络交易等
+        - title: 12348 中国法网
+          logo: /opc-company-operation/contract-law/200329.png
+          url: https://www.12348.gov.cn/
+          description: 智能法律咨询、法律文书模板、法律援助申请、合同纠纷调解指引
+        - title: 国家企业信用信息公示系统
+          logo: /opc-company-operation/contract-law/200330.png
+          url: https://www.gsxt.gov.cn/
+          description: 年报、异常名录查询
     - term: 五险一金
       links:
         - title: 易社保
@@ -55,6 +103,18 @@
           logo: /opc-company-operation/five-insurances-one-fund/200024.png
           url: /opc-company-operation/five-insurances-one-fund/200024
           description: 一站式社保，企业无忧之选
+        - title: 国家社会保险公共服务平台
+          logo: /opc-company-operation/five-insurances-one-fund/200331.png
+          url: https://si.12333.gov.cn
+          description: 全国社保查询、关系转移、参保证明打印、待遇资格认证	
+        - title: 全国人社政务服务平台
+          logo: /opc-company-operation/five-insurances-one-fund/200332.png
+          url: https://www.12333.gov.cn
+          description: 社保、就业、劳动关系、社保卡一站式服务	
+        - title: 国家医保服务平台
+          logo: /opc-company-operation/five-insurances-one-fund/200333.png
+          url: https://fuwu.nhsa.gov.cn
+          description: 医保参保、缴费、报销、异地就医备案
     - term: 发票工具
       links:
         - title: 发票通
@@ -69,6 +129,10 @@
           logo: /opc-company-operation/invoice-tools/200029.png
           url: /opc-company-operation/invoice-tools/200029
           description: 航天信息，智造未来新高度。
+        - title: 票税宝
+          logo: /opc-company-operation/invoice-tools/200336.png
+          url: /opc-company-operation/invoice-tools/200336
+          description: 票税宝，让财税管理更简单
 - taxonomy: OPC产品设计
   icon: fas fa-pencil-ruler
   list:
@@ -105,7 +169,7 @@
     - term: 品牌LOGO
       links:
         - title: 站酷（LOGO 设计）
-          logo: default.webp
+          logo: /opc-product-design/brand-logo/200054.png
           url: /opc-product-design/brand-logo/200054
           description: 站酷，千万设计师的创意家园。
 - taxonomy: OPC产品研发
@@ -142,7 +206,7 @@
     - term: 封面制作
       links:
         - title: 创客贴
-          logo: /opc-product-research/cover-making/200065.png
+          logo: /opc-product-research/cover-making/200030.png
           url: /opc-product-research/cover-making/200065
           description: 会打字就能做设计，商用有版权
         - title: 美图设计室
@@ -434,7 +498,7 @@
     - term: 沟通工具
       links:
         - title: 企业微信
-          logo: /opc-customer-management/communication-tools/200189.png
+          logo: /opc-customer-management/communication-tools/200072.png
           url: /opc-customer-management/communication-tools/200189
           description: 微信办公，高效安全
         - title: Zoom
@@ -655,6 +719,10 @@
           logo: /opc-ai-center/openclaw/200307.png
           url: https://qclawd.com/
           description: 国产OpenClaw：QClaw（腾讯出品）
+        - title: ArkClaw
+          logo: default.webp
+          url: https://www.volcengine.com/product/arkclaw
+          description: 国产OpenClaw：ArkClaw（字节出品）
         - title: AutoClaw（澳龙）
           logo: /opc-ai-center/openclaw/200309.png
           url: https://autoglm.zhipuai.cn/autoclaw
@@ -695,6 +763,10 @@
           logo: /opc-ai-center/code-tools/200302.png
           url: /opc-ai-center/code-tools/200302
           description: 让AI为你的代码加速
+        - title: CodeGeeX
+          logo: /opc-ai-center/code-tools/200303.png
+          url: /opc-ai-center/code-tools/200303
+          description: 清华智谱出品的编程工具
         - title: TRAE
           logo: /opc-ai-center/code-tools/200304.png
           url: /opc-ai-center/code-tools/200304

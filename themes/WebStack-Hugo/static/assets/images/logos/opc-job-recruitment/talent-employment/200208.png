@@ -60,19 +60,19 @@
             <div id="h5_nocaptcha" class="nc-container" data-nc-idx="1"></div>
         </div>
     </div>
-    <div style="margin-left:20px" id="traceid">TraceID: ac11000117735640378878042e00cc</div>
+    <div style="margin-left:20px" id="traceid">TraceID: ac11000117765532838702768e00ea</div>
 </div>
 </body>
 <script type="text/javascript">
          window.aliyun_captchaid_807c ='2ced30cb2fb58660c6920675d39a48c1';
-         window.aliyun_captchatrace_807c ='814d07e3b8ee48801dd54f3a89363e0fa674c1f72e46c708b6545761677299d6d291d1623a5c7e2daf74339be8bd40e5';
+         window.aliyun_captchatrace_807c ='6076088080fdebc006859b4585c651ef4097e8bca52a0ed48cc149e7e99d057a4cb52d47847a0eb899bd66406eb3c270';
          var requestInfo = {
             type: 'GET',
             url: 'https://www.lagou.com/favicon.ico',
             args: '',
             data: '',
-            token: '4254fc3eec6ae4b3e501f60387b884d3',
-            refer: 'l0SB7OETkVCNy6VLi//rzrGaW6o=',
+            token: 'c13ec05619c99f9126f57c0acb9e4426',
+            refer: '8DqW9VldKioWYUY2dnCC8oetqsM=',
             headers: '{}',
       
 };
