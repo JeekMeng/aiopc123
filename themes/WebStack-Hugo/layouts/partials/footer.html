@@ -121,8 +121,8 @@ function switchNightMode(){
 }
 </script>
 <script>
-    // 非首页隐藏侧边栏菜单
-    if (document.querySelector('.page-header.not-home')) {
+    // 非首页隐藏侧边栏菜单（book页面不隐藏）
+    if (document.querySelector('.page-header.not-home') && !window.location.pathname.startsWith('/book')) {
         var sidebarMenu = document.querySelector('#sidebar .sidebar-menu');
         if (sidebarMenu) {
             sidebarMenu.style.display = 'none';

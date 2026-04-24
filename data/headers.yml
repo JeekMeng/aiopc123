@@ -9,3 +9,11 @@
 - item: 一人公司博客
   icon: fa fa-book
   link: /blog
+
+- item: 一人公司工作台
+  icon: fa fa-book
+  link: /workspace
+
+- item: 资料专区
+  icon: fa fa-book
+  link: /book

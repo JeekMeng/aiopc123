@@ -1,0 +1,44 @@
+{{ partial "header.html" . }}
+
+{{ partial "sidebar.html" . }}
+
+{{ partial "content_header.html" . }}
+
+<link rel="stylesheet" href="/assets/css/book-style.css" type="text/css" media="all" />
+
+<div id="content" class="content-site customize-site">
+    <div id="book-detail">
+        <div class="book-catalog">
+            {{ range .Site.Data.book }}
+                {{ if .list }}
+                    {{ range .list }}
+                    <div class="catalog-section">
+                        <div class="d-flex flex-fill">
+                            <h4 class="text-gray text-lg mb-3">
+                                <i class="site-tag iconfont icon-tag icon-lg mr-1" id="{{ printf "%s" (md5 .term) }}"></i>
+                                {{ .term }}
+                            </h4>
+                        </div>
+                        <div class="book-card-grid">
+                            {{ range .links }}
+                            <a href="{{ .url }}" class="book-link-card" target="_blank">
+                                <div class="book-link-cover">
+                                    <img src="{{ .logo }}" alt="{{ .title }}">
+                                </div>
+                                <div class="book-link-title">{{ .title }}</div>
+                            </a>
+                            {{ end }}
+                        </div>
+                    </div>
+                    {{ end }}
+                {{ end }}
+            {{ end }}
+        </div>
+    </div>
+</div>
+
+{{ partial "content_footer.html" . }}
+
+{{ partial "modal_search.html" . }}
+
+{{ partial "footer.html" . }}
