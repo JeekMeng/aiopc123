@@ -1,0 +1,43 @@
+{{ partial "header.html" . }}
+
+{{ partial "sidebar.html" . }}
+
+{{ partial "content_header.html" . }}
+
+<div id="content" class="content-site customize-site">
+    <article class="container py-4">
+        <h1 class="mb-3">{{ .Title }}</h1>
+        
+        <div class="text-muted mb-4">
+            <time>{{ .Date.Format "2006-01-02" }}</time>
+            {{ with .Params.tags }}
+            <span class="ml-3">标签: {{ range . }}{{ . }} {{ end }}</span>
+            {{ end }}
+        </div>
+        
+        <div class="content">
+            {{ .Content }}
+        </div>
+        
+        <hr class="my-4">
+        
+        <div class="row">
+            <div class="col">
+                {{ with .Prev }}
+                <a href="{{ .RelPermalink }}" class="btn btn-outline-secondary">&laquo; 上一篇</a>
+                {{ end }}
+            </div>
+            <div class="col text-right">
+                {{ with .Next }}
+                <a href="{{ .RelPermalink }}" class="btn btn-outline-secondary">下一篇 &raquo;</a>
+                {{ end }}
+            </div>
+        </div>
+    </article>
+</div>
+
+{{ partial "content_footer.html" . }}
+
+{{ partial "modal_search.html" . }}
+
+{{ partial "footer.html" . }}

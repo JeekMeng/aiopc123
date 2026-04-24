@@ -1,0 +1,47 @@
+/* Blog List Styles - Force sidebar right */
+
+#blog-list .row {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    margin: 0 !important;
+}
+
+#blog-list .col-md-8,
+#blog-list .col-md-4 {
+    padding: 0 0.5rem !important;
+    margin-bottom: 0 !important;
+}
+
+#blog-list .col-md-8 {
+    flex: 0 0 66.6666666667% !important;
+    max-width: 66.6666666667% !important;
+    left: 0 !important;
+    right: auto !important;
+}
+
+#blog-list .col-md-4 {
+    flex: 0 0 33.3333333333% !important;
+    max-width: 33.3333333333% !important;
+    left: auto !important;
+    right: 0 !important;
+}
+
+#blog-list .card {
+    margin-bottom: 0.5rem !important;
+    height: auto !important;
+}
+
+#blog-list .card-body {
+    padding: 0.5rem !important;
+}
+
+@media (max-width: 767px) {
+    #blog-list .col-md-8,
+    #blog-list .col-md-4 {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
+    }
+}
