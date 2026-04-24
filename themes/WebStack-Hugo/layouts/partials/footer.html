@@ -121,13 +121,13 @@ function switchNightMode(){
 }
 </script>
 <script>
-    // 非首页隐藏侧边栏菜单（book页面不隐藏）
-    if (document.querySelector('.page-header.not-home') && !window.location.pathname.startsWith('/book')) {
+    // 非首页隐藏侧边栏菜单（book和blog页面不隐藏）
+    if (document.querySelector('.page-header.not-home') && !window.location.pathname.startsWith('/book') && !window.location.pathname.startsWith('/blog')) {
         var sidebarMenu = document.querySelector('#sidebar .sidebar-menu');
         if (sidebarMenu) {
             sidebarMenu.style.display = 'none';
         }
-    }
+}
 </script>
 </body>
 </html>
