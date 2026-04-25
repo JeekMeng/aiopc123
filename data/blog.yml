@@ -1,0 +1,37 @@
+- taxonomy: 技术教程
+  icon: fas fa-code
+  list:
+    - term: 编程开发
+      links:
+        - title: Python实战手册
+          logo: /images/blogs/python.png
+          url: /blog/python-practice
+          description: Python编程实战指南
+        - title: JavaScript精粹
+          logo: /images/blogs/js.png
+          url: /blog/javascript
+          description: JavaScript核心技术
+
+- taxonomy: 运营管理
+  icon: fas fa-chart-line
+  list:
+    - term: 营销推广
+      links:
+        - title: 抖音运营指南
+          logo: /images/blogs/douyin.png
+          url: /blog/douyin-operation
+          description: 抖音运营实战
+        - title: 私域流量
+          logo: /images/blogs/private.png
+          url: /blog/private-flow
+          description: 私域引流技巧
+
+- taxonomy: 产品设计
+  icon: fas fa-palette
+  list:
+    - term: UI设计
+      links:
+        - title: Figma教程
+          logo: /images/blogs/figma.png
+          url: /blog/figma-tutorial
+          description: Figma入门指南

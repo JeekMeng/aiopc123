@@ -4,7 +4,7 @@
     - term: 编程开发
       links:
         - title: Python实战手册
-          logo: /images/books/python.png
+          logo: default_book_cover.png
           url: /book/python-practice
           description: Python编程实战指南
         - title: JavaScript精粹
@@ -14,11 +14,11 @@
     - term: AI工具
       links:
         - title: ChatGPT使用指南
-          logo: /images/books/chatgpt.png
+          logo: default_book_cover.png
           url: /book/chatgpt-guide
           description: ChatGPT使用技巧
         - title: AI绘图手册
-          logo: /images/books/ai-draw.png
+          logo: default_book_cover.png
           url: /book/ai-drawing
           description: AI绘图工具教程
 
@@ -28,17 +28,17 @@
     - term: 营销推广
       links:
         - title: 抖音运营指南
-          logo: /images/books/douyin.png
+          logo: default_book_cover.png
           url: /book/douyin-operation
           description: 抖音运营实战
         - title: 私域流量
-          logo: /images/books/private.png
+          logo: default_book_cover.png
           url: /book/private流量
           description: 私域引流技巧
     - term: 数据分析
       links:
         - title: 数据分析实战
-          logo: /images/books/data.png
+          logo: default_book_cover.png
           url: /book/data-analysis
           description: 数据驱动决策
 
