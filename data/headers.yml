@@ -3,15 +3,15 @@
   link: "./"
 
 - item: AI 一人公司操作指南
-  icon: fa fa-book
+  icon: fas fa-fire
   link: /caozuozhinan/
 
 - item: 一人公司博客
-  icon: fa fa-book
+  icon: fas fa-pen
   link: /blog
 
 - item: 一人公司工作台
-  icon: fa fa-book
+  icon: fas fa-desktop
   link: /workspace
 
 - item: 资料专区

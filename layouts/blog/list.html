@@ -13,24 +13,35 @@
                 {{ $paginator := .Paginate (where .Site.RegularPages "Section" "blog") }}
                 {{ if gt (len $paginator.Pages) 0 }}
                 {{ range $paginator.Pages }}
-                <div class="card mb-3">
-                    <div class="row no-gutters">
+                <div class="blog-item">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h2 class="blog-title">
+                                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                            </h2>
+                            <p class="blog-summary">
+                                {{ .Summary | truncate 60 }}{{ if gt (len .Summary) 60 }}...{{ end }}
+                                <a href="{{ .RelPermalink }}" class="read-more">阅读全文</a>
+                            </p>
+                            <div class="blog-meta">
+                                <time>{{ .Date.Format "2006-01-02" }}</time>
+                                {{ with .Params.author }}
+                                <span class="author">{{ . }}</span>
+                                {{ end }}
+                                {{ with .Params.tags }}
+                                <span class="tags">
+                                    {{ range . }}<span>{{ . }}</span>{{ end }}
+                                </span>
+                                {{ end }}
+                            </div>
+                        </div>
                         <div class="col-md-3">
                             {{ $localCover := printf "%scover.png" .File.Dir }}
                             {{ if fileExists $localCover }}
-                            <img src="{{ .RelPermalink }}cover.png" class="card-img" alt="cover">
+                            <img src="{{ .RelPermalink }}cover.png" class="blog-cover" alt="cover">
                             {{ else }}
-                            <img src="/assets/images/blog/cover.png" class="card-img" alt="cover">
+                            <img src="/images/posts/cover.png" class="blog-cover" alt="cover">
                             {{ end }}
-                        </div>
-                        <div class="col-md-9">
-                            <div class="card-body">
-                                <p class="card-text text-muted small">{{ .Summary | truncate 100 }}</p>
-                                <div class="meta">
-                                    <time>{{ .Date.Format "2006-01-02" }}</time>
-                                    <a href="{{ .RelPermalink }}" class="btn-link">阅读全文</a>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

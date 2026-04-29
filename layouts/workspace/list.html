@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/assets/css/workspace-style.css">
 </head>
 <body class="workspace-body">
-    <div class="workspace-bg"></div>
+    <div class="workspace-bg" id="workspace-bg"></div>
     
     <div class="workspace-container">
         <header class="workspace-header">
@@ -18,6 +18,17 @@
                 <input type="text" placeholder="搜索应用、功能...">
             </div>
             <div class="header-actions">
+                <div class="bg-switcher">
+                    <button class="btn-icon bg-btn active" data-bg="/assets/images/workspace/workspace-simple.png" title="简约">
+                        <span>简</span>
+                    </button>
+                    <button class="btn-icon bg-btn" data-bg="/assets/images/workspace/workspace-ai.png" title="AI">
+                        <span>AI</span>
+                    </button>
+                    <button class="btn-icon bg-btn" data-bg="/assets/images/workspace/workspace-keji.png" title="科技">
+                        <span>科</span>
+                    </button>
+                </div>
                 <button class="btn-icon" title="消息">
                     <i class="iconfont icon-notice"></i>
                     <span class="badge">3</span>
@@ -44,9 +55,9 @@
                         <div class="app-icon">📖</div>
                         <span class="app-name">指南</span>
                     </div>
-                    <div class="app-item" data-url="/upload/">
-                        <div class="app-icon">🔗</div>
-                        <span class="app-name">提交</span>
+                    <div class="app-item" data-url="/book/">
+                        <div class="app-icon">📚</div>
+                        <span class="app-name">资料</span>
                     </div>
                     <div class="app-item add-app" data-action="add">
                         <div class="app-icon">➕</div>
@@ -149,6 +160,14 @@
         document.querySelectorAll('.notification-item').forEach(item => {
             item.addEventListener('click', () => {
                 item.classList.remove('unread');
+            });
+        });
+
+        document.querySelectorAll('.bg-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.bg-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById('workspace-bg').style.backgroundImage = 'url(' + btn.dataset.bg + ')';
             });
         });
     </script>

@@ -8,7 +8,7 @@
           url: /book/python-practice
           description: Python编程实战指南
         - title: JavaScript精粹
-          logo: /images/books/js.png
+          logo: default_book_cover.png
           url: /book/javascript
           description: JavaScript核心技术
     - term: AI工具
@@ -17,6 +17,22 @@
           logo: default_book_cover.png
           url: /book/chatgpt-guide
           description: ChatGPT使用技巧
+        - title: AI绘图手册
+          logo: default_book_cover.png
+          url: /book/ai-drawing
+          description: AI绘图工具教程
+        - title: AI绘图手册
+          logo: default_book_cover.png
+          url: /book/ai-drawing
+          description: AI绘图工具教程
+        - title: AI绘图手册
+          logo: default_book_cover.png
+          url: /book/ai-drawing
+          description: AI绘图工具教程
+        - title: AI绘图手册
+          logo: default_book_cover.png
+          url: /book/ai-drawing
+          description: AI绘图工具教程
         - title: AI绘图手册
           logo: default_book_cover.png
           url: /book/ai-drawing
@@ -47,13 +63,13 @@
   list:
     - term: UI设计
       links:
-        - title: Figma教程
-          logo: /images/books/figma.png
+        - title: DeepSeek 清华大学 第一版
+          logo: default_book_cover.png
           url: /book/figma-tutorial
           description: Figma入门指南
     - term: 品牌设计
       links:
         - title: 品牌设计手册
-          logo: /images/books/brand.png
+          logo: default_book_cover.png
           url: /book/brand-design
           description: 品牌视觉设计
