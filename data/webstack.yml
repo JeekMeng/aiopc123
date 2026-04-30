@@ -1,3 +1,200 @@
+- taxonomy: OPC常用推荐
+  icon: fas fa-comments
+  links:
+    - title: 创客贴
+      logo: /opc-product-research/cover-making/200030.png
+      url: /opc-product-research/cover-making/200030
+      description: 会打字就能做设计，商用有版权
+    - title: 百度网盘
+      logo: /opc-product-management/cloud-storage/200086.png
+      url: /opc-product-management/cloud-storage/200086
+      description: 海量存储，安全分享，随时随地。
+    - title: 5118 大数据
+      logo: /opc-product-launch/seo-optimization/200111.png
+      url: /opc-product-launch/seo-optimization/200111
+      description: 挖掘关键词，排名更靠前
+    - title: 简书
+      logo: /opc-promotion-operation/traffic-acquisition/200288.png
+      url: /opc-promotion-operation/traffic-acquisition/200288
+      description: 创作你的创作，发现无限可能
+    - title: 中国政府网
+      logo: /opc-policy-interpretation/industry-new-rules/200236.png
+      url: /opc-policy-interpretation/industry-new-rules/200236
+      description: 权威信息，一网打尽
+    - title: 12366 纳税服务平台
+      logo: /opc-company-operation/accounting-and-tax-reporting/200325.png
+      url: https://12366.chinatax.gov.cn/
+      description: 政策查询、办税指南、智能咨询、投诉建议
+- taxonomy: OPC最新上线
+  icon: fas fa-plus-circle
+  links:
+    - title: AutoClaw（澳龙）
+      logo: /opc-ai-center/openclaw/200309.png
+      url: https://autoglm.zhipuai.cn/autoclaw
+      description: 国产OpenClaw：AutoClaw（清华智谱）
+    - title: AiPPT
+      logo: /opc-ai-center/office/200310.png
+      url: /opc-ai-center/office/200310
+      description: AI赋能，轻松创作精美PPT
+    - title: ChatExcel
+      logo: /opc-ai-center/office/200314.png
+      url: /opc-ai-center/office/200314
+      description: AI对话式Excel，解放双手专注分析
+    - title: 站酷（LOGO 设计）
+      logo: /opc-product-design/brand-logo/200054.png
+      url: /opc-product-design/brand-logo/200054
+      description: 站酷，千万设计师的创意家园。
+- taxonomy: OPC热门推荐
+  icon: fas fa-fire
+  links:
+    - title: 豆包
+      logo: /opc-ai-center/search/200295.png
+      url: https://doubao.com
+      description: 豆包：AI全能助手，免费视频生成新体验
+    - title: DeepSeek
+      logo: /opc-ai-center/search/200296.png
+      url: https://chat.deepseek.com
+      description: 智能助手，编程创作全搞定
+    - title: OpenClaw
+      logo: /opc-ai-center/openclaw/200305.png
+      url: https://openclaw.ai/
+      description: 官方OpenClaw，AI养龙虾
+    - title: 飞书多维表格
+      logo: /opc-ai-center/office/200315.png
+      url: /opc-ai-center/office/200315
+      description: AI赋能，表格即系统，协作更高效。
+- taxonomy: OPC-AI赋能
+  icon: fas fa-tools
+  list:
+    - term: AI搜索工具
+      links:
+        - title: 豆包
+          logo: /opc-ai-center/search/200295.png
+          url: https://doubao.com
+          description: 豆包：AI全能助手，免费视频生成新体验
+        - title: DeepSeek
+          logo: /opc-ai-center/search/200296.png
+          url: https://chat.deepseek.com
+          description: 智能助手，编程创作全搞定
+        - title: 腾讯元宝
+          logo: /opc-ai-center/search/200297.png
+          url: https://yuanbao.tencent.com
+          description: 腾讯云上，轻松管理你的云资源
+        - title: 文心
+          logo: /opc-ai-center/search/200298.png
+          url: https://wenxin.baidu.com
+          description: 文心AI，让创作与办公更高效智能
+        - title: Kimi AI
+          logo: /opc-ai-center/search/200299.png
+          url: https://www.kimi.com
+          description: Kimi：像素到专家，高效搞定一切
+        - title: 千问
+          logo: /opc-ai-center/search/200300.png
+          url: https://www.qianwen.com/
+          description: 阿里千问，智能助手全能王
+    - term: AI龙虾助手
+      links:
+        - title: OpenClaw
+          logo: /opc-ai-center/openclaw/200305.png
+          url: https://openclaw.ai/
+          description: 官方OpenClaw，AI养龙虾
+        - title: Kimi Claw
+          logo: /opc-ai-center/openclaw/200306.png
+          url: https://www.kimi.com/bot
+          description: 国产OpenClaw：KimiClaw（月之暗面）
+        - title: Qclaw
+          logo: /opc-ai-center/openclaw/200307.png
+          url: https://qclawd.com/
+          description: 国产OpenClaw：QClaw（腾讯出品）
+        - title: ArkClaw
+          logo: default.webp
+          url: https://www.volcengine.com/product/arkclaw
+          description: 国产OpenClaw：ArkClaw（字节出品）
+        - title: AutoClaw（澳龙）
+          logo: /opc-ai-center/openclaw/200309.png
+          url: https://autoglm.zhipuai.cn/autoclaw
+          description: 国产OpenClaw：AutoClaw（清华智谱）
+    - term: AI办公工具
+      links:
+        - title: AiPPT
+          logo: /opc-ai-center/office/200310.png
+          url: /opc-ai-center/office/200310
+          description: AI赋能，轻松创作精美PPT
+        - title: ChatPPT
+          logo: /opc-ai-center/office/200311.png
+          url: /opc-ai-center/office/200311
+          description: AI一键生成PPT，高效办公新选择
+        - title: 笔格PPT
+          logo: /opc-ai-center/office/200312.png
+          url: /opc-ai-center/office/200312
+          description: AI智能PPT，高效创作新体验
+        - title: 课灵PPT
+          logo: /opc-ai-center/office/200313.png
+          url: /opc-ai-center/office/200313
+          description: 码上启航，编程梦想的起点
+        - title: ChatExcel
+          logo: /opc-ai-center/office/200314.png
+          url: /opc-ai-center/office/200314
+          description: AI对话式Excel，解放双手专注分析
+        - title: 飞书多维表格
+          logo: /opc-ai-center/office/200315.png
+          url: /opc-ai-center/office/200315
+          description: AI赋能，表格即系统，协作更高效。
+    - term: AI编程工具
+      links:
+        - title: Cursor
+          logo: /opc-ai-center/code-tools/200301.png
+          url: /opc-ai-center/code-tools/200301
+          description: AI编程，效率翻倍
+        - title: 通义灵码
+          logo: /opc-ai-center/code-tools/200302.png
+          url: /opc-ai-center/code-tools/200302
+          description: 让AI为你的代码加速
+        - title: CodeGeeX
+          logo: /opc-ai-center/code-tools/200303.png
+          url: /opc-ai-center/code-tools/200303
+          description: 清华智谱出品的编程工具
+        - title: TRAE
+          logo: /opc-ai-center/code-tools/200304.png
+          url: /opc-ai-center/code-tools/200304
+          description: AI编程，一键生成代码
+- taxonomy: OPC政策解读
+  icon: fas fa-torah
+  list:
+    - term: 小微企业政策
+      links:
+        - title: 国家市场监督管理总局
+          logo: /opc-policy-interpretation/micro-enterprise-policies/200214.png
+          url: /opc-policy-interpretation/micro-enterprise-policies/200214
+          description: 市场监管，服务民生。
+    - term: 税收优惠
+      links:
+        - title: 国家税务总局
+          logo: /opc-policy-interpretation/tax-incentives/200219.png
+          url: /opc-policy-interpretation/tax-incentives/200219
+          description: 权威税务资讯，一站式办税平台
+        - title: 会计网
+          logo: /opc-policy-interpretation/tax-incentives/200221.png
+          url: /opc-policy-interpretation/tax-incentives/200221
+          description: 会计人的成长家园，始于1996年。
+    - term: 创业补贴
+      links:
+        - title: 国家政务服务平台
+          logo: /opc-policy-interpretation/entrepreneurship-subsidies/200224.png
+          url: /opc-policy-interpretation/entrepreneurship-subsidies/200224
+          description: 一网通办，服务更便捷
+    - term: 地方扶持
+      links:
+        - title: 江苏政务服务网
+          logo: /opc-policy-interpretation/local-support/200229.png
+          url: /opc-policy-interpretation/local-support/200229
+          description: 江苏政务，一网通办，服务到家。
+    - term: 行业新规
+      links:
+        - title: 中国政府网
+          logo: /opc-policy-interpretation/industry-new-rules/200236.png
+          url: /opc-policy-interpretation/industry-new-rules/200236
+          description: 权威信息，一网打尽
 - taxonomy: OPC公司经营
   icon: fas fa-building
   list:
@@ -207,7 +404,7 @@
       links:
         - title: 创客贴
           logo: /opc-product-research/cover-making/200030.png
-          url: /opc-product-research/cover-making/200065
+          url: /opc-product-research/cover-making/200030
           description: 会打字就能做设计，商用有版权
         - title: 美图设计室
           logo: /opc-product-research/cover-making/200069.png
@@ -564,43 +761,6 @@
           logo: /opc-job-recruitment/outsourcing-services/200213.png
           url: /opc-job-recruitment/outsourcing-services/200213
           description: 数据智能驱动，转型未来无忧
-- taxonomy: OPC政策解读
-  icon: fas fa-torah
-  list:
-    - term: 小微企业政策
-      links:
-        - title: 国家市场监督管理总局
-          logo: /opc-policy-interpretation/micro-enterprise-policies/200214.png
-          url: /opc-policy-interpretation/micro-enterprise-policies/200214
-          description: 市场监管，服务民生。
-    - term: 税收优惠
-      links:
-        - title: 国家税务总局
-          logo: /opc-policy-interpretation/tax-incentives/200219.png
-          url: /opc-policy-interpretation/tax-incentives/200219
-          description: 权威税务资讯，一站式办税平台
-        - title: 会计网
-          logo: /opc-policy-interpretation/tax-incentives/200221.png
-          url: /opc-policy-interpretation/tax-incentives/200221
-          description: 会计人的成长家园，始于1996年。
-    - term: 创业补贴
-      links:
-        - title: 国家政务服务平台
-          logo: /opc-policy-interpretation/entrepreneurship-subsidies/200224.png
-          url: /opc-policy-interpretation/entrepreneurship-subsidies/200224
-          description: 一网通办，服务更便捷
-    - term: 地方扶持
-      links:
-        - title: 江苏政务服务网
-          logo: /opc-policy-interpretation/local-support/200229.png
-          url: /opc-policy-interpretation/local-support/200229
-          description: 江苏政务，一网通办，服务到家。
-    - term: 行业新规
-      links:
-        - title: 中国政府网
-          logo: /opc-policy-interpretation/industry-new-rules/200236.png
-          url: /opc-policy-interpretation/industry-new-rules/200236
-          description: 权威信息，一网打尽
 - taxonomy: OPC资源中心
   icon: fas fa-book
   list:
@@ -676,98 +836,3 @@
           logo: /opc-resource-center/material-collection/200281.png
           url: /opc-resource-center/material-collection/200281
           description: 高清正版图库，灵感触手可及
-- taxonomy: OPC-AI赋能
-  icon: fas fa-tools
-  list:
-    - term: AI搜索工具
-      links:
-        - title: 豆包
-          logo: /opc-ai-center/search/200295.png
-          url: https://doubao.com
-          description: 豆包：AI全能助手，免费视频生成新体验
-        - title: DeepSeek
-          logo: /opc-ai-center/search/200296.png
-          url: https://chat.deepseek.com
-          description: 智能助手，编程创作全搞定
-        - title: 腾讯元宝
-          logo: /opc-ai-center/search/200297.png
-          url: https://yuanbao.tencent.com
-          description: 腾讯云上，轻松管理你的云资源
-        - title: 文心
-          logo: /opc-ai-center/search/200298.png
-          url: https://wenxin.baidu.com
-          description: 文心AI，让创作与办公更高效智能
-        - title: Kimi AI
-          logo: /opc-ai-center/search/200299.png
-          url: https://www.kimi.com
-          description: Kimi：像素到专家，高效搞定一切
-        - title: 千问
-          logo: /opc-ai-center/search/200300.png
-          url: https://www.qianwen.com/
-          description: 阿里千问，智能助手全能王
-    - term: AI龙虾助手
-      links:
-        - title: OpenClaw
-          logo: /opc-ai-center/openclaw/200305.png
-          url: https://openclaw.ai/
-          description: 官方OpenClaw，AI养龙虾
-        - title: Kimi Claw
-          logo: /opc-ai-center/openclaw/200306.png
-          url: https://www.kimi.com/bot
-          description: 国产OpenClaw：KimiClaw（月之暗面）
-        - title: Qclaw
-          logo: /opc-ai-center/openclaw/200307.png
-          url: https://qclawd.com/
-          description: 国产OpenClaw：QClaw（腾讯出品）
-        - title: ArkClaw
-          logo: default.webp
-          url: https://www.volcengine.com/product/arkclaw
-          description: 国产OpenClaw：ArkClaw（字节出品）
-        - title: AutoClaw（澳龙）
-          logo: /opc-ai-center/openclaw/200309.png
-          url: https://autoglm.zhipuai.cn/autoclaw
-          description: 国产OpenClaw：AutoClaw（清华智谱）
-    - term: AI办公工具
-      links:
-        - title: AiPPT
-          logo: /opc-ai-center/office/200310.png
-          url: /opc-ai-center/office/200310
-          description: AI赋能，轻松创作精美PPT
-        - title: ChatPPT
-          logo: /opc-ai-center/office/200311.png
-          url: /opc-ai-center/office/200311
-          description: AI一键生成PPT，高效办公新选择
-        - title: 笔格PPT
-          logo: /opc-ai-center/office/200312.png
-          url: /opc-ai-center/office/200312
-          description: AI智能PPT，高效创作新体验
-        - title: 课灵PPT
-          logo: /opc-ai-center/office/200313.png
-          url: /opc-ai-center/office/200313
-          description: 码上启航，编程梦想的起点
-        - title: ChatExcel
-          logo: /opc-ai-center/office/200314.png
-          url: /opc-ai-center/office/200314
-          description: AI对话式Excel，解放双手专注分析
-        - title: 飞书多维表格
-          logo: /opc-ai-center/office/200315.png
-          url: /opc-ai-center/office/200315
-          description: AI赋能，表格即系统，协作更高效。
-    - term: AI编程工具
-      links:
-        - title: Cursor
-          logo: /opc-ai-center/code-tools/200301.png
-          url: /opc-ai-center/code-tools/200301
-          description: AI编程，效率翻倍
-        - title: 通义灵码
-          logo: /opc-ai-center/code-tools/200302.png
-          url: /opc-ai-center/code-tools/200302
-          description: 让AI为你的代码加速
-        - title: CodeGeeX
-          logo: /opc-ai-center/code-tools/200303.png
-          url: /opc-ai-center/code-tools/200303
-          description: 清华智谱出品的编程工具
-        - title: TRAE
-          logo: /opc-ai-center/code-tools/200304.png
-          url: /opc-ai-center/code-tools/200304
-          description: AI编程，一键生成代码
