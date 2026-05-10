@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工作台 | AI 一人公司导航</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/iconfont-3.03029.1.css">
+    <link rel="stylesheet" href="/assets/css/workspace-style.css">
+</head>
+<body class="workspace-body">
+    <div class="workspace-bg" id="workspace-bg"></div>
+    
+    <div class="workspace-container">
+        <header class="workspace-header">
+            <div class="search-box">
+                <i class="iconfont icon-search"></i>
+                <input type="text" placeholder="搜索应用、功能...">
+            </div>
+            <div class="header-actions">
+                <div class="bg-switcher">
+                    <button class="btn-icon bg-btn active" data-bg="/assets/images/workspace/workspace-simple.png" title="简约">
+                        <span>简</span>
+                    </button>
+                    <button class="btn-icon bg-btn" data-bg="/assets/images/workspace/workspace-ai.png" title="AI">
+                        <span>AI</span>
+                    </button>
+                    <button class="btn-icon bg-btn" data-bg="/assets/images/workspace/workspace-keji.png" title="科技">
+                        <span>科</span>
+                    </button>
+                </div>
+                <button class="btn-icon" title="消息">
+                    <i class="iconfont icon-notice"></i>
+                    <span class="badge">3</span>
+                </button>
+                <button class="btn-icon" title="设置">
+                    <i class="iconfont icon-set"></i>
+                </button>
+            </div>
+        </header>
+
+        <main class="workspace-main">
+            <section class="quick-apps">
+                <h3>常用应用</h3>
+                <div class="apps-grid">
+                    <div class="app-item" data-url="/">
+                        <div class="app-icon">🏠</div>
+                        <span class="app-name">首页</span>
+                    </div>
+                    <div class="app-item" data-url="/blog/">
+                        <div class="app-icon">📝</div>
+                        <span class="app-name">博客</span>
+                    </div>
+                    <div class="app-item" data-url="/caozuozhinan/">
+                        <div class="app-icon">📖</div>
+                        <span class="app-name">指南</span>
+                    </div>
+                    <div class="app-item" data-url="/book/">
+                        <div class="app-icon">📚</div>
+                        <span class="app-name">资料</span>
+                    </div>
+                    <div class="app-item add-app" data-action="add">
+                        <div class="app-icon">➕</div>
+                        <span class="app-name">添加</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="widgets-row">
+                <div class="widget">
+                    <div class="widget-header">
+                        <h4>通知消息</h4>
+                        <button class="btn-link">全部已读</button>
+                    </div>
+                    <div class="widget-body">
+                        <div class="notification-item unread">
+                            <div class="notif-icon">📢</div>
+                            <div class="notif-content">
+                                <p class="notif-title">系统更新通知</p>
+                                <p class="notif-text">网站将于今晚23:00进行系统更新...</p>
+                                <time>10分钟前</time>
+                            </div>
+                        </div>
+                        <div class="notification-item unread">
+                            <div class="notif-icon">💬</div>
+                            <div class="notif-content">
+                                <p class="notif-title">新评论提醒</p>
+                                <p class="notif-text">您的文章有新评论...</p>
+                                <time>1小时前</time>
+                            </div>
+                        </div>
+                        <div class="notification-item">
+                            <div class="notif-icon">✅</div>
+                            <div class="notif-content">
+                                <p class="notif-title">任务完成</p>
+                                <p class="notif-text">您的网站ICP备案已完成审核</p>
+                                <time>昨天</time>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="widget">
+                    <div class="widget-header">
+                        <h4>快捷工具</h4>
+                    </div>
+                    <div class="widget-body tools-grid">
+                        <a href="/upload/" class="tool-item">
+                            <span class="tool-icon">🔗</span>
+                            <span class="tool-name">网站提交</span>
+                        </a>
+                        <a href="/about/" class="tool-item">
+                            <span class="tool-icon">ℹ️</span>
+                            <span class="tool-name">关于</span>
+                        </a>
+                        <a href="/introduce/" class="tool-item">
+                            <span class="tool-icon">📋</span>
+                            <span class="tool-name">介绍</span>
+                        </a>
+                        <a href="javascript:;" class="tool-item" data-action="custom">
+                            <span class="tool-icon">⚙️</span>
+                            <span class="tool-name">自定义</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="widget">
+                    <div class="widget-header">
+                        <h4>最近访问</h4>
+                    </div>
+                    <div class="widget-body">
+                        <div class="history-list">
+                            <a href="/" class="history-item">
+                                <span>AI 一人公司导航首页</span>
+                                <time>今天</time>
+                            </a>
+                            <a href="/blog/" class="history-item">
+                                <span>博客列表</span>
+                                <time>昨天</time>
+                            </a>
+                            <a href="/caozuozhinan/" class="history-item">
+                                <span>操作指南</span>
+                                <time>3天前</time>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.querySelectorAll('.app-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const url = item.dataset.url;
+                if (url) window.location.href = url;
+            });
+        });
+        
+        document.querySelectorAll('.notification-item').forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.remove('unread');
+            });
+        });
+
+        document.querySelectorAll('.bg-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.bg-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById('workspace-bg').style.backgroundImage = 'url(' + btn.dataset.bg + ')';
+            });
+        });
+    </script>
+</body>
+</html>

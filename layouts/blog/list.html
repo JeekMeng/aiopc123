@@ -1,0 +1,73 @@
+{{ partial "header.html" . }}
+
+{{ partial "sidebar.html" . }}
+
+{{ partial "content_header.html" . }}
+
+<link rel="stylesheet" href="/assets/css/blog-style.css" type="text/css" media="all" />
+
+<div id="content" class="content-site customize-site">
+    <div id="blog-list" class="content_detail">
+        {{ range .Site.Data.blog }}
+            {{ if .list }}
+                {{ range .list }}
+                    <div class="d-flex flex-fill">
+                        <h4 class="text-gray text-lg mb-4">
+                            <i class="site-tag iconfont icon-tag icon-lg mr-1" id="{{ printf "%s" (md5 .term) }}"></i>
+                            {{ .term }}
+                        </h4>
+                    </div>
+                    <div class="blog-link-list">
+                        {{ range .links }}
+                        <a href="{{ .url }}" class="blog-link-item" target="_blank">
+                            <div class="blog-link-left">
+                                <div class="blog-link-title">{{ .title }}</div>
+                                <div class="blog-link-desc">{{ .description | truncate 150 }}{{ if gt (len .description) 150 }}...{{ end }}</div>
+                                <div class="blog-link-meta">
+                                    <span class="author">官方原创</span>
+                                    <span class="tags"></span>
+                                </div>
+                            </div>
+                            {{ if .logo }}
+                            <img src="{{ .logo }}" class="blog-link-img">
+                            {{ end }}
+                        </a>
+                        {{ end }}
+                    </div>
+                    <br />
+                {{ end }}
+            {{ else if .links }}
+                <div class="d-flex flex-fill">
+                    <h4 class="text-gray text-lg mb-4">
+                        <i class="site-tag iconfont icon-tag icon-lg mr-1" id="{{ printf "%s" (md5 .taxonomy) }}"></i>
+                        {{ .taxonomy }}
+                    </h4>
+                </div>
+                <div class="blog-link-list">
+                    {{ range .links }}
+                    <a href="{{ .url }}" class="blog-link-item" target="_blank">
+                        <div class="blog-link-left">
+                            <div class="blog-link-title">{{ .title }}</div>
+                            <div class="blog-link-desc">{{ .description | truncate 150 }}{{ if gt (len .description) 150 }}...{{ end }}</div>
+                            <div class="blog-link-meta">
+                                <span class="author">官方原创</span>
+                                <span class="tags"></span>
+                            </div>
+                        </div>
+                        {{ if .logo }}
+                        <img src="{{ .logo }}" class="blog-link-img">
+                        {{ end }}
+                    </a>
+                    {{ end }}
+                </div>
+                <br />
+            {{ end }}
+        {{ end }}
+    </div>
+</div>
+
+{{ partial "content_footer.html" . }}
+
+{{ partial "modal_search.html" . }}
+
+{{ partial "footer.html" . }}

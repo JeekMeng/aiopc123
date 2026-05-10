@@ -2,10 +2,10 @@
   icon: fa fa-home
   link: "./"
 
-- item: AI 一人公司操作指南
-  icon: fa fa-book
-  link: /caozuozhinan/
+- item: 文章资讯
+  icon: fas fa-pen
+  link: /blog
 
-- item: 热门AI工具
+- item: 资料专区
   icon: fa fa-book
-  link: /
+  link: /book

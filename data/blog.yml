@@ -1,0 +1,53 @@
+- taxonomy: 推荐文章
+  icon: fas fa-thumbs-up
+  links:
+    - title: AI 一人公司操作指南 | 官方发布
+      logo: /assets/images/blog/blog-default-cover.png
+      url: /blog/100000
+      description: 整合全国 OPC 政策库、智能体工具导航、合规运营模板、盈利落地方案，从公司注册、政策匹配、AI 提效，到产品创意、获客变现、长期经营，全>程手把手带你，用最低成本、最简单方式，从零到一真正跑通一家属于自己的 AI-OPC. 
+
+    - title: 如何区分一人公司（OPC）、个体工商户、个人独资企业？
+      logo: /assets/images/blog/blog-default-cover.png
+      url: /blog/100002
+      description: 很多初次创业的人，常常把一人公司（OPC）、个体工商户、个人独资企业混为一谈，看似都是 “一个人创业”，但在法律身份、承担责任、交税方式、合规要求、后期发展上差异巨大。本文清晰拆解三者核心区别，帮你一次性看懂该怎么选
+
+- taxonomy: 政策解读
+  icon: fas fa-star
+  links:
+    - title: 2026 年一人公司（OPC）最新优惠政策深度解读
+      logo: /assets/images/blog/blog-default-cover.png
+      url: /blog/100003
+      description: 在新《公司法》松绑与 AI 创业热潮推动下，一人公司（OPC，一人有限责任公司）成为政策重点支持对象。国家层面统一税收优惠延续至 2027 年底，北京、深圳、杭州、海南等省市密集出台专项补贴、算力支持、注册绿色通道等政策，形成 普惠减税 + 地方加码 的扶持体系
+
+- taxonomy: 案例集锦
+  icon: fas fa-trophy
+  links: 
+    - title: 2026AI OPC实战案例合集｜从小单盈利到千万营收，一人公司创业全复盘
+      logo: /assets/images/blog/blog-default-cover.png
+      url: /blog/100004
+      description: AI OPC(AI赋能一人有限公司)成为大众创业的主流新模式，AI OPC依托人工智能替代人工运营、生产、获客、售后等环节，实现单人操盘、AI干活、公司合规经营的轻量化创业形态。 
+
+- taxonomy: 技术教程
+  icon: fas fa-code
+  list:
+    - term: OpenClaw助手
+      links: 
+        - title: OpenClaw Ubuntu 安装手册（2026 最新版-2026.3.13） 
+          logo: /assets/images/blog/blog-default-cover.png
+          url: /blog/200000
+          description: OpenClaw 是基于 Node.js 的 AI 自动化与任务编排框架，支持本地/云端模型接入、Web 管理与命令行调度。本手册覆盖 Ubuntu 20.04/22.04/24.04 环境的完整安装、配置、验证与排障流程。 
+
+        - title: OpenClaw 完全使用手册（新手版） 
+          logo: /assets/images/blog/blog-default-cover.png
+          url: /blog/200001
+          description: OpenClaw 是一款本地部署、全平台打通的 AI 助手网关，能让大模型（Claude/GPT/本地模型）直接操控你的电脑、处理文件、对接聊天软件、执行自动化任务，新手也能快速上手。
+
+        - title: 在 OpenClaw 实现一个帮你干活的 Agent 助理 
+          logo: /assets/images/blog/blog-default-cover.png
+          url: /blog/200002
+          description: OpenClaw 不仅仅是一个聊天机器人，它是一个多 Agent 系统。你可以创建多个专门的 Agent，每个 Agent 都有自己的 workspace、技能集和个性，负责处理特定的任务。 
+        
+        - title: 编写你的第一个 OpenClaw Skill 
+          logo: /assets/images/blog/blog-default-cover.png
+          url: /blog/200003
+          description: Skill 是什么？简单来说，它是给 AI 助手的插件——通过编写 Skill，你可以扩展 OpenClaw 的能力，让它掌握特定领域的专业知识、工作流程和工具使用方法。  

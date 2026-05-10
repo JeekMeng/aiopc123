@@ -89,7 +89,70 @@
                     <div class="sidebar-scroll">
                         <div class="sidebar-menu-inner">
                             <ul>
-                                {{ range .Site.Data.webstack }}
+                                {{ if hasPrefix .RelPermalink "/book" }}
+                                    {{ range .Site.Data.book }}
+                                        {{ if .list }}
+                                        {{ $anchor := printf "%s" (md5 (index .list 0).term) }}
+                                        <li class="sidebar-item">
+                                            <a href="#{{ $anchor }}" class="smooth">    
+                                                <i class="{{ .icon }} icon-fw icon-lg mr-2"></i>
+                                                <span>{{ .taxonomy }}</span>
+                                                <i class="iconfont icon-arrow-r-m sidebar-more text-sm"></i>
+                                            </a>
+                                            <ul>
+                                                {{ range .list }}
+                                                {{ $termAnchor := printf "%s" (md5 .term) }}
+                                                <li><a href="#{{ $termAnchor }}" class="smooth"><span>{{ .term }}</span></a></li>
+                                                {{ end }}
+                                            </ul>
+                                        </li> 
+                                        {{ else }}
+                                        {{ $anchor := printf "%s" (md5 .taxonomy) }}
+                                        <li class="sidebar-item">
+                                            <a href="#{{ $anchor }}" class="smooth">
+                                                <i class="{{ .icon }} fa-lg icon-fw icon-lg mr-2"></i>
+                                                <span>{{ .taxonomy }}</span>
+                                            </a>
+                                        </li>
+                                        {{ end }}
+                                    {{ end }}
+                                {{ else if hasPrefix .RelPermalink "/blog" }}
+                                    {{ range .Site.Data.blog }}
+                                        {{ if .list }}
+                                        {{ $anchor := printf "%s" (md5 (index .list 0).term) }}
+                                        <li class="sidebar-item">
+                                            <a href="#{{ $anchor }}" class="smooth">    
+                                                <i class="{{ .icon }} icon-fw icon-lg mr-2"></i>
+                                                <span>{{ .taxonomy }}</span>
+                                                <i class="iconfont icon-arrow-r-m sidebar-more text-sm"></i>
+                                            </a>
+                                            <ul>
+                                                {{ range .list }}
+                                                {{ $termAnchor := printf "%s" (md5 .term) }}
+                                                <li><a href="#{{ $termAnchor }}" class="smooth"><span>{{ .term }}</span></a></li>
+                                                {{ end }}
+                                            </ul>
+                                        </li> 
+                                        {{ else if .links }}
+                                        {{ $anchor := printf "%s" (md5 .taxonomy) }}
+                                        <li class="sidebar-item">
+                                            <a href="#{{ $anchor }}" class="smooth">
+                                                <i class="{{ .icon }} fa-lg icon-fw icon-lg mr-2"></i>
+                                                <span>{{ .taxonomy }}</span>
+                                            </a>
+                                        </li>
+                                        {{ else }}
+                                        {{ $anchor := printf "%s" (md5 .taxonomy) }}
+                                        <li class="sidebar-item">
+                                            <a href="#{{ $anchor }}" class="smooth">
+                                                <i class="{{ .icon }} fa-lg icon-fw icon-lg mr-2"></i>
+                                                <span>{{ .taxonomy }}</span>
+                                            </a>
+                                        </li>
+                                        {{ end }}
+                                    {{ end }}
+                                {{ else }}
+                                    {{ range .Site.Data.webstack }}
                                     {{ if .list }}
                                     {{ $anchor := printf "%s" (md5 (index .list 0).term) }}
                                     <li class="sidebar-item">
@@ -114,6 +177,7 @@
                                         </a>
                                     </li>
                                     {{ end }}
+                                {{ end }}
                                 {{ end }}
                             </ul>           
                         </div>

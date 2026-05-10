@@ -1,0 +1,23 @@
+- taxonomy: 最新资料
+  icon: fas fa-star
+  links:
+    - title: 一人公司起步的思维
+      logo: /book/10000.png
+      url: /book/10000
+      description: 会打字就能做设计，商用有版权
+    - title: 一人公司：失业潮中的高新技术工作者
+      logo: /book/10001.png
+      url: /book/10001
+      description: 会打字就能做设计，商用有版权
+    - title: 一人公司 AI时代新赚钱方向
+      logo: /book/10002.png
+      url: /book/10002
+      description: 会打字就能做设计，商用有版权
+    - title: AI新个体：用DeepSeek重塑一人公司
+      logo: /book/10003.png
+      url: /book/10003
+      description: 会打字就能做设计，商用有版权
+    - title: 清华大学：一人公司OPC发展研究（137页）
+      logo: /book/10004.png
+      url: /book/10004
+      description: 会打字就能做设计，商用有版权

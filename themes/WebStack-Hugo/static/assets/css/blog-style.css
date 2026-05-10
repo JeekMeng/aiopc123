@@ -1,0 +1,148 @@
+/* Blog List Styles */
+
+
+
+/* Blog Item Styles */
+.blog-item {
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+}
+
+.blog-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.blog-title a {
+    color: #333;
+    text-decoration: none;
+}
+
+.blog-title a:hover {
+    color: #007bff;
+}
+
+.blog-summary {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.read-more {
+    color: #007bff;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+.blog-meta {
+    font-size: 12px;
+    color: #999;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.blog-meta time {
+    margin-right: 0;
+}
+
+.blog-meta .author {
+    margin-right: 0;
+}
+
+.blog-meta .tags {
+    color: #666;
+}
+
+.blog-meta .tags span,
+.blog-tag-item {
+    display: inline-block;
+    background: #f0f0f0;
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-right: 5px;
+    font-size: 11px;
+    border: 1px solid #ddd;
+}
+
+.blog-tag-item {
+    margin-bottom: 3px;
+}
+
+.blog-meta .read-more {
+    margin-left: auto;
+}
+
+
+
+/* Blog Link List - Large Rectangular Cards */
+.blog-link-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.blog-link-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.blog-link-item:hover {
+    background: #f8f9fa;
+    border-color: #007bff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.blog-link-img {
+    width: 120px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-left: 15px;
+    flex-shrink: 0;
+}
+
+.blog-link-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.blog-link-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.blog-link-desc {
+    font-size: 13px;
+    color: #666;
+}
+
+.blog-link-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.blog-link-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: #999;
+}
+
+.blog-link-meta .author {
+    color: #666;
+}
