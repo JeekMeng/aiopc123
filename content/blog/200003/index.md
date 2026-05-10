@@ -9,9 +9,8 @@ summary: "编写你的第一个 OpenClaw Skill"        # 文章摘要
 toc: true                                # 是否显示目录（优先级高于全局配置）
 ---
 
-# 编写你的第一个 OpenClaw Skill
 
-Skill 是什么？简单来说，它是给 AI 助手的"插件"——通过编写 Skill，你可以扩展 OpenClaw 的能力，让它掌握特定领域的专业知识、工作流程和工具使用方法。
+> Skill 是什么？简单来说，它是给 AI 助手的"插件"——通过编写 Skill，你可以扩展 OpenClaw 的能力，让它掌握特定领域的专业知识、工作流程和工具使用方法。
 
 ## 为什么需要 Skill？
 

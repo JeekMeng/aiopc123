@@ -3,15 +3,13 @@ title: "OpenClaw Ubuntu 安装手册（2026 最新版-2026.3.13）"  # 文章标
 date: 2026-03-20T09:00:00+08:00          # 发布时间（时区+08:00适配中国）
 draft: false                             # 是否草稿（false为发布）
 tags: ["OpenClaw", "智能体", "AI"]        # 标签
-categories: ["技术教程", "一人公司", "政策解读"]                   # 分类
-#featuredImage: "/static/images/posts/cover.png"  # 封面图（可选，也可放本地静态文件）
+categories: ["技术教程"]                   # 分类
+featuredImage: "cover.png"  # 封面图（可选，也可放本地静态文件）
 summary: "OpenClaw 最新版 安装手册"        # 文章摘要
 toc: true                                # 是否显示目录（优先级高于全局配置）
 ---
 
-
-
-> OpenClaw 是基于 Node.js 的 AI 自动化与任务编排框架，支持本地/云端模型接入、Web 管理与命令行调度。本手册覆盖 Ubuntu 20.04/22.04/24.04 环境的完整安装、配置、验证与排障流程。
+OpenClaw 是基于 Node.js 的 AI 自动化与任务编排框架，支持本地/云端模型接入、Web 管理与命令行调度。本手册覆盖 Ubuntu 20.04/22.04/24.04 环境的完整安装、配置、验证与排障流程。
 
 ---
 

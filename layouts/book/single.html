@@ -11,9 +11,9 @@
         <div class="book-detail">
             <div class="book-cover-large">
                 {{ with .Params.cover }}
-                <img src="{{ . }}" alt="{{ .Title }}">
+                <img src="{{ . }}" alt="{{ $.Title }}">
                 {{ else }}
-                <img src="/images/books/cover.png" alt="{{ .Title }}">
+                <img src="/book/images/10000.png" alt="{{ $.Title }}">
                 {{ end }}
             </div>
             <div class="book-info">

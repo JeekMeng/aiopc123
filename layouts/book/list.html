@@ -21,23 +21,41 @@
                         </div>
                         <div class="book-card-grid">
                             {{ range .links }}
-                            <div class="book-link-card">
+                            <a href="{{ .url }}" class="book-link-card" target="_blank">
                                 <div class="book-link-cover">
                                     <img src="/assets/images/{{ .logo }}" alt="{{ .title }}">
                                     <span class="book-tag 免费">免费</span>
                                 </div>
                                 <div class="book-link-info">
                                     <div class="book-link-title">{{ .title }}</div>
-                                    <div class="book-link-links">
-                                        <a href="#" class="link-btn">百度网盘</a>
-                                        <a href="#" class="link-btn">夸克网盘</a>
-                                    </div>
                                 </div>
-                            </div>
+                            </a>
                             {{ end }}
                         </div>
                     </div>
                     {{ end }}
+                {{ else if .links }}
+                <div class="catalog-section">
+                    <div class="d-flex flex-fill">
+                        <h4 class="text-gray text-lg mb-3">
+                            <i class="site-tag iconfont icon-tag icon-lg mr-1" id="{{ printf "%s" (md5 .taxonomy) }}"></i>
+                            {{ .taxonomy }}
+                        </h4>
+                    </div>
+                    <div class="book-card-grid">
+                        {{ range .links }}
+                        <a href="{{ .url }}" class="book-link-card" target="_blank">
+                            <div class="book-link-cover">
+                                <img src="/assets/images/{{ .logo }}" alt="{{ .title }}">
+                                <span class="book-tag 免费">免费</span>
+                            </div>
+                            <div class="book-link-info">
+                                <div class="book-link-title">{{ .title }}</div>
+                            </div>
+                        </a>
+                        {{ end }}
+                    </div>
+                </div>
                 {{ end }}
             {{ end }}
         </div>

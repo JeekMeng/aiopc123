@@ -133,6 +133,14 @@
                                                 {{ end }}
                                             </ul>
                                         </li> 
+                                        {{ else if .links }}
+                                        {{ $anchor := printf "%s" (md5 .taxonomy) }}
+                                        <li class="sidebar-item">
+                                            <a href="#{{ $anchor }}" class="smooth">
+                                                <i class="{{ .icon }} fa-lg icon-fw icon-lg mr-2"></i>
+                                                <span>{{ .taxonomy }}</span>
+                                            </a>
+                                        </li>
                                         {{ else }}
                                         {{ $anchor := printf "%s" (md5 .taxonomy) }}
                                         <li class="sidebar-item">

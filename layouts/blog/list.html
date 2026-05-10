@@ -7,104 +7,62 @@
 <link rel="stylesheet" href="/assets/css/blog-style.css" type="text/css" media="all" />
 
 <div id="content" class="content-site customize-site">
-    <div id="blog-list" class="container py-3">
-        <div class="row">
-            <div class="col-md-8">
-                {{ $paginator := .Paginate (where .Site.RegularPages "Section" "blog") }}
-                {{ if gt (len $paginator.Pages) 0 }}
-                {{ range $paginator.Pages }}
-                <div class="blog-item">
-                    <div class="row">
-                        <div class="col-md-9">
-                            <h2 class="blog-title">
-                                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-                            </h2>
-                            <p class="blog-summary">
-                                {{ .Summary | truncate 60 }}{{ if gt (len .Summary) 60 }}...{{ end }}
-                                <a href="{{ .RelPermalink }}" class="read-more">阅读全文</a>
-                            </p>
-                            <div class="blog-meta">
-                                <time>{{ .Date.Format "2006-01-02" }}</time>
-                                {{ with .Params.author }}
-                                <span class="author">{{ . }}</span>
-                                {{ end }}
-                                {{ with .Params.tags }}
-                                <span class="tags">
-                                    {{ range . }}<span>{{ . }}</span>{{ end }}
-                                </span>
-                                {{ end }}
+    <div id="blog-list" class="content_detail">
+        {{ range .Site.Data.blog }}
+            {{ if .list }}
+                {{ range .list }}
+                    <div class="d-flex flex-fill">
+                        <h4 class="text-gray text-lg mb-4">
+                            <i class="site-tag iconfont icon-tag icon-lg mr-1" id="{{ printf "%s" (md5 .term) }}"></i>
+                            {{ .term }}
+                        </h4>
+                    </div>
+                    <div class="blog-link-list">
+                        {{ range .links }}
+                        <a href="{{ .url }}" class="blog-link-item" target="_blank">
+                            <div class="blog-link-left">
+                                <div class="blog-link-title">{{ .title }}</div>
+                                <div class="blog-link-desc">{{ .description | truncate 150 }}{{ if gt (len .description) 150 }}...{{ end }}</div>
+                                <div class="blog-link-meta">
+                                    <span class="author">官方原创</span>
+                                    <span class="tags"></span>
+                                </div>
+                            </div>
+                            {{ if .logo }}
+                            <img src="{{ .logo }}" class="blog-link-img">
+                            {{ end }}
+                        </a>
+                        {{ end }}
+                    </div>
+                    <br />
+                {{ end }}
+            {{ else if .links }}
+                <div class="d-flex flex-fill">
+                    <h4 class="text-gray text-lg mb-4">
+                        <i class="site-tag iconfont icon-tag icon-lg mr-1" id="{{ printf "%s" (md5 .taxonomy) }}"></i>
+                        {{ .taxonomy }}
+                    </h4>
+                </div>
+                <div class="blog-link-list">
+                    {{ range .links }}
+                    <a href="{{ .url }}" class="blog-link-item" target="_blank">
+                        <div class="blog-link-left">
+                            <div class="blog-link-title">{{ .title }}</div>
+                            <div class="blog-link-desc">{{ .description | truncate 150 }}{{ if gt (len .description) 150 }}...{{ end }}</div>
+                            <div class="blog-link-meta">
+                                <span class="author">官方原创</span>
+                                <span class="tags"></span>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            {{ $localCover := printf "%scover.png" .File.Dir }}
-                            {{ if fileExists $localCover }}
-                            <img src="{{ .RelPermalink }}cover.png" class="blog-cover" alt="cover">
-                            {{ else }}
-                            <img src="/images/posts/cover.png" class="blog-cover" alt="cover">
-                            {{ end }}
-                        </div>
-                    </div>
+                        {{ if .logo }}
+                        <img src="{{ .logo }}" class="blog-link-img">
+                        {{ end }}
+                    </a>
+                    {{ end }}
                 </div>
-                {{ end }}
-                
-                {{ if gt $paginator.TotalPages 1 }}
-                <nav>
-                    <ul class="pagination justify-content-center">
-                        {{ if $paginator.HasPrev }}
-                        <li class="page-item">
-                            <a href="{{ $paginator.Prev.URL }}" class="page-link">上一页</a>
-                        </li>
-                        {{ end }}
-                        {{ range $paginator.Pagers }}
-                        <li class="page-item{{ if eq .PageNumber $paginator.PageNumber }} active{{ end }}">
-                            <a href="{{ .URL }}" class="page-link">{{ .PageNumber }}</a>
-                        </li>
-                        {{ end }}
-                        {{ if $paginator.HasNext }}
-                        <li class="page-item">
-                            <a href="{{ $paginator.Next.URL }}" class="page-link">下一页</a>
-                        </li>
-                        {{ end }}
-                    </ul>
-                </nav>
-                {{ end }}
-                
-                {{ else }}
-                <p class="text-center text-muted">暂无文章</p>
-                {{ end }}
-            </div>
-            
-            <div class="col-md-4 sidebar">
-                <div class="card mb-3">
-                    <div class="card-header">标签筛选</div>
-                    <div class="card-body">
-                        {{ $tags := slice }}
-                        {{ range where .Site.RegularPages "Section" "blog" }}
-                            {{ range .Params.tags }}
-                                {{ $tags = $tags | append . }}
-                            {{ end }}
-                        {{ end }}
-                        {{ $tags = $tags | uniq }}
-                        <div class="tag-cloud">
-                            {{ range $tags }}
-                            <a href="/tags/{{ . | urlize }}/" class="btn btn-outline-primary btn-sm mb-1">{{ . }}</a>
-                            {{ end }}
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <div class="card-header">最新文章</div>
-                    <div class="card-body">
-                        <ul class="list-unstyled small">
-                            {{ range first 5 (where .Site.RegularPages "Section" "blog") }}
-                            <li class="mb-1"><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
-                            {{ end }}
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+                <br />
+            {{ end }}
+        {{ end }}
     </div>
 </div>
 

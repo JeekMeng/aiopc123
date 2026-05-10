@@ -11,7 +11,7 @@
         <div class="text-muted mb-4">
             <time>{{ .Date.Format "2006-01-02" }}</time>
             {{ with .Params.tags }}
-            <span class="ml-3">标签: {{ range . }}{{ . }} {{ end }}</span>
+            <span class="ml-3">标签: {{ range $i, $e := . }}{{ if $i }} {{ end }}<span class="blog-tag-item">{{ $e }}</span>{{ end }}</span>
             {{ end }}
         </div>
         
