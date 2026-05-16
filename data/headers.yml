@@ -9,3 +9,7 @@
 - item: 资料专区
   icon: fa fa-book
   link: /book
+
+- item: 关于我们
+  icon: fa fas fa-address-card
+  link: /about

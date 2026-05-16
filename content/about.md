@@ -1,14 +1,14 @@
 ---
-title: 关于AI一人公司导航网站介绍
+title: 关于我们 - AI一人公司导航网站介绍
 date: 2026-03-01
 draft: false
 
-keywords: AI OPC 一人公司  导航网站
-description: AI一人公司导航网站提供一站式AI服务，收录一人公司的AI工具大全。
+keywords: AI OPC 一人公司 导航网站
+description: AIOPC 专注分享一人公司运营、网站搭建优化、SEO 推广、AI 工具实战等实用干货，汇聚优质建站教程与创业经验，助力个人轻松搭建专属线上事业。
 ---
 
 ## 关于AI一人公司导航网站
-    欢迎访问![AI一人公司导航网站](https://www.aiopc123.com)，本站提供创建一人公司等所有相关资源的导航网站，收录全球数千个AI相关 的网址，实时更新收录最新的AI网站，提供一站式服务。
+    欢迎访问[AI一人公司导航网站](https://www.aiopc123.com)，本站提供创建一人公司等所有相关资源的导航网站，收录全球数千个AI相关 的网址，实时更新收录最新的AI网站，提供一站式服务。
 
 ## 郑重声明
    本站不卖课，也不卖软件，本质致力于发现和推荐通过AI提升一人公司的效率，建立一个超级个体！
@@ -22,26 +22,6 @@ description: AI一人公司导航网站提供一站式AI服务，收录一人公
 
     无论您是网站建议、工具提交、内容投稿还是商务合作，随时欢迎提出你的想法！
 
-<img src='/assets/images/蒙哥微信号.jpg' text_align="center" width=200 hight=200/> 
-keywords: AI OPC 一人公司  导航网站
-description: AI一人公司导航网站提供一站式AI服务，收录一人公司的AI工具大全。
----
+<img src='/assets/images/wx.jpg' alt="官方微信号" text_align="center" width="200" height="200"/>
 
-### 关于AI一人公司导航网站
-    欢迎访问![AI一人公司导航网站](https://www.aiopc123.com)，本站提供创建一人公司等所有相关资源的导航网站，收录全球数千个AI相关 的网址，实时更新收录最新的AI网站，提供一站式服务。
-
-### 郑重声明
-    本站不卖课，也不卖软件，本质致力于发现和推荐通过AI提升一人公司的效率，建立一个超级个体！
-
-### 广告投放与免费收录
-    若您对广告投放感兴趣的话，请添加微信详谈。
-    若您只想要免费收录，请在提交AI网站中填写您的或您发现的最新产品。
-
-### 联系我们
-    欢迎使用AI一人公司导航网站！让我们携手参共同塑造人工智能的未来。
-
-    无论您是网站建议、工具提交、内容投稿还是商务合作，随时欢迎提出你的想法！
-
-<img src='/assets/images/蒙哥微信号.jpg' text_align="center" width=200 hight=200/>
-
-
+<img src='/assets/images/gzh.jpg' alt="官方公众号" text_align="center" width="200" height="200"/>
