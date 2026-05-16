@@ -16,12 +16,12 @@ disableKinds = ["taxonomy", "term"]
 
 [params]
     # 网站副标题（用于SEO:首页 meta 描述）
-    subtitle     = "OPC一人公司专用导航，工商、财务、合同、设计、营销、办公一站式工具集"
+    subtitle     = "AI一人公司导航网 是一个通过AI工具，服务于快速实现一人公司创业的导航网站，提供一站式一人公司创业服务"
     # 全局关键词（用于SEO:英文逗号分隔）
     keywords      = "OPC，一人公司，超级个体，AI工具"
-    author        = "蒙哥"
+    author        = "AI 一人公司导航"
     # (用于SEO)
-    description   = "OPC一人公司专用导航，工商、财务、合同、设计、营销、办公一站式工具集, 让您专注于产品本身"
+    description   = "AI一人公司导航主要提供一人公司产品创意、产品研发、产品设计、产品运营、网站搭建优化、SEO 推广等AI提效工具实战等实用网址，汇聚优质建站教程与创业经验，助力个人轻松搭建专属线上事业。"
     upload        = "/upload/"                                  # 左侧导航栏的"网站提交"
     about         = "/about/"	                                # 左侧导航栏的"关于导航"页面(./about)
     repository    = "/introduce/"                               # 网站介绍 
