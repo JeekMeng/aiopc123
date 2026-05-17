@@ -8,4 +8,4 @@ description: AI一人公司导航网站提供一站式AI服务，收录一人公
 ---
 
 #### 扫码以下微信, 提交您的网址,尽快为你添加: 
-<img src='/assets/images/蒙哥微信号.jpg' text_align="center" width=200 hight=200/>
+<img src='/assets/images/wx.jpg' text_align="center" width=200 hight=200/>
