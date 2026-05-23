@@ -1,23 +1,61 @@
-- taxonomy: 最新资料
+- taxonomy: 最新上线
   icon: fas fa-star
   links:
-    - title: 一人公司起步的思维
-      logo: /book/10000.png
-      url: /book/10000
-      description: 会打字就能做设计，商用有版权
-    - title: 一人公司：失业潮中的高新技术工作者
-      logo: /book/10001.png
-      url: /book/10001
-      description: 会打字就能做设计，商用有版权
-    - title: 一人公司 AI时代新赚钱方向
-      logo: /book/10002.png
-      url: /book/10002
-      description: 会打字就能做设计，商用有版权
-    - title: AI新个体：用DeepSeek重塑一人公司
-      logo: /book/10003.png
-      url: /book/10003
-      description: 会打字就能做设计，商用有版权
-    - title: 清华大学：一人公司OPC发展研究（137页）
-      logo: /book/10004.png
-      url: /book/10004
-      description: 会打字就能做设计，商用有版权
+  - title: 一人公司起步的思维
+    logo: /book/10000.png
+    url: /book/10000
+    description: 一人公司起步的思维，想做一人公司，从这本书开始。
+  - title: OpenClaw橙皮书-从入门到精通
+    logo: /book/10008.png
+    url: /book/10008
+    description: OpenClaw橙皮书《从入门到精通》PDF下载，涵盖基础操作到高级技巧详解，适合开发者与爱好者提升Claw框架实战能力。
+- taxonomy: 一人公司
+  icon: fas fa-book
+  links:
+  - title: 一人公司起步的思维
+    logo: /book/10000.png
+    url: /book/10000
+    description: 一人公司起步的思维，想做一人公司，从这本书开始。
+  - title: 一人公司：失业潮中的高新技术工作者
+    logo: /book/10001.png
+    url: /book/10001
+    description: 裁员时代，技术人如何自救，一人公司帮您解决失业的问题？
+  - title: 一人公司_AI时代赚钱新方向
+    logo: /book/10002.png
+    url: /book/10002
+    description: 裁员时代，技术人如何自救，AI时代下的一人公司应该怎么赚钱？
+  - title: AI新个体：用DeepSeek重塑一人公司
+    logo: /book/10003.png
+    url: /book/10003
+    description: DeepSeek 赋能：解锁一人公司 2.0 的高效盈利模式
+  - title: 清华大学一人公司（OPC）发展研究137页
+    logo: /book/10004.png
+    url: /book/10004
+    description: 清新研究团队（清华大学沈阳教授主导）| 清华大学一人公司发展研究
+- taxonomy: OpenClaw专区
+  icon: fas fa-book
+  links:
+  - title: OpenClaw发展研究2.0报告
+    logo: /book/10005.png
+    url: /book/10005
+    description: OpenClaw发展研究2.0报告.pdf深度解析OpenClaw技术演进与战略趋势，权威数据与案例结合，是行业从业者必备的参考资料。
+  - title: 清华&北航：OpenClaw科研手册（2026年）
+    logo: /book/10006.png
+    url: /book/10006
+    description: 《清华&北航：OpenClaw科研手册（2026年）》PDF，涵盖先进机器人抓取算法、仿真与硬件实操，是高校及AI领域研究者必备的高阶技术指南。
+  - title: 从零到全自动：一个人用 OpenClaw 重新定义_一人公司_
+    logo: /book/10007.png
+    url: /book/10007
+    description: 《从零到全自动：一个人用OpenClaw重新定义一人公司》PDF，教你用AI工具实现自动化创业，零基础打造高效单人企业，颠覆传统工作模式。
+  - title: OpenClaw橙皮书-从入门到精通
+    logo: /book/10008.png
+    url: /book/10008
+    description: OpenClaw橙皮书《从入门到精通》PDF下载，涵盖基础操作到高级技巧详解，适合开发者与爱好者提升Claw框架实战能力。
+  - title: OpenClaw AI手册指南（2026年）
+    logo: /book/10009.png
+    url: /book/10009
+    description: 《OpenClaw AI手册指南（2026年）》是一本深度解析AI算法与实战应用的权威PDF，涵盖模型训练、部署优化等核心技能，适合开发者与研究者高效提升。
+  - title: 2026年OpenClaw自我研究1.0报告
+    logo: /book/10010.png
+    url: /book/10010
+    description: 《2026年OpenClaw自我研究1.0报告.pdf》深度解析开源AI框架自我进化机制，涵盖算法优化与实战案例，是开发者掌握前沿技术的必备资料。

@@ -1,6 +1,14 @@
 - taxonomy: OPC常用推荐
   icon: fas fa-comments
   links:
+    - title: Bing网站收录入口
+      logo: /200416.png
+      url: /site/200416/
+      description: Bing站长工具，让网站搜索更高效。
+    - title: 谷歌网站收录入口
+      logo: /200415.png
+      url: /site/200415/
+      description: 谷歌站长工具，揭秘搜索数据。
     - title: 简书
       logo: /200288.png
       url: /site/200288/
@@ -13,6 +21,10 @@
       logo: /200236.png
       url: /site/200236/
       description: 权威信息，一网打尽
+    - title: 谷歌云服务
+      logo: /site/200417.png
+      url: https://console.cloud.google.com/
+      description: 网站自动化批量收录Google-鉴权认证
     - title: 创客贴
       logo: /200030.png
       url: /site/200030/
@@ -25,6 +37,10 @@
       logo: /200086.png
       url: /site/200086/
       description: 海量存储，安全分享，随时随地。
+    - title: Bing批量收录IndexNow
+      logo: /200418.png
+      url: https://www.bing.com/indexnow/getstarted
+      description: 微软批量收录页面，IndexNow
 - taxonomy: OPC最新上线
   icon: fas fa-plus-circle
   links:
@@ -172,48 +188,6 @@
           logo: /200375.png
           url: /site/200375/
           description: 用AI智能体，分钟级自动化工作流
-    - term: AI词元Token
-      links:
-        - title: 盘古NLP大模型
-          logo: /200396.png
-          url: /site/200396/
-          description: 解锁语言的力量，开启智慧未来！
-        - title: 千帆大模型平台
-          logo: /200387.png
-          url: /site/200387/
-          description: 企业级AI，从千帆开始。
-        - title: MiniMax
-          logo: /200390.png
-          url: /site/200390/
-          description: 与所有人共创智能，开启AI新体验
-        - title: 阿里云百炼
-          logo: default.webp
-          url: /site/200386/
-          description: 阿里大模型，一站式大模型服务，AI应用轻松造。
-        - title: 智谱AI开放平台
-          logo: /200391.png
-          url: /site/200391/
-          description: 智谱AI，让每个人都能用好大模型！
-        - title: 蓝心大模型
-          logo: /200397.png
-          url: /site/200397/
-          description: vivo蓝心大模型，让AI触手可及。
-        - title: 百川大模型
-          logo: /200395.png
-          url: /site/200395/
-          description: 百川大模型，实时信息融合企业知识，解锁定制化场景。
-        - title: KiMi开放平台
-          logo: /200389.png
-          url: /site/200389/
-          description: 用Kimi K2.5，开启智能对话新体验！
-        - title: 小米MiMO
-          logo: /200394.png
-          url: /site/200394/
-          description: 一次购买，坐拥双旗舰，畅享小米AI生产力！
-        - title: 硅基流动 SiliconFlow
-          logo: /200398.png
-          url: /site/200398/
-          description: 国产大模型的中转站
     - term: AI搜索工具
       links:
         - title: 腾讯元宝
@@ -712,6 +686,14 @@
           logo: /200113.png
           url: /site/200113/
           description: 百度搜索资源平台，让优质资源脱颖而出。
+        - title: Bing网站收录入口
+          logo: /200416.png
+          url: /site/200416/
+          description: Bing站长工具，让网站搜索更高效。
+        - title: 谷歌网站收录入口
+          logo: /200415.png
+          url: /site/200415/
+          description: 谷歌站长工具，揭秘搜索数据。
         - title: 百度站长平台
           logo: /200289.png
           url: /site/200289/
@@ -720,6 +702,10 @@
           logo: /200110.png
           url: /site/200110/
           description: 站长必备，数据尽在掌握
+        - title: 谷歌云服务
+          logo: /site/200417.png
+          url: https://console.cloud.google.com/
+          description: 网站自动化批量收录Google-鉴权认证
         - title: 爱站网
           logo: /200112.png
           url: /site/200112/
@@ -728,6 +714,10 @@
           logo: /200111.png
           url: /site/200111/
           description: 挖掘关键词，排名更靠前
+        - title: Bing批量收录IndexNow
+          logo: /200418.png
+          url: https://www.bing.com/indexnow/getstarted
+          description: 微软批量收录页面，IndexNow
     - term: 网站运维
       links:
         - title: 腾讯云 CVM
