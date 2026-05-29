@@ -22,7 +22,7 @@
       url: /site/200236/
       description: 权威信息，一网打尽
     - title: 谷歌云服务
-      logo: /site/200417.png
+      logo: /200417.png
       url: https://console.cloud.google.com/
       description: 网站自动化批量收录Google-鉴权认证
     - title: 创客贴
@@ -316,6 +316,64 @@
           logo: /200304.png
           url: /site/200304/
           description: AI编程，一键生成代码
+    - term: AI模型平台
+      links:
+        - title: 盘古NLP大模型
+          logo: /200396.png
+          url: /site/200396/
+          description: 解锁语言的力量，开启智慧未来！
+        - title: 千帆大模型平台
+          logo: /200387.png
+          url: /site/200387/
+          description: 企业级AI，从千帆开始。
+        - title: MiniMax
+          logo: /200390.png
+          url: /site/200390/
+          description: 与所有人共创智能，开启AI新体验
+        - title: 腾讯混元大模型API
+          logo: /200393.png
+          url: /site/200393/
+          description: 腾讯混元，秒级响应，智能生成。
+        - title: 阿里云百炼
+          logo: default.webp
+          url: /site/200386/
+          description: 阿里大模型，一站式大模型服务，AI应用轻松造。
+        - title: 智谱AI开放平台
+          logo: /200391.png
+          url: /site/200391/
+          description: 智谱AI，让每个人都能用好大模型！
+        - title: 方舟 Coding Plan
+          logo: /200385.png
+          url: /site/200385/
+          description: 字节出品的Coding Plan
+        - title: 蓝心大模型
+          logo: /200397.png
+          url: /site/200397/
+          description: vivo蓝心大模型，让AI触手可及。
+        - title: 百川大模型
+          logo: /200395.png
+          url: /site/200395/
+          description: 百川大模型，实时信息融合企业知识，解锁定制化场景。
+        - title: DeepSeek 开放平台
+          logo: /200388.png
+          url: /site/200388/
+          description: 用DeepSeek API ，确实是良心价格。
+        - title: 讯飞星火大模型API
+          logo: /200392.png
+          url: /site/200392/
+          description: 讯飞星火API，解锁智能对话新可能！
+        - title: KiMi开放平台
+          logo: /200389.png
+          url: /site/200389/
+          description: 用Kimi K2.5，开启智能对话新体验！
+        - title: 小米MiMO
+          logo: /200394.png
+          url: /site/200394/
+          description: 一次购买，坐拥双旗舰，畅享小米AI生产力！
+        - title: 硅基流动 SiliconFlow
+          logo: /200398.png
+          url: /site/200398/
+          description: 国产大模型的中转站
 - taxonomy: OPC政策解读
   icon: fas fa-torah
   list:
@@ -425,7 +483,7 @@
           url: https://etax.chinatax.gov.cn/
           description: 国家一人公司报税入口
         - title: 浪潮云会计
-          logo: /fault.webp
+          logo: default.webp
           url: /site/200008/
           description: 浪潮云会计，小微企业财务无忧首选
     - term: 财税合规
@@ -677,7 +735,7 @@
           url: /site/200106/
           description: 免费HTML模板，轻松打造专业网站
         - title: 阿里云速成美站
-          logo: /fault.webp
+          logo: default.webp
           url: /site/200109/
           description: 阿里云速成美站，快速建站，模板丰富
     - term: SEO优化
@@ -703,7 +761,7 @@
           url: /site/200110/
           description: 站长必备，数据尽在掌握
         - title: 谷歌云服务
-          logo: /site/200417.png
+          logo: /200417.png
           url: https://console.cloud.google.com/
           description: 网站自动化批量收录Google-鉴权认证
         - title: 爱站网
@@ -869,7 +927,7 @@
           url: /site/200180/
           description: 汽车零部件专家，驱动未来出行
         - title: 业务本
-          logo: /fault.webp
+          logo: default.webp
           url: /site/200183/
           description: 实时比分，尽在球探！
     - term: 专用CRM
@@ -928,7 +986,7 @@
     - term: 外包服务
       links:
         - title: 中软国际
-          logo: /fault.webp
+          logo: default.webp
           url: /site/200212/
           description: 中软国际，成就您的数字未来。
         - title: 文思海辉
