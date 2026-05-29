@@ -9,6 +9,10 @@
     logo: /book/10008.png
     url: /book/10008
     description: OpenClaw橙皮书《从入门到精通》PDF下载，涵盖基础操作到高级技巧详解，适合开发者与爱好者提升Claw框架实战能力。
+  - title: 2026中国OPC发展政策研究报告
+    logo: /book/10011.png
+    url: /book/10011
+    description: 《OPC圈：2026中国OPC发展政策研究报告》深度解析中国OPC产业政策趋势、技术路径与市场机遇，为行业提供权威前瞻分析。
 - taxonomy: 一人公司
   icon: fas fa-book
   links:
@@ -32,6 +36,10 @@
     logo: /book/10004.png
     url: /book/10004
     description: 清新研究团队（清华大学沈阳教授主导）| 清华大学一人公司发展研究
+  - title: 2026中国OPC发展政策研究报告
+    logo: /book/10011.png
+    url: /book/10011
+    description: 《OPC圈：2026中国OPC发展政策研究报告》深度解析中国OPC产业政策趋势、技术路径与市场机遇，为行业提供权威前瞻分析。
 - taxonomy: OpenClaw专区
   icon: fas fa-book
   links:
