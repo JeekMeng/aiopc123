@@ -13,6 +13,10 @@
     logo: /book/10011.png
     url: /book/10011
     description: 《OPC圈：2026中国OPC发展政策研究报告》深度解析中国OPC产业政策趋势、技术路径与市场机遇，为行业提供权威前瞻分析。
+  - title: 一人公司-把自己当成一家公司来经营
+    logo: /book/10012.png
+    url: /book/10012
+    description: 《一人公司：把自己当成一家公司来经营》鱼堂主操刀，教你用商业思维管理个人成长，打造核心竞争力，实现高效自我管理与职业突破。
 - taxonomy: 一人公司
   icon: fas fa-book
   links:
@@ -40,6 +44,10 @@
     logo: /book/10011.png
     url: /book/10011
     description: 《OPC圈：2026中国OPC发展政策研究报告》深度解析中国OPC产业政策趋势、技术路径与市场机遇，为行业提供权威前瞻分析。
+  - title: 一人公司-把自己当成一家公司来经营
+    logo: /book/10012.png
+    url: /book/10012
+    description: 《一人公司：把自己当成一家公司来经营》鱼堂主操刀，教你用商业思维管理个人成长，打造核心竞争力，实现高效自我管理与职业突破。
 - taxonomy: OpenClaw专区
   icon: fas fa-book
   links:
