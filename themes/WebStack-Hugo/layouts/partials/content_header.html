@@ -1,4 +1,24 @@
 <div class="main-content flex-fill grid-bg">
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "首页",
+            "item": "{{ .Site.BaseURL }}"
+        }{{ if not .IsHome }},
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "{{ .Title }}",
+            "item": "{{ .Permalink }}"
+        }{{ end }}
+    ]
+}
+</script>
     <div class="big-header-banner header-bg">
         <div id="header" class="page-header{{ if not .IsHome }} not-home{{ end }}">
             <div class="navbar navbar-expand-md">
@@ -68,7 +88,7 @@
                         <!-- 一言 -->
                         {{ with .Site.Params.yiyan }}
                         <li class="nav-item mr-3 mr-lg-0 d-none d-lg-block">
-				<div>用AI赋能一人公司，助您成为超级个体</div>
+				<div>{{ $.Site.Params.description }}</div>
                         </li>
                         {{ end }}
                         <!-- 一言 end -->
