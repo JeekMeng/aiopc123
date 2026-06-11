@@ -24,7 +24,7 @@ disableKinds = ["taxonomy", "term"]
     keywords      = "OPC，一人公司，超级个体，AI工具"
     author        = "AI 一人公司导航"
     # (用于SEO)
-    description   = "AI一人公司导航主要提供一人公司产品创意、产品研发、产品设计、产品运营、网站搭建优化、SEO 推广等AI提效工具实战等实用网址，汇聚优质建站教程与创业经验，助力个人轻松搭建专属线上事业。"
+    description   = "AI一人公司导航网收录上千个AI工具和一人公司创业资源，涵盖产品创意、研发设计、运营推广、网站搭建等实用网址与教程，助力创业者快速搭建专属线上事业。"
     upload        = "/upload/"                                  # 左侧导航栏的"网站提交"
     about         = "/about/"	                                # 左侧导航栏的"关于导航"页面(./about)
     repository    = "/introduce/"                               # 网站介绍 
