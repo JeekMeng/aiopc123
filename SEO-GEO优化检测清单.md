@@ -43,7 +43,7 @@
 | # | 检测项 | 修改前（错误示例） | 修改后（正确示例） | 严重度 |
 |---|--------|-------------------|-------------------|--------|
 | 1 | **FAQ 问答区** | 无（内容不适合 AI 提取） | 每篇文章末尾 2-4 个 FAQ | 🔴 严重 |
-| 2 | **JSON-LD 结构化数据** | 无任何 Schema 标记 | Article / Book / Service / BreadcrumbList / FAQPage / HowTo | 🔴 严重 |
+| 2 | **JSON-LD 结构化数据** | 三种不一致实现（模板硬编码/raw HTML/缺失） | 统一 front matter 驱动: `schema_type` + `faq`/`steps`/`offers` | 🔴 严重 |
 | 3 | **适合人群/场景** | 无明确标注 | 文章标明"适合谁读" | ⚠️ 高 |
 | 4 | **用户问题驱动** | 从"我有什么"角度 | 从"用户想解决什么"角度 | ⚠️ 高 |
 | 5 | **回答可引用性** | 段落模糊、无结论 | 每段有明确结论/干货，方便 AI 援引 | ⚠️ 高 |
@@ -73,7 +73,8 @@
 ☐ 有内链
 ☐ OG Image 独有
 ☐ Alt 已添加
-☐ JSON-LD（Article / FAQPage / HowTo）已配置
+☐ JSON-LD 已配置（front matter: schema_type + faq / steps / offers）
+☐ schema_type 字段拼写正确（Article / Book / Service）
 ☐ 无模板化描述
 ☐ llms.txt 已更新最新内容
 ☐ Bing IndexNow 已提交

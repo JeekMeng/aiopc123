@@ -361,6 +361,63 @@ curl "https://api.indexnow.org/indexnow?url=https://www.aiopc123.com&key=e28bbae
 | 导航栏 yiyan | 80+ 字符，UI 错位 | 短文案，布局正常 |
 | llms.txt | 不存在 | 已创建，引导 AI 搜索 |
 | Bing 收录 | 自然等待（数天） | IndexNow 即时推送 |
+| JSON-LD 方案 | 三种不一致实现 | 统一 front matter 驱动 |
+
+---
+
+## 优化点 13：统一 JSON-LD 方案，front matter 驱动 schema 渲染
+
+### 修改前 ❌
+
+JSON-LD 结构化数据有三种不一致的实现方式：
+
+| 类型 | 实现方式 | 问题 |
+|------|---------|------|
+| Blog | 模板内硬编码 Article + 路径匹配 FAQPage/HowTo | FAQ 和 HowTo 数据写在模板里，新增文章必须改模板 |
+| Book | markdown 正文写 raw HTML `<script>` | 破坏内容可读性，批量生成工具需拼接 HTML |
+| Site | 模板无 JSON-LD | 所有 site 页面缺失结构化数据 |
+
+### 修改后 ✅
+
+统一为 `layouts/partials/jsonld.html` 通用 partial，所有数据来自 front matter：
+
+```yaml
+# blog/200005 示例
+schema_type: "Article"
+faq:
+  - q: "Google Indexing API 免费吗？"
+    a: "免费，每日200条额度。"
+steps:
+  - name: "新建谷歌云项目"
+    text: "进入谷歌云控制台..."
+```
+
+```
+新增 front matter 字段说明：
+├── schema_type       — 主 Schema 类型（Article | Book | Service）
+├── faq[]             — FAQPage 问答列表（可选）
+│   ├── q             — 问题
+│   └── a             — 回答
+├── steps[]           — HowTo 步骤列表（可选）
+│   ├── name          — 步骤名
+│   └── text          — 步骤描述
+├── publisher         — Book 出版社
+├── pages             — Book 页数
+├── service_category  — Service 类型
+└── offers[]          — Service 服务列表
+    ├── name          — 服务名称
+    └── description   — 服务描述
+```
+
+模板自动根据这些字段生成对应的 `<script type="application/ld+json">`，三个内容类型（blog/site/book）共用同一套逻辑。
+
+**兼容性**：未设 `schema_type` 的页面不产生 JSON-LD，向后兼容。
+
+**收益**：
+- 批量生成 markdown 时只需拼 front matter 字段，无需拼接 HTML
+- 新增网站条目/文章无需改模板
+- 所有页面统一走同一套 partial，维护成本大幅降低
+- site 页面首次获得 Service 结构化数据（好顺佳示例已配置）
 
 ## 建议
 
