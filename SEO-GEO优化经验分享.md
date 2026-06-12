@@ -233,19 +233,134 @@ hugo -D --minify
 
 ---
 
+## 优化点 9：导航栏文案修复（yiyan 字段）
+
+### 修改前 ❌
+
+将站点 meta description（80+ 字符）填入导航栏 `yiyan` 字段，导致导航栏文字过长，UI 布局错位。
+
+```
+导航栏显示：好顺佳为中小微企业和创业者提供一站式工商财税服务..."（超长）
+```
+
+### 修改后 ✅
+
+恢复为短文案（5-10 字），导航栏恢复正常布局。
+
+```
+导航栏显示：AI 一人公司导航（短文案）
+```
+
+meta description 仅保留在 `<head>` 标签中，不影响 UI。
+
+---
+
+## 优化点 10：llms.txt — AI 搜索引擎引导文件
+
+### 修改前 ❌
+
+站点没有 `llms.txt` 文件，AI 搜索引擎（如 ChatGPT、Perplexity、Google SGE）抓取时缺乏引导，无法快速定位核心内容。
+
+### 修改后 ✅
+
+在 `static/llms.txt` 创建引导文件：
+
+```
+# llms.txt - https://www.aiopc123.com
+# 帮助 AI 搜索引擎理解本站内容结构
+
+## AI 一人公司导航网
+AI一人公司导航网收录上千个AI工具和一人公司创业资源...
+
+## 核心分类
+- OPC常用推荐：一人公司必备AI工具与服务平台
+- 最新上线：最新收录的AI工具推荐
+...
+
+## 推荐阅读
+- /blog/200005/ - 手把手搭建谷歌批量自动收录方案
+- /blog/200008/ - 分清传统 SEO 与 GEO 优化差异
+- /book/10000/ - 《一人公司起步的思维》
+...
+```
+
+AI 搜索引擎可快速理解站点内容结构，优先推荐核心文章。
+
+---
+
+## 优化点 11：FAQPage + HowTo 结构化数据（GEO 核心）
+
+### 修改前 ❌
+
+博客文章只有 Article Schema，缺少 FAQPage 和 HowTo 这种适合 AI 搜索提取的结构化数据。AI 搜索引擎（如 Google SGE、Perplexity）无法直接从文章中提取问答和步骤信息。
+
+### 修改后 ✅
+
+在 `layouts/blog/single.html` 中根据文件路径条件注入两种 Schema：
+
+- **FAQPage**：匹配 `blog/200005` 和 `blog/200008`，硬编码 FAQ 问答对
+- **HowTo**：匹配 `blog/200005`，将 Indexing API 配置步骤转为 HowToStep
+
+```json
+{
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Google Indexing API 免费吗？", ... },
+    { "@type": "Question", "name": "配置需要多长时间？", ... }
+  ]
+}
+```
+
+```json
+{
+  "@type": "HowTo",
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": "新建谷歌云项目", ... },
+    { "@type": "HowToStep", "position": 2, "name": "启用网页搜索索引 API", ... }
+  ]
+}
+```
+
+**效果**：AI 搜索引擎可直接提取 FAQ 和步骤作为回答素材，显著提升 GEO 排名。
+
+---
+
+## 优化点 12：Bing IndexNow 验证支持
+
+### 修改前 ❌
+
+仅支持 Google Search Console 提交收录，Bing 收录依赖自然发现，新内容收录慢（可能等待数天至数周）。
+
+### 修改后 ✅
+
+1. 创建 Bing IndexNow 验证密钥文件 `static/e28bbae34c694a3b868ecfb12f6c9a79.txt`
+2. 在 `<head>` 中添加 `<meta name="bing-nztb" content="e28bbae34c694a3b868ecfb12f6c9a79" />` 验证标签
+3. 编写 `check_bing.sh` 脚本用于手动推送 URL
+
+```
+curl "https://api.indexnow.org/indexnow?url=https://www.aiopc123.com&key=e28bbae34c694a3b868ecfb12f6c9a79"
+```
+
+双引擎（Google + Bing）加速收录覆盖。
+
+---
+
 ## 效果总结
 
 | 指标 | 优化前 | 优化后 |
 |------|--------|--------|
 | LCP | 3s+ | < 1.5s |
-| Google 富摘要 | 无 | Article / Breadcrumb / Book / Service |
-| 博客结构化 | 无 | Article Schema |
+| Google 富摘要 | 无 | Article / Breadcrumb / Book / Service / FAQPage / HowTo |
+| 博客结构化 | 无 | Article + FAQPage + HowTo Schema |
 | 面包屑结构化 | 无 | BreadcrumbList Schema |
 | CSP 外部服务 | 全部拦截 | 正常放行 |
 | 统计工具 | 无法工作 | 百度/51.LA 正常 |
 | robots.txt | 2 条规则 | 4 条规则 |
 | 文章内容深度 | 薄（book 仅 21 行） | 丰富（book 7 板块） |
 | OG 分享图 | 可能 404 | 正常兜底 |
+| 导航栏 yiyan | 80+ 字符，UI 错位 | 短文案，布局正常 |
+| llms.txt | 不存在 | 已创建，引导 AI 搜索 |
+| Bing 收录 | 自然等待（数天） | IndexNow 即时推送 |
 
 ## 建议
 

@@ -64,6 +64,10 @@
       logo: /200310.png
       url: /site/200310/
       description: AI赋能，轻松创作精美PPT
+    - title: 第五AI提示词
+      logo: /200427.png
+      url: /site/200427/
+      description: 用提示词点燃AI的无限创造力！
     - title: AutoClaw（澳龙）
       logo: /200309.png
       url: https://autoglm.zhipuai.cn/autoclaw
@@ -71,6 +75,10 @@
 - taxonomy: OPC热门推荐
   icon: fas fa-fire
   links:
+    - title: PromptEditor
+      logo: /200434.png
+      url: /site/200434/
+      description: 一键优化提示词，让AI输出更高效！
     - title: ArkClaw
       logo: /200403.png
       url: /site/200403/
@@ -188,6 +196,52 @@
           logo: /200375.png
           url: /site/200375/
           description: 用AI智能体，分钟级自动化工作流
+    - term: AI提示词
+      links:
+        - title: PromptEditor
+          logo: /200434.png
+          url: /site/200434/
+          description: 一键优化提示词，让AI输出更高效！
+        - title: AI 提示词模板与最佳实践
+          logo: /200429.png
+          url: /site/200429/
+          description: 告别低效摸索，用专业提示词释放AI潜能。
+        - title: PromptChoose
+          logo: /200430.png
+          url: /site/200430/
+          description: AI工具聚合地，创作灵感一键直达!
+        - title: AI Prompts
+          logo: /200425.png
+          url: /site/200425/
+          description: 开启AI创作，一站在手！
+        - title: AI提示词生成器
+          logo: /200433.png
+          url: /site/200433/
+          description: 一键生成，让AI更懂你
+        - title: Prompt Minder
+          logo: /200428.png
+          url: /site/200428/
+          description: 管理AI提示词，提升你的效率！
+        - title: Snack Prompt
+          logo: /200426.png
+          url: /site/200426/
+          description: 发现、分享AI灵感，打造你的神器。
+        - title: 提示词交易站
+          logo: /200432.png
+          url: /site/200432/
+          description: 用优质提示词，解锁AI无限潜力！
+        - title: 提示词社区
+          logo: /200431.png
+          url: /site/200431/
+          description: 提示词灵感库，创意加速器
+        - title: AI 提示词库
+          logo: /200424.png
+          url: /site/200424/
+          description: 让AI秒懂指令，效率翻倍！
+        - title: 第五AI提示词
+          logo: /200427.png
+          url: /site/200427/
+          description: 用提示词点燃AI的无限创造力！
     - term: AI搜索工具
       links:
         - title: 腾讯元宝
