@@ -2,26 +2,16 @@
 title: "一人公司起步的思维（保罗·贾维斯）"
 date: 2026-05-23
 draft: false
+schema_type: "Book"
 author: "保罗.贾维斯"
 description: "《一人公司：起步的思维》是保罗·贾维斯所著的一人创业经典读物，教你如何以轻资产、低风险的方式开启一人公司创业之路，适合职场转型、自由职业、OPC创业者。"
 cover: "page_1.png"
 download: "https://pan.quark.cn/s/d241ff7d8788?pwd=vh2u"
+publisher: "武汉大学出版社"
+pages: 135
 tags: ["一人公司", "创业思维", "轻创业", "OPC", "个人品牌"]
 categories: ["一人公司思维"]
 ---
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Book",
-  "name": "一人公司：起步的思维",
-  "author": { "@type": "Person", "name": "保罗·贾维斯" },
-  "publisher": { "@type": "Organization", "name": "武汉大学出版社" },
-  "description": "《一人公司：起步的思维》是保罗·贾维斯所著的一人创业经典读物，主张不盲目扩张、不追求做大做强，倡导小而美的轻创业理念。",
-  "numberOfPages": 135,
-  "inLanguage": "zh-CN"
-}
-</script>
 
 ## 📖 书籍简介
 

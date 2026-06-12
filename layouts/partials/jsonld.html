@@ -1,0 +1,128 @@
+{{/*
+  Universal JSON-LD Structured Data Partial
+  Renders indented JSON-LD <script> tags based on front matter params.
+
+  Primary schema (one per page, controlled by schema_type):
+    Article | Book | Service
+
+  Supplementary schemas (zero or more, independent of schema_type):
+    FAQPage (triggered by faq param) | HowTo (triggered by steps param)
+*/}}
+
+{{/* ─── Article ─── */}}
+{{ if eq .Params.schema_type "Article" }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ .Title | jsonify }},
+  "description": {{ (or .Params.summary .Description) | jsonify }},
+  "datePublished": {{ .Date.Format "2006-01-02T15:04:05Z07:00" | jsonify }},
+  "author": {
+    "@type": "Person",
+    "name": {{ (or .Params.author $.Site.Params.author) | jsonify }}
+  },
+  {{ with .Params.tags }}"keywords": {{ delimit . ", " | jsonify }},{{ end }}
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ .Permalink | jsonify }}
+  }
+}
+</script>
+{{ end }}
+
+{{/* ─── Book ─── */}}
+{{ if eq .Params.schema_type "Book" }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Book",
+  "name": {{ .Title | jsonify }},
+  "author": { "@type": "Person", "name": {{ .Params.author | jsonify }} },
+  {{ with .Params.publisher }}"publisher": { "@type": "Organization", "name": {{ . | jsonify }} },{{ end }}
+  {{ with .Params.pages }}"numberOfPages": {{ . }},{{ end }}
+  {{ with .Params.isbn }}"isbn": {{ . | jsonify }},{{ end }}
+  "description": {{ .Description | jsonify }},
+  "inLanguage": "zh-CN"
+}
+</script>
+{{ end }}
+
+{{/* ─── Service ─── */}}
+{{ if eq .Params.schema_type "Service" }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": {{ .Title | jsonify }},
+  "description": {{ .Description | jsonify }},
+  {{ with .Params.service_category }}"serviceType": {{ . | jsonify }},{{ end }}
+  "provider": {
+    "@type": "Organization",
+    "name": {{ (or .Params.company .Title) | jsonify }}
+  },
+  "areaServed": "CN"
+  {{ with .Params.offers }},
+  "offers": {
+    "@type": "AggregateOffer",
+    "offerCount": {{ len . }},
+    "offers": [
+      {{ $offerLen := len . }}
+      {{ range $i, $offer := . }}
+      {
+        "@type": "Offer",
+        "name": {{ $offer.name | jsonify }},
+        "description": {{ $offer.description | jsonify }}
+      }{{ if lt (add $i 1) $offerLen }},{{ end }}
+      {{ end }}
+    ]
+  }
+  {{ end }}
+}
+</script>
+{{ end }}
+
+{{/* ─── FAQPage (supplementary) ─── */}}
+{{ with .Params.faq }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {{ $faqLen := len . }}
+    {{ range $i, $item := . }}
+    {
+      "@type": "Question",
+      "name": {{ $item.q | jsonify }},
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": {{ $item.a | jsonify }}
+      }
+    }{{ if lt (add $i 1) $faqLen }},{{ end }}
+    {{ end }}
+  ]
+}
+</script>
+{{ end }}
+
+{{/* ─── HowTo (supplementary) ─── */}}
+{{ with .Params.steps }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": {{ $.Title | jsonify }},
+  "step": [
+    {{ $stepLen := len . }}
+    {{ range $i, $s := . }}
+    {
+      "@type": "HowToStep",
+      "position": {{ add $i 1 }},
+      "name": {{ $s.name | jsonify }},
+      "text": {{ $s.text | jsonify }}
+    }{{ if lt (add $i 1) $stepLen }},{{ end }}
+    {{ end }}
+  ]
+}
+</script>
+{{ end }}

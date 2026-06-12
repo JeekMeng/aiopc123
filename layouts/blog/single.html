@@ -1,67 +1,10 @@
 {{ partial "header.html" . }}
 
+{{ partial "jsonld.html" . }}
+
 {{ partial "sidebar.html" . }}
 
 {{ partial "content_header.html" . }}
-
-<script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "{{ .Title }}",
-    "description": "{{ .Description }}",
-    "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
-    "author": {
-        "@type": "Person",
-        "name": "{{ .Params.author | default $.Site.Params.author }}"
-    },
-    {{ with .Params.tags }}"keywords": "{{ delimit . ", " }}",{{ end }}
-    "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "{{ .Permalink }}"
-    }
-}
-</script>
-
-{{ if findRE "blog/200005|blog/200008" .File.Path }}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [{
-    "@type": "Question",
-    "name": "Google Indexing API 免费吗？",
-    "acceptedAnswer": { "@type": "Answer", "text": "免费，每日200条额度，中小型站点完全够用。" }
-  }, {
-    "@type": "Question",
-    "name": "配置需要多长时间？",
-    "acceptedAnswer": { "@type": "Answer", "text": "首次配置约15-30分钟，后续即可一键批量推送。" }
-  }, {
-    "@type": "Question",
-    "name": "支持哪些类型的网站？",
-    "acceptedAnswer": { "@type": "Answer", "text": "支持所有绑定Google Search Console的独立网站，不限平台。" }
-  }]
-}
-</script>
-{{ end }}
-
-{{ if findRE "blog/200005" .File.Path }}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "{{ .Title }}",
-  "description": "Google Indexing API 完整开通配置流程，搭配 curl 命令实现一键批量提交网址收录",
-  "step": [
-    { "@type": "HowToStep", "position": 1, "name": "新建谷歌云项目", "text": "进入谷歌云控制台，点击新建项目，自定义项目名称，完成创建。" },
-    { "@type": "HowToStep", "position": 2, "name": "启用网页搜索索引 API", "text": "搜索 Indexing API，找到 Web Search Indexing API，点击启用。" },
-    { "@type": "HowToStep", "position": 3, "name": "创建服务账号", "text": "API和服务 → 凭据 → 创建凭据 → 服务账号，复制系统生成的邮箱。" },
-    { "@type": "HowToStep", "position": 4, "name": "下载 JSON 密钥文件", "text": "服务账号 → 密钥 → 创建新密钥，格式选择 JSON。" },
-    { "@type": "HowToStep", "position": 5, "name": "搜索控制台授权", "text": "Google Search Console → 用户和权限 → 添加服务账号邮箱为站点所有者。" }
-  ]
-}
-</script>
-{{ end }}
 
 <div id="content" class="content-site customize-site">
     <article class="container py-4">

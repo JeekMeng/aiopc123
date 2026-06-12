@@ -2,6 +2,8 @@
 title: "好顺佳 - OPC公司经营 - 一站式工商财税服务 | AI一人公司导航网"
 date: 2026-03-01
 draft: false
+schema_type: "Service"
+service_category: "工商财税服务"
 
 # 产品信息
 official_url: "https://www.haoshunjia.com/"
@@ -13,13 +15,26 @@ score: 9.3
 
 # SEO优化
 keywords: ["AI一人公司导航", "公司注册", "代理记账", "商标注册", "财税服务"]
-description: " 好顺佳 是一个OPC公司经营类别的网址，主要功能包括提供一站式企业工商财税服务。"
+description: "好顺佳为中小微企业和创业者提供一站式工商财税服务，涵盖公司注册、代理记账、商标注册、资质办理等，降低创业门槛与运营成本。"
 
 # 标签
 tags: ["工商服务", "财税代理", "企业服务"]
 
 # 相似网站推荐
 similar: ["企查查", "天眼查", "金蝶云"]
+
+# Schema offers
+offers:
+  - name: "公司注册服务"
+    description: "提供全国范围内的公司核名、工商注册、银行开户等全套设立服务。"
+  - name: "代理记账报税"
+    description: "专业的财税团队提供记账、报税、税务筹划等日常财税托管服务。"
+  - name: "知识产权服务"
+    description: "涵盖商标注册、版权申请、专利申请等知识产权保护与申请服务。"
+  - name: "资质许可办理"
+    description: "协助办理各类行业经营许可证、资质审批等。"
+  - name: "工商变更与注销"
+    description: "提供公司信息变更、股权转让、公司注销等全生命周期服务。"
 ---
 
 ## 🎯 网站介绍
