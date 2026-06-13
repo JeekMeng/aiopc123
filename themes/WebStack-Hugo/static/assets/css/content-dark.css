@@ -1,0 +1,73 @@
+/* =========================================================
+   macOS 暗黑模式内容排版
+   ========================================================= */
+
+.io-black-mode .content,
+.io-black-mode .book-content,
+.io-black-mode .content-body {
+    color: #e5e5e7;
+}
+
+.io-black-mode .content h1, .io-black-mode .book-content h1, .io-black-mode .content-body h1,
+.io-black-mode .content h2, .io-black-mode .book-content h2, .io-black-mode .content-body h2,
+.io-black-mode .content h3, .io-black-mode .book-content h3, .io-black-mode .content-body h3,
+.io-black-mode .content h4, .io-black-mode .book-content h4, .io-black-mode .content-body h4,
+.io-black-mode .content h5, .io-black-mode .book-content h5, .io-black-mode .content-body h5 {
+    color: #f5f5f7;
+}
+
+.io-black-mode .content strong, .io-black-mode .book-content strong, .io-black-mode .content-body strong {
+    color: #f5f5f7;
+}
+
+.io-black-mode .content pre, .io-black-mode .book-content pre, .io-black-mode .content-body pre {
+    background: #2c2c2e;
+    border-color: #3a3a3c;
+    color: #e5e5e7;
+}
+
+.io-black-mode .content code, .io-black-mode .book-content code, .io-black-mode .content-body code {
+    background: #2c2c2e;
+    color: #e5e5e7;
+}
+
+.io-black-mode .content pre code, .io-black-mode .book-content pre code, .io-black-mode .content-body pre code {
+    background: none;
+}
+
+.io-black-mode .content table, .io-black-mode .book-content table, .io-black-mode .content-body table {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.io-black-mode .content th, .io-black-mode .book-content th, .io-black-mode .content-body th {
+    background: #2c2c2e;
+    color: #f5f5f7;
+    border-bottom-color: #3a3a3c;
+}
+
+.io-black-mode .content td, .io-black-mode .book-content td, .io-black-mode .content-body td {
+    border-bottom-color: #2c2c2e;
+    color: #e5e5e7;
+}
+
+.io-black-mode .content blockquote, .io-black-mode .book-content blockquote, .io-black-mode .content-body blockquote {
+    background: #2c2c2e;
+    border-left-color: #0a84ff;
+    color: #a1a1a6;
+}
+
+.io-black-mode .content img, .io-black-mode .book-content img, .io-black-mode .content-body img {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+.io-black-mode .content a, .io-black-mode .book-content a, .io-black-mode .content-body a {
+    color: #0a84ff;
+}
+
+.io-black-mode .content a:hover, .io-black-mode .book-content a:hover, .io-black-mode .content-body a:hover {
+    color: #409cff;
+}
+
+.io-black-mode .content hr, .io-black-mode .book-content hr, .io-black-mode .content-body hr {
+    background: linear-gradient(90deg, transparent, #3a3a3c, transparent);
+}

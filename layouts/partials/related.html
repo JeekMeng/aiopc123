@@ -1,0 +1,88 @@
+{{/*
+  相关推荐 partial — 根据当前页面自动匹配同 section 内容
+  优先使用 .Params.similar（site），然后按 tags/category 匹配
+*/}}
+
+{{ $section := .Section }}
+{{ $related := slice }}
+
+{{ if eq $section "blog" }}
+  {{/* 博客：按相同 tags 匹配 */}}
+  {{ $tags := .Params.tags }}
+  {{ if $tags }}
+    {{ range where $.Site.RegularPages "Section" "blog" }}
+      {{ if and (ne .Permalink $.Permalink) (gt (len (intersect $tags (.Params.tags | default slice))) 0) }}
+        {{ $related = $related | append . }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+  {{ if lt (len $related) 3 }}
+    {{ range where $.Site.RegularPages "Section" "blog" | first 6 }}
+      {{ if and (ne .Permalink $.Permalink) (not (in $related .)) }}
+        {{ $related = $related | append . }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ else if eq $section "site" }}
+  {{/* 站点：优先使用 similar 字段，再按 category 匹配 */}}
+  {{ $similar := .Params.similar }}
+  {{ $category := index (.Params.category | default slice) 0 }}
+  {{ if $similar }}
+    {{ range where $.Site.RegularPages "Section" "site" }}
+      {{ $intersect := intersect $similar (.Params.similar | default slice) }}
+      {{ if and (ne .Permalink $.Permalink) (gt (len $intersect) 0) }}
+        {{ $related = $related | append . }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+  {{ if and (lt (len $related) 3) $category }}
+    {{ range where $.Site.RegularPages "Section" "site" }}
+      {{ if and (ne .Permalink $.Permalink) (in (.Params.category | default slice) $category) (not (in $related .)) }}
+        {{ $related = $related | append . }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+  {{ if lt (len $related) 3 }}
+    {{ range where $.Site.RegularPages "Section" "site" | first 6 }}
+      {{ if and (ne .Permalink $.Permalink) (not (in $related .)) }}
+        {{ $related = $related | append . }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ else if eq $section "book" }}
+  {{/* 书籍：按相同 tags 匹配 */}}
+  {{ $tags := .Params.tags }}
+  {{ if $tags }}
+    {{ range where $.Site.RegularPages "Section" "book" }}
+      {{ if and (ne .Permalink $.Permalink) (gt (len (intersect $tags (.Params.tags | default slice))) 0) }}
+        {{ $related = $related | append . }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+  {{ if lt (len $related) 3 }}
+    {{ range where $.Site.RegularPages "Section" "book" | first 6 }}
+      {{ if and (ne .Permalink $.Permalink) (not (in $related .)) }}
+        {{ $related = $related | append . }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ if gt (len $related) 0 }}
+<section class="related-section">
+  <h3 class="related-heading">
+    {{ if eq $section "blog" }}📖 相关文章
+    {{ else if eq $section "book" }}📚 相关书籍
+    {{ else if eq $section "site" }}🔗 相关网站
+    {{ end }}
+  </h3>
+  <div class="related-list">
+    {{ range first 5 $related }}
+    <a href="{{ .RelPermalink }}" class="related-item">
+      <span class="related-title">{{ .Title }}</span>
+      <span class="related-meta">{{ .Params.description | truncate 60 }}</span>
+    </a>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

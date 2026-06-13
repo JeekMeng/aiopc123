@@ -1,0 +1,32 @@
+{{/*
+  同 Section 上下页导航 partial
+  手动遍历 section 页面列表，替代 Hugo 的 .PrevInSection / .NextInSection
+*/}}
+{{ $sectionPages := where .Site.RegularPages "Section" .Section }}
+{{ $current := . }}
+{{ $prev := "" }}
+{{ $next := "" }}
+
+{{ range $i, $p := $sectionPages }}
+  {{ if eq $p.Permalink $current.Permalink }}
+    {{ if gt $i 0 }}
+      {{ $prev = index $sectionPages (sub $i 1) }}
+    {{ end }}
+    {{ if lt (add $i 1) (len $sectionPages) }}
+      {{ $next = index $sectionPages (add $i 1) }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+<div class="row">
+  <div class="col">
+    {{ with $prev }}
+    <a href="{{ .RelPermalink }}" class="btn btn-outline-secondary">&laquo; 上一篇</a>
+    {{ end }}
+  </div>
+  <div class="col text-right">
+    {{ with $next }}
+    <a href="{{ .RelPermalink }}" class="btn btn-outline-secondary">下一篇 &raquo;</a>
+    {{ end }}
+  </div>
+</div>

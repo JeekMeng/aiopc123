@@ -1,0 +1,60 @@
+{{/*
+  统一右侧栏 partial — 数据来自 data/sidebar.yaml + 页面上下文
+*/}}
+<div class="ai-sidebar">
+  {{/* 热门工具 */}}
+  {{ with .Site.Data.sidebar.hot_tools }}
+  <div class="sidebar-section">
+    <h3>🔥 热门AI工具</h3>
+    <div class="hot-tools">
+      {{ range . }}
+      <a href="{{ .url }}" class="tool-item" target="_blank" rel="noopener">
+        <span class="tool-icon">{{ .icon }}</span>
+        <span class="tool-name">{{ .name }}</span>
+        <span class="tool-category">{{ .category }}</span>
+      </a>
+      {{ end }}
+    </div>
+  </div>
+  {{ end }}
+
+  {{/* 相关推荐（动态匹配） */}}
+  {{ $section := $.Section }}
+  {{ $recommends := slice }}
+  {{ if eq $section "blog" }}
+    {{ $recommends = first 5 (where $.Site.RegularPages "Section" "blog") }}
+  {{ else if eq $section "book" }}
+    {{ $recommends = first 5 (where $.Site.RegularPages "Section" "book") }}
+  {{ else if eq $section "site" }}
+    {{ $recommends = first 5 (where $.Site.RegularPages "Section" "site") }}
+  {{ end }}
+  {{ if gt (len $recommends) 0 }}
+  <div class="sidebar-section">
+    <h3>🔄 最新推荐</h3>
+    <div class="related-recommendations">
+      {{ range $recommends }}
+      {{ if ne .Permalink $.Permalink }}
+      <a href="{{ .RelPermalink }}" class="related-item">
+        <div class="related-title">{{ .Title }}</div>
+        <div class="related-meta">
+          <span class="related-category">{{ index (.Params.category | default (.Params.tags | default slice)) 0 | default "推荐" }}</span>
+        </div>
+      </a>
+      {{ end }}
+      {{ end }}
+    </div>
+  </div>
+  {{ end }}
+
+  {{/* 快速链接 */}}
+  {{ with .Site.Data.sidebar.quick_links }}
+  <div class="sidebar-section">
+    <h3>⚡ 快速链接</h3>
+    <div class="quick-links">
+      {{ range . }}
+      <a href="{{ .url }}" class="quick-link">{{ .name }}</a>
+      {{ end }}
+    </div>
+  </div>
+  {{ end }}
+</div>
