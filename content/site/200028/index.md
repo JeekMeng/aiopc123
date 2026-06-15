@@ -1,7 +1,8 @@
 ---
-title: "数据智能领先服务商 - OPC公司经营 - 财税数字化服务商 | AI一人公司导航网"
+title: "数据智能领先服务商 - OPC公司经营 - 财税数字化服务商"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.baiwang.com/"

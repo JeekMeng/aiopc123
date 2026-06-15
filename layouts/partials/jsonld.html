@@ -3,7 +3,7 @@
   Renders indented JSON-LD <script> tags based on front matter params.
 
   Primary schema (one per page, controlled by schema_type):
-    Article | Book | Service
+    Article | Book | Service | SoftwareApplication
 
   Supplementary schemas (zero or more, independent of schema_type):
     FAQPage (triggered by faq param) | HowTo (triggered by steps param)
@@ -78,6 +78,29 @@
     ]
   }
   {{ end }}
+}
+</script>
+{{ end }}
+
+{{/* ─── SoftwareApplication ─── */}}
+{{ if eq .Params.schema_type "SoftwareApplication" }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": {{ trim (index (split .Title "|") 0) " " | jsonify }},
+  "description": {{ .Description | jsonify }},
+  "applicationCategory": {{ with .Params.category }}{{ if reflect.IsSlice . }}{{ index . 0 | jsonify }}{{ else }}{{ . | jsonify }}{{ end }}{{ else }}"WebApplication"{{ end }},
+  "operatingSystem": "Web/Cloud",
+  {{ with .Params.official_url }}"url": {{ . | jsonify }},{{ end }}
+  {{ with .Params.company }}"author": {
+    "@type": "Organization",
+    "name": {{ . | jsonify }}
+  },{{ end }}
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ .Permalink | jsonify }}
+  }
 }
 </script>
 {{ end }}

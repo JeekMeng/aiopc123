@@ -1,0 +1,32 @@
+<div class="top-nav">
+    <div class="top-nav-inner">
+        <a href="{{ "/" | relLangURL }}" class="top-nav-logo">
+            <img src="{{ absURL $.Site.Params.images.logoExpandLight }}" height="36" alt="{{ .Site.Title }}">
+        </a>
+        <ul class="top-nav-menu">
+        {{ range .Site.Data.headers }}
+            <li{{ if .list }} class="menu-item-has-children"{{ end }}>
+                <a href="{{ .link }}">
+                    <i class="{{ .icon }} fa-lg mr-2"></i>
+                    <span>{{ .item }}</span>
+                </a>
+                {{ if .list }}
+                <ul class="sub-menu">
+                {{ range .list }}
+                    <li><a href="{{ .url }}">{{ .name }}</a></li>
+                {{ end }}
+                </ul>
+                {{ end }}
+            </li>
+        {{ end }}
+        </ul>
+        <div class="top-nav-right">
+            {{ with .Site.Params.yiyan }}
+            <span class="top-nav-tagline">用AI赋能一人公司，助您成为超级个体</span>
+            {{ end }}
+            <button class="top-nav-toggle" id="sidebar-switch" data-toggle="modal" data-target="#sidebar">
+                <i class="iconfont icon-classification icon-2x"></i>
+            </button>
+        </div>
+    </div>
+</div>

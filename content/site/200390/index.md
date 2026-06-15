@@ -1,7 +1,8 @@
 ---
-title: "MiniMax-人工智能助手|AI一人公司导航网"
+title: "MiniMax-人工智能助手"           
 date: 2026-05-15
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.minimaxi.com/"

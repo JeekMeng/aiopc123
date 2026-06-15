@@ -3,14 +3,6 @@ title: "2026AI OPC实战案例合集｜从小单盈利到千万营收，一人�
 date: 2026-05-09
 draft: false
 
-# 产品信息
-official_url: "https://www.aiopc123.com"
-mobile_url: "https://www.aiopc123.com"
-company: "AI 一人公司导航"
-score: 9.5
-price: "免费"
-launch_year: 2026
-
 # 标签系统
 tags: ["一人公司", "OPC案例", "OPC合集", "创业复盘", "政策解读"]
 

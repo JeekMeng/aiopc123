@@ -1,7 +1,8 @@
 ---
-title: "JVS Claw-AI龙虾助手-全能自进化AI|AI一人公司导航网"
+title: "JVS Claw-AI龙虾助手-全能自进化AI"           
 date: 2026-05-29
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://jvs.wuying.aliyun.com/"

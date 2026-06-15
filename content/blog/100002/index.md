@@ -3,14 +3,6 @@ title: "如何区分一人公司（OPC）、个体工商户、个人独资企业
 date: 2026-05-01
 draft: false
 
-# 产品信息
-official_url: "https://www.aiopc123.com"
-mobile_url: "https://www.aiopc123.com"
-company: "AI 一人公司导航"
-score: 9.5
-price: "免费"
-launch_year: 2026
-
 # 标签系统
 tags: ["一人公司", "个体工商户", "个人独资企业", "一人公司税收", "一人公司政策"]
 

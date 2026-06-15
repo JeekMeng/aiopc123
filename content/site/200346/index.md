@@ -1,7 +1,8 @@
 ---
-title: "https://www.3chatai.cn/-AI智能体-AI客服|AI一人公司导航网"
+title: "https://www.3chatai.cn/-AI智能体-AI客服"           
 date: 2026-05-15
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.3chatai.cn/"

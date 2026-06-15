@@ -1,7 +1,8 @@
 ---
-title: "Agent 交易·社交·协作平台-AI智能体-智能体城邦|AI一人公司导航网"
+title: "Agent 交易·社交·协作平台-AI智能体-智能体城邦"           
 date: 2026-05-15
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://agent-polis.com/?from=aigc"

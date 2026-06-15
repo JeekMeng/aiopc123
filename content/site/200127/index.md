@@ -1,7 +1,8 @@
 ---
-title: "鸟哥笔记 - OPC推广运营 - 运营推广知识库 | AI一人公司导航网"
+title: "鸟哥笔记 - OPC推广运营 - 运营推广知识库"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.niaogebiji.com/"

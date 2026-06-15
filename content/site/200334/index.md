@@ -1,7 +1,8 @@
 ---
-title: "金蝶精斗云-发票工具-智能财税管理|AI一人公司导航网"
+title: "金蝶精斗云-发票工具-智能财税管理"           
 date: 2026-04-22
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.jindouyun.com"

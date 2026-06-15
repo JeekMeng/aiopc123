@@ -1,7 +1,8 @@
 ---
-title: "Beam AI-AI智能体-流程自动化|AI一人公司导航网"
+title: "Beam AI-AI智能体-流程自动化"           
 date: 2026-05-15
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://beam.ai/"

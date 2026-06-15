@@ -1,7 +1,8 @@
 ---
-title: "千帆大模型平台-AI词元Token-智能开发工具|AI一人公司导航网"
+title: "千帆大模型平台-AI词元Token-智能开发工具"           
 date: 2026-05-15
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://qianfan.cloud.baidu.com/"

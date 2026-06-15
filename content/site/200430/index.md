@@ -1,7 +1,8 @@
 ---
-title: "PromptChoose-AI提示词-全球AI工具导航|AI一人公司导航网"
+title: "PromptChoose-AI提示词-全球AI工具导航"           
 date: 2026-06-11
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://promptchoose.com/"

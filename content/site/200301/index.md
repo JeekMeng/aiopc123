@@ -1,7 +1,8 @@
 ---
-title: "Cursor-AI编程工具-智能代码助手|AI一人公司导航网"
+title: "Cursor-AI编程工具-智能代码助手"           
 date: 2026-04-12
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://cursor.com"

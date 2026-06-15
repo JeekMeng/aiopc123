@@ -1,7 +1,8 @@
 ---
-title: "5118 大数据 - OPC产品上线 - 中文SEO大数据平台 | AI一人公司导航网"
+title: "5118 大数据 - OPC产品上线 - 中文SEO大数据平台"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.5118.com/"

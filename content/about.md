@@ -2,6 +2,8 @@
 title: 关于我们 - AI一人公司导航网站介绍
 date: 2026-05-16
 draft: false
+simple: true
+schema_type: "Article"
 keywords: AI OPC 一人公司 导航网站
 description: AIOPC 专注分享一人公司运营、网站搭建优化、SEO 推广、AI 工具实战等实用干货，汇聚优质建站教程与创业经验，助力个人轻松搭建专属线上事业。
 ---

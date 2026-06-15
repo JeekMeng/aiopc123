@@ -1,7 +1,8 @@
 ---
-title: "秀米 - OPC产品研发 - 在线图文排版工具 | AI一人公司导航网"
+title: "秀米 - OPC产品研发 - 在线图文排版工具"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://xiumi.us/"

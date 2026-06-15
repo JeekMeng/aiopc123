@@ -1,7 +1,8 @@
 ---
-title: "AI Prompts-AI提示词-全球领先提示词市场|AI一人公司导航网"
+title: "AI Prompts-AI提示词-全球领先提示词市场"           
 date: 2026-06-11
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://promptbase.com/"

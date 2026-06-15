@@ -1,7 +1,8 @@
 ---
-title: "融 360 - OPC客户管理 - 金融产品搜索平台 | AI一人公司导航网"
+title: "融 360 - OPC客户管理 - 金融产品搜索平台"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.rong360.com/"

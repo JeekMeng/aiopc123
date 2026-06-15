@@ -1,7 +1,8 @@
 ---
-title: "澜码科技-AI智能体-企业级AI平台|AI一人公司导航网"
+title: "澜码科技-AI智能体-企业级AI平台"           
 date: 2026-05-15
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.xbotspace.com/"

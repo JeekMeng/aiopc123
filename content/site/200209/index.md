@@ -1,7 +1,8 @@
 ---
-title: "软通动力 - OPC求职招聘 - IT服务与数字化专家 | AI一人公司导航网"
+title: "软通动力 - OPC求职招聘 - IT服务与数字化专家"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.isoftstone.com/"

@@ -1,7 +1,8 @@
 ---
-title: "讯飞星火-AI词元Token-星火API|AI一人公司导航网"
+title: "讯飞星火-AI词元Token-星火API"           
 date: 2026-05-15
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://xinghuo.xfyun.cn/sparkapi"

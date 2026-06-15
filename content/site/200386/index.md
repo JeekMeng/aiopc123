@@ -1,7 +1,8 @@
 ---
-title: "https://bailian.console.aliyun.com/cn-beijing/-AI词元Token-百炼控制台|AI一人公司导航网"
+title: "阿里云百炼 - AI词元Token - 大模型服务平台"           
 date: 2026-05-15
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://bailian.console.aliyun.com/cn-beijing/"

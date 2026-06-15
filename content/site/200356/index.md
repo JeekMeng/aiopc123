@@ -1,7 +1,8 @@
 ---
-title: "想象即现实-AI智能体-百度文心|AI一人公司导航网"
+title: "想象即现实-AI智能体-百度文心"           
 date: 2026-05-15
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://agents.baidu.com/"

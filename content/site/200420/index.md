@@ -1,7 +1,8 @@
 ---
-title: "百家号-流量获客-内容创作平台|AI一人公司导航网"
+title: "百家号-流量获客-内容创作平台"           
 date: 2026-06-05
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://baijiahao.baidu.com/"

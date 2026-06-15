@@ -1,7 +1,8 @@
 ---
-title: "腾讯云-混元大模型API|AI一人公司导航网"
+title: "腾讯云-混元大模型API"           
 date: 2026-05-15
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://cloud.tencent.com/document/product/1729/101848"

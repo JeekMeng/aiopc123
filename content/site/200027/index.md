@@ -1,7 +1,8 @@
 ---
-title: "发票通 - OPC公司经营 - 智能发票管理工具 | AI一人公司导航网"
+title: "发票通 - OPC公司经营 - 智能发票管理工具"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.fapiao.com/"

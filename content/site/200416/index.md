@@ -1,7 +1,8 @@
 ---
-title: "Bing网站收录-SEO优化-网站提交工具|AI一人公司导航网"
+title: "Bing网站收录-SEO优化-网站提交工具"           
 date: 2026-05-16
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.bing.com/webmasters"

@@ -1,71 +1,73 @@
 {{ partial "header.html" . }}
-
 {{ partial "jsonld.html" . }}
+{{ partial "top_nav.html" . }}
 
-{{ partial "sidebar.html" . }}
-
+<div class="page-container">
+<div class="left-sidebar">{{ partial "sidebar.html" . }}</div>
 {{ partial "content_header.html" . }}
 
 <link rel="stylesheet" href="/assets/css/book-style.css" type="text/css" media="all" />
 
-<div id="content" class="content-site customize-site">
-    <div class="content_detail">
-        <article id="book-single" class="container py-4">
-            <div class="book-detail">
-                <div class="book-cover-large">
-                    {{ with .Params.cover }}
-                    <img src="{{ . }}" alt="{{ $.Title }}">
-                    {{ else }}
-                    <img src="/book/images/10000.png" alt="{{ $.Title }}">
-                    {{ end }}
-                </div>
-                <div class="book-info">
-                    <h1>{{ .Title }}</h1>
-                    
-                    {{ with .Params.author }}
-                    <p class="book-author">作者: {{ . }}</p>
-                    {{ end }}
-                    
-                    {{ with .Params.description }}
-                    <p class="book-desc">{{ . }}</p>
-                    {{ end }}
-                    
-                    <div class="book-meta">
-                        {{ with .Params.date }}
-                        <span>发布时间: {{ . }}</span>
-                        {{ end }}
-                        {{ with .Params.tags }}
-                        <span class="ml-3">标签: {{ range . }}{{ . }} {{ end }}</span>
-                        {{ end }}
+<div class="three-col-layout">
+    <div class="content-col">
+        <div id="page-content" class="content-site customize-site">
+            <div class="content_detail">
+                <article id="book-single" class="detail-card">
+                    <div class="book-detail">
+                        <div class="book-cover-large">
+                            {{ with .Params.cover }}
+                            <img src="{{ . }}" alt="{{ $.Title }}">
+                            {{ else }}
+                            <img src="/book/images/10000.png" alt="{{ $.Title }}">
+                            {{ end }}
+                        </div>
+                        <div class="book-info">
+                            <h1>{{ trim (index (split .Title "|") 0) " " }}</h1>
+                            
+                            {{ with .Params.author }}
+                            <p class="book-author">作者: {{ . }}</p>
+                            {{ end }}
+                            
+                            {{ with .Params.description }}
+                            <p class="book-desc">{{ . }}</p>
+                            {{ end }}
+                            
+                            <div class="book-meta">
+                                {{ with .Params.date }}
+                                <span>发布时间: {{ . }}</span>
+                                {{ end }}
+                                {{ with .Params.tags }}
+                                <span class="ml-3">标签: {{ range . }}{{ . }} {{ end }}</span>
+                                {{ end }}
+                            </div>
+                            
+                            {{ with .Params.download }}
+                            <a href="{{ . }}" class="btn btn-primary btn-download" target="_blank">
+                                <i class="iconfont icon-download"></i> 下载资料
+                            </a>
+                            {{ end }}
+                        </div>
                     </div>
                     
-                    {{ with .Params.download }}
-                    <a href="{{ . }}" class="btn btn-primary btn-download" target="_blank">
-                        <i class="iconfont icon-download"></i> 下载资料
-                    </a>
-                    {{ end }}
-                </div>
+                    <div class="book-content">
+                        <h2>内容简介</h2>
+                        {{ .Content }}
+                    </div>
+                    
+                    {{ partial "related.html" . }}
+                    
+                    <hr class="my-4">
+                    
+                    {{ partial "prev_next.html" . }}
+                </article>
             </div>
-            
-            <div class="book-content">
-                <h2>内容简介</h2>
-                {{ .Content }}
-            </div>
-            
-            {{ partial "related.html" . }}
-            
-            <hr class="my-4">
-            
-            {{ partial "prev_next.html" . }}
-        </article>
+        </div>
     </div>
-    <div class="content_detail_right_sidebar">
+    <div class="right-sidebar">
         {{ partial "content_right_sidebar_unified.html" . }}
     </div>
 </div>
 
 {{ partial "content_footer.html" . }}
-
 {{ partial "modal_search.html" . }}
-
 {{ partial "footer.html" . }}

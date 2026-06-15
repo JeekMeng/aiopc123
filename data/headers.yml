@@ -1,15 +1,15 @@
 - item: 首页
-  icon: fa fa-home
-  link: "./"
+  icon: fas fa-home
+  link: "/"
 
 - item: 文章资讯
   icon: fas fa-pen
   link: /blog
 
 - item: 资料专区
-  icon: fa fa-book
+  icon: fas fa-book
   link: /book
 
 - item: 关于我们
-  icon: fa fas fa-address-card
+  icon: fas fa-address-card
   link: /about

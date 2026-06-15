@@ -1,7 +1,8 @@
 ---
-title: "艾瑞咨询 - OPC资源中心 - 行业洞察与数据报告 | AI一人公司导航网"
+title: "艾瑞咨询 - OPC资源中心 - 行业洞察与数据报告"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.iresearch.com.cn/"

@@ -1,7 +1,8 @@
 ---
-title: "今日头条-流量获客-个性化推荐|AI一人公司导航网"
+title: "今日头条-流量获客-个性化推荐"           
 date: 2026-06-05
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.toutiao.com/"

@@ -1,7 +1,8 @@
 ---
-title: "小红书 - OPC推广运营 - 生活方式分享平台 | AI一人公司导航网"
+title: "小红书 - OPC推广运营 - 生活方式分享平台"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.xiaohongshu.com/"

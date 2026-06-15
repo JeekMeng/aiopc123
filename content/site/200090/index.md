@@ -1,7 +1,8 @@
 ---
-title: "阿里云 - OPC产品上线 - 领先的云计算服务商 | AI一人公司导航网"
+title: "阿里云 - OPC产品上线 - 领先的云计算服务商"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.aliyun.com/"

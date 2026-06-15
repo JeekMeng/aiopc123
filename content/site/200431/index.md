@@ -1,7 +1,8 @@
 ---
-title: "提示词社区-AI提示词-灵感交流|AI一人公司导航网"
+title: "提示词社区-AI提示词-灵感交流"           
 date: 2026-06-11
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://tiptip.art/"

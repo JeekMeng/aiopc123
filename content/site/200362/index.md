@@ -1,7 +1,8 @@
 ---
-title: "金灵AI-AI智能体-金融投研助手|AI一人公司导航网"
+title: "金灵AI-AI智能体-金融投研助手"           
 date: 2026-05-15
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.gilin.com.cn/?channel=c01"

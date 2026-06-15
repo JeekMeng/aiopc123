@@ -1,7 +1,8 @@
 ---
-title: "语聚AI-AI智能体-一站式AI应用|AI一人公司导航网"
+title: "语聚AI-AI智能体-一站式AI应用"           
 date: 2026-05-15
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://yuju.jijyun.cn/"

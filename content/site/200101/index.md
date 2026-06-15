@@ -1,7 +1,8 @@
 ---
-title: "Jekyll - OPC产品上线 - 静态站点生成器 | AI一人公司导航网"
+title: "Jekyll - OPC产品上线 - 静态站点生成器"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://jekyllrb.com/"

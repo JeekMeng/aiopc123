@@ -1,7 +1,8 @@
 ---
-title: "DeepSeek-API平台-{AI模型服务}|AI一人公司导航网"
+title: "DeepSeek-API平台-{AI模型服务}"           
 date: 2026-05-15
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://platform.deepseek.com/"

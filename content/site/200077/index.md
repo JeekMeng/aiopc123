@@ -1,7 +1,8 @@
 ---
-title: "蓝凌 OA - OPC产品管理 - 企业数字化办公平台 | AI一人公司导航网"
+title: "蓝凌 OA - OPC产品管理 - 企业数字化办公平台"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.landray.com.cn/"

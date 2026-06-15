@@ -1,7 +1,8 @@
 ---
-title: "博彦科技 - OPC求职招聘 - IT外包与数字化服务 | AI一人公司导航网"
+title: "博彦科技 - OPC求职招聘 - IT外包与数字化服务"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.beyondsoft.com/"

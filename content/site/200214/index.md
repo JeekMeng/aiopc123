@@ -1,7 +1,8 @@
 ---
-title: "国家市场监督管理总局 - OPC政策解读 - 市场监管权威平台 | AI一人公司导航网"
+title: "国家市场监督管理总局 - OPC政策解读 - 市场监管权威平台"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.samr.gov.cn/"

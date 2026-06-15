@@ -1,7 +1,8 @@
 ---
-title: "中国政府网 - OPC政策解读 - 国家政务信息总汇 | AI一人公司导航网"
+title: "中国政府网 - OPC政策解读 - 国家政务信息总汇"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.gov.cn/"

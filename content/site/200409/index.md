@@ -1,7 +1,8 @@
 ---
-title: "QClaw-AI龙虾助手-腾讯AI助手|AI一人公司导航网"
+title: "QClaw-AI龙虾助手-腾讯AI助手"           
 date: 2026-05-29
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://qclaw.qq.com/"

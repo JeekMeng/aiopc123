@@ -1,7 +1,8 @@
 ---
-title: "Botnow-AI智能体-创作与分发平台|AI一人公司导航网"
+title: "Botnow-AI智能体-创作与分发平台"           
 date: 2026-05-15
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://botnow.cn/"

@@ -1,41 +1,43 @@
 {{ partial "header.html" . }}
-
 {{ partial "jsonld.html" . }}
+{{ partial "top_nav.html" . }}
 
-{{ partial "sidebar.html" . }}
-
+<div class="page-container">
+<div class="left-sidebar">{{ partial "sidebar.html" . }}</div>
 {{ partial "content_header.html" . }}
 
-<div id="content" class="content-site customize-site">
-    <div class="content_detail">
-        <article class="container py-4">
-            <h1 class="mb-3">{{ .Title }}</h1>
-            
-            <div class="text-muted mb-4">
-                <time>{{ .Date.Format "2006-01-02" }}</time>
-                {{ with .Params.tags }}
-                <span class="ml-3">标签: {{ range $i, $e := . }}{{ if $i }} {{ end }}<span class="blog-tag-item">{{ $e }}</span>{{ end }}</span>
-                {{ end }}
+<div class="three-col-layout">
+    <div class="content-col">
+        <div id="page-content" class="content-site customize-site">
+            <div class="content_detail">
+                <article class="detail-card">
+                    <h1 class="mb-3">{{ trim (index (split .Title "|") 0) " " }}</h1>
+                    
+                    <div class="text-muted mb-4">
+                        <time>{{ .Date.Format "2006-01-02" }}</time>
+                        {{ with .Params.tags }}
+                        <span class="ml-3">标签: {{ range $i, $e := . }}{{ if $i }} {{ end }}<span class="blog-tag-item">{{ $e }}</span>{{ end }}</span>
+                        {{ end }}
+                    </div>
+                    
+                    <div class="content">
+                        {{ .Content }}
+                    </div>
+                    
+                    {{ partial "related.html" . }}
+                    
+                    <hr class="my-4">
+                    
+                    {{ partial "prev_next.html" . }}
+                </article>
             </div>
-            
-            <div class="content">
-                {{ .Content }}
-            </div>
-            
-            {{ partial "related.html" . }}
-            
-            <hr class="my-4">
-            
-            {{ partial "prev_next.html" . }}
-        </article>
+        </div>
     </div>
-    <div class="content_detail_right_sidebar">
+    <div class="right-sidebar">
         {{ partial "content_right_sidebar_unified.html" . }}
     </div>
 </div>
 
 {{ partial "content_footer.html" . }}
-
 {{ partial "modal_search.html" . }}
-
 {{ partial "footer.html" . }}

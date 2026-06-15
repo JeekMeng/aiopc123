@@ -1,7 +1,8 @@
 ---
-title: "扣子 Coze-AI智能体-字节跳动职场AI|AI一人公司导航网"
+title: "扣子 Coze-AI智能体-字节跳动职场AI"           
 date: 2026-05-29
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.coze.cn/overview"

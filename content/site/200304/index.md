@@ -1,7 +1,8 @@
 ---
-title: "TRAE-AI编程工具-国内首款AI原生IDE|AI一人公司导航网"
+title: "TRAE-AI编程工具-国内首款AI原生IDE"           
 date: 2026-04-12
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://trae.cn"

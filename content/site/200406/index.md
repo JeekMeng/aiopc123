@@ -1,7 +1,8 @@
 ---
-title: "WorkBuddy-AI龙虾助手-智能办公|AI一人公司导航网"
+title: "WorkBuddy-AI龙虾助手-智能办公"           
 date: 2026-05-29
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://copilot.tencent.com/work/"

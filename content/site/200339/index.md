@@ -1,7 +1,8 @@
 ---
-title: "https://www.aipyaipy.com-AI智能体-爱派工具人|AI一人公司导航网"
+title: "https://www.aipyaipy.com-AI智能体-爱派工具人"           
 date: 2026-05-15
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.aipyaipy.com"

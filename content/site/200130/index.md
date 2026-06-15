@@ -1,7 +1,8 @@
 ---
-title: "秘塔写作猫 - OPC推广运营 - AI智能写作助手 | AI一人公司导航网"
+title: "秘塔写作猫 - OPC推广运营 - AI智能写作助手"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://xiezuocat.com/"

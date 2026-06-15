@@ -1,7 +1,8 @@
 ---
-title: "LightAI-AI智能体-轻量化飞跃|AI一人公司导航网"
+title: "LightAI-AI智能体-轻量化飞跃"           
 date: 2026-05-15
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.lightai.com/"

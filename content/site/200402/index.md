@@ -1,7 +1,8 @@
 ---
-title: "GitHub-AI词元Token-模型运行器|AI一人公司导航网"
+title: "GitHub-AI词元Token-模型运行器"           
 date: 2026-05-15
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://github.com/ollama/ollama"

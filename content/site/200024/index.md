@@ -1,7 +1,8 @@
 ---
-title: "51社保 - OPC公司经营 - 企业社保服务专家 | AI一人公司导航网"
+title: "51社保 - OPC公司经营 - 企业社保服务专家"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.51shebao.com/"

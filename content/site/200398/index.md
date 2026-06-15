@@ -1,7 +1,8 @@
 ---
-title: "硅基流动 SiliconFlow-AI词元Token-大模型API|AI一人公司导航网"
+title: "硅基流动 SiliconFlow-AI词元Token-大模型API"           
 date: 2026-05-15
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://siliconflow.cn/zh-cn/siliconcloud"

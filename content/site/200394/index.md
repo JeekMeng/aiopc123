@@ -1,7 +1,8 @@
 ---
-title: "https://platform.xiaomimimo.com/-AI词元Token-小米MiMo大模型|AI一人公司导航网"
+title: "https://platform.xiaomimimo.com/-AI词元Token-小米MiMo大模型"           
 date: 2026-05-15
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://platform.xiaomimimo.com/"

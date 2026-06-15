@@ -1,7 +1,8 @@
 ---
-title: "来画 - OPC产品研发 - AI动画视频创作平台 | AI一人公司导航网"
+title: "来画 - OPC产品研发 - AI动画视频创作平台"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.laihua.com/"

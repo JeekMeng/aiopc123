@@ -80,7 +80,7 @@
     {{ range first 5 $related }}
     <a href="{{ .RelPermalink }}" class="related-item">
       <span class="related-title">{{ .Title }}</span>
-      <span class="related-meta">{{ .Params.description | truncate 60 }}</span>
+      <span class="related-meta">{{ .Params.description | default .Params.summary | truncate 60 }}</span>
     </a>
     {{ end }}
   </div>

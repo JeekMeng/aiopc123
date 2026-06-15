@@ -1,7 +1,8 @@
 ---
-title: "提示词交易站-AI提示词-交易平台|AI一人公司导航网"
+title: "提示词交易站-AI提示词-交易平台"           
 date: 2026-06-11
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.tipstore.cn/"

@@ -1,7 +1,8 @@
 ---
-title: "笔格PPT-AI办公工具-智能PPT生成助手|AI一人公司导航网"
+title: "笔格PPT-AI办公工具-智能PPT生成助手"           
 date: 2026-04-12
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://bigppt.cn/"

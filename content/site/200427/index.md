@@ -1,7 +1,8 @@
 ---
-title: "10W+提示词指令免费用-AI提示词-智能优化|AI一人公司导航网"
+title: "10W+提示词指令免费用-AI提示词-智能优化"           
 date: 2026-06-11
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://prompt.diwuai.com/"

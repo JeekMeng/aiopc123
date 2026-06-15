@@ -1,7 +1,8 @@
 ---
-title: "百度网盘 - OPC产品管理 - 云端存储与分享 | AI一人公司导航网"
+title: "百度网盘 - OPC产品管理 - 云端存储与分享"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://pan.baidu.com/"

@@ -13,7 +13,7 @@
       {{- if .IsHome -}}
         {{ .Site.Title }}
       {{- else -}}
-        {{- .Title }} | {{ .Site.Title -}}
+        {{- .Title }} | AI一人公司导航网
       {{- end -}}
     </title>
     <link rel="shortcut icon" href="{{ absURL $.Site.Params.images.favicon }}" />
@@ -87,8 +87,8 @@
 
     <!-- 51.LA 网站统计 -->
     {{ with .Site.Params.seo.tj51laid }}
-    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
-    <script>LA.init({id:"{{ $.Site.Params.seo.tj51laid }}",ck:"{{ $.Site.Params.seo.tj51lack }}"})</script>    
+    <script charset="UTF-8" id="LA_COLLECT" src="{{ absURL "assets/js/51la-sdk-pro.min.js" }}"></script>
+    <script>LA.init({id:"{{ $.Site.Params.seo.tj51laid }}",ck:"{{ $.Site.Params.seo.tj51lack }}",autoTrack:true,hashMode:true})</script>    
     {{ end }} 
     <!-- end 51.LA 网站统计 -->
 
@@ -106,3 +106,8 @@
     <!-- end Fancybox -->
 
 </head>
+{{ if $.Site.Params.nightMode }}
+<body class="io-black-mode">
+{{ else }}
+<body class="io-grey-mode">
+{{ end }}

@@ -1,7 +1,8 @@
 ---
-title: "Snack Prompt — The AI Prompt Marketplace-AI提示词-提示词市场|AI一人公司导航网"
+title: "Snack Prompt — The AI Prompt Marketplace-AI提示词-提示词市场"           
 date: 2026-06-11
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://snackprompt.com/"

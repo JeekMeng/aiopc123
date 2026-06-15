@@ -1,7 +1,8 @@
 ---
-title: "夸克 - OPC产品管理 - 智能搜索与云存储 | AI一人公司导航网"
+title: "夸克 - OPC产品管理 - 智能搜索与云存储"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.quark.cn/"

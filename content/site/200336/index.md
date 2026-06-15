@@ -1,7 +1,8 @@
 ---
-title: "票税宝-发票工具-智能发票管理工具|AI一人公司导航网"
+title: "票税宝-发票工具-智能发票管理工具"           
 date: 2026-04-22
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.piaoshuibao.com"

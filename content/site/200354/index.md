@@ -1,7 +1,8 @@
 ---
-title: "百宝箱-AI智能体-创作平台|AI一人公司导航网"
+title: "百宝箱-AI智能体-创作平台"           
 date: 2026-05-15
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://tbox.alipay.com/"

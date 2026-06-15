@@ -1,7 +1,8 @@
 ---
-title: "百度一下，你就知道-AI编程工具-中文搜索引擎|AI一人公司导航网"
+title: "百度一下，你就知道-AI编程工具-中文搜索引擎"           
 date: 2026-04-14
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.baidu.com/"

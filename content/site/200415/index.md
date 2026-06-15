@@ -1,7 +1,8 @@
 ---
-title: "谷歌收录-SEO优化-网站诊断|AI一人公司导航网"
+title: "谷歌收录-SEO优化-网站诊断"           
 date: 2026-05-16
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://search.google.com/search-console"

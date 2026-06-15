@@ -1,7 +1,8 @@
 ---
-title: "Prompt Minder-AI提示词-专业管理工具|AI一人公司导航网"
+title: "Prompt Minder-AI提示词-专业管理工具"           
 date: 2026-06-11
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.prompt-minder.com/"

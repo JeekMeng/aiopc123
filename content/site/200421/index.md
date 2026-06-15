@@ -1,7 +1,8 @@
 ---
-title: "CSDN-流量获客-技术社区|AI一人公司导航网"
+title: "CSDN-流量获客-技术社区"           
 date: 2026-06-05
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.csdn.net/"

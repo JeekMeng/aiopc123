@@ -1,7 +1,8 @@
 ---
-title: "万网 - OPC产品上线 - 阿里云域名服务 | AI一人公司导航网"
+title: "万网 - OPC产品上线 - 阿里云域名服务"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://wanwang.aliyun.com/"

@@ -1,7 +1,8 @@
 ---
-title: "百度搭子 DuMate-AI龙虾助手-智能助理|AI一人公司导航网"
+title: "百度搭子 DuMate-AI龙虾助手-智能助理"           
 date: 2026-05-29
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://cloud.baidu.com/product/BCC/moltbot.html"

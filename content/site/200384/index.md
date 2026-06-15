@@ -1,7 +1,8 @@
 ---
-title: "司马阅-AI智能体-文档智能|AI一人公司导航网"
+title: "司马阅-AI智能体-文档智能"           
 date: 2026-05-15
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://smartchoose.cn/"

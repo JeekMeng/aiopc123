@@ -1,7 +1,8 @@
 ---
-title: "微信公众平台-流量获客-内容分发|AI一人公司导航网"
+title: "微信公众平台-流量获客-内容分发"           
 date: 2026-06-05
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://mp.weixin.qq.com/"

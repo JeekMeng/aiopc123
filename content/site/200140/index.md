@@ -1,7 +1,8 @@
 ---
-title: "百度营销 - OPC推广运营 - 一站式营销平台 | AI一人公司导航网"
+title: "百度营销 - OPC推广运营 - 一站式营销平台"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://e.baidu.com/"

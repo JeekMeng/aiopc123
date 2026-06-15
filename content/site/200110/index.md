@@ -1,7 +1,8 @@
 ---
-title: "站长工具 - OPC产品上线 - 站长必备工具箱 | AI一人公司导航网"
+title: "站长工具 - OPC产品上线 - 站长必备工具箱"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://tool.chinaz.com/"

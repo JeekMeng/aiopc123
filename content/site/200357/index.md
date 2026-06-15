@@ -1,7 +1,8 @@
 ---
-title: "飞书-AI智能体-智能伙伴|AI一人公司导航网"
+title: "飞书-AI智能体-智能伙伴"           
 date: 2026-05-15
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.feishu.cn/product/ai_companion"

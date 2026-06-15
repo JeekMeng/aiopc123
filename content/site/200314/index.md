@@ -1,7 +1,8 @@
 ---
-title: "ChatExcel-AI办公工具-用AI聊天处理Excel|AI一人公司导航网"
+title: "ChatExcel-AI办公工具-用AI聊天处理Excel"           
 date: 2026-04-12
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.chatexcel.com/"

@@ -1,7 +1,8 @@
 ---
-title: "AI 提示词库-AI提示词-提示词模板|AI一人公司导航网"
+title: "AI 提示词库-AI提示词-提示词模板"           
 date: 2026-06-11
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.aishort.top/"

@@ -1,7 +1,8 @@
 ---
-title: "Z-Blog - OPC产品上线 - 轻量级博客系统 | AI一人公司导航网"
+title: "Z-Blog - OPC产品上线 - 轻量级博客系统"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.zblogcn.com/"

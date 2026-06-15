@@ -1,7 +1,8 @@
 ---
-title: "AI提示词生成器-AI提示词-提示词优化|AI一人公司导航网"
+title: "AI提示词生成器-AI提示词-提示词优化"           
 date: 2026-06-11
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://promptark.net/zh"

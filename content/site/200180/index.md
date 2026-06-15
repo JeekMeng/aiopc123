@@ -1,7 +1,8 @@
 ---
-title: "简信 CRM - OPC客户管理 - 智能客户关系管理 | AI一人公司导航网"
+title: "简信 CRM - OPC客户管理 - 智能客户关系管理"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.jianxin.com/"

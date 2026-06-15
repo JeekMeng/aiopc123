@@ -1,7 +1,8 @@
 ---
-title: "字由 - OPC产品设计 - 字体管理与设计工具 | AI一人公司导航网"
+title: "字由 - OPC产品设计 - 字体管理与设计工具"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.hellofont.cn/"

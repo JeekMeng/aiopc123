@@ -1,7 +1,8 @@
 ---
-title: "微小宝 - OPC推广运营 - 新媒体运营工具 | AI一人公司导航网"
+title: "微小宝 - OPC推广运营 - 新媒体运营工具"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.wxb.com/"

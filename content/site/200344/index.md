@@ -1,7 +1,8 @@
 ---
-title: "01Agent-AI智能体-图文创作神器|AI一人公司导航网"
+title: "01Agent-AI智能体-图文创作神器"           
 date: 2026-05-15
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://01agent.net"

@@ -1,7 +1,8 @@
 ---
-title: "北京未来式智能科技有限公司-AI智能体-智能体构建|AI一人公司导航网"
+title: "北京未来式智能科技有限公司-AI智能体-智能体构建"           
 date: 2026-05-15
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://autoagents.ai/"

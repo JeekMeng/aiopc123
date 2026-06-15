@@ -1,7 +1,8 @@
 ---
-title: "壹伴 - OPC产品研发 - 微信图文排版助手 | AI一人公司导航网"
+title: "壹伴 - OPC产品研发 - 微信图文排版助手"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://yiban.io/"

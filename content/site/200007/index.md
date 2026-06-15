@@ -1,7 +1,8 @@
 ---
-title: "金蝶AI星辰 - OPC公司经营 - 智能财税管理助手 | AI一人公司导航网"
+title: "金蝶AI星辰 - OPC公司经营 - 智能财税管理助手"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.jdy.com/"

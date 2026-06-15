@@ -1,7 +1,8 @@
 ---
-title: "百度搜索资源平台 - OPC产品上线 - 百度官方SEO平台 | AI一人公司导航网"
+title: "百度搜索资源平台 - OPC产品上线 - 百度官方SEO平台"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://ziyuan.baidu.com/"

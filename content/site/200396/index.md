@@ -1,7 +1,8 @@
 ---
-title: "盘古NLP大模型-AI词元Token-语言模型|AI一人公司导航网"
+title: "盘古NLP大模型-AI词元Token-语言模型"           
 date: 2026-05-15
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.huaweicloud.com/product/pangu/nlp.html"

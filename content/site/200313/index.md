@@ -1,7 +1,8 @@
 ---
-title: "码上启航-编程项目对接平台|AI一人公司导航网"
+title: "码上启航-编程项目对接平台"           
 date: 2026-04-12
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.classppt.cn/"

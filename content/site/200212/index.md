@@ -1,7 +1,8 @@
 ---
-title: "中软国际 - OPC求职招聘 - IT人才招聘平台 | AI一人公司导航网"
+title: "中软国际 - OPC求职招聘 - IT人才招聘平台"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.chinasofti.com/"

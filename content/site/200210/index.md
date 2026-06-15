@@ -1,7 +1,8 @@
 ---
-title: "文思海辉 - OPC求职招聘 - 全球IT服务商 | AI一人公司导航网"
+title: "文思海辉 - OPC求职招聘 - 全球IT服务商"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.pactera.com/"

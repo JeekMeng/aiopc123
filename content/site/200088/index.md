@@ -1,7 +1,8 @@
 ---
-title: "坚果云 - OPC产品管理 - 安全同步网盘 | AI一人公司导航网"
+title: "坚果云 - OPC产品管理 - 安全同步网盘"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.jianguoyun.com/"

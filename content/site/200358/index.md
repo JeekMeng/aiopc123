@@ -1,7 +1,8 @@
 ---
-title: "实在智能AI+RPA-AI智能体-数字员工|AI一人公司导航网"
+title: "实在智能AI+RPA-AI智能体-数字员工"           
 date: 2026-05-15
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.ai-indeed.com/"

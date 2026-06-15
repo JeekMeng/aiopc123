@@ -1,7 +1,8 @@
 ---
-title: "知乎-流量获客-问答社区|AI一人公司导航网"
+title: "知乎-流量获客-问答社区"           
 date: 2026-06-05
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.zhihu.com/"

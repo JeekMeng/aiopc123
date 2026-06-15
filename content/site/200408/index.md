@@ -1,7 +1,8 @@
 ---
-title: "AutoClaw（澳龙）-AI龙虾助手-AI助手工具|AI一人公司导航网"
+title: "AutoClaw（澳龙）-AI龙虾助手-AI助手工具"           
 date: 2026-05-29
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://autoglm.zhipuai.cn/autoclaw/"

@@ -1,7 +1,8 @@
 ---
-title: "阶跃AI-智能助手|AI一人公司导航网"
+title: "阶跃AI-智能助手"           
 date: 2026-05-29
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.stepfun.com/download"

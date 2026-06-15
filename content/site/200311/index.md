@@ -1,7 +1,8 @@
 ---
-title: "ChatPPT-AI办公工具-AI生成PPT|AI一人公司导航网"
+title: "ChatPPT-AI办公工具-AI生成PPT"           
 date: 2026-04-12
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://chatppt.cn/"

@@ -1,7 +1,8 @@
 ---
-title: "达芬奇Resolve - OPC产品设计 - 专业影视后期软件 | AI一人公司导航网"
+title: "达芬奇Resolve - OPC产品设计 - 专业影视后期软件"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.blackmagicdesign.com/cn/products/davinciresolve/"

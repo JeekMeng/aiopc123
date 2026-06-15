@@ -1,7 +1,8 @@
 ---
-title: "https://developers.vivo.com/product/ai/bluelm-AI词元Token-vivo蓝心大模型|AI一人公司导航网"
+title: "vivo蓝心大模型 - AI词元Token - 大模型API服务"           
 date: 2026-05-15
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://developers.vivo.com/product/ai/bluelm"

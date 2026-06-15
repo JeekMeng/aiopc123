@@ -1,7 +1,8 @@
 ---
-title: "讯飞星辰Agent平台-AI智能体-智能体开发|AI一人公司导航网"
+title: "讯飞星辰Agent平台-AI智能体-智能体开发"           
 date: 2026-05-15
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://agent.xfyun.cn"

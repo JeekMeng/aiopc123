@@ -1,7 +1,8 @@
 ---
-title: "极客时间 - OPC资源中心 - 前沿技术知识平台 | AI一人公司导航网"
+title: "极客时间 - OPC资源中心 - 前沿技术知识平台"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://time.geekbang.org/"

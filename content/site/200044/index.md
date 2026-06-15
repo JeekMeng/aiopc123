@@ -1,7 +1,8 @@
 ---
-title: "猫啃网 - OPC产品设计 - 免费商用字体下载 | AI一人公司导航网"
+title: "猫啃网 - OPC产品设计 - 免费商用字体下载"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.100font.com/"

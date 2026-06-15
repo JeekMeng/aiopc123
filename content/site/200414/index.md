@@ -1,7 +1,8 @@
 ---
-title: "Youtu-Tip-AI龙虾助手-视频总结|AI一人公司导航网"
+title: "Youtu-Tip-AI龙虾助手-视频总结"           
 date: 2026-05-29
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://youtu-tip.com/"

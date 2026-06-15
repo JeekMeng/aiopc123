@@ -1,7 +1,8 @@
 ---
-title: "https://www.lyzr.ai/-AI智能体-企业级AI代理|AI一人公司导航网"
+title: "https://www.lyzr.ai/-AI智能体-企业级AI代理"           
 date: 2026-05-15
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.lyzr.ai/"

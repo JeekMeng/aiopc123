@@ -1,7 +1,8 @@
 ---
-title: "万彩动画大师 - OPC产品研发 - 动画视频制作工具 | AI一人公司导航网"
+title: "万彩动画大师 - OPC产品研发 - 动画视频制作工具"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.animiz.cn/"

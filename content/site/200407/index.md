@@ -1,7 +1,8 @@
 ---
-title: "LobsterAI-AI龙虾助手-智能办公助手|AI一人公司导航网"
+title: "LobsterAI-AI龙虾助手-智能办公助手"           
 date: 2026-05-29
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://lobsterai.youdao.com/#/index"

@@ -1,7 +1,8 @@
 ---
-title: "飞书多维表格-AI办公工具-智能多维表格|AI一人公司导航网"
+title: "飞书多维表格-AI办公工具-智能多维表格"           
 date: 2026-04-12
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://base.feishu.cn/"

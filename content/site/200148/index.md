@@ -1,7 +1,8 @@
 ---
-title: "克劳锐 - OPC推广运营 - 新媒体数据服务 | AI一人公司导航网"
+title: "克劳锐 - OPC推广运营 - 新媒体数据服务"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.klr.com/"

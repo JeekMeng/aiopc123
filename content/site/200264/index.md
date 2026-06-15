@@ -1,7 +1,8 @@
 ---
-title: "网易云课堂 - OPC资源中心 - 在线学习平台 | AI一人公司导航网"
+title: "网易云课堂 - OPC资源中心 - 在线学习平台"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://study.163.com/"

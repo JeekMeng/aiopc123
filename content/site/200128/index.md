@@ -1,7 +1,8 @@
 ---
-title: "梅花网 - OPC推广运营 - 营销创意与资讯平台 | AI一人公司导航网"
+title: "梅花网 - OPC推广运营 - 营销创意与资讯平台"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.meihua.info/"

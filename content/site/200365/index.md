@@ -1,7 +1,8 @@
 ---
-title: "Manus-AI智能体-行动引擎|AI一人公司导航网"
+title: "Manus-AI智能体-行动引擎"           
 date: 2026-05-15
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://manus.im/"

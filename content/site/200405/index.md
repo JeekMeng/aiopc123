@@ -1,7 +1,8 @@
 ---
-title: "讯飞星辰Agent平台-AI龙虾助手-智能体搭建|AI一人公司导航网"
+title: "讯飞星辰Agent平台-AI龙虾助手-智能体搭建"           
 date: 2026-05-29
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://agent.xfyun.cn/"

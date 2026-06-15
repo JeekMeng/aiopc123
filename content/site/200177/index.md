@@ -1,7 +1,8 @@
 ---
-title: "Freshworks - OPC客户管理 - 一体化客户体验平台 | AI一人公司导航网"
+title: "Freshworks - OPC客户管理 - 一体化客户体验平台"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.freshworks.com/"

@@ -1,7 +1,8 @@
 ---
-title: "豆丁网 - OPC资源中心 - 文档分享与下载 | AI一人公司导航网"
+title: "豆丁网 - OPC资源中心 - 文档分享与下载"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.docin.com/"

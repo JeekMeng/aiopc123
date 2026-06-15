@@ -1,7 +1,8 @@
 ---
-title: "阿里云企业服务 - OPC公司经营 - 一站式企业服务 | AI一人公司导航网"
+title: "阿里云企业服务 - OPC公司经营 - 一站式企业服务"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.aliyun.com/solution/enterprise/"

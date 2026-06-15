@@ -3,22 +3,25 @@
 {{ partial "top_nav.html" . }}
 
 <div class="page-container">
-    <div class="left-sidebar">{{ partial "sidebar.html" . }}</div>
+{{ if not .Params.simple }}
+<div class="left-sidebar">{{ partial "sidebar.html" . }}</div>
+{{ end }}
 {{ partial "content_header.html" . }}
 
-<div class="three-col-layout">
-    <div class="content-col">
+<div class="three-col-layout{{ if .Params.simple }} three-col-layout--simple{{ end }}">
+    <div class="content-col{{ if .Params.simple }} content-col--simple{{ end }}">
         <div id="page-content" class="content-site customize-site">
             <div class="content_detail">
                 <article class="detail-card">
                     <h1 class="mb-3">{{ trim (index (split .Title "|") 0) " " }}</h1>
 
+                    {{ if or .Params.score .Params.category .Params.company }}
                     <div class="text-muted mb-3">
-                        <span class="mr-3"><i class="fas fa-star"></i> 评分: <strong>{{ .Params.score | default "暂无" }}</strong></span>
-                        <span class="mr-3"><i class="fas fa-tag"></i> {{ .Params.category | default "AI工具" }}</span>
-                        <span class="mr-3"><i class="fas fa-calendar-alt"></i> {{ .Date.Format "2006-01-02" }}</span>
+                        {{ with .Params.score }}<span class="mr-3"><i class="fas fa-star"></i> 评分: <strong>{{ . }}</strong></span>{{ end }}
+                        {{ with .Params.category }}<span class="mr-3"><i class="fas fa-tag"></i> {{ . }}</span>{{ end }}
                         {{ with .Params.company }}<span class="mr-3"><i class="fas fa-building"></i> {{ . }}</span>{{ end }}
                     </div>
+                    {{ end }}
 
                     {{ if or .Params.official_url .Params.mobile_url .Params.download_url }}
                     <div class="action-buttons mb-4">
@@ -31,15 +34,15 @@
                     <div class="content-body">
                         {{ .Content }}
                     </div>
-
-                    {{ partial "related.html" . }}
                 </article>
             </div>
         </div>
     </div>
+    {{ if not .Params.simple }}
     <div class="right-sidebar">
         {{ partial "content_right_sidebar_unified.html" . }}
     </div>
+    {{ end }}
 </div>
 
 {{ partial "content_footer.html" . }}

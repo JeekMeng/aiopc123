@@ -1,7 +1,8 @@
 ---
-title: "创建对话补全-AI词元Token-对话补全API|AI一人公司导航网"
+title: "创建对话补全-AI词元Token-对话补全API"           
 date: 2026-05-15
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://platform.moonshot.cn/docs/api/chat"

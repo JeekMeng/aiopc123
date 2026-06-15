@@ -1,7 +1,8 @@
 ---
-title: "Trello - OPC产品管理 - 可视化项目管理 | AI一人公司导航网"
+title: "Trello - OPC产品管理 - 可视化项目管理"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://trello.com/"

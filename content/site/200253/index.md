@@ -1,7 +1,8 @@
 ---
-title: "运营管理 - OPC资源中心 - 运营资源导航 | AI一人公司导航网"
+title: "运营管理 - OPC资源中心 - 运营资源导航"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.yunyingguanli.com/"

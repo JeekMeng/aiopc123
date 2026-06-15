@@ -1,16 +1,18 @@
 {{ partial "header.html" . }}
-
-{{ partial "sidebar.html" . }}
-
-{{ partial "content_header.html" . }}
+{{ partial "top_nav.html" . }}
 
 {{ partial "content_search.html" . }}
 
-{{ partial "content_main.html" . }}
+<div class="page-container">
+<div class="left-sidebar">{{ partial "sidebar.html" . }}</div>
+{{ partial "content_header.html" . }}
+
+<div class="three-col-layout">
+    <div class="content-col content-col--framed">
+        {{ partial "content_main.html" . }}
+    </div>
+</div>
 
 {{ partial "content_footer.html" . }}
-
 {{ partial "modal_search.html" . }}
-
 {{ partial "footer.html" . }}
-

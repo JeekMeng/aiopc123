@@ -1,69 +1,75 @@
 {{ partial "header.html" . }}
+{{ partial "top_nav.html" . }}
 
-{{ partial "sidebar.html" . }}
-
+<div class="page-container">
+<div class="left-sidebar">{{ partial "sidebar.html" . }}</div>
 {{ partial "content_header.html" . }}
 
 <link rel="stylesheet" href="/assets/css/book-style.css" type="text/css" media="all" />
 
-<div id="content" class="content-site customize-site">
-    <div id="book-detail">
-        <div class="book-catalog">
-            {{ range .Site.Data.book }}
-                {{ if .list }}
-                    {{ range .list }}
-                    <div class="catalog-section">
-                        <div class="d-flex flex-fill">
-                            <h4 class="text-gray text-lg mb-3">
-                                <i class="site-tag iconfont icon-tag icon-lg mr-1" id="{{ printf "%s" (md5 .term) }}"></i>
-                                {{ .term }}
-                            </h4>
-                        </div>
-                        <div class="book-card-grid">
-                            {{ range .links }}
-                            <a href="{{ .url }}" class="book-link-card" target="_blank">
-                                <div class="book-link-cover">
-                                    <img src="/assets/images/{{ .logo }}" alt="{{ .title }}">
-                                    <span class="book-tag 免费">免费</span>
+<div class="three-col-layout">
+    <div class="content-col content-col--framed">
+        <div id="page-content" class="content-site customize-site">
+            <div class="content_detail">
+                <div class="book-catalog">
+                    {{ range .Site.Data.book }}
+                        {{ if .list }}
+                            {{ range .list }}
+                            <div class="catalog-section">
+                                <div class="d-flex flex-fill">
+                                    <h4 class="text-gray text-lg mb-3">
+                                        <i class="site-tag iconfont icon-tag icon-lg mr-1" id="{{ printf "%s" (md5 .term) }}"></i>
+                                        {{ .term }}
+                                    </h4>
                                 </div>
-                                <div class="book-link-info">
-                                    <div class="book-link-title">{{ .title }}</div>
+                                <div class="book-card-grid">
+                                    {{ range .links }}
+                                    <a href="{{ .url }}" class="book-link-card" target="_blank">
+                                        <div class="book-link-cover">
+                                            <img src="/assets/images/{{ .logo }}" alt="{{ .title }}">
+                                            <span class="book-tag 免费">免费</span>
+                                        </div>
+                                        <div class="book-link-info">
+                                            <div class="book-link-title">{{ .title }}</div>
+                                        </div>
+                                    </a>
+                                    {{ end }}
                                 </div>
-                            </a>
+                            </div>
                             {{ end }}
+                        {{ else if .links }}
+                        <div class="catalog-section">
+                            <div class="d-flex flex-fill">
+                                <h4 class="text-gray text-lg mb-3">
+                                    <i class="site-tag iconfont icon-tag icon-lg mr-1" id="{{ printf "%s" (md5 .taxonomy) }}"></i>
+                                    {{ .taxonomy }}
+                                </h4>
+                            </div>
+                            <div class="book-card-grid">
+                                {{ range .links }}
+                                <a href="{{ .url }}" class="book-link-card" target="_blank">
+                                    <div class="book-link-cover">
+                                        <img src="/assets/images/{{ .logo }}" alt="{{ .title }}">
+                                        <span class="book-tag 免费">免费</span>
+                                    </div>
+                                    <div class="book-link-info">
+                                        <div class="book-link-title">{{ .title }}</div>
+                                    </div>
+                                </a>
+                                {{ end }}
+                            </div>
                         </div>
-                    </div>
-                    {{ end }}
-                {{ else if .links }}
-                <div class="catalog-section">
-                    <div class="d-flex flex-fill">
-                        <h4 class="text-gray text-lg mb-3">
-                            <i class="site-tag iconfont icon-tag icon-lg mr-1" id="{{ printf "%s" (md5 .taxonomy) }}"></i>
-                            {{ .taxonomy }}
-                        </h4>
-                    </div>
-                    <div class="book-card-grid">
-                        {{ range .links }}
-                        <a href="{{ .url }}" class="book-link-card" target="_blank">
-                            <div class="book-link-cover">
-                                <img src="/assets/images/{{ .logo }}" alt="{{ .title }}">
-                                <span class="book-tag 免费">免费</span>
-                            </div>
-                            <div class="book-link-info">
-                                <div class="book-link-title">{{ .title }}</div>
-                            </div>
-                        </a>
                         {{ end }}
-                    </div>
+                    {{ end }}
                 </div>
-                {{ end }}
-            {{ end }}
+            </div>
         </div>
+    </div>
+    <div class="right-sidebar">
+        {{ partial "content_right_sidebar_unified.html" . }}
     </div>
 </div>
 
 {{ partial "content_footer.html" . }}
-
 {{ partial "modal_search.html" . }}
-
 {{ partial "footer.html" . }}

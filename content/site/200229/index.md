@@ -1,7 +1,8 @@
 ---
-title: "江苏政务服务网 - OPC政策解读 - 江苏政务一网通办 | AI一人公司导航网"
+title: "江苏政务服务网 - OPC政策解读 - 江苏政务一网通办"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.jszwfw.gov.cn/"

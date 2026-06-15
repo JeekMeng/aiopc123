@@ -1,7 +1,8 @@
 ---
-title: "东软集团 - OPC求职招聘 - IT解决方案与服务 | AI一人公司导航网"
+title: "东软集团 - OPC求职招聘 - IT解决方案与服务"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.neusoft.com/"

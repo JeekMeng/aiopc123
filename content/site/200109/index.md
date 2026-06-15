@@ -1,7 +1,8 @@
 ---
-title: "阿里云速成美站 - OPC产品上线 - 智能建站工具 | AI一人公司导航网"
+title: "阿里云速成美站 - OPC产品上线 - 智能建站工具"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.anyunjianzhan.com/"

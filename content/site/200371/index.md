@@ -1,7 +1,8 @@
 ---
-title: "搭建AI Agent应用-AI智能体-无代码开发|AI一人公司导航网"
+title: "搭建AI Agent应用-AI智能体-无代码开发"           
 date: 2026-05-15
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.functorz.com/zai"

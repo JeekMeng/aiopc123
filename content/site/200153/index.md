@@ -1,7 +1,8 @@
 ---
-title: "GrowingIO - OPC推广运营 - 用户行为分析平台 | AI一人公司导航网"
+title: "GrowingIO - OPC推广运营 - 用户行为分析平台"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.growingio.com/"

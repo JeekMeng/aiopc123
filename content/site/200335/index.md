@@ -1,7 +1,8 @@
 ---
-title: "用友畅捷通好会计-发票工具-智能财税云服务|AI一人公司导航网"
+title: "用友畅捷通好会计-发票工具-智能财税云服务"           
 date: 2026-04-22
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://h.chanjet.com"

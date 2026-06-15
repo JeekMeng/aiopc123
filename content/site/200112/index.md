@@ -1,7 +1,8 @@
 ---
-title: "爱站网 - OPC产品上线 - SEO数据查询工具 | AI一人公司导航网"
+title: "爱站网 - OPC产品上线 - SEO数据查询工具"              
 date: 2026-03-01
 draft: false
+schema_type: "SoftwareApplication"
 
 # 产品信息
 official_url: "https://www.aizhan.com/"
