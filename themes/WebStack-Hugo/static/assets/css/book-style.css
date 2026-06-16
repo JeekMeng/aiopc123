@@ -147,6 +147,19 @@
     }
 }
 
+@media (max-width: 480px) {
+    .book-cover-large {
+        width: 140px;
+    }
+    .book-info h1 {
+        font-size: 1.3rem;
+    }
+    .btn-download {
+        padding: 10px 24px;
+        font-size: 14px;
+    }
+}
+
 /* Book Catalog - Link Cards */
 #book-detail {
     padding: 20px;

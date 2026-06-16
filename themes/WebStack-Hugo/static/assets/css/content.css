@@ -519,7 +519,7 @@ body {
     border-radius: 10px;
     padding: 10px 16px;
     align-self: flex-start;
-    margin: 24px;
+    margin: 24px 0 24px 24px;
     position: sticky;
     top: 80px;
     max-height: calc(100vh - 80px);
@@ -639,5 +639,37 @@ body {
     }
     .left-sidebar .sidebar-nav.show {
         display: block !important;
+    }
+
+    .page-container {
+        flex-direction: column;
+    }
+    .left-sidebar {
+        margin: 0;
+    }
+    .detail-card {
+        padding: 20px 16px;
+    }
+}
+
+@media (max-width: 576px) {
+    .three-col-layout {
+        padding: 12px;
+        gap: 12px;
+    }
+    .detail-card {
+        padding: 16px 12px;
+        border-radius: 10px;
+    }
+    .detail-card h1 {
+        font-size: 1.3rem;
+    }
+    .action-btn {
+        font-size: 13px;
+        padding: 6px 14px;
+    }
+    .detail-card .text-muted .mr-3 {
+        display: block;
+        margin-bottom: 4px;
     }
 }
