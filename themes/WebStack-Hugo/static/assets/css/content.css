@@ -370,6 +370,122 @@
     display: none;
 }
 
+/* ========== 详情页 Hero 信息卡片 ========== */
+.detail-hero {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border: 1px solid #e5e5ea;
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
+}
+
+.hero-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.hero-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1d1d1f;
+    margin: 0 0 4px 0;
+    line-height: 1.3;
+}
+
+.hero-subtitle {
+    font-size: 14px;
+    color: #86868b;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.hero-score {
+    text-align: center;
+    flex-shrink: 0;
+    min-width: 70px;
+}
+
+.score-value {
+    display: block;
+    font-size: 28px;
+    font-weight: 700;
+    color: #f5a623;
+    line-height: 1;
+}
+
+.score-stars {
+    position: relative;
+    display: inline-block;
+    font-size: 14px;
+    letter-spacing: 2px;
+    width: 74px;
+    height: 1em;
+    margin-top: 4px;
+}
+
+.score-stars::before {
+    content: '★★★★★';
+    position: absolute;
+    color: #e0e0e0;
+}
+
+.score-stars .stars-fill {
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    height: 100%;
+}
+
+.score-stars .stars-fill::before {
+    content: '★★★★★';
+    color: #f5a623;
+    display: block;
+}
+
+.hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 16px;
+    font-size: 13px;
+    color: #86868b;
+}
+
+.hero-meta .meta-item i {
+    margin-right: 4px;
+    width: 14px;
+    text-align: center;
+}
+
+.hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.hero-tags .tag {
+    display: inline-block;
+    padding: 3px 10px;
+    font-size: 12px;
+    border-radius: 20px;
+    background: #f0f0f0;
+    color: #555;
+    border: 1px solid #e5e5ea;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid #e5e5ea;
+}
+
 /* ========== macOS 风格详情卡片 ========== */
 .detail-card {
     background: #ffffff;
@@ -576,19 +692,40 @@ body {
     min-width: 0;
 }
 
-/* ── 首页搜索栏：墨绿纯色背景 ── */
+/* ── 首页搜索栏：macOS 毛玻璃 ── */
 #search-bg {
-    background: #1a4731 !important;
+    background: rgba(255, 255, 255, 0.88) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     background-image: none !important;
     animation: none !important;
+    border-bottom: 1px solid #e5e5ea;
     padding-top: 20px !important;
     padding-bottom: 40px !important;
 }
 #search-bg h1.big-title {
-    color: #ffffff !important;
+    color: #1d1d1f !important;
     text-shadow: none !important;
     font-size: 22px !important;
     margin-bottom: 12px !important;
+}
+
+/* 搜索输入框适配浅色背景 */
+.header-big #search-text {
+    color: #1d1d1f !important;
+    background: #ffffff !important;
+    border: 1px solid #d1d1d6 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+.header-big #search-text::placeholder {
+    color: #8e8e93 !important;
+}
+
+/* 搜索类型文字（百度/谷歌等）适配浅色 */
+.header-big:not(.no-bg) .search-type label .text-muted,
+.header-big:not(.no-bg) .text-muted {
+    color: #666 !important;
 }
 
 @media (min-width: 768px) {
@@ -672,4 +809,101 @@ body {
         display: block;
         margin-bottom: 4px;
     }
+}
+
+/* ── 站内搜索 ── */
+#site-search-results,
+#m_site-search-results {
+    position: absolute;
+    z-index: 20;
+    width: 100%;
+    overflow: hidden;
+    margin-top: 4px;
+}
+#site-search-results .site-search-list,
+#m_site-search-results .site-search-list {
+    padding: 10px 0;
+    margin: 0;
+}
+#site-search-results .site-search-list li,
+#m_site-search-results .site-search-list li {
+    line-height: 30px;
+    font-size: 14px;
+    padding: 0 25px;
+    cursor: pointer;
+    list-style: none;
+    transition: .3s;
+}
+#site-search-results .site-search-list li:hover,
+#m_site-search-results .site-search-list li:hover {
+    background-color: rgba(130, 130, 130, .5);
+}
+#site-search-results .site-search-empty,
+#m_site-search-results .site-search-empty {
+    padding: 20px 25px;
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+}
+#site-search-results .text-warning,
+#m_site-search-results .text-warning {
+    color: #f5a623;
+}
+#site-search-results .site-search-list li.current,
+#m_site-search-results .site-search-list li.current {
+    background-color: rgba(130, 130, 130, .5);
+}
+
+/* ── macOS 风格 pill 标签（适配浅色背景）── */
+
+/* 覆写 custom-style.css 的干扰色 */
+.header-big:not(.no-bg) .s-type-list {
+    color: #1d1d1f !important;
+}
+
+.header-big .s-type-list.big {
+    background: none !important;
+}
+
+/* pill 本体 */
+.header-big .s-type-list.big label {
+    display: inline-flex !important;
+    align-items: center;
+    padding: 0 22px;
+    margin: 0 5px;
+    height: 36px;
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.header-big .s-type-list.big label.active {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.header-big .s-type-list.big label:not(.active):hover {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+/* 覆写原有半透明 + indicator */
+.header-big .s-type-list label:not(.active) {
+    opacity: 0.75;
+}
+.header-big .s-type-list label:not(.active):hover {
+    opacity: 1;
+}
+.header-big .s-type-list label:not(.active)::after {
+    display: none !important;
+}
+
+/* 内联文字 */
+.header-big .s-type-list.big label span {
+    font-size: 16px;
+    font-weight: 500;
+    color: #1d1d1f !important;
+    padding: 0 !important;
+    line-height: 1;
+    display: inline !important;
 }

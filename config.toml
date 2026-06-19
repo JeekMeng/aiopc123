@@ -13,6 +13,16 @@ enableRobotsTXT       = true           # 生成robots.txt
 
 disableKinds = ["taxonomy", "term"]
 
+[outputFormats]
+  [outputFormats.sitesjson]
+    baseName = "sites"
+    mediaType = "application/json"
+    isPlainText = true
+    notAlternative = true
+
+[outputs]
+  home = ["HTML", "sitesjson"]
+
 [minify]
   disableXML = true
   minifyOutput = true

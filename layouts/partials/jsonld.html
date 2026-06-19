@@ -105,15 +105,15 @@
 </script>
 {{ end }}
 
-{{/* ─── FAQPage (supplementary) ─── */}}
-{{ with .Params.faq }}
+{{/* ─── FAQPage (standalone) ─── */}}
+{{ if eq .Params.schema_type "FAQPage" }}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {{ $faqLen := len . }}
-    {{ range $i, $item := . }}
+    {{ $faqLen := len .Params.faq }}
+    {{ range $i, $item := .Params.faq }}
     {
       "@type": "Question",
       "name": {{ $item.q | jsonify }},
@@ -128,16 +128,63 @@
 </script>
 {{ end }}
 
-{{/* ─── HowTo (supplementary) ─── */}}
-{{ with .Params.steps }}
+{{/* ─── FAQPage (supplementary, standalone 页面不再重复输出) ─── */}}
+{{ $faq := .Params.faq }}
+{{ if and $faq (ne .Params.schema_type "FAQPage") }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {{ $faqLen := len $faq }}
+    {{ range $i, $item := $faq }}
+    {
+      "@type": "Question",
+      "name": {{ $item.q | jsonify }},
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": {{ $item.a | jsonify }}
+      }
+    }{{ if lt (add $i 1) $faqLen }},{{ end }}
+    {{ end }}
+  ]
+}
+</script>
+{{ end }}
+
+{{/* ─── HowTo (standalone) ─── */}}
+{{ if eq .Params.schema_type "HowTo" }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": {{ .Title | jsonify }},
+  "step": [
+    {{ $stepLen := len .Params.steps }}
+    {{ range $i, $s := .Params.steps }}
+    {
+      "@type": "HowToStep",
+      "position": {{ add $i 1 }},
+      "name": {{ $s.name | jsonify }},
+      "text": {{ $s.text | jsonify }}
+    }{{ if lt (add $i 1) $stepLen }},{{ end }}
+    {{ end }}
+  ]
+}
+</script>
+{{ end }}
+
+{{/* ─── HowTo (supplementary, standalone 页面不再重复输出) ─── */}}
+{{ $steps := .Params.steps }}
+{{ if and $steps (ne .Params.schema_type "HowTo") }}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "HowTo",
   "name": {{ $.Title | jsonify }},
   "step": [
-    {{ $stepLen := len . }}
-    {{ range $i, $s := . }}
+    {{ $stepLen := len $steps }}
+    {{ range $i, $s := $steps }}
     {
       "@type": "HowToStep",
       "position": {{ add $i 1 }},
