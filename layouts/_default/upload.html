@@ -1,0 +1,138 @@
+{{ partial "header.html" . }}
+{{ partial "top_nav.html" . }}
+
+<div class="page-container">
+{{ partial "content_header.html" . }}
+
+<div class="three-col-layout">
+    <div class="content-col">
+        <div id="page-content" class="content-site customize-site">
+            <div class="content_detail">
+                <article class="detail-card">
+                    <div class="content-body" style="padding:2rem">
+                        {{ .Content }}
+
+                        <div id="submit-page" class="submit-page">
+                            <div class="submit-hero">
+                                <h2><i class="fas fa-rocket mr-2"></i>免费入驻</h2>
+                                <p>免费展示您的一人公司，让更多的客户发现您</p>
+                            </div>
+
+                            <form id="submitForm" class="submit-form">
+                                <div class="form-row">
+                                    <label>网站名称 <span class="text-danger">*</span></label>
+                                    <input type="text" name="name" class="form-control" placeholder="例如: 张三设计工作室" required>
+                                </div>
+
+                                <div class="form-row">
+                                    <label>网站LOGO</label>
+                                    <input type="url" name="logo" class="form-control" placeholder="Logo图片网址 (选填)">
+                                </div>
+
+                                <div class="form-row">
+                                    <label>所在城市 <small class="text-muted">（您网站具有较强的地域属性，需要GEO优化，建议填写）</small></label>
+                                    <input type="text" name="city" class="form-control" placeholder="例如: 北京">
+                                </div>
+
+                                <div class="form-row">
+                                    <label>网站分类 <span class="text-danger">*</span> <small class="text-muted">（最多选3个，已选 <span id="catCount">0</span>/3）</small></label>
+                                    <div class="category-tree" id="categoryGrid">
+                                        <div class="cat-left" id="catLeft">
+                                            {{ range .Site.Data.webstack }}
+                                            {{ if and (ne .taxonomy "OPC常用推荐") (ne .taxonomy "OPC最新上线") (ne .taxonomy "OPC热门推荐") }}
+                                            <div class="cat-left-item" data-target="items-{{ md5 .taxonomy }}">
+                                                <i class="{{ .icon }} mr-1"></i>{{ .taxonomy }}
+                                            </div>
+                                            {{ end }}
+                                            {{ end }}
+                                        </div>
+                                        <div class="cat-right" id="catRightPanel">
+                                            {{ range .Site.Data.webstack }}
+                                            {{ if and (ne .taxonomy "OPC常用推荐") (ne .taxonomy "OPC最新上线") (ne .taxonomy "OPC热门推荐") }}
+                                            <div class="cat-group-items" id="items-{{ md5 .taxonomy }}" style="display:none">
+                                                {{ if .list }}
+                                                    {{ range .list }}
+                                                    <label class="cat-item"><input type="checkbox" value="{{ .taxonomy }}/{{ .term }}"> {{ .term }}</label>
+                                                    {{ end }}
+                                                {{ else if .links }}
+                                                    <label class="cat-item"><input type="checkbox" value="{{ .taxonomy }}"> {{ .taxonomy }}</label>
+                                                {{ end }}
+                                            </div>
+                                            {{ end }}
+                                            {{ end }}
+                                        </div>
+                                    </div>
+                                    <div class="cat-error text-danger small mt-1" style="display:none"></div>
+                                </div>
+
+                                <div class="form-row">
+                                    <label>一句话简介 <span class="text-danger">*</span> <small class="text-muted">限50字以内，突出核心价值</small></label>
+                                    <input type="text" name="summary" class="form-control" maxlength="50" placeholder="例如: 专注品牌设计10年，服务500+客户" required>
+                                </div>
+
+                                <div class="form-row">
+                                    <label>详细介绍 <small class="text-muted">限200字以内</small></label>
+                                    <textarea name="detail" class="form-control" maxlength="200" rows="3" placeholder="详细介绍你的服务内容..."></textarea>
+                                </div>
+
+                                <div class="form-row">
+                                    <label>官网链接 <span class="text-danger">*</span></label>
+                                    <input type="url" name="website" class="form-control" placeholder="https://..." required>
+                                </div>
+
+                                <div class="form-row">
+                                    <label>微信号 <small class="text-muted">仅用于审核联系</small></label>
+                                    <input type="text" name="wechat" class="form-control" placeholder="微信号">
+                                </div>
+
+                                <div class="form-row">
+                                    <label>联系人 <span class="text-danger">*</span></label>
+                                    <input type="text" name="contact_name" class="form-control" placeholder="联系人姓名" required>
+                                </div>
+
+                                <div class="form-row">
+                                    <label>联系电话 <span class="text-danger">*</span></label>
+                                    <input type="tel" name="contact_phone" class="form-control" placeholder="手机号" required>
+                                </div>
+
+                                <div class="form-row">
+                                    <label>补充说明</label>
+                                    <textarea name="notes" class="form-control" rows="2" placeholder="其他需要说明的内容..."></textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-lg btn-block submit-btn" id="submitBtn">
+                                    <i class="fas fa-paper-plane mr-2"></i>提交入驻申请
+                                </button>
+                                <p class="text-muted text-center mt-2 small">提交后将在1-3个工作日内完成人工审核</p>
+                                <div class="submit-error text-danger text-center mt-2" style="display:none"></div>
+                            </form>
+
+                            <div id="submitSuccess" class="submit-success" style="display:none">
+                                <div class="text-center py-5">
+                                    <i class="fas fa-check-circle text-success" style="font-size:64px"></i>
+                                    <h3 class="mt-3">入驻申请已提交！</h3>
+                                    <p class="text-muted">我们将在1-3个工作日内完成审核，审核通过后你的信息将上线展示。</p>
+                                    <a href="/" class="btn btn-outline-primary mt-3"><i class="fas fa-home mr-1"></i>返回首页</a>
+                                </div>
+                            </div>
+
+                            <div class="submit-notice">
+                                <h5><i class="fas fa-info-circle mr-2"></i>入驻须知</h5>
+                                <ul>
+                                    <li>入驻完全免费，展示信息不收取任何费用</li>
+                                    <li>提交后1-3个工作日完成人工审核</li>
+                                    <li>请确保信息真实有效，虚假信息将被驳回</li>
+                                    <li>联系方式仅用于审核，不会公开展示</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{ partial "content_footer.html" . }}
+{{ partial "modal_search.html" . }}
+{{ partial "footer.html" . }}
