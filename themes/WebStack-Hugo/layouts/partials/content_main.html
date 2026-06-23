@@ -1,4 +1,19 @@
 <div id="content" class="content-site customize-site">
+    <!--自定义导航-->
+    <script>window.logosPath='{{ $.Site.Params.logosPath | relURL }}/';window.defaultLogo='{{ $.Site.Params.defaultLogo | relURL }}';</script>
+    <div id="custom-nav-section" class="custom-nav-section">
+        <div class="d-flex flex-fill">
+            <h4 class="text-gray text-lg mb-4">
+                <i class="fas fa-star text-warning mr-1" id="custom-nav-title"></i>自定义导航
+            </h4>
+            <div class="flex-fill"></div>
+            <button class="btn btn-sm btn-outline-primary" id="customNavAddBtn" style="border-radius:20px;height:32px;align-self:center">
+                <i class="fas fa-plus mr-1"></i>添加
+            </button>
+        </div>
+        <div class="row" id="custom-nav-list"></div>
+        <br />
+    </div>
     {{ range .Site.Data.webstack }}
         {{ if .list }}
             {{ range .list }}

@@ -473,22 +473,8 @@ function setup_sidebar_menu()
 		}
 		$items_with_subs.each(function(i, el)
 		{
-			var $li = jQuery(el),
-				$a = $li.children('a'),
-				$sub = $li.children('ul');
+			var $li = jQuery(el);
 			$li.addClass('has-sub');
-			$a.on('click', function(ev)
-			{
-				ev.preventDefault();
-				if(toggle_others)
-				{
-					sidebar_menu_close_items_siblings($li);
-				}
-				if($li.hasClass('expanded') || $li.hasClass('opened'))
-					sidebar_menu_item_collapse($li, $sub);
-				else
-					sidebar_menu_item_expand($li, $sub);
-			});
 		});
 	}
 }

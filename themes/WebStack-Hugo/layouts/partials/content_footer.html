@@ -1,6 +1,16 @@
     </div><!-- main-content end -->
 </div><!-- page-container end -->
 
+{{ if .IsHome }}
+<a href="/upload/" class="submit-banner d-flex align-items-center" style="display:flex;background:linear-gradient(135deg,#667eea,#764ba2);border-radius:12px;padding:2rem 2rem;margin:0;text-decoration:none;transition:transform 0.2s">
+    <div class="flex-fill" style="margin-left:auto;margin-right:auto;max-width:500px;text-align:center">
+        <div class="font-weight-bold" style="color:#fff;font-size:20px;margin-bottom:6px"><i class="fas fa-rocket mr-2"></i>免费入驻</div>
+        <div style="color:rgba(255,255,255,0.85);font-size:14px;margin-bottom:12px">免费展示您的一人公司，让更多的客户发现您</div>
+        <span style="display:inline-block;background:rgba(255,255,255,0.2);color:#fff;border-radius:20px;padding:8px 28px;font-size:15px;font-weight:600">立即免费入驻</span>
+    </div>
+</a>
+{{ end }}
+
 <div class="footer-container">
     <div class="footer-content">
         <div class="footer-columns">

@@ -9,6 +9,7 @@
                 <a href="{{ .link }}">
                     <i class="{{ .icon }} fa-lg mr-2"></i>
                     <span>{{ .item }}</span>
+                    {{ if .new }}<small class="badge badge-danger ml-1" style="font-size:10px;vertical-align:super;padding:1px 5px">New</small>{{ end }}
                 </a>
                 {{ if .list }}
                 <ul class="sub-menu">
@@ -21,12 +22,17 @@
         {{ end }}
         </ul>
         <div class="top-nav-right">
-            {{ with .Site.Params.yiyan }}
-            <span class="top-nav-tagline">用AI赋能一人公司，助您成为超级个体</span>
-            {{ end }}
+            <a href="/upload" class="submit-link mr-3">
+                <i class="fas fa-rocket mr-1"></i>免费入驻
+                <small class="badge badge-danger ml-1" style="font-size:10px;vertical-align:super;padding:1px 5px">New</small>
+            </a>
             <button class="top-nav-toggle" id="sidebar-switch" data-toggle="modal" data-target="#sidebar">
                 <i class="iconfont icon-classification icon-2x"></i>
             </button>
+            <div class="user-menu mr-3" id="user-menu">
+                <a href="#" class="mr-3" data-toggle="modal" data-target="#authModal">登录</a>
+                <a href="#" data-toggle="modal" data-target="#authModal">注册</a>
+            </div>
         </div>
     </div>
 </div>

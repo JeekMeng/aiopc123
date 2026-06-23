@@ -43,12 +43,44 @@
                             {{ with .Params.official_url }}<a href="{{ . }}" class="action-btn" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> 链接直达</a>{{ end }}
                             {{ with .Params.mobile_url }}<a href="{{ . }}" class="action-btn" target="_blank" rel="noopener"><i class="fas fa-mobile-alt"></i> 手机查看</a>{{ end }}
                             {{ with .Params.download_url }}<a href="{{ . }}" class="action-btn" target="_blank" rel="noopener"><i class="fas fa-download"></i> 立即下载</a>{{ end }}
+                            {{ $siteId := path.Base (path.Dir .File.Path) }}
+                            {{ $officialUrl := .Params.official_url | default "" }}
+                            {{ $sitePath := printf "/site/%s/" $siteId }}
+                            {{ $logo := "" }}
+                            {{ range .Site.Data.webstack }}
+                              {{ if .links }}
+                                {{ range .links }}
+                                  {{ if eq .url $sitePath }}{{ $logo = .logo }}{{ end }}
+                                {{ end }}
+                              {{ else if .list }}
+                                {{ range .list }}
+                                  {{ range .links }}
+                                    {{ if eq .url $sitePath }}{{ $logo = .logo }}{{ end }}
+                                  {{ end }}
+                                {{ end }}
+                              {{ end }}
+                            {{ end }}
+                            <button class="action-btn bookmark-btn" data-site-id="{{ $siteId }}" data-title="{{ trim (index (split .Title "|") 0) " " }}" data-url="{{ $officialUrl }}" data-description="{{ .Description }}" data-logo="{{ $logo }}">
+                                <i class="far fa-bookmark"></i> 收藏
+                            </button>
                         </div>
                         {{ end }}
                     </div>
 
                     <div class="content-body">
                         {{ .Content }}
+                    </div>
+
+                    {{ $siteId := path.Base (path.Dir .File.Path) }}
+                    <div id="comment-section" class="comment-section" data-site-id="{{ $siteId }}">
+                        <h4><i class="far fa-comment-dots mr-2"></i>评论区</h4>
+                        <form class="comment-form mb-4">
+                            <div class="form-group">
+                                <textarea class="form-control" placeholder="写下你的评论..." rows="2" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sm">发表评论</button>
+                        </form>
+                        <div class="comment-list"></div>
                     </div>
 
                     {{ partial "related.html" . }}

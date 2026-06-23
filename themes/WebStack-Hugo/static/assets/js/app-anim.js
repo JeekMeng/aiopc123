@@ -56,7 +56,7 @@
         });
     });
     $(document).on('click', "a[target!='_blank']", function() {
-        if( theme.loading=='1' && $(this).attr('href') && $(this).attr('href').indexOf("#") != 0 && $(this).attr('href').indexOf("java") != 0 && !$(this).data('fancybox')  && !$(this).data('commentid') && !$(this).hasClass('nofx') ){
+        if( theme.loading=='1' && $(this).attr('href') && $(this).attr('href').indexOf("#") === -1 && $(this).attr('href').indexOf("java") != 0 && !$(this).data('fancybox')  && !$(this).data('commentid') && !$(this).hasClass('nofx') ){
             var load = $('<div id="load-loading"></div>');
             $("body").prepend(load);
             load.animate({opacity:'1'},200,'swing').delay(2000).hide(300,function(){ load.remove() });
@@ -341,20 +341,14 @@
         }
     }
     // sidebar-menu-inner收缩展开
-    $('.sidebar-menu-inner a').on('click',function(){//.sidebar-menu-inner a //.has-sub a  
-
-        //console.log('--->>>'+$(this).find('span').text());
-        if (!$('.sidebar-nav').hasClass('mini-sidebar')) {//菜单栏没有最小化   
-            $(this).parent("li").siblings("li.sidebar-item").children('ul').slideUp(200);
-            if ($(this).next().css('display') == "none") { //展开
-                //展开未展开
-                // $('.sidebar-item').children('ul').slideUp(300);
-                $(this).next('ul').slideDown(200);
+    $('.sidebar-menu-inner a').on('click',function(){
+        if (!$('.sidebar-nav').hasClass('mini-sidebar')) {
+            $(this).parent("li").siblings("li.sidebar-item").children('ul').hide();
+            if ($(this).next().css('display') == "none") {
+                $(this).next('ul').show();
                 $(this).parent('li').addClass('sidebar-show').siblings('li').removeClass('sidebar-show');
-            }else{ //收缩
-                //收缩已展开
-                $(this).next('ul').slideUp(200);
-                //$('.sidebar-item.sidebar-show').removeClass('sidebar-show');
+            }else{
+                $(this).next('ul').hide();
                 $(this).parent('li').removeClass('sidebar-show');
             }
         }
