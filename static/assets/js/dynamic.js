@@ -7,7 +7,6 @@
 
   var currentUser = null;
   var modalEl = null;
-  var profileTemplate = null;
 
   function api(path, options) {
     options = options || {};
@@ -129,6 +128,8 @@
         currentUser = data.user;
         updateUI();
         $(modalEl).modal('hide');
+        initBookmarkButtons();
+        initComments();
         if (document.getElementById('profile-page')) {
           initProfilePage();
         } else {
@@ -153,6 +154,8 @@
         currentUser = data.user;
         updateUI();
         $(modalEl).modal('hide');
+        initBookmarkButtons();
+        initComments();
         if (document.getElementById('profile-page')) {
           initProfilePage();
         } else {
@@ -528,16 +531,27 @@
     var container = document.getElementById('profile-page');
     if (!container) return;
 
-    if (profileTemplate === null) {
-      profileTemplate = container.innerHTML;
+    if (!container._profileReady) {
+      container._profileReady = true;
+      var hint = document.createElement('div');
+      hint.className = 'profile-login-hint';
+      hint.style.display = 'none';
+      hint.innerHTML = '<p>请先登录</p><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#authModal">去登录</a>';
+      container.insertBefore(hint, container.firstChild);
+      container._profileReq = 0;
     }
 
+    var hint = container.querySelector('.profile-login-hint');
+    var sections = container.querySelectorAll('.profile-header, .profile-section');
+
     if (!currentUser) {
-      container.innerHTML = '<div class="profile-login-hint"><p>请先登录</p><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#authModal">去登录</a></div>';
+      hint.style.display = '';
+      sections.forEach(function (el) { el.style.display = 'none'; });
       return;
     }
 
-    container.innerHTML = profileTemplate;
+    hint.style.display = 'none';
+    sections.forEach(function (el) { el.style.display = ''; });
 
     var nicknameEl = document.getElementById('profile-nickname');
     var emailEl = document.getElementById('profile-email');
@@ -548,8 +562,11 @@
     var commentList = container.querySelector('.my-comments-list');
     if (!bookmarkList) return;
 
+    var reqId = ++container._profileReq;
+
     bookmarkList.innerHTML = '<div class="text-muted text-center py-3">加载中...</div>';
     api('/bookmarks').then(function (data) {
+      if (reqId !== container._profileReq) return;
       if (data.bookmarks.length === 0) {
         bookmarkList.innerHTML = '<div class="text-muted text-center py-3">还没有收藏任何网站</div>';
       } else {
@@ -584,12 +601,14 @@
         });
       }
     }).catch(function () {
+      if (reqId !== container._profileReq) return;
       bookmarkList.innerHTML = '<div class="text-danger text-center py-3">加载失败</div>';
     });
 
     if (!commentList) return;
     commentList.innerHTML = '<div class="text-muted text-center py-3">加载中...</div>';
     api('/comments?mine=1').then(function (data) {
+      if (reqId !== container._profileReq) return;
       if (data.comments.length === 0) {
         commentList.innerHTML = '<div class="text-muted text-center py-3">还没有发表任何评论</div>';
       } else {
@@ -620,6 +639,7 @@
         });
       }
     }).catch(function () {
+      if (reqId !== container._profileReq) return;
       commentList.innerHTML = '<div class="text-danger text-center py-3">加载失败</div>';
     });
     initChangePwdForm();
@@ -628,6 +648,8 @@
   function initChangePwdForm() {
     var form = document.getElementById('changePwdForm');
     if (!form) return;
+    if (form._pwdBound) return;
+    form._pwdBound = true;
     var errEl = form.querySelector('.change-pwd-error');
     var okEl = form.querySelector('.change-pwd-success');
     form.addEventListener('submit', function (e) {
