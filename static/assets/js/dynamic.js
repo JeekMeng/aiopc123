@@ -7,6 +7,16 @@
 
   var currentUser = null;
   var modalEl = null;
+  var AUTH_KEY = 'auth_user';
+
+  function saveAuth(user) {
+    try { localStorage.setItem(AUTH_KEY, JSON.stringify(user)); } catch (e) {} }
+
+  function clearAuth() {
+    try { localStorage.removeItem(AUTH_KEY); } catch (e) {} }
+
+  function loadAuth() {
+    try { var d = localStorage.getItem(AUTH_KEY); return d ? JSON.parse(d) : null; } catch (e) { return null; } }
 
   function api(path, options) {
     options = options || {};
@@ -126,6 +136,7 @@
     api('/auth/login', { method: 'POST', body: { email: email, password: password } })
       .then(function (data) {
         currentUser = data.user;
+        saveAuth(data.user);
         updateUI();
         $(modalEl).modal('hide');
         initBookmarkButtons();
@@ -152,6 +163,7 @@
     api('/auth/register', { method: 'POST', body: { email: email, password: password, nickname: nickname } })
       .then(function (data) {
         currentUser = data.user;
+        saveAuth(data.user);
         updateUI();
         $(modalEl).modal('hide');
         initBookmarkButtons();
@@ -174,6 +186,7 @@
   function logoutUser() {
     api('/auth/logout', { method: 'POST' }).then(function () {
       currentUser = null;
+      clearAuth();
       updateUI();
       initProfilePage();
       initAdmin();
@@ -220,11 +233,21 @@
   function initAuth() {
     if (!document.getElementById('user-menu')) return;
     createModal();
+
+    var cached = loadAuth();
+
     api('/auth/me').then(function (data) {
       if (data.user) {
         currentUser = data.user;
+        saveAuth(data.user);
+      } else {
+        currentUser = null;
+        clearAuth();
       }
     }).catch(function () {
+      if (cached) {
+        currentUser = cached;
+      }
     }).finally(function () {
       updateUI();
       initBookmarkButtons();
@@ -233,6 +256,18 @@
       initAdmin();
       initCustomNav();
     });
+
+    if (!window._authStorageBound) {
+      window._authStorageBound = true;
+      window.addEventListener('storage', function (e) {
+        if (e.key !== AUTH_KEY) return;
+        currentUser = e.newValue ? JSON.parse(e.newValue) : null;
+        updateUI();
+        initProfilePage();
+        initAdmin();
+        initCustomNav();
+      });
+    }
   }
 
   function refreshCustomNavCache() {
