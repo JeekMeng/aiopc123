@@ -141,6 +141,7 @@
         $(modalEl).modal('hide');
         initBookmarkButtons();
         initComments();
+        refreshCustomNavCache();
         if (document.getElementById('profile-page')) {
           initProfilePage();
         } else {
@@ -168,6 +169,7 @@
         $(modalEl).modal('hide');
         initBookmarkButtons();
         initComments();
+        refreshCustomNavCache();
         if (document.getElementById('profile-page')) {
           initProfilePage();
         } else {
