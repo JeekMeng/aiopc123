@@ -238,8 +238,14 @@
 
     api('/auth/me').then(function (data) {
       if (data.user) {
-        currentUser = data.user;
-        saveAuth(data.user);
+        if (cached && data.user.id !== cached.id) {
+          currentUser = cached;
+        } else {
+          currentUser = data.user;
+          saveAuth(data.user);
+        }
+      } else if (cached) {
+        currentUser = cached;
       } else {
         currentUser = null;
         clearAuth();
