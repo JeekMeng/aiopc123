@@ -465,10 +465,12 @@
     document.querySelectorAll('.bookmark-btn').forEach(function (btn) {
       btn.addEventListener('click', function (e) {
         e.preventDefault();
+        if (btn.getAttribute('data-busy') === 'true') return;
         if (!currentUser) {
           $(modalEl).modal('show');
           return;
         }
+        btn.setAttribute('data-busy', 'true');
         var siteId = btn.getAttribute('data-site-id');
         var title = btn.getAttribute('data-title');
         var url = btn.getAttribute('data-url');
@@ -483,6 +485,8 @@
             refreshCustomNavCache();
           }).catch(function (err) {
             alert(err.message);
+          }).finally(function () {
+            btn.removeAttribute('data-busy');
           });
         } else {
           api('/bookmarks', {
@@ -495,6 +499,8 @@
             refreshCustomNavCache();
           }).catch(function (err) {
             alert(err.message);
+          }).finally(function () {
+            btn.removeAttribute('data-busy');
           });
         }
       });

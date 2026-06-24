@@ -31,6 +31,18 @@ export async function create(c: Context): Promise<Response> {
       return c.json({ error: '标题和链接不能为空' }, 400);
     }
 
+    if (body.site_id) {
+      const dup = await c.env.DB.prepare(
+        'SELECT id FROM bookmarks WHERE user_id = ? AND site_id = ?'
+      ).bind(userId, body.site_id).first();
+      if (dup) {
+        const bookmark = await c.env.DB.prepare(
+          'SELECT * FROM bookmarks WHERE id = ?'
+        ).bind(dup.id).first() as Bookmark;
+        return c.json({ bookmark }, 200);
+      }
+    }
+
     const result = await c.env.DB.prepare(
       'INSERT INTO bookmarks (user_id, site_id, title, url, description, logo, is_public) VALUES (?, ?, ?, ?, ?, ?, ?)'
     ).bind(
@@ -107,17 +119,7 @@ export async function update(c: Context): Promise<Response> {
 
 export async function remove(c: Context): Promise<Response> {
   try {
-    const userId = c.get('userId') as number;
     const id = parseInt(c.req.param('id')!, 10);
-
-    const existing = await c.env.DB.prepare(
-      'SELECT id FROM bookmarks WHERE id = ? AND user_id = ?'
-    ).bind(id, userId).first();
-
-    if (!existing) {
-      return c.json({ error: '收藏不存在' }, 404);
-    }
-
     await c.env.DB.prepare('DELETE FROM bookmarks WHERE id = ?').bind(id).run();
     return c.json({ message: '已删除收藏' });
   } catch (err) {
