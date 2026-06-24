@@ -21,6 +21,10 @@
   function api(path, options) {
     options = options || {};
     options.credentials = 'include';
+    if (currentUser) {
+      options.headers = options.headers || {};
+      options.headers['X-Auth-User-Id'] = currentUser.id;
+    }
     if (options.body && typeof options.body === 'object') {
       options.body = JSON.stringify(options.body);
       options.headers = options.headers || {};
@@ -638,6 +642,9 @@
             if (confirm('确定删除此收藏？')) {
               api('/bookmarks/' + id, { method: 'DELETE' }).then(function () {
                 btn.closest('.bookmark-item').remove();
+                refreshCustomNavCache();
+              }).catch(function (err) {
+                alert(err.message);
               });
             }
           });

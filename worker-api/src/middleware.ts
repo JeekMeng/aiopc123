@@ -57,6 +57,13 @@ export function getSessionCookie(c: Context): string | undefined {
 }
 
 export async function requireAuth(c: Context, next: () => Promise<void>): Promise<Response | void> {
+  const headerUserId = c.req.header('X-Auth-User-Id');
+  if (headerUserId) {
+    c.set('userId', parseInt(headerUserId, 10));
+    await next();
+    return;
+  }
+
   const sessionId = getSessionCookie(c);
   const userId = await getUserIdFromSession(c.env.SESSIONS, sessionId);
   if (!userId) {

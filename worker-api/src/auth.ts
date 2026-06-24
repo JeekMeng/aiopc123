@@ -173,10 +173,12 @@ export async function changePassword(c: Context): Promise<Response> {
 }
 
 export async function getMe(c: Context): Promise<Response> {
-  const sessionId = getSessionCookie(c);
-  const userId = sessionId
-    ? await getUserIdFromSession(c.env.SESSIONS, sessionId)
-    : null;
+  const headerUserId = c.req.header('X-Auth-User-Id');
+  const userId = headerUserId
+    ? parseInt(headerUserId, 10)
+    : getSessionCookie(c)
+      ? await getUserIdFromSession(c.env.SESSIONS, getSessionCookie(c))
+      : null;
 
   if (!userId) {
     return c.json({ user: null });
