@@ -1,0 +1,27 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "aiopc-worker",
+	"main": "src/index.ts",
+	"compatibility_date": "2026-06-20",
+	"observability": {
+		"enabled": true
+	},
+	"upload_source_maps": true,
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "aiopc-db",
+			"database_id": "9270c40c-b7cd-44d0-b337-d4821accdf87"
+		}
+	],
+	"kv_namespaces": [
+		{
+			"binding": "SESSIONS",
+			"id": "0e8e759c336443d68f81357e263a8d3c",
+			"remote": true
+		}
+	]
+}

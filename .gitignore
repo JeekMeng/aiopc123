@@ -1,3 +1,9 @@
 /public
 .hugo_build.lock
 logs/
+
+.wrangler/
+
+# Worker API
+worker-api/node_modules/
+worker-api/.wrangler/
