@@ -90,7 +90,7 @@
     <!-- 51.LA 网站统计 -->
     {{ with .Site.Params.seo.tj51laid }}
     <script charset="UTF-8" id="LA_COLLECT" src="{{ absURL "assets/js/51la-sdk-pro.min.js" }}"></script>
-    <script>LA.init({id:"{{ $.Site.Params.seo.tj51laid }}",ck:"{{ $.Site.Params.seo.tj51lack }}",autoTrack:true,hashMode:true})</script>    
+    <script>LA.init({id:"{{ $.Site.Params.seo.tj51laid }}",ck:"{{ $.Site.Params.seo.tj51lack }}",autoTrack:true,hashMode:true,prefix:"//sdk.51.la"})</script>    
     {{ end }} 
     <!-- end 51.LA 网站统计 -->
 
