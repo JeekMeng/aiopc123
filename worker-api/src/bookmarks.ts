@@ -120,7 +120,9 @@ export async function update(c: Context): Promise<Response> {
 export async function remove(c: Context): Promise<Response> {
   try {
     const id = parseInt(c.req.param('id')!, 10);
-    await c.env.DB.prepare('DELETE FROM bookmarks WHERE id = ?').bind(id).run();
+    if (isNaN(id)) return c.json({ error: '无效的收藏ID' }, 400);
+    const info = await c.env.DB.prepare('DELETE FROM bookmarks WHERE id = ?').bind(id).run();
+    if (info.meta.changes === 0) return c.json({ error: '收藏不存在' }, 404);
     return c.json({ message: '已删除收藏' });
   } catch (err) {
     console.error('delete bookmark error:', err);

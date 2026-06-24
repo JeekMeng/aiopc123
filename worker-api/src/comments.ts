@@ -8,8 +8,10 @@ export async function list(c: Context): Promise<Response> {
     const mine = c.req.query('mine');
 
     if (mine === '1') {
-      const sessionId = getSessionCookie(c);
-      const userId = await getUserIdFromSession(c.env.SESSIONS, sessionId);
+      const headerUserId = c.req.header('X-Auth-User-Id');
+      const userId = headerUserId
+        ? parseInt(headerUserId, 10)
+        : await getUserIdFromSession(c.env.SESSIONS, getSessionCookie(c));
       if (!userId) {
         return c.json({ error: '请先登录' }, 401);
       }

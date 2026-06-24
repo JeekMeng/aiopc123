@@ -135,10 +135,10 @@ export async function logout(c: Context): Promise<Response> {
 
 export async function changePassword(c: Context): Promise<Response> {
   try {
-    const sessionId = getSessionCookie(c);
-    const userId = sessionId
-      ? await getUserIdFromSession(c.env.SESSIONS, sessionId)
-      : null;
+    const headerUserId = c.req.header('X-Auth-User-Id');
+    const userId = headerUserId
+      ? parseInt(headerUserId, 10)
+      : await getUserIdFromSession(c.env.SESSIONS, getSessionCookie(c));
     if (!userId) return c.json({ error: '请先登录' }, 401);
 
     const body = await c.req.json() as { currentPassword: string; newPassword: string };
