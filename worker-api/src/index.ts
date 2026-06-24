@@ -13,6 +13,7 @@ const app = new Hono<{ Bindings: Env; Variables: { userId: number } }>();
 app.use('/api/*', cors({
   origin: ['https://www.aiopc123.com', 'https://aiopc123.pages.dev', 'http://localhost:1313', 'http://localhost:8787'],
   credentials: true,
+  allowHeaders: ['Content-Type', 'X-Auth-User-Id'],
 }));
 
 app.get('/api/health', (c) => c.json({ status: 'ok' }));

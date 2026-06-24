@@ -481,6 +481,8 @@
             btn.setAttribute('data-bookmark-id', '');
             btn.innerHTML = '<i class="far fa-bookmark mr-1"></i>收藏';
             refreshCustomNavCache();
+          }).catch(function (err) {
+            alert(err.message);
           });
         } else {
           api('/bookmarks', {
@@ -491,6 +493,8 @@
             btn.setAttribute('data-bookmark-id', data.bookmark.id);
             btn.innerHTML = '<i class="fas fa-bookmark mr-1"></i>已收藏';
             refreshCustomNavCache();
+          }).catch(function (err) {
+            alert(err.message);
           });
         }
       });
