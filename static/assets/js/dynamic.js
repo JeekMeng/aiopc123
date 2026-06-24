@@ -7,6 +7,7 @@
 
   var currentUser = null;
   var modalEl = null;
+  var profileTemplate = null;
 
   function api(path, options) {
     options = options || {};
@@ -526,10 +527,18 @@
   function initProfilePage() {
     var container = document.getElementById('profile-page');
     if (!container) return;
+
+    if (profileTemplate === null) {
+      profileTemplate = container.innerHTML;
+    }
+
     if (!currentUser) {
       container.innerHTML = '<div class="profile-login-hint"><p>请先登录</p><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#authModal">去登录</a></div>';
       return;
     }
+
+    container.innerHTML = profileTemplate;
+
     var nicknameEl = document.getElementById('profile-nickname');
     var emailEl = document.getElementById('profile-email');
     if (nicknameEl) nicknameEl.textContent = currentUser.nickname;
@@ -539,6 +548,7 @@
     var commentList = container.querySelector('.my-comments-list');
     if (!bookmarkList) return;
 
+    bookmarkList.innerHTML = '<div class="text-muted text-center py-3">加载中...</div>';
     api('/bookmarks').then(function (data) {
       if (data.bookmarks.length === 0) {
         bookmarkList.innerHTML = '<div class="text-muted text-center py-3">还没有收藏任何网站</div>';
@@ -573,9 +583,12 @@
           });
         });
       }
+    }).catch(function () {
+      bookmarkList.innerHTML = '<div class="text-danger text-center py-3">加载失败</div>';
     });
 
     if (!commentList) return;
+    commentList.innerHTML = '<div class="text-muted text-center py-3">加载中...</div>';
     api('/comments?mine=1').then(function (data) {
       if (data.comments.length === 0) {
         commentList.innerHTML = '<div class="text-muted text-center py-3">还没有发表任何评论</div>';
@@ -606,6 +619,8 @@
           });
         });
       }
+    }).catch(function () {
+      commentList.innerHTML = '<div class="text-danger text-center py-3">加载失败</div>';
     });
     initChangePwdForm();
   }

@@ -197,6 +197,25 @@ hugo
 
 ---
 
+## 调试指南
+
+### 问题定位优先级
+1. 先 `grep` 搜索关键词定位相关代码（不要从头线性读文件）
+2. 先分析前端 JS 逻辑（`static/assets/js/dynamic.js`）再分析后端
+3. 不要读类型定义文件（`.d.ts`）、配置文件（`wrangler.jsonc`）、测试文件，除非问题明确相关
+
+### 已知模式
+- `window.location.href = X` 在 X 就是当前页面时会导致无意义重载 → 优先考虑就地更新而非跳转
+- 登录/注册流程入口在 `dynamic.js` 的 `loginUser` / `registerUser` 函数
+- API 路径：`/api/auth/login`、`/api/auth/register`、`/api/auth/me`
+
+### 效率原则
+- 每次分析前先问自己：这个问题最少需要读哪些文件就能定位？
+- 优先用 grep 缩小范围，不要线性读完整文件
+- 不要推理基础设施问题（Cookie/KV/跨域），除非确认代码逻辑没问题
+
+---
+
 ## 注意事项
 
 ### 开发约定
