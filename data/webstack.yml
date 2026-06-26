@@ -68,6 +68,10 @@
       logo: 200310.webp
       url: /site/200310/
       description: AI赋能，轻松创作精美PPT
+    - title: MoliliClaw - AI智能体 - 一键安装
+      logo: default.webp
+      url: /site/200440/
+      description: 一键安装，24小时全能AI机器人随身带
     - title: 第五AI提示词-AI提示词-智能优化
       logo: 200427.webp
       url: /site/200427/
@@ -136,10 +140,18 @@
           logo: 200355.webp
           url: /site/200355/
           description: 用Dify，让AI从创意走向价值。
+        - title: LongCat AI - AI智能体 - 长猫AI
+          logo: 200439.webp
+          url: /site/200439/
+          description: 长猫AI，让聊天更聪明
         - title: 腾讯元器-AI智能体-零代码开发平台
           logo: 200352.webp
           url: /site/200352/
           description: 零代码打造专属AI，微信直达智能体
+        - title: Atypica - AI智能体 - AI洞察人心
+          logo: 200437.webp
+          url: /site/200437/
+          description: AI洞察人心，商业决策更精准
         - title: FastGPT-AI智能体-工作流引擎
           logo: 200341.webp
           url: /site/200341/
@@ -172,6 +184,10 @@
           logo: 200348.webp
           url: /site/200348/
           description: 让AI成为你的专属数字同事。
+        - title: 攻壳智能体 - AI智能体 - 发现AI利器
+          logo: default.webp
+          url: /site/200436/
+          description: 发现AI利器，开启智能生活新篇章
         - title: 金灵AI-AI智能体-金融投研助手
           logo: 200362.webp
           url: /site/200362/
@@ -188,6 +204,10 @@
           logo: 200383.webp
           url: /site/200383/
           description: 澜码科技，填补大模型中间层空白。
+        - title: MoliliClaw - AI智能体 - 一键安装
+          logo: default.webp
+          url: /site/200440/
+          description: 一键安装，24小时全能AI机器人随身带
         - title: 01Agent-AI智能体-图文创作神器
           logo: 200344.webp
           url: /site/200344/

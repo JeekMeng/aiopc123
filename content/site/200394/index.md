@@ -1,5 +1,5 @@
 ---
-title: "小米MIMO-AI词元Token-小米MiMo大模型"
+title: "https://platform.xiaomimimo.com/-AI词元Token-小米MiMo大模型"           
 date: 2026-05-15
 draft: false
 schema_type: "SoftwareApplication"
