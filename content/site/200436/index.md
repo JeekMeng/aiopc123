@@ -8,7 +8,7 @@ mobile_url: https://gongke.net
 company: 攻壳智能体
 category: [OPC-AI赋能, AI智能体]
 score: 9.6
-description: 攻壳智能体（gongke.net）是一个专注于智能体和AI工具的专业导航网站，致力于为用户精选和推荐最新、热门的AI工具与智能体资源。平台覆盖学习、工作、生活多场景，帮助用户快速找到适合自身需求的AI利器，提升效率与体验。访问攻壳智能体官网，探索智能体大全与AI工具导航，发现高效解决方案。
+description: "攻壳智能体是专业的智能体与AI工具导航网站，提供最新、热门的AI工具推荐，帮助用户快速找到适合学习、工作和生活的AI利器。"
 tags: [攻壳智能体, 攻壳智能体官网, gongke.net, 智能体, AI工具, AI导航, AI工具导航, AI工具推荐]
 keywords: [攻壳智能体, 攻壳智能体官网, gongke.net, 智能体, AI工具, AI导航, AI工具导航, AI工具推荐, 智能体导航, 智能体大全]
 ---

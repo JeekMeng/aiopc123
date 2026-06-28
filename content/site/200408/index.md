@@ -13,7 +13,7 @@ score: 9.5
 
 # SEO优化
 keywords: ["AI一人公司导航", "AutoClaw", "OpenClaw一键安装", "AI助手", "浏览器自动化"]
-description: "AutoClaw（澳龙） 是一个AI龙虾助手类别的网址，主要功能包括支持OpenClaw一键安装与浏览器自动化。"
+description: "AutoClaw（澳龙）是支持OpenClaw一键安装的AI助手，兼容Windows与macOS，具备飞书集成、模型热插拔、50+技能及AutoGLM浏览器自动"
 
 # 标签
 tags: ["AI工具", "自动化", "浏览器插件"]

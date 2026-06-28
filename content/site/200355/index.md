@@ -13,7 +13,7 @@ score: 9.5
 
 # SEO优化
 keywords: ["AI一人公司导航", "AI开发平台", "AI智能体", "AI应用构建", "工作流自动化"]
-description: "Dify 是一个AI智能体类别的网址，主要功能包括构建和部署AI智能体应用。"
+description: "Dify AI智能体开发平台，提供从构思到部署的完整AI应用基础设施，助力团队打造高价值Agentic AI解决方案，实现高效开发与监控。"
 
 # 标签
 tags: ["AI开发", "智能体", "低代码"]

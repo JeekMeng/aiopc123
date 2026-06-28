@@ -13,7 +13,7 @@ score: 9.2
 
 # SEO优化
 keywords: ["AI一人公司导航", "RAG知识库", "工作流编排", "私有化部署", "LLM应用"]
-description: "FastGPT 是一个AI智能体类别的网址，主要功能包括基于LLM的可视化工作流编排与RAG知识库引擎。"
+description: "FastGPT提供基于LLM的可视化工作流编排与高性能RAG知识库引擎，支持私有化部署，打破数据孤岛，让AI深度融入企业核心业务流，助力智能体开发。"
 
 # 标签
 tags: ["AI工作流", "RAG知识库", "私有化部署"]

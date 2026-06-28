@@ -13,7 +13,7 @@ score: 9.3
 
 # SEO优化
 keywords: ["AI一人公司导航", "复合AI平台", "大语言模型智能体", "生成式AI", "知识本体语义层"]
-description: "Tyrion.ai CAIP 是一个AI智能体类别的网址，主要功能包括融合生成式AI与知识语义的智能自动化平台。"
+description: "泰然复合AI平台Tyrion.ai融合生成式AI与大语言模型智能体，为企业提供跨业务智能自动化与决策支持，实现AI中枢统一管理。"
 
 # 标签
 tags: ["AI智能体", "企业AI中枢", "强化学习"]

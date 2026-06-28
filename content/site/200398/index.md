@@ -13,7 +13,7 @@ score: 9.6
 
 # SEO优化
 keywords: ["AI一人公司导航", "大模型API", "AI云服务", "模型推理", "AGI平台"]
-description: "硅基流动 SiliconFlow 是一个AI词元Token类别的网址，主要功能包括提供低成本大模型API服务."
+description: "硅基流动 SiliconFlow 提供高效能、低成本的AI大模型API服务，助力开发者和企业快速集成AI能力，聚焦产品创新与AGI落地。"
 
 # 标签
 tags: ["大模型API", "AI云平台", "模型推理"]

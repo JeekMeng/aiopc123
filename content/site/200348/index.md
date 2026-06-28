@@ -13,7 +13,7 @@ score: 9.1
 
 # SEO优化
 keywords: ["AI一人公司导航", "AI Agent平台", "数字员工", "AI工作流", "多Agent协作"]
-description: "超级麦吉 是一个AI智能体类别的网址，主要功能包括企业级开源AI Agent平台，让每个人调动专属AI数字员工完成真实任务。"
+description: "超级麦吉是企业级开源AI Agent平台，帮助企业创建专属数字员工，实现多Agent协作与AI自动化办公，提升真实任务处理效率。"
 
 # 标签
 tags: ["AI智能体", "企业AI", "数字员工", "开源平台"]

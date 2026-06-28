@@ -13,7 +13,7 @@ score: 9.4
 
 # SEO优化
 keywords: ["AI一人公司导航", "AI生成PPT", "智能演示文稿", "PPT模板", "AI办公"]
-description: "AiPPT 是一个AI办公工具类别的网址，主要功能包括通过AI快速生成和美化演示文稿。"
+description: "使用AiPPT智能PPT生成工具，快速创建专业演示文稿。AI自动生成内容与设计，提升办公效率，适用于商务汇报与教学展示。"
 
 # 标签
 tags: ["AI办公", "PPT制作", "效率工具"]

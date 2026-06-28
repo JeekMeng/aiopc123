@@ -10,7 +10,7 @@ category:
 - OPC-AI赋能
 - AI办公工具
 score: 9.4
-description: AI写文神器，灵感无限！
+description: "蛙蛙写作是一款AI办公工具，专注辅助写文，提供创意灵感、拆书、小说转剧本及视频生成等功能，是功能全面的AI智能写作助手。"
 tags:
 - AI写文、AI智能写作、deepseek、写网文、AI写作、写作辅助工具、视频生成工具、智能写作助手
 keywords:

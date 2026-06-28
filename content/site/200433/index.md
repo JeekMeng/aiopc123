@@ -13,7 +13,7 @@ score: 9.5
 
 # SEO优化
 keywords: ["AI一人公司导航", "AI提示词生成器", "提示词优化工具", "ChatGPT提示词", "Claude提示词"]
-description: "AI提示词生成器 是一个AI提示词类别的网址，主要功能包括快速生成优化提示词。"
+description: "免费AI提示词生成器，支持ChatGPT、Claude、Gemini等模型，运用先进提示词工程技术快速生成优化提示词，提升AI回答效果，助力高效人机交互。"
 
 # 标签
 tags: ["AI提示词生成器", "提示词工程", "AI工具"]

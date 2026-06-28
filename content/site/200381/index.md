@@ -13,7 +13,7 @@ score: 9.2
 
 # SEO优化
 keywords: ["AI一人公司导航", "Serverless事件流", "事件驱动平台", "云服务连接", "智能体编排"]
-description: "Vanus 是一个AI智能体类别的网址，主要功能包括连接SaaS与云服务的事件流平台。"
+description: "Vanus是一个Serverless事件流平台，连接SaaS、云服务和数据库，助力构建新一代事件驱动应用。支持智能体处理，实现高效事件流管理。"
 
 # 标签
 tags: ["Serverless", "事件驱动", "云服务"]

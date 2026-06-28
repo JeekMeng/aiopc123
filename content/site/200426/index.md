@@ -13,7 +13,7 @@ score: 9.4
 
 # SEO优化
 keywords: ["AI一人公司导航", "AI提示词", "提示词市场", "Prompt共享", "AI社区"]
-description: "Snack Prompt — The AI Prompt Marketplace 是一个AI提示词类别的网址，主要功能包括发现、分享和混编AI提示词。"
+description: "Snack Prompt是一个AI提示词市场，提供发现、分享和混编AI提示词、图像及自动化功能，是提示工程师与AI构建者的家园。"
 
 # 标签
 tags: ["AI提示词", "提示词市场", "AI社区"]

@@ -14,7 +14,7 @@ score: 9.4
 
 # SEO优化
 keywords: ["AI一人公司导航", "免费网页模板", "HTML模板下载", "响应式网站模板", "Bootstrap模板"]
-description: " TemplateMo 是一个OPC产品上线类别的网址，主要功能包括提供大量免费、高质量的HTML网站模板。"
+description: "TemplateMo提供600+免费HTML CSS网页模板，支持AI定制纯CSS设计和响应式Bootstrap布局，无需注册即可免费商业使用。"
 
 # 标签
 tags: ["网页设计", "前端开发", "模板资源"]

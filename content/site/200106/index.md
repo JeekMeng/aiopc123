@@ -14,7 +14,7 @@ score: 9.3
 
 # SEO优化
 keywords: ["AI一人公司导航", "免费HTML模板", "网页设计", "响应式模板", "个人项目"]
-description: " HTMLTemplates 是一个OPC产品上线类别的网址，主要功能包括提供免费、响应式的HTML网站模板。"
+description: "访问HTMLTemplates，免费下载高质量HTML网站模板，无需注册。精选最佳在线模板库，助力快速建站，OPC产品现已上线，打造专业网页设计。"
 
 # 标签
 tags: ["免费资源", "前端开发", "网页模板"]

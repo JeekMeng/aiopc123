@@ -13,7 +13,7 @@ score: 9.7
 
 # SEO优化
 keywords: ["AI一人公司导航", "Kimi Claw", "OpenClaw 部署", "长期记忆AI", "AI定时任务"]
-description: "Kimi Claw 是一个AI龙虾助手类别的网址，主要功能包括部署全天候AI Agent。"
+description: "通过Kimi快速部署OpenClaw，构建具备长期记忆与定时任务的7x24小时AI助手。支持多Agent与人类群组协同，实现高效个性化工作流。"
 
 # 标签
 tags: ["AI助手", "智能部署", "群组协作"]

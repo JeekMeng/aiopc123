@@ -13,7 +13,7 @@ score: 9.0
 
 # SEO优化
 keywords: ["AI一人公司导航", "AI提示词市场", "ChatGPT提示词", "Midjourney提示词", "Stable Diffusion提示词"]
-description: "全球最大AI提示词交易市场，提供27万+高质量提示词。"
+description: "全球领先AI提示词市场，提供27万+优质提示词，覆盖ChatGPT、Midjourney等主流模型，助您快速生成优质AI内容。"
 
 # 标签
 tags: ["AI提示词", "提示词市场", "AI创作工具", "DALL-E提示词", "Flux提示词"]

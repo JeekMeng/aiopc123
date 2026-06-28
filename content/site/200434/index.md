@@ -13,7 +13,7 @@ score: 9.0
 
 # SEO优化
 keywords: ["AI一人公司导航", "提示词编辑", "提示词优化", "AI输出转Word", "知识卡片"]
-description: "PromptEditor 是一个AI提示词类别的网址，主要功能包括编辑优化提示词及处理AI输出内容。"
+description: "PromptEditor是专业的AI提示词编写与优化工具，支持编辑调试管理提示词，提升AI输出质量，并可转换输出内容为Word或知识卡片，让AI使用更高效。"
 
 # 标签
 tags: ["AI提示词", "效率工具", "内容处理"]

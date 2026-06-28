@@ -13,7 +13,7 @@ score: 9.3
 
 # SEO优化
 keywords: ["AI一人公司导航", "AI生成PPT", "PPT模板", "免费PPT", "办公工具"]
-description: "笔格PPT 是一个AI办公工具类别的网址，主要功能包括AI一键生成PPT与海量模板下载。"
+description: "笔格PPT是AI智能PPT生成工具，支持一键生成大纲、导入文档快速制作PPT，免费提供党政、教育、商务等行业模板，让工作总结、毕业答辩更高效。"
 
 # 标签
 tags: ["AI办公", "PPT制作", "效率工具"]

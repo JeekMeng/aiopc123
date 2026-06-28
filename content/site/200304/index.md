@@ -13,7 +13,7 @@ score: 9.2
 
 # SEO优化
 keywords: ["AI一人公司导航", "AI编程", "AI代码生成", "云端IDE", "智能开发"]
-description: "TRAE 是一个AI编程工具类别的网址，主要功能包括AI驱动的一键代码生成与实时预览。"
+description: "TRAE是国内首款AI原生IDE，集成Doubao与DeepSeek模型，支持中文生成代码、实时预览与智能修复BUG，实现需求到代码自动化开发。"
 
 # 标签
 tags: ["AI编程", "云端开发", "代码生成"]

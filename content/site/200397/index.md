@@ -13,7 +13,7 @@ score: 9.3
 
 # SEO优化
 keywords: ["AI一人公司导航", "vivo蓝心大模型", "BlueLM", "AI开发平台", "大模型API"]
-description: "https://developers.vivo.com/product/ai/bluelm 是一个AI词元Token类别的网址，主要功能包括提供vivo蓝心大模型的开放能力，支持API接入。"
+description: "vivo蓝心大模型是vivo开放平台的核心AI能力，为开发者提供智能终端开放能力与详细文档，助力App Services、IoT等领域创新应用开发。"
 
 # 标签
 tags: ["vivo", "大模型", "AI开发"]

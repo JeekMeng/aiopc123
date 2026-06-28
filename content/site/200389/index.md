@@ -13,7 +13,7 @@ score: 9.0
 
 # SEO优化
 keywords: ["AI一人公司导航", "Kimi K2.5", "Moonshot AI", "多模态模型", "Tool Calling"]
-description: "创建对话补全 是一个AI词元Token类别的网址，主要功能包括调用AI模型生成聊天回复。"
+description: "Moonshot AI平台提供对话补全API，支持Kimi K2.5大模型，具备多模态理解、长上下文、Tool Calling和代码生成功能，助力智能对话与AI"
 
 # 标签
 tags: ["AI API", "对话补全", "多模态"]

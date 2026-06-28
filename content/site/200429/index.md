@@ -13,7 +13,7 @@ score: 9.4
 
 # SEO优化
 keywords: ["AI一人公司导航", "提示词模板", "提示词工程", "ChatGPT提示词", "提示词管理"]
-description: "AI 提示词模板与最佳实践 是一个AI提示词类别的网址，主要功能包括提供分类提示词模板与最佳实践。"
+description: "Prompted 提示词库提供高质量AI提示词模板与最佳实践，支持ChatGPT、Claude等大模型的分类检索与管理，助力高效完成任务。"
 
 # 标签
 tags: ["提示词", "提示词工程", "AI工具"]

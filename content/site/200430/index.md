@@ -13,7 +13,7 @@ score: 9.4
 
 # SEO优化
 keywords: ["AI一人公司导航", "AI提示词", "AI工具合集", "Prompt生成器", "AI绘画导航"]
-description: "PromptChoose 是一个AI提示词类别的网址，主要功能是汇集全球优质AI工具和资源。"
+description: "PromptChoose 汇集全球优质AI工具，提供专业Prompt提示词生成器、AI写作机器人及AI绘画导航，助您高效探索全方位AI资源服务。"
 
 # 标签
 tags: ["AI工具导航", "Prompt提示词", "AI资源平台"]

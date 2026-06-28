@@ -13,7 +13,7 @@ score: 9.3
 
 # SEO优化
 keywords: ["AI一人公司导航", "AI办公", "AI Agent", "智能办公助手", "多模态任务"]
-description: "WorkBuddy 是一个AI龙虾助手类别的网址，主要功能包括自主规划交付多模态任务。"
+description: "WorkBuddy是腾讯云代码助手推出的AI Agent办公工具，支持多Agents并行工作，自主规划并交付多模态复杂任务结果，极致提升办公效率，助力智能办公。"
 
 # 标签
 tags: ["AI办公", "智能助手", "多模态"]

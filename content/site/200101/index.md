@@ -14,7 +14,7 @@ score: 9.3
 
 # SEO优化
 keywords: ["AI一人公司导航", "静态站点生成器", "博客工具", "GitHub Pages", "Markdown"]
-description: " Jekyll 是一个OPC产品上线类别的网址，主要功能包括将纯文本转换为静态博客和网站。"
+description: "Jekyll静态站点生成器，将纯文本转换为静态网站和博客。支持Markdown、Liquid模板，无需数据库，适合快速部署与SEO优化，助力OPC产品高效上线。"
 
 # 标签
 tags: ["静态网站", "博客框架", "开发者工具"]

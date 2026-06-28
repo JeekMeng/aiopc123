@@ -13,7 +13,7 @@ score: 9.3
 
 # SEO优化
 keywords: ["AI一人公司导航", "提示词交易", "ChatGPT提示词", "Midjourney提示词", "Stable Diffusion提示词"]
-description: "提示词交易站 是一个AI提示词类别的网址，主要功能包括买卖AI提示词。"
+description: "tipstore是一个AI提示词交易平台，提供Midjourney、ChatGPT等模型的提示词浏览与销售，帮助用户稳定生成结果并节省API成本。"
 
 # 标签
 tags: ["提示词交易", "AI工具", "创意生成"]

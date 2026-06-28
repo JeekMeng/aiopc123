@@ -13,7 +13,7 @@ score: 9.5
 
 # SEO优化
 keywords: ["AI一人公司导航", "AI提示词", "Prompt模板", "提示词优化", "Prompt生成器"]
-description: "10W+提示词指令免费用 是一个AI提示词类别的网址，主要功能包括提供海量提示词模板与优化。"
+description: "第五AI提示词是一个智能提示词优化平台，提供Prompt模板库与生成器，通过提示工程提升AIGC和LLM内容质量与效率。"
 
 # 标签
 tags: ["提示词", "Prompt", "AI工具"]

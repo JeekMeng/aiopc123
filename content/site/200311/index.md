@@ -13,7 +13,7 @@ score: 9.3
 
 # SEO优化
 keywords: ["AI一人公司导航", "AI写PPT", "一键生成PPT", "智能美化", "AI办公"]
-description: "ChatPPT 是一个AI办公工具类别的网址，主要功能包括通过AI指令快速生成和美化PPT文档。"
+description: "ChatPPT是必优科技旗下AI办公工具，基于Chat指令快速生成PPT，支持350+指令集，1分钟内完成全篇设计与排版，高效辅助职场创作。"
 
 # 标签
 tags: ["AI办公", "PPT制作", "效率工具"]

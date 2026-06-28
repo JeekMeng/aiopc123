@@ -13,7 +13,7 @@ score: 9.0
 
 # SEO优化
 keywords: ["AI一人公司导航", "LobsterAI", "AI办公", "AI Agent", "智能助手"]
-description: "LobsterAI 是一个AI龙虾助手类别的网址，主要功能包括7×24小时全场景个人助理Agent。"
+description: "LobsterAI是有道推出的7×24小时全场景智能办公助手，提供AI Agent服务，助力高效完成日常工作任务，是您的全天候智能办公伙伴。"
 
 # 标签
 tags: ["AI办公", "智能助手", "AI Agent"]

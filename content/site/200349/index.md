@@ -13,7 +13,7 @@ score: 9.0
 
 # SEO优化
 keywords: ["AI一人公司导航", "Kimi AI", "智能助手", "K2.6模型", "视觉编程"]
-description: "Kimi AI 是一个AI智能体类别的网址，主要功能包括AI对话与多模态创作。"
+description: "Kimi AI K2.6模型发布，支持一键建站与Agent集群升级，可转化Office文档为技能，内测Claw群组协作，提供深度研究等智能服务。"
 
 # 标签
 tags: ["AI助手", "多模态", "办公效率"]

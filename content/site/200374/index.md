@@ -13,7 +13,7 @@ score: 9.2
 
 # SEO优化
 keywords: ["AI一人公司导航", "Clay替代", "AI拓客", "lead enrichment", "outbound automation"]
-description: "Bitscale 是一个AI智能体类别的网址，主要功能包括通过AI代理批量查找和丰富潜在客户数据。"
+description: "Bitscale是低成本Clay.com替代方案，通过AI智能体从20+数据源查找和丰富潜在客户，支持低代码构建个性化外展活动，实现规模化拓客与自动化。"
 
 # 标签
 tags: ["AI代理", "潜在客户生成", "自动化外展"]

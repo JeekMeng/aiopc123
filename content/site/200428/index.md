@@ -13,7 +13,7 @@ score: 9.2
 
 # SEO优化
 keywords: ["AI一人公司导航", "提示词管理", "AI提示词工具", "版本控制", "团队协作"]
-description: "Prompt Minder 是一个AI提示词类别的网址，主要功能包括管理优化AI提示词库。"
+description: "Prompt Minder是专业AI提示词管理工具，支持版本控制、团队协作与智能分类，免费管理ChatGPT、Claude等提示词库。"
 
 # 标签
 tags: ["提示词管理", "AI工具", "团队协作"]

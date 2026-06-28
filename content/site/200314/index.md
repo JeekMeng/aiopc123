@@ -13,7 +13,7 @@ score: 9.3
 
 # SEO优化
 keywords: ["AI一人公司导航", "AI Excel", "AI表格处理", "AI数据分析", "AI数据可视化"]
-description: "ChatExcel 是一个AI办公工具类别的网址，主要功能包括通过自然语言对话处理和分析Excel数据。"
+description: "ChatExcel是一款AI办公工具，通过聊天方式自动完成Excel图表处理与数据分析，无需编写公式和代码，让用户专注于数据本身，提升办公效率。"
 
 # 标签
 tags: ["AI办公", "Excel工具", "数据分析"]

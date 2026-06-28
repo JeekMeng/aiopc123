@@ -13,7 +13,7 @@ score: 9.2
 
 # SEO优化
 keywords: ["AI一人公司导航", "MiniMax", "AI助手", "多模态大模型", "AI对话"]
-description: "MiniMax 是一个AI词元Token类别的网址，主要功能包括提供多模态AI对话与内容生成服务。"
+description: "MiniMax是全球领先的通用人工智能科技公司，自主研发多模态大模型，推出AI原生产品，已服务逾2亿用户，致力于与所有人共创智能。"
 
 # 标签
 tags: ["AI助手", "多模态", "大模型"]

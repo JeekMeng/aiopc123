@@ -93,10 +93,10 @@
   "applicationCategory": {{ with .Params.category }}{{ if reflect.IsSlice . }}{{ index . 0 | jsonify }}{{ else }}{{ . | jsonify }}{{ end }}{{ else }}"WebApplication"{{ end }},
   "operatingSystem": "Web/Cloud",
   {{ with .Params.official_url }}"url": {{ . | jsonify }},{{ end }}
-  {{ with .Params.company }}"author": {
+  "author": {
     "@type": "Organization",
-    "name": {{ . | jsonify }}
-  },{{ end }}
+    "name": "AI一人公司导航网"
+  },
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": {{ .Permalink | jsonify }}

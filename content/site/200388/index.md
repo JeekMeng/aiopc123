@@ -13,7 +13,7 @@ score: 9.3
 
 # SEO优化
 keywords: ["AI一人公司导航", "DeepSeek API", "AI模型开发", "大语言模型", "Token管理"]
-description: "DeepSeek 是一个AI词元Token类别的网址，主要功能是提供AI模型API服务。"
+description: "加入DeepSeek API平台，访问先进AI模型、开发者资源与API文档。提供高效智能服务，助力应用开发与创新。"
 
 # 标签
 tags: ["AI开发", "API平台", "大模型"]

@@ -13,7 +13,7 @@ score: 9.6
 
 # SEO优化
 keywords: ["AI一人公司导航", "AI提示词", "提示词模板", "Prompt库", "AI指令库"]
-description: "AI 提示词库 是一个AI提示词类别的网址，主要功能包括提供各类场景的AI提示词模板。"
+description: "AiShort收录论文写作、编程、翻译等场景的实用AI提示词模板，一键复制即可让AI精准理解指令，提升工作效率，解决答非所问问题。"
 
 # 标签
 tags: ["AI提示词", "Prompt工程", "效率工具"]

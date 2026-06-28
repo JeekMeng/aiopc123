@@ -13,7 +13,7 @@ score: 9.5
 
 # SEO优化
 keywords: ["AI一人公司导航", "阿里云百炼", "大模型训练", "AI模型部署", "智能体开发"]
-description: "https://bailian.console.aliyun.com/cn-beijing/ 是一个AI词元Token类别的网址，主要功能包括一站式大模型训练与推理服务。"
+description: "阿里云百炼控制台是阿里云大模型服务平台，提供AI模型训练、部署、推理一站式服务，支持多种大模型框架，助力企业快速构建AI应用。"
 
 # 标签
 tags: ["大模型平台", "AI开发", "阿里云"]

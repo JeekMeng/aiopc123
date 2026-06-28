@@ -13,7 +13,7 @@ score: 9.1
 
 # SEO优化
 keywords: ["AI一人公司导航", "小米MiMo大模型", "AI词元Token", "旗舰模型", "TTS模型"]
-description: "https://platform.xiaomimimo.com/ 是一个AI词元Token类别的网址，主要功能包括提供MiMo-V2-Pro/Omni旗舰模型与TTS服务。"
+description: "小米MIMO大模型提供MiMo-V2-Pro和Omni两款旗舰模型，一次购买畅用。TTS模型全档位套餐限时免费，释放AI词元Token的强大生产力。"
 
 # 标签
 tags: ["AI大模型", "小米MiMo", "词元Token"]

@@ -2,11 +2,11 @@
   icon: fas fa-home
   link: "/"
 
-- item: 文章资讯
+- item: OPC专栏
   icon: fas fa-pen
   link: /blog
 
-- item: 资料专区
+- item: OPC资料
   icon: fas fa-book
   link: /book
 
