@@ -35,8 +35,8 @@
                     <h1 class="policy-page-title">OPC 政策专区</h1>
                     <p class="policy-page-desc">{{ .Description }}</p>
                     <div class="policy-stats">
-                        <span><i class="fas fa-file-alt"></i> {{ len $policies }} 条政策</span>
-                        <span><i class="fas fa-city"></i> 覆盖 {{ len ($stats.cities | default slice) }} 个城市</span>
+                        <span><i class="fas fa-file-alt"></i> <span data-stat="total">{{ len $policies }}</span> 条政策</span>
+                        <span><i class="fas fa-city"></i> 覆盖 <span data-stat="cities">{{ len ($stats.cities | default slice) }}</span> 个城市</span>
                         <span><i class="fas fa-sync-alt"></i> 数据来自 Worker 实时</span>
                     </div>
                 </div>
@@ -175,6 +175,28 @@
     </div>
 </div>
 
+<script>
+fetch('{{ $apiBase }}/policies/stats').then(function(r){return r.json()}).then(function(d){
+  var el=document.querySelector('[data-stat="total"]');if(el)el.textContent=d.total||0;
+  var el2=document.querySelector('[data-stat="cities"]');if(el2)el2.textContent=(d.cities||[]).length;
+  var tc=document.getElementById('policy-tagcloud');if(!tc)return;
+  var tags=d.benefit_tags||[];if(!tags.length)return;
+  var maxCount=tags[tags.length-1].count;
+  tc.innerHTML='';
+  tags.forEach(function(t){
+    var ratio=t.count/7;
+    var size=11+ratio*5;
+    var opacity=0.5+ratio*0.5;
+    var span=document.createElement('span');
+    span.className='tagcloud-item';
+    span.style.cssText='font-size:'+size.toFixed(1)+'px;opacity:'+opacity.toFixed(2);
+    span.title='出现 '+t.count+' 次';
+    span.textContent=t.item;
+    tc.appendChild(span);
+  });
+  document.getElementById('policy-tagcloud-section').style.display='';
+}).catch(function(){});
+</script>
 {{ partial "content_footer.html" . }}
 {{ partial "modal_search.html" . }}
 {{ partial "footer.html" . }}

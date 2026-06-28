@@ -8,7 +8,7 @@ import { requireAdmin } from './admin-middleware';
 import { setupAdmin, listUsers, updateRole, deleteUser, listAllComments, deleteComment, listAllSubmissions, updateSubmissionStatus, deleteSubmission } from './admin';
 import { create as createSubmission } from './submissions';
 import { listPolicies, getPolicy, getPolicyStats } from './policies';
-import { adminListPolicies, adminCreatePolicy, adminUpdatePolicy, adminDeletePolicy, adminImportPolicies, adminExportPolicies } from './admin-policies';
+import { adminListPolicies, adminGetPolicy, adminCreatePolicy, adminUpdatePolicy, adminDeletePolicy, adminImportPolicies, adminExportPolicies } from './admin-policies';
 
 const app = new Hono<{ Bindings: Env; Variables: { userId: number } }>();
 
@@ -70,6 +70,7 @@ adminPolicies.put('/:id', requireAdmin, adminUpdatePolicy);
 adminPolicies.delete('/:id', requireAdmin, adminDeletePolicy);
 adminPolicies.post('/import', requireAdmin, adminImportPolicies);
 adminPolicies.get('/export', requireAdmin, adminExportPolicies);
+adminPolicies.get('/:id', requireAdmin, adminGetPolicy);
 app.route('/api/admin/policies', adminPolicies);
 
 export default {

@@ -2,9 +2,8 @@
   统一右侧栏 partial — 数据来自 data/sidebar.yaml + 页面上下文
 */}}
 <div class="ai-sidebar">
-  {{/* 政策权益标签云（仅政策页·仅生产） */}}
+  {{/* 政策权益标签云（仅政策页） */}}
   {{ if hasPrefix $.RelPermalink "/policy" }}
-    {{ if not (hasPrefix $.Site.BaseURL "http://localhost") }}
     {{ $apiBase := $.Site.Params.api_base }}
     {{ $stats := dict }}
     {{ with try (resources.GetRemote (printf "%s/policies/stats" $apiBase)) }}
@@ -14,21 +13,20 @@
         {{ $stats = .Content | unmarshal }}
       {{ end }}
     {{ end }}
-    {{ with $stats.benefit_tags }}
-    <div class="sidebar-section">
+    <div class="sidebar-section" id="policy-tagcloud-section"{{ if not $stats.benefit_tags }} style="display:none"{{ end }}>
       <h3>🏷️ 政策权益标签</h3>
-      <div class="policy-tagcloud">
-        {{ $maxCount := float (index (last 1 .) 0).count }}
-        {{ range . }}
+      <div class="policy-tagcloud" id="policy-tagcloud">
+        {{ if $stats.benefit_tags }}
+        {{ $maxCount := float (index (last 1 $stats.benefit_tags) 0).count }}
+        {{ range $stats.benefit_tags }}
         {{ $ratio := div (float .count) 7.0 }}
         {{ $size := add 11.0 (mul $ratio 5.0) }}
         {{ $opacity := add 0.5 (mul $ratio 0.5) }}
         <span class="tagcloud-item" style="font-size: {{ printf "%.1f" $size }}px; opacity: {{ printf "%.2f" $opacity }}" title="出现 {{ .count }} 次">{{ .item }}</span>
         {{ end }}
+        {{ end }}
       </div>
     </div>
-    {{ end }}
-    {{ end }}
   {{ else }}
   {{/* 热门工具 */}}
   {{ with .Site.Data.sidebar.hot_tools }}

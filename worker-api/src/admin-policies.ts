@@ -44,7 +44,7 @@ export async function adminCreatePolicy(c: Context): Promise<Response> {
       JSON.stringify(tags || []), landing_status || '', materials || ''
     ).run();
     const policy = await c.env.DB.prepare('SELECT * FROM policies WHERE id = ?').bind(id).first();
-    return c.json(policy, 201);
+    return c.json(parsePolicy(policy as Record<string, any>), 201);
   } catch (err: any) {
     console.error('admin create policy error:', err);
     if (err?.message?.includes('UNIQUE constraint')) {
@@ -87,7 +87,7 @@ export async function adminUpdatePolicy(c: Context): Promise<Response> {
 
     await c.env.DB.prepare(`UPDATE policies SET ${setClauses.join(', ')} WHERE id = ?`).bind(...params).run();
     const policy = await c.env.DB.prepare('SELECT * FROM policies WHERE id = ?').bind(id).first();
-    return c.json(policy);
+    return c.json(parsePolicy(policy as Record<string, any>));
   } catch (err) {
     console.error('admin update policy error:', err);
     return c.json({ error: '更新政策失败' }, 500);
@@ -103,6 +103,18 @@ export async function adminDeletePolicy(c: Context): Promise<Response> {
   } catch (err) {
     console.error('admin delete policy error:', err);
     return c.json({ error: '删除政策失败' }, 500);
+  }
+}
+
+export async function adminGetPolicy(c: Context): Promise<Response> {
+  try {
+    const id = c.req.param('id')!;
+    const policy = await c.env.DB.prepare('SELECT * FROM policies WHERE id = ?').bind(id).first();
+    if (!policy) return c.json({ error: '政策不存在' }, 404);
+    return c.json(parsePolicy(policy as Record<string, any>));
+  } catch (err) {
+    console.error('admin get policy error:', err);
+    return c.json({ error: '获取政策失败' }, 500);
   }
 }
 
@@ -159,4 +171,14 @@ export async function adminExportPolicies(c: Context): Promise<Response> {
 function safeParseJSON(str: string | null | undefined, fallback: any): any {
   if (!str) return fallback;
   try { return JSON.parse(str); } catch { return fallback; }
+}
+
+function parsePolicy(p: Record<string, any>): any {
+  return {
+    ...p,
+    benefits: safeParseJSON(p.benefits, []),
+    links: safeParseJSON(p.links, {}),
+    communities: safeParseJSON(p.communities, []),
+    tags: safeParseJSON(p.tags, []),
+  };
 }

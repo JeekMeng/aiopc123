@@ -7,6 +7,9 @@ curl -i -X POST https://api.indexnow.org/IndexNow \
   "urlList": [
 "https://www.aiopc123.com/",
 "https://www.aiopc123.com/about",
+"https://www.aiopc123.com/policy/",
+"https://www.aiopc123.com/hot/",
+"https://www.aiopc123.com/about",
 "https://www.aiopc123.com/site/200436/",
 "https://www.aiopc123.com/site/200437/",
 "https://www.aiopc123.com/site/200438/",
