@@ -2,9 +2,12 @@
 {{ $isLocal := hasPrefix $.Site.BaseURL "http://localhost" }}
 {{ $allPolicies := .Site.Data.policies.policies | default slice }}
 {{ if not $isLocal }}
-  {{ $policyResp := resources.GetRemote (printf "%s/policies" $apiBase) }}
-  {{ if not $policyResp.Err }}
-    {{ $allPolicies = $policyResp.Content | unmarshal }}
+  {{ with try (resources.GetRemote (printf "%s/policies" $apiBase)) }}
+    {{ with .Err }}
+      {{ warnf "failed to fetch policies: %s" . }}
+    {{ else with .Value }}
+      {{ $allPolicies = .Content | unmarshal }}
+    {{ end }}
   {{ end }}
 {{ end }}
 {{ .Store.Set "jsonld_page" (partial "jsonld-hot-body.html" (dict "page" . "policies" $allPolicies)) }}

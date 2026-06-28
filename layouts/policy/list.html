@@ -3,55 +3,23 @@
 {{ $policies := .Site.Data.policies.policies | default slice }}
 {{ $stats := dict }}
 {{ if not $isLocal }}
-  {{ $policyResp := resources.GetRemote (printf "%s/policies" $apiBase) }}
-  {{ if not $policyResp.Err }}
-    {{ $policies = $policyResp.Content | unmarshal }}
+  {{ with try (resources.GetRemote (printf "%s/policies" $apiBase)) }}
+    {{ with .Err }}
+      {{ warnf "failed to fetch policies: %s" . }}
+    {{ else with .Value }}
+      {{ $policies = .Content | unmarshal }}
+    {{ end }}
   {{ end }}
-  {{ $statsResp := resources.GetRemote (printf "%s/policies/stats" $apiBase) }}
-  {{ if not $statsResp.Err }}
-    {{ $stats = $statsResp.Content | unmarshal }}
+  {{ with try (resources.GetRemote (printf "%s/policies/stats" $apiBase)) }}
+    {{ with .Err }}
+      {{ warnf "failed to fetch policy stats: %s" . }}
+    {{ else with .Value }}
+      {{ $stats = .Content | unmarshal }}
+    {{ end }}
   {{ end }}
 {{ end }}
 {{ .Store.Set "jsonld_page" (partial "jsonld-policy-body.html" (dict "page" . "policies" $policies)) }}
 {{ partial "header.html" . }}
-{{ $policyCount := len $policies }}
-{{ $maxItems := 20 }}
-{{ $displayPolicies := first $maxItems $policies }}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  "name": {{ .Title | jsonify }},
-  "description": {{ .Description | jsonify }},
-  "url": {{ .Permalink | jsonify }},
-  "mainEntity": {
-    "@type": "ItemList",
-    "name": "OPC扶持政策列表",
-    "numberOfItems": {{ $policyCount }},
-    "itemListElement": [
-    {{ range $i, $p := $displayPolicies }}
-    {
-      "@type": "ListItem",
-      "position": {{ add $i 1 }},
-      "item": {
-        "@type": "GovernmentService",
-        "name": {{ $p.name | jsonify }},
-        "description": {{ (or $p.summary "") | jsonify }},
-        "provider": {
-          "@type": "GovernmentOrganization",
-          "name": {{ (or $p.issuer "") | jsonify }}
-        },
-        "areaServed": {
-          "@type": "City",
-          "name": {{ $p.city | jsonify }}
-        }
-      }
-    }{{ if lt (add $i 1) (len $displayPolicies) }},{{ end }}
-    {{ end }}
-    ]
-  }
-}
-</script>
 {{ partial "top_nav.html" . }}
 
 <div class="page-container">
