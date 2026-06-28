@@ -159,6 +159,7 @@
   "@context": "https://schema.org",
   "@type": "HowTo",
   "name": {{ .Title | jsonify }},
+  "description": {{ (or .Params.summary .Description) | jsonify }},
   "step": [
     {{ $stepLen := len .Params.steps }}
     {{ range $i, $s := .Params.steps }}
@@ -182,6 +183,7 @@
   "@context": "https://schema.org",
   "@type": "HowTo",
   "name": {{ $.Title | jsonify }},
+  "description": {{ (or $.Params.summary $.Description) | jsonify }},
   "step": [
     {{ $stepLen := len $steps }}
     {{ range $i, $s := $steps }}
