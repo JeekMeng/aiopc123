@@ -1,0 +1,130 @@
+{{ $apiBase := $.Site.Params.api_base }}
+{{ $isLocal := hasPrefix $.Site.BaseURL "http://localhost" }}
+{{ $allPolicies := .Site.Data.policies.policies | default slice }}
+{{ if not $isLocal }}
+  {{ $policyResp := resources.GetRemote (printf "%s/policies" $apiBase) }}
+  {{ if not $policyResp.Err }}
+    {{ $allPolicies = $policyResp.Content | unmarshal }}
+  {{ end }}
+{{ end }}
+{{ .Store.Set "jsonld_page" (partial "jsonld-hot-body.html" (dict "page" . "policies" $allPolicies)) }}
+{{ partial "header.html" . }}
+{{ partial "top_nav.html" . }}
+
+<div class="page-container">
+{{ partial "content_header.html" . }}
+
+<div class="hot-layout">
+  <div class="hot-container">
+    <div class="hot-header">
+      <h1 class="hot-title">🔥 热点榜单</h1>
+      <p class="hot-desc">{{ .Description }}</p>
+    </div>
+
+    {{/* 顶部导航 pills */}}
+    <nav class="hot-nav">
+      <a href="#hot-policy" class="hot-nav-item"><i class="fas fa-gavel"></i> OPC政策热榜</a>
+      <a href="#hot-tools" class="hot-nav-item"><i class="fas fa-tools"></i> OPC实用工具</a>
+      {{ range $category := .Site.Data.hot }}
+      <a href="#hot-{{ printf "%s" (md5 $category.name) }}" class="hot-nav-item"><i class="{{ $category.icon }}"></i> {{ $category.name }}</a>
+      {{ end }}
+    </nav>
+
+    {{/* ───── 1. OPC政策热榜 ───── */}}
+    {{ $policies := sort $allPolicies "publish_date" "desc" | first 20 }}
+    <section class="hot-section" id="hot-policy">
+      <h2 class="hot-section-title"><i class="fas fa-gavel"></i> OPC政策热榜</h2>
+      <p class="hot-section-desc">最新发布的一人公司扶持政策，覆盖算力券、人才补贴、办公空间等</p>
+      <div class="hot-cards">
+        {{ range $i, $p := $policies }}
+        <div class="hot-card">
+          <div class="hot-card-header">
+            <span class="hot-card-rank">#{{ add $i 1 }}</span>
+            <span class="hot-card-source">政策</span>
+          </div>
+          <div class="hot-card-body">
+            <div class="hot-card-title">{{ .name }}</div>
+            <div class="hot-card-desc">{{ .summary | truncate 80 }}</div>
+            <div class="hot-card-meta">
+              <span>{{ .city }}</span>
+              <span>{{ .publish_date }}</span>
+            </div>
+          </div>
+          <div class="hot-card-footer">
+            {{ with .links.official }}
+            <a href="{{ . }}" class="hot-card-btn" target="_blank" rel="nofollow noopener"><i class="fas fa-external-link-alt"></i> 查看原文</a>
+            {{ end }}
+            <a href="/policy/#city-{{ printf "%s" (md5 .city) }}" class="hot-card-btn hot-card-btn-outline" rel="nofollow"><i class="fas fa-map-marker-alt"></i> 同城政策</a>
+          </div>
+        </div>
+        {{ end }}
+      </div>
+    </section>
+
+    {{/* ───── 2. OPC实用工具 ───── */}}
+    {{ $tools := where $.Site.RegularPages "Section" "site" }}
+    {{ $tools := sort $tools "Params.score" "desc" | first 20 }}
+    <section class="hot-section" id="hot-tools">
+      <h2 class="hot-section-title"><i class="fas fa-tools"></i> OPC实用工具</h2>
+      <p class="hot-section-desc">高评分AI一人公司工具，助力高效创业</p>
+      <div class="hot-cards">
+        {{ range $i, $t := $tools }}
+        <div class="hot-card">
+          <div class="hot-card-header">
+            <span class="hot-card-rank">#{{ add $i 1 }}</span>
+            <span class="hot-card-source hot-card-source-tool">工具</span>
+          </div>
+          <div class="hot-card-body">
+            <div class="hot-card-title">{{ trim (index (split .Title "|") 0) " " }}</div>
+            <div class="hot-card-desc">{{ .Description | truncate 80 }}</div>
+            <div class="hot-card-meta">
+              {{ with .Params.score }}<span>评分 {{ . }}</span>{{ end }}
+              {{ with .Params.company }}<span>{{ . }}</span>{{ end }}
+            </div>
+          </div>
+          <div class="hot-card-footer">
+            {{ with .Params.official_url }}
+            <a href="{{ . }}" class="hot-card-btn" target="_blank" rel="nofollow noopener"><i class="fas fa-external-link-alt"></i> 访问官网</a>
+            {{ end }}
+          </div>
+        </div>
+        {{ end }}
+      </div>
+    </section>
+
+    {{/* ───── 3-7: 外部榜单 ───── */}}
+    {{ range $category := .Site.Data.hot }}
+    <section class="hot-section" id="hot-{{ printf "%s" (md5 $category.name) }}">
+      <h2 class="hot-section-title"><i class="{{ $category.icon }}"></i> {{ $category.name }}</h2>
+      {{ with $category.desc }}<p class="hot-section-desc">{{ . }}</p>{{ end }}
+      <div class="hot-cards">
+        {{ range $j, $link := $category.links }}
+        <div class="hot-card hot-card-external">
+          <div class="hot-card-header">
+            <span class="hot-card-rank">#{{ add $j 1 }}</span>
+            <span class="hot-card-source hot-card-source-ext">{{ $category.name }}</span>
+          </div>
+          <div class="hot-card-body">
+            <div class="hot-card-title">{{ $link.title }}</div>
+            {{ with $link.desc }}<div class="hot-card-desc">{{ . | truncate 80 }}</div>{{ end }}
+            {{ with $link.source }}<div class="hot-card-meta"><span>{{ . }}</span></div>{{ end }}
+          </div>
+          <div class="hot-card-footer">
+            <a href="{{ $link.url }}" class="hot-card-btn" target="_blank" rel="nofollow noopener"><i class="fas fa-external-link-alt"></i> 访问</a>
+          </div>
+        </div>
+        {{ end }}
+      </div>
+    </section>
+    {{ end }}
+
+    <div class="policy-notice">
+      <p><i class="fas fa-exclamation-circle"></i> 本页热点榜单内容均来自公开渠道，仅供用户参考。</p>
+      <p class="policy-notice-last">政策信息以各城市官方发布为准，工具排名基于站内评分数据，不构成推荐或投资建议。</p>
+    </div>
+  </div>
+</div>
+
+{{ partial "content_footer.html" . }}
+{{ partial "modal_search.html" . }}
+{{ partial "footer.html" . }}

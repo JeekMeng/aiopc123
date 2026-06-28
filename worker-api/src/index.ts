@@ -7,6 +7,8 @@ import { list as listComments, create as createComment, remove as removeComment 
 import { requireAdmin } from './admin-middleware';
 import { setupAdmin, listUsers, updateRole, deleteUser, listAllComments, deleteComment, listAllSubmissions, updateSubmissionStatus, deleteSubmission } from './admin';
 import { create as createSubmission } from './submissions';
+import { listPolicies, getPolicy, getPolicyStats } from './policies';
+import { adminListPolicies, adminCreatePolicy, adminUpdatePolicy, adminDeletePolicy, adminImportPolicies, adminExportPolicies } from './admin-policies';
 
 const app = new Hono<{ Bindings: Env; Variables: { userId: number } }>();
 
@@ -54,6 +56,21 @@ admin.get('/submissions', requireAdmin, listAllSubmissions);
 admin.patch('/submissions/:id/status', requireAdmin, updateSubmissionStatus);
 admin.delete('/submissions/:id', requireAdmin, deleteSubmission);
 app.route('/api/admin', admin);
+
+const policies = new Hono();
+policies.get('/', listPolicies);
+policies.get('/stats', getPolicyStats);
+policies.get('/:id', getPolicy);
+app.route('/api/policies', policies);
+
+const adminPolicies = new Hono();
+adminPolicies.get('/', requireAdmin, adminListPolicies);
+adminPolicies.post('/', requireAdmin, adminCreatePolicy);
+adminPolicies.put('/:id', requireAdmin, adminUpdatePolicy);
+adminPolicies.delete('/:id', requireAdmin, adminDeletePolicy);
+adminPolicies.post('/import', requireAdmin, adminImportPolicies);
+adminPolicies.get('/export', requireAdmin, adminExportPolicies);
+app.route('/api/admin/policies', adminPolicies);
 
 export default {
   async fetch(request, env, ctx): Promise<Response> {

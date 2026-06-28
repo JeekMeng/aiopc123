@@ -35,6 +35,33 @@
                                 </li>
                                 {{ end }}
                             {{ end }}
+                        {{ else if hasPrefix .RelPermalink "/policy" }}
+                            {{ $policies := .Site.Data.policies.policies | default slice }}
+                            {{ $priorityCities := slice "苏州" "上海" "杭州" "南京" "宁波" "无锡" "常州" "合肥" "南通" }}
+                            {{ $otherCities := slice "广州" "深圳" "成都" "北京" "郑州" "青岛" "重庆" "惠州" "武汉" "长沙" "济南" "扬州" "宿迁" "温州" "东莞" "佛山" "中山" "西安" "厦门" "福州" "昆明" "珠海" "海口" "天津" "石家庄" "盐城" "连云港" "徐州" "梅州" }}
+                            <li class="sidebar-item sidebar-show">
+                                <a href="/policy/" class="smooth">
+                                    <i class="fas fa-gavel icon-fw icon-lg mr-2"></i>
+                                    <span>全部政策</span>
+                                    <i class="iconfont icon-arrow-r-m sidebar-more text-sm"></i>
+                                </a>
+                                <ul>
+                                {{ range $priorityCities }}
+                                    {{ $cityPolicies := where $policies "city" . }}
+                                    {{ if $cityPolicies }}
+                                    {{ $anchor := printf "%s" (md5 .) }}
+                                    <li><a href="/policy/#city-{{ $anchor }}" class="smooth"><span>{{ . }}</span></a></li>
+                                    {{ end }}
+                                {{ end }}
+                                {{ range $otherCities }}
+                                    {{ $cityPolicies := where $policies "city" . }}
+                                    {{ if $cityPolicies }}
+                                    {{ $anchor := printf "%s" (md5 .) }}
+                                    <li><a href="/policy/#city-{{ $anchor }}" class="smooth"><span>{{ . }}</span></a></li>
+                                    {{ end }}
+                                {{ end }}
+                                </ul>
+                            </li>
                         {{ else if hasPrefix .RelPermalink "/blog" }}
                             {{ range .Site.Data.blog }}
                                 {{ if .list }}

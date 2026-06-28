@@ -10,6 +10,15 @@
   icon: fas fa-book
   link: /book
 
+- item: OPC政策
+  icon: fas fa-gavel
+  link: /policy
+
+- item: OPC榜单
+  icon: fas fa-fire
+  link: /hot
+  hot: true
+
 - item: 关于我们
   icon: fas fa-address-card
   link: /about

@@ -1,0 +1,38 @@
+{{ $page := .page }}
+{{ $policies := .policies | default slice }}
+{{ $policyCount := len $policies }}
+{{ $maxItems := 20 }}
+{{ $displayPolicies := first $maxItems $policies }}
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": {{ $page.Title | jsonify }},
+  "description": {{ $page.Description | jsonify }},
+  "url": {{ $page.Permalink | jsonify }},
+  "mainEntity": {
+    "@type": "ItemList",
+    "name": "OPC扶持政策列表",
+    "numberOfItems": {{ $policyCount }},
+    "itemListElement": [
+    {{ range $i, $p := $displayPolicies }}
+    {
+      "@type": "ListItem",
+      "position": {{ add $i 1 }},
+      "item": {
+        "@type": "GovernmentService",
+        "name": {{ $p.name | jsonify }},
+        "description": {{ (or $p.summary "") | jsonify }},
+        "provider": {
+          "@type": "GovernmentOrganization",
+          "name": {{ (or $p.issuer "") | jsonify }}
+        },
+        "areaServed": {
+          "@type": "City",
+          "name": {{ $p.city | jsonify }}
+        }
+      }
+    }{{ if lt (add $i 1) (len $displayPolicies) }},{{ end }}
+    {{ end }}
+    ]
+  }
+}

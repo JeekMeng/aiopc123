@@ -1,0 +1,207 @@
+{{ $apiBase := $.Site.Params.api_base }}
+{{ $isLocal := hasPrefix $.Site.BaseURL "http://localhost" }}
+{{ $policies := .Site.Data.policies.policies | default slice }}
+{{ $stats := dict }}
+{{ if not $isLocal }}
+  {{ $policyResp := resources.GetRemote (printf "%s/policies" $apiBase) }}
+  {{ if not $policyResp.Err }}
+    {{ $policies = $policyResp.Content | unmarshal }}
+  {{ end }}
+  {{ $statsResp := resources.GetRemote (printf "%s/policies/stats" $apiBase) }}
+  {{ if not $statsResp.Err }}
+    {{ $stats = $statsResp.Content | unmarshal }}
+  {{ end }}
+{{ end }}
+{{ .Store.Set "jsonld_page" (partial "jsonld-policy-body.html" (dict "page" . "policies" $policies)) }}
+{{ partial "header.html" . }}
+{{ $policyCount := len $policies }}
+{{ $maxItems := 20 }}
+{{ $displayPolicies := first $maxItems $policies }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": {{ .Title | jsonify }},
+  "description": {{ .Description | jsonify }},
+  "url": {{ .Permalink | jsonify }},
+  "mainEntity": {
+    "@type": "ItemList",
+    "name": "OPC扶持政策列表",
+    "numberOfItems": {{ $policyCount }},
+    "itemListElement": [
+    {{ range $i, $p := $displayPolicies }}
+    {
+      "@type": "ListItem",
+      "position": {{ add $i 1 }},
+      "item": {
+        "@type": "GovernmentService",
+        "name": {{ $p.name | jsonify }},
+        "description": {{ (or $p.summary "") | jsonify }},
+        "provider": {
+          "@type": "GovernmentOrganization",
+          "name": {{ (or $p.issuer "") | jsonify }}
+        },
+        "areaServed": {
+          "@type": "City",
+          "name": {{ $p.city | jsonify }}
+        }
+      }
+    }{{ if lt (add $i 1) (len $displayPolicies) }},{{ end }}
+    {{ end }}
+    ]
+  }
+}
+</script>
+{{ partial "top_nav.html" . }}
+
+<div class="page-container">
+<div class="left-sidebar">{{ partial "sidebar.html" . }}</div>
+{{ partial "content_header.html" . }}
+
+<div class="three-col-layout">
+    <div class="content-col content-col--framed">
+        <div id="page-content" class="content-site customize-site">
+            <div class="content_detail">
+                <div class="policy-page-header">
+                    <h1 class="policy-page-title">OPC 政策专区</h1>
+                    <p class="policy-page-desc">{{ .Description }}</p>
+                    <div class="policy-stats">
+                        <span><i class="fas fa-file-alt"></i> {{ len $policies }} 条政策</span>
+                        <span><i class="fas fa-city"></i> 覆盖 {{ len ($stats.cities | default slice) }} 个城市</span>
+                        <span><i class="fas fa-sync-alt"></i> 数据来自 Worker 实时</span>
+                    </div>
+                </div>
+                {{ $priorityCities := slice "苏州" "上海" "杭州" "南京" "宁波" "无锡" "常州" "合肥" "南通" }}
+                {{ $otherCities := slice "广州" "深圳" "成都" "北京" "郑州" "青岛" "重庆" "惠州" "武汉" "长沙" "济南" "扬州" "宿迁" "温州" "东莞" "佛山" "中山" "西安" "厦门" "福州" "昆明" "珠海" "海口" "天津" "石家庄" "盐城" "连云港" "徐州" "梅州" }}
+
+                <div class="policy-city-nav">
+                    {{ range $priorityCities }}
+                        {{ $cityPolicies := where $policies "city" . }}
+                        {{ if $cityPolicies }}
+                        <a href="#city-{{ printf "%s" (md5 .) }}" class="policy-city-pill priority">
+                            {{ . }} <span class="pill-count">{{ len $cityPolicies }}</span>
+                        </a>
+                        {{ end }}
+                    {{ end }}
+                    {{ range $otherCities }}
+                        {{ $cityPolicies := where $policies "city" . }}
+                        {{ if $cityPolicies }}
+                        <a href="#city-{{ printf "%s" (md5 .) }}" class="policy-city-pill">
+                            {{ . }} <span class="pill-count">{{ len $cityPolicies }}</span>
+                        </a>
+                        {{ end }}
+                    {{ end }}
+                </div>
+
+                {{ range $priorityCities }}
+                    {{ $cityPolicies := where $policies "city" . }}
+                    {{ if $cityPolicies }}
+                    <div class="policy-city-section" id="city-{{ printf "%s" (md5 .) }}">
+                        <h2 class="policy-city-title">
+                            <i class="fas fa-star"></i> {{ . }}
+                            <span class="city-count">{{ len $cityPolicies }} 条政策</span>
+                        </h2>
+                        <div class="policy-card-list">
+                            {{ range $cityPolicies }}
+                            <div class="policy-card">
+                                <div class="policy-card-header">
+                                    <h3 class="policy-name">{{ .name }}</h3>
+                                    {{ $status := .status }}
+                                    {{ if eq $status "active" }}
+                                    <span class="policy-status status-active">进行中</span>
+                                    {{ else if eq $status "upcoming" }}
+                                    <span class="policy-status status-upcoming">即将实施</span>
+                                    {{ else }}
+                                    <span class="policy-status status-ended">已结束</span>
+                                    {{ end }}
+                                </div>
+                                <p class="policy-summary">{{ .summary }}</p>
+                                {{ with .benefits }}
+                                <div class="policy-benefits">
+                                    {{ range . }}
+                                    <span class="policy-benefit-pill" title="{{ .amount }}">{{ .item }}{{ if and .amount (ne .amount "") }} · {{ .amount }}{{ end }}</span>
+                                    {{ end }}
+                                </div>
+                                {{ end }}
+                                <div class="policy-meta">
+                                    <span class="policy-issuer"><i class="fas fa-building"></i> {{ .issuer }}</span>
+                                    <span class="policy-date"><i class="fas fa-calendar-alt"></i> {{ .publish_date }}</span>
+                                </div>
+                                <div class="policy-actions">
+                                    {{ with .links.official }}
+                                    <a href="{{ . }}" class="policy-btn" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> 查看原文</a>
+                                    {{ end }}
+                                    {{ range .links.news }}
+                                    <a href="{{ . }}" class="policy-btn policy-btn-secondary" target="_blank" rel="noopener"><i class="fas fa-newspaper"></i> 新闻报道</a>
+                                    {{ end }}
+                                </div>
+                            </div>
+                            {{ end }}
+                        </div>
+                    </div>
+                    {{ end }}
+                {{ end }}
+
+                {{ range $otherCities }}
+                    {{ $cityPolicies := where $policies "city" . }}
+                    {{ if $cityPolicies }}
+                    <div class="policy-city-section" id="city-{{ printf "%s" (md5 .) }}">
+                        <h2 class="policy-city-title">
+                            <i class="fas fa-city"></i> {{ . }}
+                            <span class="city-count">{{ len $cityPolicies }} 条政策</span>
+                        </h2>
+                        <div class="policy-card-list">
+                            {{ range $cityPolicies }}
+                            <div class="policy-card">
+                                <div class="policy-card-header">
+                                    <h3 class="policy-name">{{ .name }}</h3>
+                                    {{ $status := .status }}
+                                    {{ if eq $status "active" }}
+                                    <span class="policy-status status-active">进行中</span>
+                                    {{ else if eq $status "upcoming" }}
+                                    <span class="policy-status status-upcoming">即将实施</span>
+                                    {{ else }}
+                                    <span class="policy-status status-ended">已结束</span>
+                                    {{ end }}
+                                </div>
+                                <p class="policy-summary">{{ .summary }}</p>
+                                {{ with .benefits }}
+                                <div class="policy-benefits">
+                                    {{ range . }}
+                                    <span class="policy-benefit-pill" title="{{ .amount }}">{{ .item }}{{ if and .amount (ne .amount "") }} · {{ .amount }}{{ end }}</span>
+                                    {{ end }}
+                                </div>
+                                {{ end }}
+                                <div class="policy-meta">
+                                    <span class="policy-issuer"><i class="fas fa-building"></i> {{ .issuer }}</span>
+                                    <span class="policy-date"><i class="fas fa-calendar-alt"></i> {{ .publish_date }}</span>
+                                </div>
+                                <div class="policy-actions">
+                                    {{ with .links.official }}
+                                    <a href="{{ . }}" class="policy-btn" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> 查看原文</a>
+                                    {{ end }}
+                                    {{ range .links.news }}
+                                    <a href="{{ . }}" class="policy-btn policy-btn-secondary" target="_blank" rel="noopener"><i class="fas fa-newspaper"></i> 新闻报道</a>
+                                    {{ end }}
+                                </div>
+                            </div>
+                            {{ end }}
+                        </div>
+                    </div>
+                    {{ end }}
+                {{ end }}
+            </div>
+        </div>
+        <div class="policy-notice">
+          <p><i class="fas fa-exclamation-circle"></i> 本页政策信息均来自各城市政府公开渠道，仅供用户参考。</p>
+          <p class="policy-notice-last">具体政策内容、申报条件及截止日期以各城市官方发布为准，不构成任何投资或法律建议。</p>
+        </div>
+    </div>
+    <div class="right-sidebar">
+        {{ partial "content_right_sidebar_unified.html" . }}
+    </div>
+</div>
+
+{{ partial "content_footer.html" . }}
+{{ partial "modal_search.html" . }}
+{{ partial "footer.html" . }}

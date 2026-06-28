@@ -5,11 +5,17 @@
         </a>
         <ul class="top-nav-menu">
         {{ range .Site.Data.headers }}
-            <li{{ if .list }} class="menu-item-has-children"{{ end }}>
+            {{ $link := .link }}
+            {{ $isActive := or (eq $.RelPermalink $link) (and (ne $link "/") (hasPrefix $.RelPermalink (printf "%s/" $link))) }}
+            {{ $liClass := "" }}
+            {{ if $isActive }}{{ $liClass = "active" }}{{ end }}
+            {{ if .list }}{{ if $liClass }}{{ $liClass = printf "%s menu-item-has-children" $liClass }}{{ else }}{{ $liClass = "menu-item-has-children" }}{{ end }}{{ end }}
+            <li{{ if $liClass }} class="{{ $liClass }}"{{ end }}>
                 <a href="{{ .link }}">
                     <i class="{{ .icon }} fa-lg mr-2"></i>
                     <span>{{ .item }}</span>
                     {{ if .new }}<small class="badge badge-danger ml-1" style="font-size:10px;vertical-align:super;padding:1px 5px">New</small>{{ end }}
+                    {{ if .hot }}<small class="badge badge-danger top-nav-hot ml-1">HOT</small>{{ end }}
                 </a>
                 {{ if .list }}
                 <ul class="sub-menu">

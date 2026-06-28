@@ -28,6 +28,8 @@ disableKinds = ["taxonomy", "term"]
   minifyOutput = true
 
 [params]
+    # API 基础路径（Hugo 构建时通过 getJSON 拉取 Worker 数据）
+    api_base     = "https://www.api.aiopc123.com/api"
     # 网站副标题（用于SEO:首页 meta 描述）
     subtitle     = "AI一人公司导航网 是一个通过AI工具，服务于快速实现一人公司创业的导航网站，提供一站式一人公司创业服务"
     # 全局关键词（用于SEO:英文逗号分隔）
@@ -79,7 +81,7 @@ disableKinds = ["taxonomy", "term"]
     allow = ['^dart-sass-embedded$', '^go$', '^npx$', '^postcss$']
 [security.http]
     # 限制 Hugo 可请求的外部域名
-    allow = ['^https://aiopc123.com$']
+    allow = ['^https://aiopc123\\.com$', '^https://aiopc-worker\\.3994983718\\.workers\\.dev$']
 # 限制 Markdown 中允许的 HTML 标签
 [security.markdown]
     allowUnsafeLinks = true

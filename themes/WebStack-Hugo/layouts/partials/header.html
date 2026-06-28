@@ -109,6 +109,8 @@
 
     {{ partial "jsonld.html" . }}
 
+    {{ with (.Store.Get "jsonld_page") }}<script type="application/ld+json">{{ . | safeJS }}</script>{{ end }}
+
 </head>
 {{ if $.Site.Params.nightMode }}
 <body class="io-black-mode">

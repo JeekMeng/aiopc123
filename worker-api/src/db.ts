@@ -31,3 +31,27 @@ export interface Comment {
   nickname?: string;
   avatar?: string;
 }
+
+export interface Policy {
+  id: string;
+  name: string;
+  city: string;
+  province: string;
+  district: string;
+  level: string;
+  issuer: string;
+  publish_date: string;
+  status: string;
+  category: string;
+  summary: string;
+  benefits: string;
+  requirements: string;
+  application: string;
+  links: string;
+  communities: string;
+  tags: string;
+  landing_status: string;
+  materials: string;
+  created_at: string;
+  updated_at: string;
+}

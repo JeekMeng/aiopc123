@@ -766,9 +766,11 @@
     var commentsPanel = document.getElementById('admin-comments-panel');
     var submissionsPanel = document.getElementById('admin-submissions-panel');
     var passwordPanel = document.getElementById('admin-password-panel');
+    var policiesPanel = document.getElementById('admin-policies-panel');
     var usersTable = usersPanel.querySelector('.admin-users-table');
     var commentsList = commentsPanel.querySelector('.admin-comments-list');
     var submissionsList = submissionsPanel ? submissionsPanel.querySelector('.admin-submissions-list') : null;
+    var policiesTable = policiesPanel ? policiesPanel.querySelector('.admin-policies-table') : null;
 
     document.querySelectorAll('#adminTabs .nav-link').forEach(function (tab) {
       tab.addEventListener('click', function (e) {
@@ -780,8 +782,234 @@
         commentsPanel.style.display = tabName === 'comments' ? 'block' : 'none';
         if (submissionsPanel) submissionsPanel.style.display = tabName === 'submissions' ? 'block' : 'none';
         if (passwordPanel) passwordPanel.style.display = tabName === 'password' ? 'block' : 'none';
+        if (policiesPanel) {
+          policiesPanel.style.display = tabName === 'policies' ? 'block' : 'none';
+          if (tabName === 'policies') loadPolicies();
+        }
       });
     });
+
+    function loadPolicies(search) {
+      if (!policiesTable) return;
+      var url = '/admin/policies';
+      if (search) url += '?search=' + encodeURIComponent(search);
+      api(url).then(function (data) {
+        var policies = data.policies || [];
+        if (policies.length === 0) {
+          policiesTable.innerHTML = '<div class="text-muted text-center py-3">暂无政策数据</div>';
+          return;
+        }
+        var html =
+          '<table class="table table-hover">' +
+          '<thead><tr><th>ID</th><th>名称</th><th>城市</th><th>发布机构</th><th>日期</th><th>状态</th><th style="width:180px">操作</th></tr></thead><tbody>';
+        policies.forEach(function (p) {
+          var statusMap = { active: '进行中', upcoming: '即将实施', ended: '已结束' };
+          var statusText = statusMap[p.status] || p.status;
+          html +=
+            '<tr>' +
+            '<td><small class="text-muted">' + escapeHtml(p.id) + '</small></td>' +
+            '<td>' + escapeHtml(p.name) + '</td>' +
+            '<td>' + escapeHtml(p.city) + '</td>' +
+            '<td>' + escapeHtml(p.issuer || '-') + '</td>' +
+            '<td><small>' + escapeHtml(p.publish_date || '-') + '</small></td>' +
+            '<td><span class="badge ' + (p.status === 'active' ? 'badge-success' : p.status === 'upcoming' ? 'badge-warning' : 'badge-secondary') + '">' + statusText + '</span></td>' +
+            '<td>' +
+            '<button class="btn btn-sm btn-outline-primary mr-1 policy-edit" data-id="' + escapeHtml(p.id) + '">编辑</button>' +
+            '<button class="btn btn-sm btn-outline-danger policy-delete" data-id="' + escapeHtml(p.id) + '">删除</button>' +
+            '</td>' +
+            '</tr>';
+        });
+        html += '</tbody></table>';
+        policiesTable.innerHTML = html;
+
+        policiesTable.querySelectorAll('.policy-edit').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var id = btn.getAttribute('data-id');
+            api('/admin/policies/' + id).then(function (policy) {
+              openPolicyModal(policy);
+            }).catch(function (err) {
+              alert(err.message);
+            });
+          });
+        });
+
+        policiesTable.querySelectorAll('.policy-delete').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var id = btn.getAttribute('data-id');
+            if (confirm('确定要删除此政策？')) {
+              api('/admin/policies/' + id, { method: 'DELETE' }).then(function () {
+                loadPolicies(document.getElementById('policySearch').value);
+              }).catch(function (err) {
+                alert(err.message);
+              });
+            }
+          });
+        });
+      }).catch(function (err) {
+        policiesTable.innerHTML = '<div class="text-danger text-center py-3">加载失败: ' + err.message + '</div>';
+      });
+    }
+
+    function openPolicyModal(policy) {
+      if (!policy) return;
+      document.getElementById('pf_id').value = policy.id || '';
+      document.getElementById('pf_name').value = policy.name || '';
+      document.getElementById('pf_city').value = policy.city || '';
+      document.getElementById('pf_province').value = policy.province || '';
+      document.getElementById('pf_issuer').value = policy.issuer || '';
+      document.getElementById('pf_publish_date').value = policy.publish_date || '';
+      document.getElementById('pf_level').value = policy.level || 'city';
+      document.getElementById('pf_status').value = policy.status || 'active';
+      document.getElementById('pf_summary').value = policy.summary || '';
+      document.getElementById('pf_official_url').value = (policy.links && policy.links.official) || '';
+      document.getElementById('pf_news_url').value = (policy.links && policy.links.news && policy.links.news[0]) || '';
+
+      var container = document.getElementById('benefits-container');
+      container.innerHTML = '';
+      var benefits = policy.benefits || [];
+      if (benefits.length === 0) {
+        addBenefitRow(container);
+      } else {
+        benefits.forEach(function (b) {
+          addBenefitRow(container, b.item || '', b.amount || '', b.type || 'voucher');
+        });
+      }
+      $('#policyModal').modal('show');
+    }
+
+    function addBenefitRow(container, item, amount, type) {
+      var row = document.createElement('div');
+      row.className = 'benefit-row d-flex gap-2 mb-1';
+      row.innerHTML =
+        '<input type="text" class="form-control form-control-sm" placeholder="项目名" style="width:30%" value="' + escapeHtml(item || '') + '">' +
+        '<input type="text" class="form-control form-control-sm" placeholder="金额/说明" style="width:40%" value="' + escapeHtml(amount || '') + '">' +
+        '<select class="form-control form-control-sm" style="width:20%">' +
+        '<option value="voucher"' + (type === 'voucher' ? ' selected' : '') + '>券</option>' +
+        '<option value="cash"' + (type === 'cash' ? ' selected' : '') + '>现金</option>' +
+        '<option value="loan"' + (type === 'loan' ? ' selected' : '') + '>贷款</option>' +
+        '<option value="other"' + (type === 'other' ? ' selected' : '') + '>其他</option>' +
+        '</select>' +
+        '<button type="button" class="btn btn-sm btn-outline-danger benefit-remove">×</button>';
+      container.appendChild(row);
+      row.querySelector('.benefit-remove').addEventListener('click', function () {
+        row.remove();
+      });
+    }
+
+    function collectBenefits() {
+      var rows = document.querySelectorAll('#benefits-container .benefit-row');
+      var benefits = [];
+      rows.forEach(function (row) {
+        var inputs = row.querySelectorAll('input');
+        var select = row.querySelector('select');
+        var item = inputs[0] ? inputs[0].value.trim() : '';
+        var amount = inputs[1] ? inputs[1].value.trim() : '';
+        var type = select ? select.value : 'voucher';
+        if (item || amount) {
+          benefits.push({ item: item, amount: amount, type: type });
+        }
+      });
+      return benefits;
+    }
+
+    function savePolicy() {
+      var id = document.getElementById('pf_id').value;
+      var data = {
+        name: document.getElementById('pf_name').value.trim(),
+        city: document.getElementById('pf_city').value.trim(),
+        province: document.getElementById('pf_province').value.trim(),
+        issuer: document.getElementById('pf_issuer').value.trim(),
+        publish_date: document.getElementById('pf_publish_date').value,
+        level: document.getElementById('pf_level').value,
+        status: document.getElementById('pf_status').value,
+        summary: document.getElementById('pf_summary').value.trim(),
+        benefits: collectBenefits(),
+        links: {}
+      };
+      var officialUrl = document.getElementById('pf_official_url').value.trim();
+      var newsUrl = document.getElementById('pf_news_url').value.trim();
+      if (officialUrl) data.links.official = officialUrl;
+      if (newsUrl) data.links.news = [newsUrl];
+      if (!data.name || !data.city) {
+        alert('名称和城市为必填项');
+        return;
+      }
+      var method = id ? 'PUT' : 'POST';
+      var url = id ? '/admin/policies/' + encodeURIComponent(id) : '/admin/policies';
+      if (!id) {
+        data.id = prompt('请输入政策 ID（唯一标识）:');
+        if (!data.id) return;
+      }
+      var btn = document.getElementById('policySaveBtn');
+      btn.disabled = true;
+      btn.textContent = '保存中...';
+      api(url, { method: method, body: data }).then(function () {
+        $('#policyModal').modal('hide');
+        loadPolicies(document.getElementById('policySearch').value);
+      }).catch(function (err) {
+        alert(err.message);
+      }).finally(function () {
+        btn.disabled = false;
+        btn.textContent = '保存';
+      });
+    }
+
+    // --- policies tab event bindings ---
+    if (policiesPanel) {
+      document.getElementById('policySearchBtn').addEventListener('click', function () {
+        loadPolicies(document.getElementById('policySearch').value);
+      });
+      document.getElementById('policySearch').addEventListener('keyup', function (e) {
+        if (e.key === 'Enter') loadPolicies(this.value);
+      });
+      document.getElementById('policyImportBtn').addEventListener('click', function () {
+        document.getElementById('policyFileInput').click();
+      });
+      document.getElementById('policyFileInput').addEventListener('change', function (e) {
+        var file = e.target.files[0];
+        if (!file) return;
+        var reader = new FileReader();
+        reader.onload = function (ev) {
+          try {
+            var json = JSON.parse(ev.target.result);
+            var arr = Array.isArray(json) ? json : (json.policies || []);
+            if (arr.length === 0) { alert('JSON 格式错误，需要 policies 数组'); return; }
+            api('/admin/policies/import', { method: 'POST', body: { policies: arr } }).then(function (res) {
+              alert('导入完成: ' + res.imported + '/' + res.total + ' 条');
+              loadPolicies(document.getElementById('policySearch').value);
+            }).catch(function (err) {
+              alert(err.message);
+            });
+          } catch (err) {
+            alert('JSON 解析失败: ' + err.message);
+          }
+        };
+        reader.readAsText(file);
+        e.target.value = '';
+      });
+      document.getElementById('policyExportBtn').addEventListener('click', function () {
+        api('/admin/policies/export').then(function (data) {
+          var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          a.href = url;
+          a.download = 'policies-' + new Date().toISOString().slice(0, 10) + '.json';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        }).catch(function (err) {
+          alert(err.message);
+        });
+      });
+      document.getElementById('benefitAddBtn').addEventListener('click', function () {
+        addBenefitRow(document.getElementById('benefits-container'));
+      });
+      document.getElementById('policySaveBtn').addEventListener('click', savePolicy);
+      $('#policyModal').on('hidden.bs.modal', function () {
+        document.getElementById('pf_id').value = '';
+      });
+    }
 
     function loadUsers() {
       api('/admin/users').then(function (data) {
