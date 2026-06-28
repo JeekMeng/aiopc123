@@ -23,6 +23,7 @@
 {{ partial "top_nav.html" . }}
 
 <div class="page-container">
+{{ .Store.Set "policy_list" $policies }}
 <div class="left-sidebar">{{ partial "sidebar.html" . }}</div>
 {{ partial "content_header.html" . }}
 
