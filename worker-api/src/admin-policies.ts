@@ -12,7 +12,14 @@ export async function adminListPolicies(c: Context): Promise<Response> {
     }
     sql += ' ORDER BY publish_date DESC';
     const result = await c.env.DB.prepare(sql).bind(...params).all();
-    return c.json({ policies: result.results });
+    const policies = (result.results as any[]).map(p => ({
+      ...p,
+      benefits: safeParseJSON(p.benefits, []),
+      links: safeParseJSON(p.links, {}),
+      communities: safeParseJSON(p.communities, []),
+      tags: safeParseJSON(p.tags, []),
+    }));
+    return c.json({ policies });
   } catch (err) {
     console.error('admin list policies error:', err);
     return c.json({ error: '获取政策列表失败' }, 500);

@@ -1,5 +1,20 @@
 import { Context } from 'hono';
 
+function safeParseJSON(str: string | null | undefined, fallback: any): any {
+  if (!str) return fallback;
+  try { return JSON.parse(str); } catch { return fallback; }
+}
+
+function parsePolicy(p: Record<string, any>): any {
+  return {
+    ...p,
+    benefits: safeParseJSON(p.benefits, []),
+    links: safeParseJSON(p.links, {}),
+    communities: safeParseJSON(p.communities, []),
+    tags: safeParseJSON(p.tags, []),
+  };
+}
+
 export async function listPolicies(c: Context): Promise<Response> {
   try {
     const { city, status, province } = c.req.query();
@@ -10,7 +25,7 @@ export async function listPolicies(c: Context): Promise<Response> {
     if (province) { sql += ' AND province = ?'; params.push(province); }
     sql += ' ORDER BY publish_date DESC';
     const result = await c.env.DB.prepare(sql).bind(...params).all();
-    return c.json(result.results);
+    return c.json((result.results as any[]).map(parsePolicy));
   } catch (err) {
     console.error('list policies error:', err);
     return c.json({ error: '获取政策列表失败' }, 500);
@@ -22,7 +37,7 @@ export async function getPolicy(c: Context): Promise<Response> {
     const id = c.req.param('id')!;
     const policy = await c.env.DB.prepare('SELECT * FROM policies WHERE id = ?').bind(id).first();
     if (!policy) return c.json({ error: '政策不存在' }, 404);
-    return c.json(policy);
+    return c.json(parsePolicy(policy as Record<string, any>));
   } catch (err) {
     console.error('get policy error:', err);
     return c.json({ error: '获取政策失败' }, 500);
