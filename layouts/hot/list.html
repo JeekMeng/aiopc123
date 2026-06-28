@@ -54,7 +54,7 @@
             </div>
           </div>
           <div class="hot-card-footer">
-            {{ with .links.official }}
+            {{ with (index .links "official") }}
             <a href="{{ . }}" class="hot-card-btn" target="_blank" rel="nofollow noopener"><i class="fas fa-external-link-alt"></i> 查看原文</a>
             {{ end }}
             <a href="/policy/#city-{{ printf "%s" (md5 .city) }}" class="hot-card-btn hot-card-btn-outline" rel="nofollow"><i class="fas fa-map-marker-alt"></i> 同城政策</a>
