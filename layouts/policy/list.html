@@ -99,8 +99,10 @@
                                     {{ with (index .links "official") }}
                                     <a href="{{ . }}" class="policy-btn" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> 查看原文</a>
                                     {{ end }}
-                                    {{ range (first (len (index .links "news")) (index .links "news")) }}
+                                    {{ with (index .links "news") }}
+                                    {{ range (first (len .) .) }}
                                     <a href="{{ . }}" class="policy-btn policy-btn-secondary" target="_blank" rel="noopener"><i class="fas fa-newspaper"></i> 新闻报道</a>
+                                    {{ end }}
                                     {{ end }}
                                 </div>
                             </div>
@@ -148,8 +150,10 @@
                                     {{ with (index .links "official") }}
                                     <a href="{{ . }}" class="policy-btn" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> 查看原文</a>
                                     {{ end }}
-                                    {{ range (first (len (index .links "news")) (index .links "news")) }}
+                                    {{ with (index .links "news") }}
+                                    {{ range (first (len .) .) }}
                                     <a href="{{ . }}" class="policy-btn policy-btn-secondary" target="_blank" rel="noopener"><i class="fas fa-newspaper"></i> 新闻报道</a>
+                                    {{ end }}
                                     {{ end }}
                                 </div>
                             </div>
