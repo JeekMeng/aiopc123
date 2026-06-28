@@ -84,9 +84,10 @@
                                     {{ end }}
                                 </div>
                                 <p class="policy-summary">{{ .summary }}</p>
-                                {{ with .benefits }}
+                                {{ $benefits := .benefits | jsonify | unmarshal }}
+                                {{ with $benefits }}
                                 <div class="policy-benefits">
-                                    {{ range . }}
+                                    {{ range $benefits }}
                                     <span class="policy-benefit-pill" title="{{ .amount }}">{{ .item }}{{ if and .amount (ne .amount "") }} · {{ .amount }}{{ end }}</span>
                                     {{ end }}
                                 </div>
@@ -96,10 +97,11 @@
                                     <span class="policy-date"><i class="fas fa-calendar-alt"></i> {{ .publish_date }}</span>
                                 </div>
                                 <div class="policy-actions">
-                                    {{ with .links.official }}
+                                    {{ with (index .links "official") }}
                                     <a href="{{ . }}" class="policy-btn" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> 查看原文</a>
                                     {{ end }}
-                                    {{ range .links.news }}
+                                    {{ $news := (index .links "news") | jsonify | unmarshal }}
+                                    {{ range $news }}
                                     <a href="{{ . }}" class="policy-btn policy-btn-secondary" target="_blank" rel="noopener"><i class="fas fa-newspaper"></i> 新闻报道</a>
                                     {{ end }}
                                 </div>
@@ -133,9 +135,10 @@
                                     {{ end }}
                                 </div>
                                 <p class="policy-summary">{{ .summary }}</p>
-                                {{ with .benefits }}
+                                {{ $benefits := .benefits | jsonify | unmarshal }}
+                                {{ with $benefits }}
                                 <div class="policy-benefits">
-                                    {{ range . }}
+                                    {{ range $benefits }}
                                     <span class="policy-benefit-pill" title="{{ .amount }}">{{ .item }}{{ if and .amount (ne .amount "") }} · {{ .amount }}{{ end }}</span>
                                     {{ end }}
                                 </div>
@@ -145,10 +148,11 @@
                                     <span class="policy-date"><i class="fas fa-calendar-alt"></i> {{ .publish_date }}</span>
                                 </div>
                                 <div class="policy-actions">
-                                    {{ with .links.official }}
+                                    {{ with (index .links "official") }}
                                     <a href="{{ . }}" class="policy-btn" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> 查看原文</a>
                                     {{ end }}
-                                    {{ range .links.news }}
+                                    {{ $news := (index .links "news") | jsonify | unmarshal }}
+                                    {{ range $news }}
                                     <a href="{{ . }}" class="policy-btn policy-btn-secondary" target="_blank" rel="noopener"><i class="fas fa-newspaper"></i> 新闻报道</a>
                                     {{ end }}
                                 </div>
