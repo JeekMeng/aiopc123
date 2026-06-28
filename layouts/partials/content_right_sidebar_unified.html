@@ -7,9 +7,12 @@
     {{ if not (hasPrefix $.Site.BaseURL "http://localhost") }}
     {{ $apiBase := $.Site.Params.api_base }}
     {{ $stats := dict }}
-    {{ $statsResp := resources.GetRemote (printf "%s/policies/stats" $apiBase) }}
-    {{ if not $statsResp.Err }}
-      {{ $stats = $statsResp.Content | unmarshal }}
+    {{ with try (resources.GetRemote (printf "%s/policies/stats" $apiBase)) }}
+      {{ with .Err }}
+        {{ warnf "failed to fetch policy stats: %s" . }}
+      {{ else with .Value }}
+        {{ $stats = .Content | unmarshal }}
+      {{ end }}
     {{ end }}
     {{ with $stats.benefit_tags }}
     <div class="sidebar-section">
