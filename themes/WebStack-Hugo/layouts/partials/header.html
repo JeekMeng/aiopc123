@@ -94,6 +94,12 @@
     {{ end }} 
     <!-- end 51.LA 网站统计 -->
 
+    <!-- 51.LA 性能监控 -->
+    <script src="https://sdk.51.la/perf/js-sdk-perf.min.js" crossorigin="anonymous"></script>
+    <script>
+      new LingQue.Monitor().init({id:"3QPYP9rH8BvJZq2X"});
+    </script>
+
     <!-- Google AdSense -->
     {{ if .Site.Params.seo.GoogleAdsClient }}
     <script defer src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ $.Site.Params.seo.GoogleAdsClient }}" crossorigin="anonymous"></script>

@@ -8,6 +8,20 @@
   var currentUser = null;
   var modalEl = null;
   var AUTH_KEY = 'auth_user';
+  var _cachedPolicies = [];
+  var CITY_CODES = {
+    "上海": "310000", "北京": "110000", "天津": "120000", "重庆": "500000",
+    "南京": "320100", "苏州": "320500", "无锡": "320200", "常州": "320400",
+    "南通": "320600", "扬州": "321000", "徐州": "320300", "盐城": "320900",
+    "宿迁": "321300", "连云港": "320700",
+    "杭州": "330100", "宁波": "330200", "温州": "330300",
+    "广州": "440100", "深圳": "440300", "珠海": "440400", "佛山": "440600",
+    "东莞": "441900", "中山": "442000", "惠州": "441300",
+    "成都": "510100", "武汉": "420100", "长沙": "430100",
+    "郑州": "410100", "西安": "610100", "济南": "370100", "青岛": "370200",
+    "合肥": "340100", "福州": "350100", "厦门": "350200",
+    "昆明": "530100", "石家庄": "130100", "海口": "460100"
+  };
 
   function saveAuth(user) {
     try { localStorage.setItem(AUTH_KEY, JSON.stringify(user)); } catch (e) {} }
@@ -795,6 +809,7 @@
       if (search) url += '?search=' + encodeURIComponent(search);
       api(url).then(function (data) {
         var policies = data.policies || [];
+        _cachedPolicies = policies;
         if (policies.length === 0) {
           policiesTable.innerHTML = '<div class="text-muted text-center py-3">暂无政策数据</div>';
           return;
@@ -937,8 +952,17 @@
       var method = id ? 'PUT' : 'POST';
       var url = id ? '/admin/policies/' + encodeURIComponent(id) : '/admin/policies';
       if (!id) {
-        data.id = prompt('请输入政策 ID（唯一标识）:');
-        if (!data.id) return;
+        var code = CITY_CODES[data.city];
+        if (!code) { alert('无法识别城市编码，请先选择有效城市'); return; }
+        var prefix = code + '-';
+        var maxSeq = 99;
+        _cachedPolicies.forEach(function(p) {
+          if (p.id && p.id.indexOf(prefix) === 0) {
+            var num = parseInt(p.id.slice(prefix.length), 10);
+            if (!isNaN(num) && num > maxSeq) maxSeq = num;
+          }
+        });
+        data.id = prefix + (maxSeq + 1);
       }
       var btn = document.getElementById('policySaveBtn');
       btn.disabled = true;
