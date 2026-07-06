@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var API_BASE = window.location.port === '1313'
+  var API_BASE = (window.location.port === '1313' || window.location.port === '1317')
     ? 'http://localhost:8787/api'
     : '/api';
 

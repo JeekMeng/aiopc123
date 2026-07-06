@@ -46,29 +46,83 @@ export async function getPolicy(c: Context): Promise<Response> {
 
 export async function getPolicyStats(c: Context): Promise<Response> {
   try {
-    const totalResult = await c.env.DB.prepare('SELECT COUNT(*) as count FROM policies').first<{ count: number }>();
-    const citiesResult = await c.env.DB.prepare('SELECT DISTINCT city FROM policies ORDER BY city').all<{ city: string }>();
-    const allPolicies = await c.env.DB.prepare('SELECT benefits FROM policies').all<{ benefits: string }>();
+    const DB = c.env.DB;
+
+    const results = await Promise.all([
+      DB.prepare('SELECT COUNT(*) as count FROM policies').first(),
+      DB.prepare('SELECT DISTINCT city FROM policies ORDER BY city').all(),
+      DB.prepare('SELECT province, COUNT(*) as count, COUNT(DISTINCT city) as cities FROM policies GROUP BY province ORDER BY count DESC').all(),
+      DB.prepare("SELECT substr(publish_date,1,4) as year, COUNT(*) as count FROM policies WHERE publish_date != '' GROUP BY year ORDER BY year").all(),
+      DB.prepare('SELECT category, COUNT(*) as count FROM policies GROUP BY category ORDER BY count DESC').all(),
+      DB.prepare('SELECT level, COUNT(*) as count FROM policies GROUP BY level ORDER BY count DESC').all(),
+      DB.prepare('SELECT landing_status, COUNT(*) as count FROM policies GROUP BY landing_status').all(),
+      DB.prepare("SELECT landing_difficulty, COUNT(*) as count FROM policies WHERE landing_difficulty != '' GROUP BY landing_difficulty").all(),
+      DB.prepare('SELECT city, province, COUNT(*) as count FROM policies GROUP BY city ORDER BY count DESC LIMIT 20').all(),
+      DB.prepare('SELECT benefits, requirements, tags FROM policies').all(),
+    ]);
+
+    const totalResult = results[0] as any;
+    const citiesResult = results[1] as any;
+    const provinceResult = results[2] as any;
+    const yearResult = results[3] as any;
+    const categoryResult = results[4] as any;
+    const levelResult = results[5] as any;
+    const landingResult = results[6] as any;
+    const difficultyResult = results[7] as any;
+    const cityTopResult = results[8] as any;
+    const allPolicies = results[9] as any;
 
     const itemCounts = new Map<string, number>();
+    const fundingItems: { policy: string; item: string; amount: number; city: string }[] = [];
+    const allIndustries = new Set<string>();
+
     for (const row of allPolicies.results) {
-      if (!row.benefits) continue;
-      try {
-        const benefits = JSON.parse(row.benefits);
-        for (const b of benefits) {
-          if (b.item) itemCounts.set(b.item, (itemCounts.get(b.item) || 0) + 1);
-        }
-      } catch { /* skip invalid JSON */ }
+      if (row.benefits) {
+        try {
+          const benefits = JSON.parse(row.benefits);
+          for (const b of benefits) {
+            if (b?.item) {
+              itemCounts.set(b.item, (itemCounts.get(b.item) || 0) + 1);
+            }
+            const amt = Number(b?.amount_max) || 0;
+            if (amt > 0) {
+              fundingItems.push({ policy: '', item: b.item || '', amount: amt, city: '' });
+            }
+          }
+        } catch { /* skip */ }
+      }
+      if (row.requirements) {
+        try {
+          const req = JSON.parse(row.requirements);
+          if (req?.industries) {
+            for (const ind of req.industries) {
+              if (ind) allIndustries.add(ind);
+            }
+          }
+        } catch { /* skip */ }
+      }
     }
+
     const benefitTags = [...itemCounts.entries()]
       .map(([item, count]) => ({ item, count }))
       .sort((a, b) => b.count - a.count)
       .slice(0, 30);
 
+    fundingItems.sort((a, b) => b.amount - a.amount);
+
     return c.json({
       total: totalResult?.count || 0,
-      cities: citiesResult.results.map(r => r.city),
+      cities: citiesResult.results.map((r: any) => r.city),
+      province_stats: provinceResult.results,
+      year_stats: yearResult.results,
+      category_stats: categoryResult.results,
+      level_stats: levelResult.results,
+      landing_stats: landingResult.results,
+      difficulty_stats: difficultyResult.results,
+      city_top: cityTopResult.results,
       benefit_tags: benefitTags,
+      funding_top: fundingItems.slice(0, 10),
+      industry_count: allIndustries.size,
     });
   } catch (err) {
     console.error('get policy stats error:', err);

@@ -3,8 +3,8 @@ title: 蛙蛙写作
 date: '2026-06-20'
 draft: false
 schema_type: SoftwareApplication
-official_url: https://wawawriter.com
-mobile_url: https://wawawriter.com
+official_url: "https://wawawriter.cgref.cn/s/ogewww4ep2"
+mobile_url: "https://wawawriter.cgref.cn/s/ogewww4ep2"
 company: 蛙蛙写作
 category:
 - OPC-AI赋能
