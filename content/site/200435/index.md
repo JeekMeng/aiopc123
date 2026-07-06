@@ -1,5 +1,5 @@
 ---
-title: 蛙蛙写作
+title: "蛙蛙写作 - AI办公工具 - AI写文神器"
 date: '2026-06-20'
 draft: false
 schema_type: SoftwareApplication

@@ -1,5 +1,5 @@
 ---
-title: https://anygen.io
+title: "AnyGen - AI智能体 - AI创作神器"
 date: '2026-06-26'
 draft: false
 schema_type: SoftwareApplication
@@ -8,7 +8,7 @@ mobile_url: https://anygen.io
 company: https://anygen.io
 category: ['']
 score: 9.3
-description: 发现AI创作新可能 - AnyGen.io 提供智能写作、图像生成、代码辅助等多元化AI工具，助力创作者高效产出优质内容。无需复杂设置，在线即可体验前沿AI技术，适用于文案撰写、设计灵感、编程开发等场景。立即访问，解锁你的AI创造力。
+description: "AnyGen.io提供AI驱动的创意生成工具，助力用户快速创建文本、图像和代码。核心功能包括智能内容生成与个性化定制，适用于营销、设计及开发场景，提升工作效率。"
 ---
 
 ## 🎯 网站介绍

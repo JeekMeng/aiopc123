@@ -1,5 +1,5 @@
 ---
-title: "vivo蓝心大模型 - AI词元Token - 大模型API服务"           
+title: "vivo蓝心大模型 - AI模型平台"
 date: 2026-05-15
 draft: false
 schema_type: "SoftwareApplication"
