@@ -360,14 +360,34 @@
           logo: 200314.webp
           url: /site/200314/
           description: AI对话式Excel，解放双手专注分析
+        - title: 觅知网 - AI办公工具 - 觅知网
+          logo: 200448.webp
+          url: /site/200448/
+          description: 觅知网，让设计灵感一键生成，AI赋能办公更高效！
         - title: ChatPPT-AI办公工具-AI生成PPT
           logo: 200311.webp
           url: /site/200311/
           description: AI一键生成PPT，高效办公新选择
+        - title: Pi - AI办公工具 - 一键输入
+          logo: 200442.webp
+          url: /site/200442/
+          description: 一键输入，AI秒变精美PPT！
         - title: 飞书多维表格-AI办公工具-智能多维表格
           logo: 200315.webp
           url: /site/200315/
           description: AI赋能，表格即系统，协作更高效。
+        - title: 歌者PPT - AI办公工具 - 一键生成专业设计
+          logo: 200446.webp
+          url: /site/200446/
+          description: 一键生成专业设计，让创意更高效！
+        - title: 咔片PPT - AI办公工具 - 3分钟搞定PPT
+          logo: default.webp
+          url: /site/200447/
+          description: 3分钟搞定PPT，AI一键生成！
+        - title: 小浣熊家族 Raccoon - AI办公工具
+          logo: 200441.webp
+          url: /site/200441/
+          description: 集AI编程、办公与数据分析于一体的全能智能助手
         - title: 蛙蛙写作 - AI办公工具 - AI写文神器
           logo: 200435.webp
           url: https://wawawriter.cgref.cn/s/ogewww4ep2
@@ -384,6 +404,10 @@
           logo: 200310.webp
           url: /site/200310/
           description: AI赋能，轻松创作精美PPT
+        - title: 爱设计PPT - AI办公工具
+          logo: 200445.webp
+          url: /site/200445/
+          description: AI一键生成专业PPT，从此设计不求人。
     - term: AI编程工具
       links:
         - title: Cursor-AI编程工具-智能代码助手
