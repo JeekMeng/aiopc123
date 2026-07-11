@@ -37,6 +37,10 @@
       logo: 200086.webp
       url: /site/200086/
       description: 海量存储，安全分享，随时随地。
+    - title: 51LA - 数据统计 - 新站手选
+      logo: 200449.webp
+      url: /site/200449/
+      description: 新站手选，千万免费额度
     - title: Bing批量收录IndexNow - SEO优化 - 微软批量收录页面
       logo: 200418.webp
       url: https://www.bing.com/indexnow/getstarted
@@ -48,10 +52,18 @@
       logo: 200314.webp
       url: /site/200314/
       description: AI对话式Excel，解放双手专注分析
+    - title: 码上飞 - AI智能体 - 一句话就能做应用
+      logo: 200453.webp
+      url: /site/200453/
+      description: 一句话就能做应用
     - title: 蛙蛙写作 - AI办公工具 - AI写文神器
       logo: 200435.webp
-      url: https://wawawriter.cgref.cn/s/ogewww4ep2
+      url: /site/200435/
       description: AI写文神器，灵感无限！
+    - title: 沁言学术 - AI智能体 - 超级学术智能体
+      logo: 200456.webp
+      url: /site/200456/
+      description: 超级学术智能体
     - title: 阶跃AI-智能助手
       logo: 200413.webp
       url: /site/200413/
@@ -72,6 +84,10 @@
       logo: default.webp
       url: /site/200440/
       description: 一键安装，24小时全能AI机器人随身带
+    - title: AstronClaw - AI智能体
+      logo: 200455.webp
+      url: /site/200455/
+      description: 科大讯飞旗下的智能体
     - title: 第五AI提示词-AI提示词-智能优化
       logo: 200427.webp
       url: /site/200427/
@@ -87,10 +103,10 @@
       logo: 200434.webp
       url: /site/200434/
       description: 一键优化提示词，让AI输出更高效！
-    - title: ArkClaw-AI龙虾助手-火山引擎
-      logo: 200403.webp
-      url: /site/200403/
-      description: 字节出品的龙虾
+    - title: 百度统计 - 数据统计 - 国内网站首选
+      logo: 200450.webp
+      url: /site/200450/
+      description: 国内网站首选，必须先备案。
     - title: 豆包 - AI搜索工具 - AI全能助手
       logo: 200295.webp
       url: https://doubao.com
@@ -99,6 +115,10 @@
       logo: 200315.webp
       url: /site/200315/
       description: AI赋能，表格即系统，协作更高效。
+    - title: ArkClaw - AI龙虾助手
+      logo: 200308.webp
+      url: https://volcengine.cgref.cn/s/rpex7p4k90
+      description: 国产OpenClaw：ArkClaw（字节出品）
     - title: DeepSeek - AI搜索工具 - 智能助手
       logo: 200296.webp
       url: https://chat.deepseek.com
@@ -140,6 +160,10 @@
           logo: 200355.webp
           url: /site/200355/
           description: 用Dify，让AI从创意走向价值。
+        - title: AiPy爱派 - AI智能体
+          logo: 200454.webp
+          url: /site/200454/
+          description: 超级AI牛马智能体工厂
         - title: LongCat AI - AI智能体 - 长猫AI
           logo: 200439.webp
           url: /site/200439/
@@ -148,6 +172,10 @@
           logo: 200352.webp
           url: /site/200352/
           description: 零代码打造专属AI，微信直达智能体
+        - title: 码上飞 - AI智能体 - 一句话就能做应用
+          logo: 200453.webp
+          url: /site/200453/
+          description: 一句话就能做应用
         - title: Atypica - AI智能体 - AI洞察人心
           logo: 200437.webp
           url: /site/200437/
@@ -184,6 +212,10 @@
           logo: 200348.webp
           url: /site/200348/
           description: 让AI成为你的专属数字同事。
+        - title: 沁言学术 - AI智能体 - 超级学术智能体
+          logo: 200456.webp
+          url: /site/200456/
+          description: 超级学术智能体
         - title: 攻壳智能体 - AI智能体 - 发现AI利器
           logo: default.webp
           url: /site/200436/
@@ -212,6 +244,10 @@
           logo: default.webp
           url: /site/200440/
           description: 一键安装，24小时全能AI机器人随身带
+        - title: AstronClaw - AI智能体
+          logo: 200455.webp
+          url: /site/200455/
+          description: 科大讯飞旗下的智能体
         - title: 01Agent-AI智能体-图文创作神器
           logo: 200344.webp
           url: /site/200344/
@@ -302,10 +338,6 @@
           description: 阿里千问，智能助手全能王
     - term: AI龙虾助手
       links:
-        - title: ArkClaw-AI龙虾助手-火山引擎
-          logo: 200403.webp
-          url: /site/200403/
-          description: 字节出品的龙虾
         - title: Kimi Claw - AI龙虾助手
           logo: 200306.webp
           url: https://www.kimi.com/bot
@@ -316,7 +348,7 @@
           description: AI赋能办公，高效并行完成任务！
         - title: ArkClaw - AI龙虾助手
           logo: 200308.webp
-          url: https://www.volcengine.com/product/arkclaw
+          url: https://volcengine.cgref.cn/s/rpex7p4k90
           description: 国产OpenClaw：ArkClaw（字节出品）
         - title: QClaw-AI龙虾助手-腾讯AI助手
           logo: 200409.webp
@@ -334,18 +366,6 @@
           logo: 200307.webp
           url: https://qclawd.com/
           description: 国产OpenClaw：QClaw（腾讯出品）
-        - title: AutoClaw（澳龙）-AI龙虾助手-AI助手工具
-          logo: 200408.webp
-          url: /site/200408/
-          description: 一键安装，小白也能秒变AI高手！
-        - title: 讯飞星辰Agent平台-AI龙虾助手-智能体搭建
-          logo: 200405.webp
-          url: /site/200405/
-          description: 零代码打造你的专属AI智能体
-        - title: Kimi Claw-AI龙虾助手-全天候AI助手
-          logo: 200410.webp
-          url: /site/200410/
-          description: 7x24小时在线，AI长期记忆助手
         - title: AutoClaw（澳龙） - AI龙虾助手
           logo: 200309.webp
           url: https://autoglm.zhipuai.cn/autoclaw
@@ -390,7 +410,7 @@
           description: 集AI编程、办公与数据分析于一体的全能智能助手
         - title: 蛙蛙写作 - AI办公工具 - AI写文神器
           logo: 200435.webp
-          url: https://wawawriter.cgref.cn/s/ogewww4ep2
+          url: /site/200435/
           description: AI写文神器，灵感无限！
         - title: 笔格PPT-AI办公工具-智能PPT生成助手
           logo: 200312.webp
@@ -550,10 +570,6 @@
           logo: 200004.webp
           url: /site/200004/
           description: 云端方案，一键加速企业成长
-        - title: 江苏政务服务 - 工商注册 - 江苏一人公司注册
-          logo: 200319.webp
-          url: https://www.jszwfw.gov.cn
-          description: 江苏一人公司注册
         - title: 上海市一网通办 - 工商注册 - 上海一人公司注册
           logo: default.webp
           url: https://zwdt.sh.gov.cn
@@ -989,10 +1005,22 @@
           description: 数据驱动直播，灰豚助你领跑
     - term: 数据统计
       links:
+        - title: 百度统计 - 数据统计 - 国内网站首选
+          logo: 200450.webp
+          url: /site/200450/
+          description: 国内网站首选，必须先备案。
+        - title: 51LA - 数据统计 - 新站手选
+          logo: 200449.webp
+          url: /site/200449/
+          description: 新站手选，千万免费额度
         - title: GrowingIO - OPC推广运营 - 用户行为分析平台
           logo: 200153.webp
           url: /site/200153/
           description: 数据驱动增长，智能引领未来
+        - title: 友盟+  - 数据统计
+          logo: 200451.webp
+          url: /site/200451/
+          description: Web和APP都能统计
     - term: 多平台分发
       links:
         - title: 易媒助手 - OPC推广运营 - 多平台内容分发

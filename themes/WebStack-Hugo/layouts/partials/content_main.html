@@ -70,7 +70,7 @@
                                     </div>
                                     <div class="url-info flex-fill">
                                         <div class="text-sm overflowClip_1">
-                                            <strong>{{ .title }}</strong>
+                                            <strong>{{ trim (index (split .title "-") 0) " " }}</strong>
                                         </div>
                                         <p class="overflowClip_1 m-0 text-muted text-xs">{{ .description }}</p>
                                     </div>
@@ -142,7 +142,7 @@
                                     </div>
                                     <div class="url-info flex-fill">
                                         <div class="text-sm overflowClip_1">
-                                            <strong>{{ .title }}</strong>
+                                            <strong>{{ trim (index (split .title "-") 0) " " }}</strong>
                                         </div>
                                         <p class="overflowClip_1 m-0 text-muted text-xs">{{ .description }}</p>
                                     </div>
