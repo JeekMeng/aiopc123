@@ -1,3 +1,16 @@
+---
+title: Image Prompt - AI提示词
+date: '2026-07-15'
+draft: false
+schema_type: SoftwareApplication
+official_url: https://imageprompt.org
+mobile_url: https://imageprompt.org
+company: Image Prompt
+category: [OPC-AI赋能, AI提示词]
+score: 9.5
+description: Image Prompt提供AI驱动的图像提示词生成与优化工具，支持Midjourney、Flux、Stable Diffusion等平台，助您高效创建并优化图
+---
+
 ## 🎯 网站介绍
 
     Image Prompt 是一个专注于AI图像提示词生成与优化的在线平台。它利用AI技术帮助用户创建、优化和管理用于Midjourney、Flux、Stable Diffusion等主流AI绘画工具的提示词，提升图像生成质量与效率。

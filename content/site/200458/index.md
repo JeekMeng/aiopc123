@@ -1,3 +1,16 @@
+---
+title: Image to Prompt - AI图像工具
+date: '2026-07-15'
+draft: false
+schema_type: SoftwareApplication
+official_url: https://imagetoprompt.org
+mobile_url: https://imagetoprompt.org
+company: Image to Prompt
+category: [OPC-AI赋能, AI图像工具]
+score: 9.1
+description: 上传图片即可在数秒内将图像转换为精准提示词，Image to Prompt 提供高效、便捷的AI图像转文本服务，助您快速获取创意灵感。
+---
+
 ## 🎯 网站介绍
 
     Image to Prompt 是一个在线工具，用户只需上传图片，即可在几秒内自动生成对应的AI提示词（Prompt）。它利用先进的图像识别技术，帮助用户快速理解图片内容，并获取可用于AI绘画（如Midjourney、Stable Diffusion）的文本描述。

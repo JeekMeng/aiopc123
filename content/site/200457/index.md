@@ -1,3 +1,16 @@
+---
+title: AI Prompt Generator - AI提示词 - 一键生成专业提示
+date: '2026-07-15'
+draft: false
+schema_type: SoftwareApplication
+official_url: https://aipromptgenerator.ai
+mobile_url: https://aipromptgenerator.ai
+company: AI Prompt Generator
+category: [OPC-AI赋能, AI提示词]
+score: 9.6
+description: AI Prompt Generator免费生成专业AI提示词，支持文本、图像和视频模型，通过专家级提示工程优化输出质量，是高效创作的最佳工具。
+---
+
 ## 🎯 网站介绍
 
 AI Prompt Generator – Best Tool for Generating AI Prompts 是一个专业的免费AI提示词生成工具，专为文本、图像和视频AI模型设计。它通过专家级的提示词工程，帮助用户快速生成高质量、精准的Prompt，从而显著提升AI模型的输出质量与效率。

@@ -1,3 +1,16 @@
+---
+title: Replicate - AI编程工具
+date: '2026-07-15'
+draft: false
+schema_type: SoftwareApplication
+official_url: https://replicate.com
+mobile_url: https://replicate.com
+company: Replicate
+category: [OPC-AI赋能, AI编程工具]
+score: 9.5
+description: Replicate提供云端API，运行开源机器学习模型。开发者可快速部署、测试和集成AI功能，简化模型调用流程，提升应用开发效率。
+---
+
 ## 🎯 网站介绍
 
     Replicate 是一个提供开源机器学习模型云API的平台，用户无需管理基础设施即可通过简单接口运行数百种预训练模型，涵盖图像生成、文本处理、音频合成等领域，支持快速集成和按需付费。

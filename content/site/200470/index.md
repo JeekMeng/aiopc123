@@ -1,3 +1,18 @@
+---
+title: AI Image Generator - AI图像工具 - 点字成画
+date: '2026-07-15'
+draft: false
+schema_type: SoftwareApplication
+official_url: https://imagesart.ai
+mobile_url: https://imagesart.ai
+company: AI Image Generator
+category: [OPC-AI赋能, AI图像工具]
+score: 9.3
+description: AI Image Generator提供多语言文本转图像服务，支持6种AI模型和魔法提示增强，每日免费额度，无需设计技能，数秒内创建专业图像。
+tags: [ai image generator, ai art, text to image, ai art generator, image generation]
+keywords: [ai image generator, ai art, text to image, ai art generator, image generation]
+---
+
 ## 🎯 网站介绍
 
     AI Image Generator 是一个强大的在线AI图像生成平台，支持6种以上AI模型，用户只需输入文字描述即可在几秒内生成专业级图像。它具备魔法提示增强功能，可自动优化描述，即使无设计经验也能轻松创作，并每日提供免费额度。
