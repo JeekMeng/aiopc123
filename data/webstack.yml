@@ -262,6 +262,10 @@
           description: 用AI智能体，分钟级自动化工作流
     - term: AI提示词
       links:
+        - title: AI Prompt Generator - AI提示词 - 一键生成专业提示
+          logo: 200457.webp
+          url: /site/200457/
+          description: 一键生成专业提示，释放AI潜能。
         - title: PromptEditor-AI提示词-编辑器
           logo: 200434.webp
           url: /site/200434/
@@ -274,6 +278,10 @@
           logo: 200430.webp
           url: /site/200430/
           description: "AI工具聚合地，创作灵感一键直达！"
+        - title: Image Prompt - AI提示词
+          logo: 200465.webp
+          url: /site/200465/
+          description: 用AI生成完美创意图像提示词
         - title: AI Prompts-AI提示词-全球领先提示词市场
           logo: 200425.webp
           url: /site/200425/
@@ -306,6 +314,16 @@
           logo: 200427.webp
           url: /site/200427/
           description: 用提示词点燃AI的无限创造力！
+    - term: AI图像工具
+      links:
+        - title: Image to Prompt - AI图像工具
+          logo: 200458.webp
+          url: /site/200458/
+          description: 一句话生成精准提示，秒变创意高手！
+        - title: AI Image Generator - AI图像工具 - 点字成画
+          logo: 200470.webp
+          url: /site/200470/
+          description: 点字成画，秒变大师。
     - term: AI搜索工具
       links:
         - title: 腾讯元宝 - AI搜索工具 - 腾讯云上
@@ -434,6 +452,10 @@
           logo: 200301.webp
           url: /site/200301/
           description: AI编程，效率翻倍
+        - title: Replicate - AI编程工具
+          logo: 200469.webp
+          url: /site/200469/
+          description: 用云端API让AI触手可及！
         - title: 通义灵码-AI编程工具-阿里云智能编码助手
           logo: 200302.webp
           url: /site/200302/
