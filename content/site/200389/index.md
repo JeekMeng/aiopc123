@@ -1,5 +1,5 @@
 ---
-title: "创建对话补全-AI词元Token-对话补全API"           
+title: "KIMI开放平台-AI词元Token-对话补全API"
 date: 2026-05-15
 draft: false
 schema_type: "SoftwareApplication"

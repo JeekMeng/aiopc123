@@ -316,6 +316,10 @@
           description: 用提示词点燃AI的无限创造力！
     - term: AI图像工具
       links:
+        - title: 堆友 - AI图像工具 - 堆友
+          logo: 200477.webp
+          url: /site/200477/
+          description: 堆友，让每个设计师都能轻松创造高品质作品！
         - title: Image to Prompt - AI图像工具
           logo: 200458.webp
           url: /site/200458/
@@ -326,6 +330,10 @@
           description: 点字成画，秒变大师。
     - term: AI搜索工具
       links:
+        - title: 纳米AI - AI搜索工具
+          logo: 200478.webp
+          url: /site/200478/
+          description: 一句话生成专家级内容，解锁全能力！
         - title: 腾讯元宝 - AI搜索工具 - 腾讯云上
           logo: 200297.webp
           url: https://yuanbao.tencent.com
@@ -354,6 +362,10 @@
           logo: 200300.webp
           url: https://www.qianwen.com/
           description: 阿里千问，智能助手全能王
+        - title: 秘塔AI搜索 - AI搜索工具 - 告别广告
+          logo: 200476.webp
+          url: /site/200476/
+          description: 告别广告，直达答案的纯净搜索。
     - term: AI龙虾助手
       links:
         - title: Kimi Claw - AI龙虾助手
@@ -446,6 +458,14 @@
           logo: 200445.webp
           url: /site/200445/
           description: AI一键生成专业PPT，从此设计不求人。
+        - title: 知犀 - AI办公工具 - 用知犀
+          logo: 200475.webp
+          url: /site/200475/
+          description: 用知犀，轻松捕捉灵感，高效梳理一切。
+        - title: TreeMind树图 - AI办公工具 - 用树图
+          logo: 200479.webp
+          url: /site/200479/
+          description: 用树图，把灵感变成清晰蓝图！
     - term: AI编程工具
       links:
         - title: Cursor-AI编程工具-智能代码助手
@@ -514,7 +534,7 @@
           logo: 200392.webp
           url: /site/200392/
           description: 讯飞星火API，解锁智能对话新可能！
-        - title: 创建对话补全-AI词元Token-对话补全API
+        - title: KIMI开放平台-AI词元Token-对话补全API
           logo: 200389.webp
           url: /site/200389/
           description: 用Kimi K2.5，开启智能对话新体验！
