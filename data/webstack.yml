@@ -56,6 +56,14 @@
       logo: 200453.webp
       url: /site/200453/
       description: 一句话就能做应用
+    - title: 切问学术 - AI办公工具 - 切问AI
+      logo: default.webp
+      url: /site/200485/
+      description: 切问AI，秒速筛选论文，科研更高效。
+    - title: 二狗PPT - AI办公工具
+      logo: 200483.webp
+      url: /site/200483/
+      description: 注册即可免费用AI做PPT。
     - title: 蛙蛙写作 - AI办公工具 - AI写文神器
       logo: 200435.webp
       url: /site/200435/
@@ -111,6 +119,10 @@
       logo: 200295.webp
       url: https://doubao.com
       description: 豆包：AI全能助手，免费视频生成新体验
+    - title: 墨刀 - AI办公工具 - 智能协同
+      logo: 200482.webp
+      url: /site/200482/
+      description: 智能协同，原型一步到位。
     - title: 飞书多维表格-AI办公工具-智能多维表格
       logo: 200315.webp
       url: /site/200315/
@@ -252,6 +264,10 @@
           logo: 200344.webp
           url: /site/200344/
           description: AI生成、一键排版、多平台发布，让图文创作轻松高效！
+        - title: Atom - AI智能体 - AI秒建应用
+          logo: 200484.webp
+          url: /site/200484/
+          description: AI秒建应用，零代码验证创意！
         - title: LightAI-AI智能体-轻量化飞跃
           logo: 200376.webp
           url: /site/200376/
@@ -418,6 +434,14 @@
           logo: 200311.webp
           url: /site/200311/
           description: AI一键生成PPT，高效办公新选择
+        - title: 切问学术 - AI办公工具 - 切问AI
+          logo: default.webp
+          url: /site/200485/
+          description: 切问AI，秒速筛选论文，科研更高效。
+        - title: 墨刀 - AI办公工具 - 智能协同
+          logo: 200482.webp
+          url: /site/200482/
+          description: 智能协同，原型一步到位。
         - title: Pi - AI办公工具 - 一键输入
           logo: 200442.webp
           url: /site/200442/
@@ -434,6 +458,10 @@
           logo: default.webp
           url: /site/200447/
           description: 3分钟搞定PPT，AI一键生成！
+        - title: 二狗PPT - AI办公工具
+          logo: 200483.webp
+          url: /site/200483/
+          description: 注册即可免费用AI做PPT。
         - title: 小浣熊家族 Raccoon - AI办公工具
           logo: 200441.webp
           url: /site/200441/
@@ -454,6 +482,10 @@
           logo: 200310.webp
           url: /site/200310/
           description: AI赋能，轻松创作精美PPT
+        - title: Loomy - AI办公工具 - Loomy
+          logo: 200486.webp
+          url: /site/200486/
+          description: Loomy，科大讯飞的工作搭子
         - title: 爱设计PPT - AI办公工具
           logo: 200445.webp
           url: /site/200445/
@@ -1151,6 +1183,10 @@
           description: 自由接单，成就技术梦想
     - term: 人才雇佣
       links:
+        - title: UP简历 - 人才雇佣 - AI生成简历
+          logo: 200480.webp
+          url: /site/200480/
+          description: AI生成简历，精准匹配，求职快人一步！
         - title: 猎聘 - OPC求职招聘 - 中高端人才招聘平台
           logo: 200207.webp
           url: /site/200207/
@@ -1159,6 +1195,10 @@
           logo: 200206.webp
           url: /site/200206/
           description: 找工作，直接和老板谈！
+        - title: 超级简历 - 人才雇佣
+          logo: 200481.webp
+          url: /site/200481/
+          description: AI帮你3分钟写出专业简历
         - title: 拉勾网 - OPC求职招聘 - 互联网垂直招聘平台
           logo: default.webp
           url: /site/200208/
