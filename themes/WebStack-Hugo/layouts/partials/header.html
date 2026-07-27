@@ -87,7 +87,6 @@
     </script>
     <!-- end 百度统计 -->
 
-    {{ if not hugo.IsDevelopment }}
     <!-- 51.LA 网站统计 -->
     {{ with .Site.Params.seo.tj51laid }}
     <script charset="UTF-8" id="LA_COLLECT" src="{{ absURL "assets/js/51la-sdk-pro.min.js" }}"></script>
@@ -103,7 +102,6 @@
 
     <!-- 悟空统计 -->
     <script src="//api.wukongtongji.com/c?_=940503608546803712" async></script>
-    {{ end }}
 
     <!-- Google AdSense -->
     {{ if .Site.Params.seo.GoogleAdsClient }}
