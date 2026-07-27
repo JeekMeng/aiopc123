@@ -87,6 +87,7 @@
     </script>
     <!-- end 百度统计 -->
 
+    {{ if not hugo.IsDevelopment }}
     <!-- 51.LA 网站统计 -->
     {{ with .Site.Params.seo.tj51laid }}
     <script charset="UTF-8" id="LA_COLLECT" src="{{ absURL "assets/js/51la-sdk-pro.min.js" }}"></script>
@@ -95,10 +96,14 @@
     <!-- end 51.LA 网站统计 -->
 
     <!-- 51.LA 性能监控 -->
-    <script src="https://sdk.51.la/perf/js-sdk-perf.min.js" crossorigin="anonymous"></script>
+    <script src="https://sdk.51.la/perf/js-sdk-perf.min.js" crossorigin="anonymous" async></script>
     <script>
       new LingQue.Monitor().init({id:"3QPYP9rH8BvJZq2X"});
     </script>
+
+    <!-- 悟空统计 -->
+    <script src="//api.wukongtongji.com/c?_=940503608546803712" async></script>
+    {{ end }}
 
     <!-- Google AdSense -->
     {{ if .Site.Params.seo.GoogleAdsClient }}
