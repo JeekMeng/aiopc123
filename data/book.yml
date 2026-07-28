@@ -17,6 +17,10 @@
     logo: /book/10012.png
     url: /book/10012
     description: 《一人公司：把自己当成一家公司来经营》鱼堂主操刀，教你用商业思维管理个人成长，打造核心竞争力，实现高效自我管理与职业突破。
+  - title: AI+OPC入市陪伴手册-杭州市发布
+    logo: /book/10013.png
+    url: /book/10013
+    description: 这是杭州市市场监督管理局发布的全国首份AI+OPC一人公司的操作手册，从入市准备，极简审批，知识产权，创新监管，质量标准等全方位的为AI一人公司的入驻杭州市最完备的手册。
 - taxonomy: 一人公司
   icon: fas fa-book
   links:
@@ -48,6 +52,10 @@
     logo: /book/10012.png
     url: /book/10012
     description: 《一人公司：把自己当成一家公司来经营》鱼堂主操刀，教你用商业思维管理个人成长，打造核心竞争力，实现高效自我管理与职业突破。
+  - title: AI+OPC入市陪伴手册-杭州市发布
+    logo: /book/10013.png
+    url: /book/10013
+    description: 这是杭州市市场监督管理局发布的全国首份AI+OPC一人公司的操作手册，从入市准备，极简审批，知识产权，创新监管，质量标准等全方位的为AI一人公司的入驻杭州市最完备的手册。
 - taxonomy: OpenClaw专区
   icon: fas fa-book
   links:
