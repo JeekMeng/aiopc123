@@ -54,7 +54,7 @@ disableKinds = ["taxonomy", "term"]
     baiduSiteVer    = ''			                        # 百度HTML标签验证(baidu-site-verification)
     tj51laid        = '3PVk9jBC9wwnlhnK'                   		    # 51.LA 网站统计
     tj51lack        = '3PVk9jBC9wwnlhnK'
-    GoogleAdsClient = 'ca-pub-7686030471021439'		                # Google AdSense 
+    # GoogleAdsClient = 'ca-pub-7686030471021439'		                # Google AdSense（已停用，国内访问提速）
 
 [params.qweather]
     key = "085791e805a24491b43b06cf58ab31e7"
@@ -88,6 +88,6 @@ disableKinds = ["taxonomy", "term"]
     enableRawHtml = true
 # 限制外部资源加载，防止XSS
 [security.headers]
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' hm.baidu.com sdk.51.la pagead2.googlesyndication.com; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; connect-src 'self' https:; frame-src 'self' https:;"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' hm.baidu.com sdk.51.la; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; connect-src 'self' https:; frame-src 'self' https:;"
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"

@@ -423,12 +423,6 @@ check_csp() {
     else
       echo "    $WARN  51.LA（sdk.51.la）未在 CSP 中"
     fi
-
-    if echo "$csp" | grep -q "pagead2.googlesyndication.com"; then
-      echo "    $PASS  Google AdSense 已放行 ✓"
-    else
-      echo "    $WARN  Google AdSense 未在 CSP 中"
-    fi
   else
     echo "  $FAIL  CSP 头缺失"
     echo "    → Hugo 的 [security.headers] 仅在 hugo server 开发模式下生效"
