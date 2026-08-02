@@ -4,8 +4,10 @@ date: 2026-07-26
 draft: false
 author: ""
 description: "这是杭州市市场监督管理局发布的全国首份AI+OPC一人公司的操作手册，从入市准备，极简审批，知识产权，创新监管，质量标准等全方位的为AI一人公司的入驻杭州市最完备的手册。"
-cover: "page_1.png"
+page_cover: "page_1.png"
 download: "https://pan.quark.cn/s/12a84e088381?pwd=YXGe"
+schema_type: "Book"
+keywords: ["AI+OPC入市陪伴手册", "杭州市发布", "一人公司"]
 ---
 
 出版社：杭州市市场监督管理局
@@ -14,3 +16,17 @@ download: "https://pan.quark.cn/s/12a84e088381?pwd=YXGe"
 2026年6月30日，《“AI+OPC”入市陪伴手册》在杭州发布，这是全国首个面向人工智能创业主体（OPC，One-Person Company）的综合性服务手册，标志着杭州在数智经济新业态监管服务领域迈出制度性一步。目前，手册全文已在杭州市市场监管局官网上线。
 
 该手册是落实杭州市市场监管局《支持一人公司OPC创新创业发展的若干举措》的具体行动之一，旨在构建“AI+OPC”陪伴式成长服务机制。该手册还分为《政务服务手册》与《风控法务手册》两册，分别针对准入准营和合规风控两大场景，为创业者提供从入市到发展的全生命周期指引。
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Book",
+  "name": "AI+OPC入市陪伴手册-杭州市发布",
+  "author": {
+    "@type": "Person",
+    "name": "AI 一人公司导航"
+  },
+  "description": "这是杭州市市场监督管理局发布的全国首份AI+OPC一人公司的操作手册，从入市准备，极简审批，知识产权，创新监管，质量标准等全方位的为AI一人公司的入驻杭州市最完备的手册。",
+  "inLanguage": "zh-CN"
+}
+</script>

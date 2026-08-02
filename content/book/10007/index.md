@@ -1,10 +1,10 @@
 ---
 title: "从零到全自动：一个人用 OpenClaw 重新定义_一人公司_"
-date: 2026-05-23
+date: 2026-05-22
 draft: false
 author: ""
 description: "《从零到全自动：一个人用OpenClaw重新定义一人公司》PDF，教你用AI工具实现自动化创业，零基础打造高效单人企业，颠覆传统工作模式。"
-cover: "page_1.png"
+page_cover: "page_1.png"
 download: "https://pan.quark.cn/s/602073b3f1a9?pwd=QVZA"
 ---
 

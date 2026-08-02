@@ -1,11 +1,13 @@
 ---
 title: "AI新个体：用DeepSeek重塑一人公司"
-date: 2026-05-23
+date: 2026-05-22
 draft: false
 author: "鱼堂主、阿猫"
 description: "DeepSeek 赋能：解锁一人公司 2.0 的高效盈利模式"
-cover: "page_1.png"
+page_cover: "page_1.png"
 download: "https://pan.quark.cn/s/1bd185d42bf4?pwd=aHfd"
+schema_type: "Book"
+keywords: ["AI新个体", "用DeepSeek重塑一人公司", "一人公司"]
 ---
 
 作者：鱼堂主、阿猫
@@ -18,3 +20,17 @@ download: "https://pan.quark.cn/s/1bd185d42bf4?pwd=aHfd"
 
 
 > 本站所有内容均收集整理自网络，仅作为学习交流使用，请勿用于商业用途，请于下载后的24小时内删除，否则后果自负。用户行为与本站无关。如有侵权，请联系站长删除。
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Book",
+  "name": "AI新个体：用DeepSeek重塑一人公司",
+  "author": {
+    "@type": "Person",
+    "name": "鱼堂主、阿猫"
+  },
+  "description": "DeepSeek 赋能：解锁一人公司 2.0 的高效盈利模式",
+  "inLanguage": "zh-CN"
+}
+</script>

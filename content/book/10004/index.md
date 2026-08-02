@@ -1,11 +1,13 @@
 ---
 title: "清华大学一人公司（OPC）发展研究137页"
-date: 2026-05-23
+date: 2026-05-22
 draft: false
 author: "清新研究团队（清华大学沈阳教授主导）"
 description: "清新研究团队（清华大学沈阳教授主导）| 清华大学一人公司发展研究"
-cover: "page_1.png"
+page_cover: "page_1.png"
 download: "https://pan.quark.cn/s/b5e96a0e32a0?pwd=Ns49"
+schema_type: "Book"
+keywords: ["清华大学一人公司", "OPC", "发展研究137页", "一人公司"]
 ---
 
 作者：清新研究团队（清华大学沈阳教授主导）
@@ -16,3 +18,18 @@ download: "https://pan.quark.cn/s/b5e96a0e32a0?pwd=Ns49"
 
 
 > 本站所有内容均收集整理自网络，仅作为学习交流使用，请勿用于商业用途，请于下载后的24小时内删除，否则后果自负。用户行为与本站无关。如有侵权，请联系站长删除。
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Book",
+  "name": "清华大学一人公司（OPC）发展研究137页",
+  "author": {
+    "@type": "Person",
+    "name": "清新研究团队（清华大学沈阳教授主导）"
+  },
+  "description": "清新研究团队（清华大学沈阳教授主导）| 清华大学一人公司发展研究",
+  "inLanguage": "zh-CN"
+}
+</script>

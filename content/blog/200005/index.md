@@ -1,31 +1,14 @@
 ---
 title: "手把手搭建谷歌批量自动收录方案（Indexing API 教程）"
-date: 2026-05-17T09:00:00+08:00
+date: 2026-07-29
 draft: false
-schema_type: "Article"
-tags: ["一人公司", "网站运营", "谷歌收录", "GEO优化"]
+tags: ["运营", "一人公司", "教程"]
 categories: ["网站运营"]
+description: "如何利用Google Indexing API完整开通配置流程，搭配 curl 命令实现一键批量提交收录，大幅缩短页面收录周期。"
 featuredImage: "/assets/images/blog/blog-indexing-api.png"
-summary: "Google Indexing API 完整开通配置流程，搭配 curl 命令实现一键批量提交网址收录，带你彻底解决谷歌收录慢的问题。"
 toc: true
-faq:
-  - q: "Google Indexing API 免费吗？"
-    a: "免费，每日200条额度，中小型站点完全够用。"
-  - q: "配置需要多长时间？"
-    a: "首次配置约15-30分钟，后续即可一键批量推送。"
-  - q: "支持哪些类型的网站？"
-    a: "支持所有绑定Google Search Console的独立网站，不限平台。"
-steps:
-  - name: "新建谷歌云项目"
-    text: "进入谷歌云控制台，点击新建项目，自定义项目名称，完成创建。"
-  - name: "启用网页搜索索引 API"
-    text: "搜索 Indexing API，找到 Web Search Indexing API，点击启用。"
-  - name: "创建服务账号"
-    text: "API和服务 → 凭据 → 创建凭据 → 服务账号，复制系统生成的邮箱。"
-  - name: "下载 JSON 密钥文件"
-    text: "服务账号 → 密钥 → 创建新密钥，格式选择 JSON。"
-  - name: "搜索控制台授权"
-    text: "Google Search Console → 用户和权限 → 添加服务账号邮箱为站点所有者。"
+schema_type: "Article"
+keywords: ["手把手搭建谷歌批量自动收录方案", "Indexing", "API", "教程", "网站运营"]
 ---
 
 做境外个人站点、搭建一人公司线上项目，最头疼的问题就是**谷歌收录缓慢**，大量新页面长期处于"已发现未索引"状态。今天分享 **Google Indexing API** 完整开通配置流程，搭配 curl 命令实现一键批量提交收录，大幅缩短页面收录周期。
@@ -131,3 +114,21 @@ A：首次配置约 15-30 分钟，后续一键批量推送。
 
 **Q：支持哪些类型的网站？**
 A：支持所有绑定 Google Search Console 的独立网站，不限平台。
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "手把手搭建谷歌批量自动收录方案（Indexing API 教程）",
+  "description": "如何利用Google Indexing API完整开通配置流程，搭配 curl 命令实现一键批量提交收录，大幅缩短页面收录周期。",
+  "datePublished": "2026-07-29",
+  "author": {
+    "@type": "Person",
+    "name": "AI 一人公司导航"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/blog/200005"
+  }
+}
+</script>

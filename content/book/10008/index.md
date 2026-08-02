@@ -1,11 +1,13 @@
 ---
 title: "OpenClaw橙皮书-从入门到精通"
-date: 2026-05-23
+date: 2026-05-22
 draft: false
 author: ""
 description: "OpenClaw橙皮书《从入门到精通》PDF下载，涵盖基础操作到高级技巧详解，适合开发者与爱好者提升Claw框架实战能力。"
-cover: "page_1.png"
+page_cover: "page_1.png"
 download: "https://pan.quark.cn/s/5d3eedd70c2e?pwd=gBWY"
+schema_type: "Book"
+keywords: ["OpenClaw橙皮书", "从入门到精通", "OpenClaw专区"]
 ---
 
 页数：98
@@ -22,3 +24,17 @@ download: "https://pan.quark.cn/s/5d3eedd70c2e?pwd=gBWY"
 无论是刚接触区块链的开发者，还是寻求迁移至Claw生态的资深工程师，本书都能提供从理论到落地的闭环指导。其清晰的逻辑编排与丰富的示例代码，甚至可作为项目开发的速查手册。立即阅读，抢占Claw生态的技术先机！
 
 > 本站所有内容均收集整理自网络，仅作为学习交流使用，请勿用于商业用途，请于下载后的24小时内删除，否则后果自负。用户行为与本站无关。如有侵权，请联系站长删除。
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Book",
+  "name": "OpenClaw橙皮书-从入门到精通",
+  "author": {
+    "@type": "Person",
+    "name": "AI 一人公司导航"
+  },
+  "description": "OpenClaw橙皮书《从入门到精通》PDF下载，涵盖基础操作到高级技巧详解，适合开发者与爱好者提升Claw框架实战能力。",
+  "inLanguage": "zh-CN"
+}
+</script>

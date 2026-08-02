@@ -1,12 +1,14 @@
 ---
-title: "Cloudflare网站完整部署实操指南|AI一人公司导航"  # 文章标题
-date: 2026-03-20T09:00:00+08:00          # 发布时间（时区+08:00适配中国）
-draft: false                             # 是否草稿（false为发布）
-tags: ["OpenClaw", "智能体", "SKILL"]        # 标签
-categories: ["技术教程"]                   # 分类
-featuredImage: "/static/images/posts/cover.png"  # 封面图（可选，也可放本地静态文件）
-summary: "编写你的第一个 OpenClaw Skill"        # 文章摘要
-toc: true                                # 是否显示目录（优先级高于全局配置）
+title: "Cloudflare网站完整部署实操指南"
+date: 2026-07-29
+draft: false
+tags: ["网站", "教程"]
+categories: ["技术教程"]
+description: "Cloudflare作为全球主流的网站加速、安全防护与部署平台，免费版即可实现无限流量CDN、免费SSL证书、DDoS防护、静态网站托管等核心功能，适配个人博客、企业官网、小型应用等各类站点"
+featuredImage: "/static/images/posts/cover.png"
+toc: true
+schema_type: "Article"
+keywords: ["OpenClaw", "智能体", "SKILL", "网站上线"]
 ---
 
 ​	Cloudflare作为全球主流的网站加速、安全防护与部署平台，免费版即可实现无限流量CDN、免费SSL证书、DDoS防护、静态网站托管等核心功能，适配个人博客、企业官网、小型应用等各类站点。本次结合完整部署实操，整理从账号注册到上线运行的全流程，同步汇总部署期间遇到的各类报错、配置误区、生效异常问题，附上可直接落地的解决方法，新手也能零基础完成部署。
@@ -135,3 +137,21 @@ Cloudflare网站部署主要分两种场景，一是**已有源站，接入Cloud
 5. 免费版满足个人和小型站点需求，无需付费，进阶需求再升级套餐
 
 按照以上流程和问题解决方法，即可顺利完成Cloudflare网站部署，实现网站加速、安全防护、HTTPS访问一体化配置。部署后若出现新的异常，可按照「DNS生效→记录配置→SSL设置→缓存清理」的顺序逐一排查，快速解决问题。
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Cloudflare网站完整部署实操指南|AI一人公司导航",
+  "description": "编写你的第一个 OpenClaw Skill",
+  "datePublished": "2026-07-29",
+  "author": {
+    "@type": "Person",
+    "name": "AI 一人公司导航"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/blog/200004"
+  }
+}
+</script>

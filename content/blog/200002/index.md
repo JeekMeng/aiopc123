@@ -1,15 +1,15 @@
 ---
-title: "在 OpenClaw 实现一个帮你干活的 Agent 助理"  # 文章标题
-date: 2026-03-20T09:00:00+08:00          # 发布时间（时区+08:00适配中国）
-draft: false                             # 是否草稿（false为发布）
-tags: ["OpenClaw", "智能体", "Agent助力"]        # 标签
-categories: ["技术教程"]                   # 分类
-featuredImage: "/static/images/posts/cover.png"  # 封面图（可选，也可放本地静态文件）
-summary: "在 OpenClaw 实现一个帮你干活的 Agent 助理"        # 文章摘要
-toc: true                                # 是否显示目录（优先级高于全局配置）
+title: "在 OpenClaw 实现一个帮你干活的 Agent 助理"
+date: 2026-07-29
+draft: false
+tags: ["AI工具", "一人公司", "教程"]
+categories: ["技术教程"]
+description: "OpenClaw 不仅仅是一个聊天机器人，它是一个**多 Agent 系统**。你可以创建多个专门的 Agent，每个 Agent 都有自己的 workspace、技能集和个性，负责处理特定的任务。"
+featuredImage: "/static/images/posts/cover.png"
+toc: true
+schema_type: "Article"
+keywords: ["OpenClaw", "智能体", "Agent助力", "实现一个帮你干活的", "Agent", "助理", "技术教程"]
 ---
-
-
 
 OpenClaw 不仅仅是一个聊天机器人，它是一个**多 Agent 系统**。你可以创建多个专门的 Agent，每个 Agent 都有自己的 workspace、技能集和个性，负责处理特定的任务。
 
@@ -636,3 +636,21 @@ import requests
 ---
 
 **祝你好运！开始创建你的第一个专属 Agent 吧！🚀**
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "在 OpenClaw 实现一个帮你干活的 Agent 助理",
+  "description": "在 OpenClaw 实现一个帮你干活的 Agent 助理",
+  "datePublished": "2026-07-29",
+  "author": {
+    "@type": "Person",
+    "name": "AI 一人公司导航"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/blog/200002"
+  }
+}
+</script>

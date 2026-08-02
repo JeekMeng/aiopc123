@@ -1,13 +1,14 @@
 ---
-title: "一人公司建站运营干货｜手把手搭建微软Bing批量自动收录方案，快速提升Bing收录"  # 文章标题
-date: 2026-05-17T09:00:00+08:00          # 发布时间（时区+08:00适配中国）
-draft: false                             # 是否草稿（false为发布）
-tags: ["一人公司", "网站运营", "Bing收录", "批量收录"]        # 标签
-categories: ["网站运营"]                   # 分类
-featuredImage: "/static/images/posts/cover.png"  # 封面图（可选，也可放本地静态文件）
-summary: "一人公司逃避不了要给自己建一个官方网站，建好了之后怎么能够快速被搜索引擎收录呢，今天介绍的 Bing ，主要靠 IndexNow（微软官方、免费、支持批量）"        # 文章摘要
-toc: true                                # 是否显示目录（优先级高于全局配置）
-
+title: "一人公司建站运营干货｜手把手搭建微软Bing批量自动收录方案，快速提升Bing收录"
+date: 2026-07-29
+draft: false
+tags: ["运营", "一人公司", "教程"]
+categories: ["网站运营"]
+description: "一人公司逃避不了要给自己建一个官方网站，建好了之后怎么能够快速被搜索引擎收录呢，今天介绍的 Bing ，主要靠 IndexNow（微软官方、免费、支持批量）"
+featuredImage: "/static/images/posts/cover.png"
+toc: true
+schema_type: "Article"
+keywords: ["一人公司", "网站运营", "Bing收录", "批量收录", "快速提升Bing收录"]
 ---
 
 做英文站、跨境站、一人公司网站，**Bing 收录慢、不收录**是常态。
@@ -149,3 +150,21 @@ curl -X POST "https://api.indexnow.org/indexnow" \
 IndexNow 是 Bing 官方免费的**批量收录神器**，对一人公司、独立站长极其友好。
 
 配置一次，后续用 CURL 或脚本一键批量提交，**大幅提升 Bing 收录效率与流量**。
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "一人公司建站运营干货｜手把手搭建微软Bing批量自动收录方案，快速提升Bing收录",
+  "description": "一人公司逃避不了要给自己建一个官方网站，建好了之后怎么能够快速被搜索引擎收录呢，今天介绍的 Bing ，主要靠 IndexNow（微软官方、免费、支持批量）",
+  "datePublished": "2026-07-29",
+  "author": {
+    "@type": "Person",
+    "name": "AI 一人公司导航"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/blog/200006"
+  }
+}
+</script>

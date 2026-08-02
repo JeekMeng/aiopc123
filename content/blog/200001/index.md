@@ -1,16 +1,15 @@
 ---
-title: "OpenClaw 完全使用手册（新手版）"  # 文章标题
-date: 2026-03-20T09:00:00+08:00          # 发布时间（时区+08:00适配中国）
-draft: false                             # 是否草稿（false为发布）
-tags: ["OpenClaw", "智能体", "使用手册"]        # 标签
-categories: ["技术教程"]                   # 分类
-featuredImage: "/static/images/posts/cover.png"  # 封面图（可选，也可放本地静态文件）
-summary: "OpenClaw 最新版 使用手册"        # 文章摘要
-toc: true                                # 是否显示目录（优先级高于全局配置）
-
+title: "OpenClaw 完全使用手册（新手版）"
+date: 2026-07-29
+draft: false
+tags: ["AI工具", "一人公司", "教程"]
+categories: ["技术教程"]
+description: "OpenClaw 是一款**本地部署、全平台打通**的 AI 助手网关，能让大模型（Claude/GPT/本地模型）直接操控你的电脑、处理文件、对接聊天软件、执行自动化任务，新手也能快速上手。"
+featuredImage: "/static/images/posts/cover.png"
+toc: true
+schema_type: "Article"
+keywords: ["OpenClaw", "智能体", "使用手册", "完全使用手册", "新手版", "技术教程"]
 ---
-
-
 
 OpenClaw 是一款**本地部署、全平台打通**的 AI 助手网关，能让大模型（Claude/GPT/本地模型）直接操控你的电脑、处理文件、对接聊天软件、执行自动化任务，新手也能快速上手。
 
@@ -315,3 +314,21 @@ openclaw plugins list
 
 OpenClaw 新手使用核心逻辑：**安装 → 配置模型/渠道 → 启动网关 → 发指令/设定时 → 自动执行**。
 从文件整理、定时提醒到远程控制，它能帮你大幅提升办公与开发效率，且所有数据本地部署，安全可控。
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "OpenClaw 完全使用手册（新手版）",
+  "description": "OpenClaw 最新版 使用手册",
+  "datePublished": "2026-07-29",
+  "author": {
+    "@type": "Person",
+    "name": "AI 一人公司导航"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/blog/200001"
+  }
+}
+</script>

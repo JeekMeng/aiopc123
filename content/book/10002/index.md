@@ -1,11 +1,13 @@
 ---
 title: "一人公司_AI时代赚钱新方向"
-date: 2026-05-23
+date: 2026-05-22
 draft: false
 author: "究慈"
 description: "裁员时代，技术人如何自救，AI时代下的一人公司应该怎么赚钱？"
-cover: "page_1.png"
+page_cover: "page_1.png"
 download: "https://pan.quark.cn/s/f1ceacd9c8bf?pwd=2sYb"
+schema_type: "Book"
+keywords: ["一人公司_AI时代赚钱新方向", "一人公司"]
 ---
 
 作者：究慈
@@ -17,3 +19,17 @@ download: "https://pan.quark.cn/s/f1ceacd9c8bf?pwd=2sYb"
 
 
 > 本站所有内容均收集整理自网络，仅作为学习交流使用，请勿用于商业用途，请于下载后的24小时内删除，否则后果自负。用户行为与本站无关。如有侵权，请联系站长删除。
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Book",
+  "name": "一人公司_AI时代赚钱新方向",
+  "author": {
+    "@type": "Person",
+    "name": "究慈"
+  },
+  "description": "裁员时代，技术人如何自救，AI时代下的一人公司应该怎么赚钱？",
+  "inLanguage": "zh-CN"
+}
+</script>

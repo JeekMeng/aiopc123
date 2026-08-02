@@ -22,3 +22,7 @@
 - item: 关于我们
   icon: fas fa-address-card
   link: /about
+
+- item: 常见问题
+  icon: fas fa-question-circle
+  link: /faq

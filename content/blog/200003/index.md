@@ -1,14 +1,15 @@
 ---
-title: "编写你的第一个 OpenClaw Skill"  # 文章标题
-date: 2026-03-20T09:00:00+08:00          # 发布时间（时区+08:00适配中国）
-draft: false                             # 是否草稿（false为发布）
-tags: ["OpenClaw", "智能体", "SKILL"]        # 标签
-categories: ["技术教程"]                   # 分类
-featuredImage: "/static/images/posts/cover.png"  # 封面图（可选，也可放本地静态文件）
-summary: "编写你的第一个 OpenClaw Skill"        # 文章摘要
-toc: true                                # 是否显示目录（优先级高于全局配置）
+title: "编写你的第一个 OpenClaw Skill"
+date: 2026-07-29
+draft: false
+tags: ["AI工具", "一人公司", "教程"]
+categories: ["技术教程"]
+description: " 编写你的第一个 OpenClaw Skill， Skill 是什么？简单来说，它是给 AI 助手的\"插件\"——通过编写 Skill，你可以扩展 OpenClaw 的能力，让它掌握特定领域的专业知识、工作流程和工具使用方法。"
+featuredImage: "/static/images/posts/cover.png"
+toc: true
+schema_type: "Article"
+keywords: ["OpenClaw", "智能体", "SKILL", "编写你的第一个", "Skill", "技术教程"]
 ---
-
 
 > Skill 是什么？简单来说，它是给 AI 助手的"插件"——通过编写 Skill，你可以扩展 OpenClaw 的能力，让它掌握特定领域的专业知识、工作流程和工具使用方法。
 
@@ -363,3 +364,21 @@ A: 关键在 `description` 字段。要写清楚触发场景和关键词。
 4. **迭代改进**：在实际使用中不断优化
 
 祝你好运！开始创建你的第一个 Skill 吧！🚀
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "编写你的第一个 OpenClaw Skill",
+  "description": "编写你的第一个 OpenClaw Skill",
+  "datePublished": "2026-07-29",
+  "author": {
+    "@type": "Person",
+    "name": "AI 一人公司导航"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/blog/200003"
+  }
+}
+</script>

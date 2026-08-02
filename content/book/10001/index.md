@@ -1,11 +1,13 @@
 ---
 title: "一人公司：失业潮中的高新技术工作者"
-date: 2026-05-23
+date: 2026-05-22
 draft: false
 author: "[美] 卡丽・莱恩（Carrie M. Lane）"
 description: "裁员时代，技术人如何自救，一人公司帮您解决失业的问题？"
-cover: "page_1.png"
+page_cover: "page_1.png"
 download: "https://pan.quark.cn/s/a44aa9f90d29?pwd=5sE8"
+schema_type: "Book"
+keywords: ["一人公司", "失业潮中的高新技术工作者"]
 ---
 
 作者：[美] 卡丽・莱恩（Carrie M. Lane）
@@ -18,3 +20,17 @@ download: "https://pan.quark.cn/s/a44aa9f90d29?pwd=5sE8"
 
 
 > 本站所有内容均收集整理自网络，仅作为学习交流使用，请勿用于商业用途，请于下载后的24小时内删除，否则后果自负。用户行为与本站无关。如有侵权，请联系站长删除。
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Book",
+  "name": "一人公司：失业潮中的高新技术工作者",
+  "author": {
+    "@type": "Person",
+    "name": "[美] 卡丽・莱恩（Carrie M. Lane）"
+  },
+  "description": "裁员时代，技术人如何自救，一人公司帮您解决失业的问题？",
+  "inLanguage": "zh-CN"
+}
+</script>

@@ -4,7 +4,7 @@ date: 2026-05-29
 draft: false
 author: "OPC圈"
 description: "《OPC圈：2026中国OPC发展政策研究报告》深度解析中国OPC产业政策趋势、技术路径与市场机遇，为行业提供权威前瞻分析。"
-cover: "page_1.png"
+page_cover: "page_1.png"
 download: "https://pan.quark.cn/s/291123ef5266?pwd=LHvx"
 ---
 
