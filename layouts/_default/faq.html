@@ -1,0 +1,37 @@
+{{ partial "header.html" . }}
+{{ partial "top_nav.html" . }}
+
+<div class="page-container">
+{{ partial "content_header.html" . }}
+
+<div class="three-col-layout three-col-layout--simple">
+    <div class="content-col content-col--simple">
+        <div id="page-content" class="content-site customize-site">
+            <div class="content_detail">
+                <article class="detail-card faq-page">
+                    <h1 class="faq-title">{{ trim (index (split .Title "|") 0) " " }}</h1>
+
+                    {{ with .Description }}
+                    <p class="faq-intro">{{ . }}</p>
+                    {{ end }}
+
+                    <div class="faq-list">
+                        {{ range $i, $item := .Params.faq }}
+                        <section class="faq-item">
+                            <p class="faq-question">
+                                <span class="faq-num">{{ add $i 1 }}.</span>
+                                <strong class="faq-q-text">{{ $item.q }}</strong>
+                            </p>
+                            <div class="faq-answer">{{ $item.a }}</div>
+                        </section>
+                        {{ end }}
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{ partial "content_footer.html" . }}
+{{ partial "modal_search.html" . }}
+{{ partial "footer.html" . }}
