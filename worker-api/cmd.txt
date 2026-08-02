@@ -1,0 +1,8 @@
+# 终端 1：Worker
+cd worker-api && npx wrangler dev --port 8787
+# 终端 2：Hugo
+hugo server -D --bind 0.0.0.0 --port 1317 --baseURL http://localhost:1317
+▣  Build · deepseek-v4-flash-free · 10.9s
+管理员账号是啥
+Thinking: The user is asking for the admin account credentials again.
+admin@aiopc123.com / admin123

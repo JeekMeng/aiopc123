@@ -1,0 +1,358 @@
+{{ partial "header.html" . }}
+{{ partial "top_nav.html" . }}
+<div class="report-wrapper">
+<div class="report-container">
+  <div id="report-export">
+  <div class="report-actions">
+    <div>
+      <h1 class="report-title">OPC 政策数据报告</h1>
+      <p class="report-desc">{{ .Description }}</p>
+    </div>
+    <button class="report-download-btn" onclick="downloadReport()">
+      <i class="fas fa-download"></i> 下载报告 PDF
+    </button>
+  </div>
+
+  <div id="report-dashboard">
+    <div class="report-section">
+      <div class="report-kpi-row" id="reportKPI">
+        <div class="report-kpi-card"><div class="kpi-value" data-kpi="total">--</div><div class="kpi-label">政策总数</div></div>
+        <div class="report-kpi-card"><div class="kpi-value" data-kpi="cities">--</div><div class="kpi-label">覆盖城市</div></div>
+        <div class="report-kpi-card"><div class="kpi-value" data-kpi="provinces">--</div><div class="kpi-label">覆盖省份</div></div>
+        <div class="report-kpi-card"><div class="kpi-value" data-kpi="industries">--</div><div class="kpi-label">覆盖行业</div></div>
+      </div>
+    </div>
+
+    <div class="report-section">
+      <h2 class="report-section-title"><i class="fas fa-chart-line"></i> 政策趋势</h2>
+      <div class="report-chart-row">
+        <div class="report-chart-box">
+          <h3>年度发布趋势</h3>
+          <canvas id="chartYearTrend"></canvas>
+        </div>
+        <div class="report-chart-box">
+          <h3>省份分布 TOP</h3>
+          <canvas id="chartProvince"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="report-section">
+      <h2 class="report-section-title"><i class="fas fa-tag"></i> 政策分类</h2>
+      <div class="report-chart-row">
+        <div class="report-chart-box">
+          <h3>政策类别构成</h3>
+          <canvas id="chartCategory"></canvas>
+        </div>
+        <div class="report-chart-box">
+          <h3>行政层级分布</h3>
+          <canvas id="chartLevel"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="report-section">
+      <h2 class="report-section-title"><i class="fas fa-trophy"></i> 排行榜</h2>
+      <div class="report-chart-row">
+        <div class="report-chart-box">
+          <h3>政策数量 TOP10 城市</h3>
+          <div id="reportCityRank" class="report-ranking"></div>
+        </div>
+        <div class="report-chart-box">
+          <h3>福利类型 TOP10</h3>
+          <div id="reportBenefitRank" class="report-ranking"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="report-section">
+      <h2 class="report-section-title"><i class="fas fa-check-circle"></i> 落地分析</h2>
+      <div class="report-chart-row">
+        <div class="report-chart-box">
+          <h3>落地难度分布</h3>
+          <canvas id="chartDifficulty"></canvas>
+        </div>
+        <div class="report-chart-box">
+          <h3>福利标签云</h3>
+          <div id="reportTagcloud" class="report-tagcloud"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="report-section">
+      <h2 class="report-section-title"><i class="fas fa-star"></i> 高金额福利 TOP</h2>
+      <div id="reportFundingRank" class="report-ranking report-ranking--horizontal"></div>
+    </div>
+  </div>
+
+  <div class="report-footer">
+    <p>数据来源：各城市政府公开渠道 | 更新时间：{{ now.Format "2006-01-02" }} | 共计 96 条政策</p>
+    <p class="report-footer-note">本报告仅供用户参考，具体政策内容以各城市官方发布为准。</p>
+  </div>
+</div>
+</div>
+</div>
+{{ partial "content_footer.html" . }}
+{{ partial "modal_search.html" . }}
+{{ partial "footer.html" . }}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
+
+<script>
+(function(){
+  var API_BASE = (window.location.port === '1313' || window.location.port === '1317')
+    ? 'http://localhost:8787/api' : '/api';
+
+  var COLORS = {
+    blue: '#007aff', green: '#34c759', orange: '#ff9500',
+    red: '#ff3b30', purple: '#af52de', yellow: '#ffcc00',
+    cyan: '#5ac8fa', gray: '#8e8e93', pink: '#ff2d55',
+  };
+  var PALETTE = ['#007aff','#34c759','#ff9500','#ff3b30','#af52de','#5ac8fa','#ffcc00','#ff2d55','#8e8e93'];
+  var PALETTE2 = ['#007aff','#5856d6','#34c759','#ff9500','#ff3b30','#af52de','#5ac8fa','#ffcc00','#ff2d55','#8e8e93'];
+
+  fetch(API_BASE + '/policies/stats')
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      renderKPI(d);
+      renderYearChart(d);
+      renderProvinceChart(d);
+      renderCategoryChart(d);
+      renderLevelChart(d);
+      renderCityRank(d);
+      renderBenefitRank(d);
+      renderDifficultyChart(d);
+      renderTagcloud(d);
+      renderFundingRank(d);
+    })
+    .catch(function(err){
+      document.querySelector('#reportKPI').innerHTML = '<div class="report-error">数据加载失败，请确认 Worker 是否运行</div>';
+    });
+
+  function renderKPI(d){
+    setKPI('total', d.total);
+    setKPI('cities', (d.cities || []).length);
+    setKPI('provinces', (d.province_stats || []).length);
+    setKPI('industries', d.industry_count || 0);
+  }
+  function setKPI(key, val){
+    var el = document.querySelector('[data-kpi="' + key + '"]');
+    if(el) el.textContent = val;
+  }
+
+  function renderYearChart(d){
+    var years = d.year_stats || [];
+    var ctx = document.getElementById('chartYearTrend');
+    if(!ctx || !years.length) return;
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: years.map(function(r){ return r.year + '年'; }),
+        datasets: [{
+          label: '政策数量',
+          data: years.map(function(r){ return r.count; }),
+          backgroundColor: years.map(function(_, i){
+            var c = ['#007aff','#34c759','#ff9500','#ff3b30','#af52de','#5ac8fa'];
+            return c[i] || '#8e8e93';
+          }),
+          borderRadius: 6,
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { beginAtZero: true, ticks: { stepSize: 1, precision:0 } }
+        }
+      }
+    });
+  }
+
+  function renderProvinceChart(d){
+    var provs = (d.province_stats || []).slice(0, 10);
+    var ctx = document.getElementById('chartProvince');
+    if(!ctx || !provs.length) return;
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: provs.map(function(r){ return r.province; }),
+        datasets: [{
+          label: '政策数量',
+          data: provs.map(function(r){ return r.count; }),
+          backgroundColor: '#007aff',
+          borderRadius: 6,
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: { x: { beginAtZero: true, ticks: { stepSize: 1, precision:0 } } }
+      }
+    });
+  }
+
+  function renderCategoryChart(d){
+    var cats = d.category_stats || [];
+    var ctx = document.getElementById('chartCategory');
+    if(!ctx || !cats.length) return;
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: cats.map(function(r){ return r.category; }),
+        datasets: [{
+          data: cats.map(function(r){ return r.count; }),
+          backgroundColor: cats.map(function(_, i){ return PALETTE[i % PALETTE.length]; }),
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'right', labels: { padding: 12, usePointStyle: true } }
+        }
+      }
+    });
+  }
+
+  function renderLevelChart(d){
+    var levels = d.level_stats || [];
+    var ctx = document.getElementById('chartLevel');
+    if(!ctx || !levels.length) return;
+    var levelLabels = { province: '省级', city: '市级', district: '区级' };
+    new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: levels.map(function(r){ return levelLabels[r.level] || r.level; }),
+        datasets: [{
+          data: levels.map(function(r){ return r.count; }),
+          backgroundColor: ['#007aff','#34c759','#ff9500'],
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'right', labels: { padding: 12, usePointStyle: true } }
+        }
+      }
+    });
+  }
+
+  function renderDifficultyChart(d){
+    var diffs = d.difficulty_stats || [];
+    var ctx = document.getElementById('chartDifficulty');
+    if(!ctx) return;
+    var diffLabels = { easy: '容易', medium: '中等', hard: '困难' };
+    new Chart(ctx, {
+      type: 'radar',
+      data: {
+        labels: diffs.map(function(r){ return diffLabels[r.landing_difficulty] || r.landing_difficulty; }),
+        datasets: [{
+          label: '政策数量',
+          data: diffs.map(function(r){ return r.count; }),
+          backgroundColor: 'rgba(0, 122, 255, 0.2)',
+          borderColor: '#007aff',
+          pointBackgroundColor: '#007aff',
+          pointRadius: 5,
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          r: { beginAtZero: true, ticks: { stepSize: 1, precision:0 } }
+        }
+      }
+    });
+  }
+
+  function renderCityRank(d){
+    var el = document.getElementById('reportCityRank');
+    if(!el) return;
+    var cities = (d.city_top || []).slice(0, 10);
+    var maxCount = cities.length ? cities[0].count : 1;
+    el.innerHTML = cities.map(function(r, i){
+      var pct = (r.count / maxCount * 100).toFixed(0);
+      var medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '';
+      return '<div class="rank-item"><span class="rank-num">' + medal + '</span><span class="rank-name">' + r.city + '</span><div class="rank-bar"><div class="rank-bar-fill" style="width:' + pct + '%"></div></div><span class="rank-count">' + r.count + ' 条</span></div>';
+    }).join('');
+  }
+
+  function renderBenefitRank(d){
+    var el = document.getElementById('reportBenefitRank');
+    if(!el) return;
+    var tags = (d.benefit_tags || []).slice(0, 10);
+    var maxCount = tags.length ? tags[0].count : 1;
+    el.innerHTML = tags.map(function(r, i){
+      var pct = (r.count / maxCount * 100).toFixed(0);
+      var medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '';
+      return '<div class="rank-item"><span class="rank-num">' + medal + '</span><span class="rank-name">' + r.item + '</span><div class="rank-bar"><div class="rank-bar-fill rank-bar-fill--green" style="width:' + pct + '%"></div></div><span class="rank-count">' + r.count + ' 次</span></div>';
+    }).join('');
+  }
+
+  function renderTagcloud(d){
+    var el = document.getElementById('reportTagcloud');
+    if(!el) return;
+    var tags = d.benefit_tags || [];
+    if(!tags.length){ el.textContent = '暂无数据'; return; }
+    var maxCount = tags[0].count;
+    el.innerHTML = tags.map(function(t){
+      var ratio = t.count / maxCount;
+      var size = 12 + ratio * 10;
+      var opacity = 0.5 + ratio * 0.5;
+      var colorIdx = Math.floor(Math.random() * PALETTE2.length);
+      return '<span class="tagcloud-item" style="font-size:' + size.toFixed(1) + 'px;opacity:' + opacity.toFixed(2) + ';color:' + PALETTE2[colorIdx] + '" title="出现 ' + t.count + ' 次">' + t.item + '</span>';
+    }).join('');
+  }
+
+  function renderFundingRank(d){
+    var el = document.getElementById('reportFundingRank');
+    if(!el) return;
+    var items = (d.funding_top || []).slice(0, 10);
+    if(!items.length){ el.innerHTML = '<div class="report-empty">暂无高金额福利数据</div>'; return; }
+    var maxAmt = items[0].amount;
+    el.innerHTML = items.map(function(r, i){
+      var label = r.amount >= 10000 ? (r.amount/10000).toFixed(0) + '亿' : r.amount.toFixed(0) + '万';
+      var pct = (r.amount / maxAmt * 100).toFixed(0);
+      return '<div class="rank-item"><span class="rank-num">' + (i+1) + '</span><span class="rank-name">' + r.item + '</span><span class="rank-amount">' + label + '</span><div class="rank-bar"><div class="rank-bar-fill rank-bar-fill--orange" style="width:' + pct + '%"></div></div></div>';
+    }).join('');
+  }
+
+  window.downloadReport = function(){
+    var btn = document.querySelector('.report-download-btn');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 生成中...';
+    var el = document.getElementById('report-export');
+    html2canvas(el, {
+      backgroundColor: '#ffffff',
+      scale: 2,
+      useCORS: true,
+      logging: false,
+    }).then(function(canvas){
+      var imgData = canvas.toDataURL('image/png');
+      var { jsPDF } = window.jspdf;
+      var pdf = new jsPDF('p', 'mm', 'a4');
+      var pdfW = pdf.internal.pageSize.getWidth();
+      var pdfH = (canvas.height * pdfW) / canvas.width;
+      var pageH = pdf.internal.pageSize.getHeight();
+      if(pdfH <= pageH){
+        pdf.addImage(imgData, 'PNG', 0, 0, pdfW, pdfH);
+      } else {
+        var top = 0;
+        while(top < pdfH){
+          if(top > 0) pdf.addPage();
+          pdf.addImage(imgData, 'PNG', 0, -(top), pdfW, pdfH);
+          top += pageH;
+        }
+      }
+      pdf.save('OPC政策数据报告_' + new Date().toISOString().slice(0,10) + '.pdf');
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-download"></i> 下载报告 PDF';
+    }).catch(function(err){
+      alert('PDF 生成失败: ' + err.message);
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-download"></i> 下载报告 PDF';
+    });
+  };
+})();
+</script>

@@ -196,3 +196,58 @@ export async function getMe(c: Context): Promise<Response> {
     user: { id: user.id, email: user.email, nickname: user.nickname, avatar: user.avatar, role: user.role },
   });
 }
+
+export async function forgotPassword(c: Context): Promise<Response> {
+  try {
+    const body = await c.req.json() as { email: string };
+    const { email } = body;
+    if (!email) return c.json({ error: '请输入邮箱' }, 400);
+
+    const user = await c.env.DB.prepare(
+      'SELECT id FROM users WHERE email = ?'
+    ).bind(email).first() as { id: number } | null;
+
+    if (!user) {
+      return c.json({ message: '如果该邮箱已注册，重置链接已发送' });
+    }
+
+    const token = crypto.randomUUID();
+    const tokenKey = `reset:${token}`;
+    await c.env.SESSIONS.put(tokenKey, String(user.id), { expirationTtl: 3600 });
+
+    return c.json({
+      message: '如果该邮箱已注册，重置链接已发送',
+      token: token,
+    });
+  } catch (err) {
+    console.error('forgotPassword error:', err);
+    return c.json({ error: '操作失败，请稍后重试' }, 500);
+  }
+}
+
+export async function resetPassword(c: Context): Promise<Response> {
+  try {
+    const body = await c.req.json() as { token: string; password: string };
+    const { token, password } = body;
+
+    if (!token || !password) return c.json({ error: '参数不完整' }, 400);
+    if (password.length < 6) return c.json({ error: '密码至少 6 位' }, 400);
+
+    const tokenKey = `reset:${token}`;
+    const userIdStr = await c.env.SESSIONS.get(tokenKey);
+    if (!userIdStr) return c.json({ error: '链接已失效，请重新申请' }, 400);
+
+    const userId = parseInt(userIdStr, 10);
+    const newHash = await hashPassword(password);
+    await c.env.DB.prepare(
+      'UPDATE users SET password_hash = ? WHERE id = ?'
+    ).bind(newHash, userId).run();
+
+    await c.env.SESSIONS.delete(tokenKey);
+
+    return c.json({ message: '密码重置成功，请重新登录' });
+  } catch (err) {
+    console.error('resetPassword error:', err);
+    return c.json({ error: '密码重置失败，请稍后重试' }, 500);
+  }
+}

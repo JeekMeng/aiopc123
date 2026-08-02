@@ -6,7 +6,6 @@
     : '/api';
 
   var currentUser = null;
-  var modalEl = null;
   var AUTH_KEY = 'auth_user';
   var _cachedPolicies = [];
   var CITY_CODES = {
@@ -56,191 +55,56 @@
     });
   }
 
-  function createModal() {
-    var html =
-      '<div class="modal fade" id="authModal" tabindex="-1">' +
-      '  <div class="modal-dialog modal-dialog-centered" style="max-width:440px">' +
-      '    <div class="modal-content auth-modal-content">' +
-      '      <div class="auth-modal-header">' +
-      '        <ul class="nav nav-tabs border-0" id="authTabs">' +
-      '          <li class="nav-item"><a class="nav-link active" data-tab="login" href="#">登录</a></li>' +
-      '          <li class="nav-item"><a class="nav-link" data-tab="register" href="#">注册</a></li>' +
-      '        </ul>' +
-      '        <button type="button" class="close auth-close" data-dismiss="modal">&times;</button>' +
-      '      </div>' +
-      '      <div class="modal-body auth-modal-body">' +
-      '        <form id="loginForm" style="display:block">' +
-      '          <div class="auth-input-wrap">' +
-      '            <i class="fas fa-envelope auth-input-icon"></i>' +
-      '            <input type="email" class="form-control auth-input" id="loginEmail" placeholder="请输入邮箱" required>' +
-      '          </div>' +
-      '          <div class="auth-input-wrap">' +
-      '            <i class="fas fa-lock auth-input-icon"></i>' +
-      '            <input type="password" class="form-control auth-input" id="loginPassword" placeholder="请输入密码" required>' +
-      '          </div>' +
-      '          <button type="submit" class="btn auth-btn" id="loginBtn">登 录</button>' +
-      '          <div class="auth-error text-danger small mt-2 text-center" style="display:none"></div>' +
-      '        </form>' +
-      '        <form id="registerForm" style="display:none">' +
-      '          <div class="auth-input-wrap">' +
-      '            <i class="fas fa-user auth-input-icon"></i>' +
-      '            <input type="text" class="form-control auth-input" id="regNickname" placeholder="请输入昵称" required>' +
-      '          </div>' +
-      '          <div class="auth-input-wrap">' +
-      '            <i class="fas fa-envelope auth-input-icon"></i>' +
-      '            <input type="email" class="form-control auth-input" id="regEmail" placeholder="请输入邮箱" required>' +
-      '          </div>' +
-      '          <div class="auth-input-wrap">' +
-            '            <i class="fas fa-lock auth-input-icon"></i>' +
-            '            <input type="password" class="form-control auth-input" id="regPassword" placeholder="设置密码(至少6位)" required>' +
-            '          </div>' +
-            '          <div class="auth-input-wrap">' +
-            '            <i class="fas fa-check-circle auth-input-icon"></i>' +
-            '            <input type="password" class="form-control auth-input" id="regConfirmPassword" placeholder="确认密码" required>' +
-            '          </div>' +
-            '          <button type="submit" class="btn auth-btn" id="registerBtn">注 册</button>' +
-      '          <div class="auth-error text-danger small mt-2 text-center" style="display:none"></div>' +
-      '        </form>' +
-      '      </div>' +
-      '    </div>' +
-      '  </div>' +
-      '</div>';
-    document.body.insertAdjacentHTML('beforeend', html);
-    modalEl = document.getElementById('authModal');
-
-    document.querySelectorAll('#authTabs .nav-link').forEach(function (tab) {
-      tab.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelectorAll('#authTabs .nav-link').forEach(function (t) { t.classList.remove('active'); });
-        this.classList.add('active');
-        var tabName = this.getAttribute('data-tab');
-        document.getElementById('loginForm').style.display = tabName === 'login' ? 'block' : 'none';
-        document.getElementById('registerForm').style.display = tabName === 'register' ? 'block' : 'none';
-      });
-    });
-
-    document.getElementById('loginForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      var email = document.getElementById('loginEmail').value;
-      var password = document.getElementById('loginPassword').value;
-      loginUser(email, password);
-    });
-
-    document.getElementById('registerForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      var nickname = document.getElementById('regNickname').value;
-      var email = document.getElementById('regEmail').value;
-      var password = document.getElementById('regPassword').value;
-      var confirmPwd = document.getElementById('regConfirmPassword').value;
-      if (password !== confirmPwd) {
-        showAuthError('registerForm', '两次输入的密码不一致');
-        return;
-      }
-      registerUser(email, password, nickname);
-    });
-  }
-
-  function showAuthError(formId, msg) {
-    var el = document.querySelector('#' + formId + ' .auth-error');
-    el.textContent = msg;
-    el.style.display = 'block';
-    setTimeout(function () { el.style.display = 'none'; }, 3000);
-  }
-
-  function loginUser(email, password) {
-    var btn = document.getElementById('loginBtn');
-    btn.disabled = true;
-    btn.textContent = '登录中...';
-    api('/auth/login', { method: 'POST', body: { email: email, password: password } })
-      .then(function (data) {
-        currentUser = data.user;
-        saveAuth(data.user);
-        updateUI();
-        $(modalEl).modal('hide');
-        initBookmarkButtons();
-        initComments();
-        refreshCustomNavCache();
-        if (document.getElementById('profile-page')) {
-          initProfilePage();
-        } else {
-          window.location.href = '/profile/';
-        }
-      })
-      .catch(function (err) {
-        showAuthError('loginForm', err.message);
-      })
-      .finally(function () {
-        btn.disabled = false;
-        btn.textContent = '登录';
-      });
-  }
-
-  function registerUser(email, password, nickname) {
-    var btn = document.getElementById('registerBtn');
-    btn.disabled = true;
-    btn.textContent = '注册中...';
-    api('/auth/register', { method: 'POST', body: { email: email, password: password, nickname: nickname } })
-      .then(function (data) {
-        currentUser = data.user;
-        saveAuth(data.user);
-        updateUI();
-        $(modalEl).modal('hide');
-        initBookmarkButtons();
-        initComments();
-        refreshCustomNavCache();
-        if (document.getElementById('profile-page')) {
-          initProfilePage();
-        } else {
-          window.location.href = '/profile/';
-        }
-      })
-      .catch(function (err) {
-        showAuthError('registerForm', err.message);
-      })
-      .finally(function () {
-        btn.disabled = false;
-        btn.textContent = '注册';
-      });
-  }
 
   function logoutUser() {
     api('/auth/logout', { method: 'POST' }).then(function () {
       currentUser = null;
       clearAuth();
-      updateUI();
-      initProfilePage();
-      initAdmin();
-      initCustomNav();
+      window.location.href = '/user/login/';
     });
   }
 
   function updateUI() {
     var container = document.getElementById('user-menu');
-    if (!container) return;
+    var appContainer = document.getElementById('appUserMenu');
+    if (!container && !appContainer) return;
     if (currentUser) {
       var adminLink = currentUser.role === 'admin'
         ? '<div class="dropdown-divider"></div><a class="dropdown-item" href="/admin/"><i class="fas fa-shield-alt mr-2"></i>管理后台</a>'
         : '';
-      container.innerHTML =
+      var html =
         '<div class="dropdown d-inline-block">' +
         '  <a href="#" class="dropdown-toggle" data-toggle="dropdown">' +
         '    <i class="fas fa-user-circle mr-1"></i>' + escapeHtml(currentUser.nickname) +
         '  </a>' +
         '  <div class="dropdown-menu dropdown-menu-right">' +
-        '    <a class="dropdown-item" href="/profile/"><i class="fas fa-user mr-2"></i>个人中心</a>' +
+        '    <a class="dropdown-item" href="/user/"><i class="fas fa-user mr-2"></i>个人中心</a>' +
         adminLink +
         '    <div class="dropdown-divider"></div>' +
         '    <a class="dropdown-item" href="#" id="logoutBtn"><i class="fas fa-sign-out-alt mr-2"></i>退出登录</a>' +
         '  </div>' +
         '</div>';
-      document.getElementById('logoutBtn').addEventListener('click', function (e) {
-        e.preventDefault();
-        logoutUser();
-      });
+      if (container) container.innerHTML = html;
+      if (appContainer) appContainer.innerHTML = html;
+      var logoutBtn = document.getElementById('logoutBtn');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          logoutUser();
+        });
+      }
     } else {
-      container.innerHTML =
-        '<a href="#" class="mr-3" data-toggle="modal" data-target="#authModal">登录</a>' +
-        '<a href="#" data-toggle="modal" data-target="#authModal">注册</a>';
+      if (container) {
+        container.innerHTML =
+          '<a href="/user/login/" class="mr-3">登录</a>' +
+          '<a href="/user/register/">注册</a>';
+      }
+      if (appContainer) {
+        appContainer.innerHTML =
+          '<span class="top-btn" onclick="openAuthModal()" style="width:36px;height:36px;border-radius:8px;border:none;background:transparent;color:var(--text-primary);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;">' +
+          '  <i class="fas fa-user"></i>' +
+          '</span>';
+      }
     }
   }
 
@@ -251,8 +115,10 @@
   }
 
   function initAuth() {
-    if (!document.getElementById('user-menu')) return;
-    createModal();
+    var userMenu = document.getElementById('user-menu');
+    var appUserMenu = document.getElementById('appUserMenu');
+    if (!userMenu && !appUserMenu) return;
+
 
     var cached = loadAuth();
 
@@ -278,8 +144,8 @@
       updateUI();
       initBookmarkButtons();
       initComments();
-      initProfilePage();
-      initAdmin();
+      initUserSection();
+      initAdminSection();
       initCustomNav();
     });
 
@@ -289,8 +155,8 @@
         if (e.key !== AUTH_KEY) return;
         currentUser = e.newValue ? JSON.parse(e.newValue) : null;
         updateUI();
-        initProfilePage();
-        initAdmin();
+        initUserSection();
+        initAdminSection();
         initCustomNav();
       });
     }
@@ -453,7 +319,7 @@
 
     document.getElementById('customNavAddBtn').addEventListener('click', function () {
       if (!currentUser) {
-        $(modalEl).modal('show');
+        window.location.href = '/user/login/';
         return;
       }
       showCustomNavAddDialog();
@@ -481,7 +347,7 @@
         e.preventDefault();
         if (btn.getAttribute('data-busy') === 'true') return;
         if (!currentUser) {
-          $(modalEl).modal('show');
+          window.location.href = '/user/login/';
           return;
         }
         btn.setAttribute('data-busy', 'true');
@@ -573,7 +439,7 @@
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         if (!currentUser) {
-          $(modalEl).modal('show');
+          window.location.href = '/user/login/';
           return;
         }
         var textarea = form.querySelector('textarea');
@@ -598,22 +464,23 @@
     loadComments();
   }
 
-  function initProfilePage() {
-    var container = document.getElementById('profile-page');
-    if (!container) return;
+  function initUserSection() {
+    var pageEl = document.getElementById('userPage');
+    if (!pageEl) return;
+    var section = pageEl.getAttribute('data-section') || 'home';
 
-    if (!container._profileReady) {
-      container._profileReady = true;
+    if (!pageEl._profileReady) {
+      pageEl._profileReady = true;
       var hint = document.createElement('div');
       hint.className = 'profile-login-hint';
       hint.style.display = 'none';
-      hint.innerHTML = '<p>请先登录</p><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#authModal">去登录</a>';
-      container.insertBefore(hint, container.firstChild);
-      container._profileReq = 0;
+      hint.innerHTML = '<p>请先登录</p><a href="/user/login/" class="btn btn-primary">去登录</a>';
+      pageEl.insertBefore(hint, pageEl.firstChild);
+      pageEl._profileReq = 0;
     }
 
-    var hint = container.querySelector('.profile-login-hint');
-    var sections = container.querySelectorAll('.profile-header, .profile-section');
+    var hint = pageEl.querySelector('.profile-login-hint');
+    var sections = pageEl.querySelectorAll('.profile-header, .profile-section');
 
     if (!currentUser) {
       hint.style.display = '';
@@ -629,17 +496,32 @@
     if (nicknameEl) nicknameEl.textContent = currentUser.nickname;
     if (emailEl) emailEl.textContent = currentUser.email;
 
-    var bookmarkList = container.querySelector('.bookmark-list');
-    var commentList = container.querySelector('.my-comments-list');
-    if (!bookmarkList) return;
+    switch (section) {
+      case 'home':
+        break;
+      case 'profile':
+        initChangePwdForm();
+        break;
+      case 'bookmarks':
+        var bl = pageEl.querySelector('.bookmark-list');
+        if (!bl) break;
+        loadUserBookmarks(bl, pageEl);
+        break;
+      case 'comments':
+        var cl = pageEl.querySelector('.my-comments-list');
+        if (!cl) break;
+        loadUserComments(cl, pageEl);
+        break;
+    }
+  }
 
-    var reqId = ++container._profileReq;
-
-    bookmarkList.innerHTML = '<div class="text-muted text-center py-3">加载中...</div>';
+  function loadUserBookmarks(container, pageEl) {
+    var reqId = ++pageEl._profileReq;
+    container.innerHTML = '<div class="text-muted text-center py-3">加载中...</div>';
     api('/bookmarks').then(function (data) {
-      if (reqId !== container._profileReq) return;
+      if (reqId !== pageEl._profileReq) return;
       if (data.bookmarks.length === 0) {
-        bookmarkList.innerHTML = '<div class="text-muted text-center py-3">还没有收藏任何网站</div>';
+        container.innerHTML = '<div class="text-muted text-center py-3">还没有收藏任何网站</div>';
       } else {
         var html = '';
         data.bookmarks.forEach(function (b) {
@@ -659,8 +541,8 @@
             '  <button class="btn btn-sm btn-outline-danger ml-2 delete-bookmark flex-shrink-0" data-id="' + b.id + '">删除</button>' +
             '</div>';
         });
-        bookmarkList.innerHTML = html;
-        bookmarkList.querySelectorAll('.delete-bookmark').forEach(function (btn) {
+        container.innerHTML = html;
+        container.querySelectorAll('.delete-bookmark').forEach(function (btn) {
           btn.addEventListener('click', function () {
             var id = btn.getAttribute('data-id');
             if (confirm('确定删除此收藏？')) {
@@ -675,16 +557,18 @@
         });
       }
     }).catch(function () {
-      if (reqId !== container._profileReq) return;
-      bookmarkList.innerHTML = '<div class="text-danger text-center py-3">加载失败</div>';
+      if (reqId !== pageEl._profileReq) return;
+      container.innerHTML = '<div class="text-danger text-center py-3">加载失败</div>';
     });
+  }
 
-    if (!commentList) return;
-    commentList.innerHTML = '<div class="text-muted text-center py-3">加载中...</div>';
+  function loadUserComments(container, pageEl) {
+    var reqId = ++pageEl._profileReq;
+    container.innerHTML = '<div class="text-muted text-center py-3">加载中...</div>';
     api('/comments?mine=1').then(function (data) {
-      if (reqId !== container._profileReq) return;
+      if (reqId !== pageEl._profileReq) return;
       if (data.comments.length === 0) {
-        commentList.innerHTML = '<div class="text-muted text-center py-3">还没有发表任何评论</div>';
+        container.innerHTML = '<div class="text-muted text-center py-3">还没有发表任何评论</div>';
       } else {
         var html = '';
         data.comments.forEach(function (c) {
@@ -700,8 +584,8 @@
             '  </div>' +
             '</div>';
         });
-        commentList.innerHTML = html;
-        commentList.querySelectorAll('.delete-my-comment').forEach(function (btn) {
+        container.innerHTML = html;
+        container.querySelectorAll('.delete-my-comment').forEach(function (btn) {
           btn.addEventListener('click', function () {
             var id = btn.getAttribute('data-id');
             if (confirm('确定删除此评论？')) {
@@ -713,10 +597,9 @@
         });
       }
     }).catch(function () {
-      if (reqId !== container._profileReq) return;
-      commentList.innerHTML = '<div class="text-danger text-center py-3">加载失败</div>';
+      if (reqId !== pageEl._profileReq) return;
+      container.innerHTML = '<div class="text-danger text-center py-3">加载失败</div>';
     });
-    initChangePwdForm();
   }
 
   function initChangePwdForm() {
@@ -1227,7 +1110,7 @@
           var checked = catGrid.querySelectorAll('input[type="checkbox"]:checked');
           catCount.textContent = checked.length;
           if (checked.length > 3) {
-            checkboxes[i].checked = false;
+            e.target.checked = false;
             catCount.textContent = '3';
             catError.textContent = '最多选择3个分类';
             catError.style.display = 'block';
@@ -1290,9 +1173,651 @@
     });
   }
 
+  // ═══════════════════════════════════════════
+  // ── RBAC Data & Permission Management ──
+  // ═══════════════════════════════════════════
+
+  var RBAC_ROLES = {
+    guest: { id:'guest',  name:'游客',     level:0 },
+    user:  { id:'user',   name:'普通用户',  level:10 },
+    vip:   { id:'vip',    name:'VIP会员',   level:20 },
+    svip:  { id:'svip',   name:'SVIP会员',  level:30 },
+    admin: { id:'admin',  name:'超级管理员', level:999 }
+  };
+
+  var RBAC_PERMISSIONS = {
+    'workspace.view':          '访问工作台',
+    'workspace.bookmark':      '收藏管理',
+    'workspace.comment':       '评论管理',
+    'roadmap.use':             '创办一人公司',
+    'admin.users.view':        '查看用户列表',
+    'admin.users.manage':      '管理用户角色',
+    'admin.membership.manage': '管理会员等级',
+    'admin.permissions.manage':'管理权限配置'
+  };
+
+  var RBAC_ROLE_PERMISSIONS = {
+    guest: [],
+    user:   ['workspace.view','workspace.bookmark','workspace.comment'],
+    vip:    ['workspace.view','workspace.bookmark','workspace.comment','roadmap.use'],
+    svip:   ['workspace.view','workspace.bookmark','workspace.comment','roadmap.use'],
+    admin:  Object.keys(RBAC_PERMISSIONS)
+  };
+
+  function rbacLoadConfig() {
+    try { return JSON.parse(localStorage.getItem('permissions_config') || 'null'); } catch(e) { return null; }
+  }
+
+  function rbacSaveConfig(config) {
+    try { localStorage.setItem('permissions_config', JSON.stringify(config)); } catch(e) {}
+  }
+
+  function rbacGetEffectivePerms(role) {
+    var defaults = RBAC_ROLE_PERMISSIONS[role] || [];
+    var overrides = rbacLoadConfig();
+    if (!overrides || !overrides[role]) return defaults;
+    var merged = [];
+    var allPerms = Object.keys(RBAC_PERMISSIONS);
+    for (var i = 0; i < allPerms.length; i++) {
+      var p = allPerms[i];
+      if (overrides[role].indexOf(p) !== -1) merged.push(p);
+    }
+    return merged;
+  }
+
+  window.renderPermissionsPanel = function renderPermissionsPanel(gridId) {
+    var grid = document.getElementById(gridId || 'adminPermsGrid');
+    if (!grid) return;
+    var allPerms = Object.keys(RBAC_PERMISSIONS);
+    var config = rbacLoadConfig() || {};
+    var html = '';
+    var roleIds = ['user', 'vip', 'svip', 'admin'];
+    for (var ri = 0; ri < roleIds.length; ri++) {
+      var rid = roleIds[ri];
+      var role = RBAC_ROLES[rid];
+      if (!role) continue;
+      var rolePerms = config[rid] || RBAC_ROLE_PERMISSIONS[rid] || [];
+      var items = '';
+      for (var pi = 0; pi < allPerms.length; pi++) {
+        var p = allPerms[pi];
+        var checked = rolePerms.indexOf(p) !== -1;
+        var disabled = rid === 'admin' ? ' disabled' : '';
+        items += '<label class="perms-toggle' + (checked ? ' checked' : '') + disabled + '">' +
+          '<input type="checkbox" value="' + p + '"' + (checked ? ' checked' : '') + disabled +
+          ' onchange="togglePermission(\'' + rid + '\',\'' + p + '\',this.checked)">' +
+          '<span class="perms-toggle-label">' + RBAC_PERMISSIONS[p] + '</span>' +
+          '</label>';
+      }
+      html += '<div class="perms-role-section">' +
+        '<div class="perms-role-header">' +
+        '<span class="perms-role-badge" style="background:' + (rid === 'admin' ? 'var(--accent-red)' : rid === 'svip' ? '#AF52DE' : rid === 'vip' ? '#FFA500' : 'var(--bg-secondary)') + ';">' + role.name + '</span>' +
+        '<span class="perms-count">' + rolePerms.length + ' / ' + allPerms.length + ' 项权限</span>' +
+        '</div>' +
+        '<div class="perms-items">' + items + '</div>' +
+        '</div>';
+    }
+    grid.innerHTML = html;
+  };
+
+  window.togglePermission = function togglePermission(roleId, perm, checked) {
+    if (roleId === 'admin') return;
+    var config = rbacLoadConfig() || {};
+    if (!config[roleId]) config[roleId] = (RBAC_ROLE_PERMISSIONS[roleId] || []).slice();
+    var idx = config[roleId].indexOf(perm);
+    if (checked && idx === -1) config[roleId].push(perm);
+    if (!checked && idx !== -1) config[roleId].splice(idx, 1);
+    rbacSaveConfig(config);
+    window.renderPermissionsPanel();
+  };
+
+  window.resetPermissions = function resetPermissions() {
+    if (!confirm('确定恢复所有角色的权限为默认值？')) return;
+    localStorage.removeItem('permissions_config');
+    window.renderPermissionsPanel();
+  };
+
+  window.renderRolesPanel = function renderRolesPanel(containerId) {
+    var container = document.getElementById(containerId || 'adminRolesContainer');
+    if (!container) return;
+    var html = '';
+    var allPerms = Object.keys(RBAC_PERMISSIONS);
+    var roleIds = ['guest', 'user', 'vip', 'svip', 'admin'];
+    for (var ri = 0; ri < roleIds.length; ri++) {
+      var rid = roleIds[ri];
+      var role = RBAC_ROLES[rid];
+      if (!role) continue;
+      var perms = RBAC_ROLE_PERMISSIONS[rid] || [];
+      var badgeColor = rid === 'admin' ? 'var(--accent-red)' : rid === 'svip' ? '#AF52DE' : rid === 'vip' ? '#FFA500' : rid === 'user' ? '#007AFF' : 'var(--text-tertiary)';
+      html += '<div class="app-card app-card-sm mb-2">' +
+        '<div class="d-flex justify-content-between align-items-center mb-2">' +
+        '<div><span class="app-badge" style="background:' + badgeColor + ';color:#fff;padding:4px 12px;border-radius:6px;">' + role.name + '</span>' +
+        '<span class="text-muted" style="margin-left:12px;font-size:12px;">等级 ' + role.level + '</span></div>' +
+        '<span class="text-muted" style="font-size:12px;">' + perms.length + ' / ' + allPerms.length + ' 项默认权限</span></div>' +
+        '<div style="display:flex;flex-wrap:wrap;gap:6px;">';
+      for (var pi = 0; pi < allPerms.length; pi++) {
+        var p = allPerms[pi];
+        var has = perms.indexOf(p) !== -1;
+        html += '<span class="app-badge ' + (has ? 'app-badge-success' : 'app-badge-secondary') + '" style="font-size:11px;">' +
+          RBAC_PERMISSIONS[p] + '</span>';
+      }
+      html += '</div></div>';
+    }
+    container.innerHTML = html;
+  };
+
+  // ═══════════════════════════════════════════
+  // ── Section-based Admin Init ──
+  // ═══════════════════════════════════════════
+
+  function initAdminSection() {
+    var pageEl = document.getElementById('adminPage');
+    if (!pageEl) return;
+    var section = pageEl.getAttribute('data-section');
+    if (!section) return;
+    if (!currentUser) {
+      var cached = loadAuth();
+      if (cached) currentUser = cached;
+    }
+    if (!currentUser || currentUser.role !== 'admin') {
+      pageEl.innerHTML = '<div class="text-center py-5"><p class="text-danger">' + escapeHtml('权限不足') + '</p></div>';
+      return;
+    }
+    switch (section) {
+      case 'dashboard':
+        api('/admin/users').then(function (data) {
+          var users = data.users || [];
+          document.getElementById('statUsers').textContent = users.length;
+        }).catch(function () {});
+        api('/admin/comments').then(function (data) {
+          var comments = data.comments || [];
+          document.getElementById('statComments').textContent = comments.length;
+        }).catch(function () {});
+        api('/admin/submissions').then(function (data) {
+          var submissions = data.submissions || [];
+          document.getElementById('statSubmissions').textContent = submissions.length;
+          var pending = submissions.filter(function (s) { return s.status === 'pending'; });
+          document.getElementById('statPending').textContent = pending.length;
+        }).catch(function () {});
+        break;
+      case 'users':
+        adminPageLoadUsers();
+        break;
+      case 'comments':
+        adminPageLoadComments();
+        break;
+      case 'submissions':
+        adminPageLoadSubmissions();
+        break;
+      case 'permissions':
+        window.renderPermissionsPanel('adminPermsGrid');
+        break;
+      case 'bookmarks':
+        adminPageLoadBookmarks();
+        break;
+      case 'policies':
+        adminPageLoadPolicies();
+        bindPolicyPageEvents();
+        break;
+      case 'roles':
+        window.renderRolesPanel('adminRolesContainer');
+        break;
+    }
+  }
+
+  // Expose user management functions on window
+  window.toggleUserRole = function toggleUserRole(userId, curRole) {
+    var newRole = curRole === 'admin' ? 'user' : 'admin';
+    api('/admin/users/' + userId + '/role', { method: 'PATCH', body: { role: newRole } })
+      .then(function () { adminPageLoadUsers(); })
+      .catch(function (err) { alert(err.message); });
+  };
+
+  window.cycleVipLevel = function cycleVipLevel(userId, currentLevel) {
+    var levels = ['', 'vip', 'svip'];
+    var idx = levels.indexOf(currentLevel);
+    var nextLevel = levels[(idx + 1) % levels.length];
+    try {
+      var p = JSON.parse(localStorage.getItem('user_profiles') || '{}');
+      if (!p[userId]) p[userId] = {};
+      p[userId].vip_level = nextLevel;
+      localStorage.setItem('user_profiles', JSON.stringify(p));
+    } catch (e) {}
+    adminPageLoadUsers();
+  };
+
+  window.cycleUserType = function cycleUserType(userId, currentType) {
+    var newType = currentType === 'personal' ? 'enterprise' : 'personal';
+    try {
+      var p = JSON.parse(localStorage.getItem('user_profiles') || '{}');
+      if (!p[userId]) p[userId] = {};
+      p[userId].user_type = newType;
+      localStorage.setItem('user_profiles', JSON.stringify(p));
+    } catch (e) {}
+    adminPageLoadUsers();
+  };
+
+  window.deleteUser = function deleteUser(userId) {
+    if (!confirm('确定要删除此用户及其所有数据？')) return;
+    api('/admin/users/' + userId, { method: 'DELETE' })
+      .then(function () {
+        try {
+          var p = JSON.parse(localStorage.getItem('user_profiles') || '{}');
+          delete p[userId];
+          localStorage.setItem('user_profiles', JSON.stringify(p));
+        } catch (e) {}
+        adminPageLoadUsers();
+      })
+      .catch(function (err) { alert(err.message); });
+  };
+
+  // ── Admin page loading helpers ──
+
+  function adminPageLoadUsers() {
+    var body = document.getElementById('adminUsersBody');
+    if (!body) return;
+    body.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--text-tertiary);">' + escapeHtml('加载中...') + '</td></tr>';
+    api('/admin/users').then(function (data) {
+      var users = data.users || [];
+      if (users.length === 0) {
+        body.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--text-tertiary);">' + escapeHtml('暂无用户') + '</td></tr>';
+        return;
+      }
+      body.innerHTML = users.map(function (u) {
+        var isSelf = currentUser && currentUser.id === u.id;
+        var roleLabel = u.role === 'admin'
+          ? '<span class="role-badge role-admin" style="font-size:11px;">管理员</span>'
+          : '<span class="role-badge" style="font-size:11px;background:var(--bg-secondary);color:var(--text-secondary);">用户</span>';
+        var vl = u.vip_level || '';
+        var vipLabel = vl === 'svip'
+          ? '<span class="role-badge role-svip" style="font-size:11px;">SVIP</span>'
+          : vl === 'vip'
+          ? '<span class="role-badge role-vip" style="font-size:11px;">VIP</span>'
+          : '<span style="font-size:11px;color:var(--text-tertiary);">普通</span>';
+        var ut = u.user_type || 'personal';
+        var actions = isSelf
+          ? '<span style="color:var(--text-tertiary);font-size:12px;">当前用户</span>'
+          : '<button class="app-btn app-btn-sm app-btn-secondary" onclick="toggleUserRole(\'' + u.id + '\',\'' + u.role + '\')">' + (u.role === 'admin' ? '取消管理' : '设为管理') + '</button>' +
+            '<button class="app-btn app-btn-sm app-btn-secondary" onclick="cycleVipLevel(\'' + u.id + '\',\'' + vl + '\')">切换VIP</button>' +
+            '<button class="app-btn app-btn-sm app-btn-secondary" onclick="cycleUserType(\'' + u.id + '\',\'' + ut + '\')">切换类型</button>' +
+            '<button class="app-btn app-btn-sm app-btn-danger" onclick="deleteUser(\'' + u.id + '\')">删除</button>';
+        return '<tr>' +
+          '<td>' + u.id + '</td>' +
+          '<td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;">' + escapeHtml(u.email) + '</td>' +
+          '<td>' + escapeHtml(u.nickname || '-') + '</td>' +
+          '<td>' + roleLabel + '</td>' +
+          '<td>' + vipLabel + '</td>' +
+          '<td style="font-size:12px;color:var(--text-secondary);">' + (ut === 'enterprise' ? '企业用户' : '个人用户') + '</td>' +
+          '<td style="white-space:nowrap;">' + actions + '</td>' +
+          '</tr>';
+      }).join('');
+    }).catch(function (err) {
+      body.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--accent-red);">' + escapeHtml('加载失败: ' + err.message) + '</td></tr>';
+    });
+  }
+
+  function adminPageLoadComments() {
+    var list = document.getElementById('adminCommentsList');
+    if (!list) return;
+    list.innerHTML = '<div class="text-muted text-center py-3">' + escapeHtml('加载中...') + '</div>';
+    api('/admin/comments').then(function (data) {
+      if (data.comments.length === 0) {
+        list.innerHTML = '<div class="text-muted text-center py-3">' + escapeHtml('暂无评论') + '</div>';
+        return;
+      }
+      list.innerHTML = data.comments.map(function (c) {
+        var date = new Date(c.created_at + 'Z').toLocaleDateString('zh-CN');
+        return '<div class="app-card app-card-sm mb-2">' +
+          '<div class="d-flex justify-content-between align-items-start">' +
+          '<div><p class="mb-1">' + escapeHtml(c.content) + '</p>' +
+          '<small class="text-muted">' + escapeHtml(c.nickname || '匿名') + ' (' + escapeHtml(c.email || '') + ') · ' + date + '</small></div>' +
+          '<button class="app-btn app-btn-sm app-btn-danger ml-2 flex-shrink-0" onclick="adminPageDeleteComment(\'' + c.id + '\')">删除</button>' +
+          '</div></div>';
+      }).join('');
+    }).catch(function (err) {
+      list.innerHTML = '<div class="text-danger text-center py-3">' + escapeHtml('加载失败: ' + err.message) + '</div>';
+    });
+  }
+
+  window.adminPageDeleteComment = function adminPageDeleteComment(id) {
+    if (!confirm('确定删除此评论？')) return;
+    api('/admin/comments/' + id, { method: 'DELETE' }).then(function () {
+      adminPageLoadComments();
+    }).catch(function (err) {
+      alert(err.message);
+    });
+  };
+
+  function adminPageLoadSubmissions() {
+    var list = document.getElementById('adminSubmissionsList');
+    if (!list) return;
+    list.innerHTML = '<div class="text-muted text-center py-3">' + escapeHtml('加载中...') + '</div>';
+    api('/admin/submissions').then(function (data) {
+      if (data.submissions.length === 0) {
+        list.innerHTML = '<div class="text-muted text-center py-3">' + escapeHtml('暂无入驻申请') + '</div>';
+        return;
+      }
+      list.innerHTML = data.submissions.map(function (s) {
+        var date = s.created_at ? new Date(s.created_at + 'Z').toLocaleDateString('zh-CN') : '-';
+        var statusMap = { approved: '已通过', rejected: '已拒绝', pending: '待审核' };
+        var statusBadgeCls = s.status === 'approved' ? 'app-badge-success' : s.status === 'rejected' ? 'app-badge-danger' : 'app-badge-warning';
+        return '<div class="app-card app-card-sm mb-2">' +
+          '<div class="d-flex justify-content-between align-items-start">' +
+          '<div><strong>' + escapeHtml(s.name) + '</strong>' +
+          ' <span class="app-badge ' + statusBadgeCls + '">' + (statusMap[s.status] || s.status) + '</span>' +
+          '<p class="small text-muted mb-1 mt-1">' + escapeHtml(s.summary) + '</p>' +
+          '<small class="text-muted">' + escapeHtml(s.city) + ' · ' + escapeHtml(s.contact_name) + ' · ' + date + '</small></div>' +
+          '<div class="ml-2 flex-shrink-0">' +
+          (s.status === 'pending'
+            ? '<button class="app-btn app-btn-sm app-btn-success mr-1" onclick="adminPageApproveSub(\'' + s.id + '\')">通过</button>' +
+              '<button class="app-btn app-btn-sm app-btn-danger mr-1" onclick="adminPageRejectSub(\'' + s.id + '\')">拒绝</button>'
+            : '') +
+          '<button class="app-btn app-btn-sm app-btn-secondary" onclick="adminPageDeleteSub(\'' + s.id + '\')">删除</button>' +
+          '</div></div></div>';
+      }).join('');
+    }).catch(function (err) {
+      list.innerHTML = '<div class="text-danger text-center py-3">' + escapeHtml('加载失败: ' + err.message) + '</div>';
+    });
+  }
+
+  window.adminPageApproveSub = function adminPageApproveSub(id) {
+    api('/admin/submissions/' + id + '/status', { method: 'PATCH', body: { status: 'approved' } }).then(adminPageLoadSubmissions);
+  };
+  window.adminPageRejectSub = function adminPageRejectSub(id) {
+    api('/admin/submissions/' + id + '/status', { method: 'PATCH', body: { status: 'rejected' } }).then(adminPageLoadSubmissions);
+  };
+  window.adminPageDeleteSub = function adminPageDeleteSub(id) {
+    if (!confirm('确定删除此申请？')) return;
+    api('/admin/submissions/' + id, { method: 'DELETE' }).then(adminPageLoadSubmissions);
+  };
+
+  function adminPageLoadPolicies(search) {
+    var tbody = document.getElementById('adminPoliciesBody');
+    if (!tbody) return;
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--text-tertiary);">' + escapeHtml('加载中...') + '</td></tr>';
+    var url = '/admin/policies';
+    if (search) url += '?search=' + encodeURIComponent(search);
+    api(url).then(function (data) {
+      var policies = data.policies || [];
+      _cachedPolicies = policies;
+      if (policies.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--text-tertiary);">' + escapeHtml('暂无政策数据') + '</td></tr>';
+        return;
+      }
+      var statusMap = { active: '进行中', upcoming: '即将实施', ended: '已结束' };
+      var html = '';
+      policies.forEach(function (p) {
+        var statusText = statusMap[p.status] || p.status;
+        html += '<tr>' +
+          '<td><small class="text-muted">' + escapeHtml(p.id) + '</small></td>' +
+          '<td>' + escapeHtml(p.name) + '</td>' +
+          '<td>' + escapeHtml(p.city) + '</td>' +
+          '<td>' + escapeHtml(p.issuer || '-') + '</td>' +
+          '<td><small>' + escapeHtml(p.publish_date || '-') + '</small></td>' +
+          '<td><span class="app-badge ' + (p.status === 'active' ? 'app-badge-success' : p.status === 'upcoming' ? 'app-badge-warning' : 'app-badge-secondary') + '">' + statusText + '</span></td>' +
+          '<td><button class="app-btn app-btn-sm app-btn-secondary" onclick="adminPageEditPolicy(\'' + escapeHtml(p.id) + '\')">编辑</button> ' +
+          '<button class="app-btn app-btn-sm app-btn-danger" onclick="adminPageDeletePolicy(\'' + escapeHtml(p.id) + '\')">删除</button></td>' +
+          '</tr>';
+      });
+      tbody.innerHTML = html;
+    }).catch(function (err) {
+      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--accent-red);">' + escapeHtml('加载失败: ' + err.message) + '</td></tr>';
+    });
+  }
+
+  function adminPageLoadBookmarks(search) {
+    var list = document.getElementById('adminBookmarksList');
+    if (!list) return;
+    list.innerHTML = '<div class="text-muted text-center py-3">' + escapeHtml('加载中...') + '</div>';
+    api('/bookmarks').then(function (data) {
+      var bookmarks = data.bookmarks || data || [];
+      if (!bookmarks.length) {
+        list.innerHTML = '<div class="text-muted text-center py-3">' + escapeHtml('暂无收藏') + '</div>';
+        return;
+      }
+      list.innerHTML = bookmarks.map(function (b) {
+        var date = b.created_at ? new Date(b.created_at + 'Z').toLocaleDateString('zh-CN') : '';
+        return '<div class="app-card app-card-sm mb-2">' +
+          '<div class="d-flex justify-content-between align-items-center">' +
+          '<div><strong>' + escapeHtml(b.title) + '</strong>' +
+          '<br><small class="text-muted">' + escapeHtml(b.description || '') + (date ? ' · ' + date : '') + '</small></div>' +
+          '<button class="app-btn app-btn-sm app-btn-danger" onclick="adminPageDeleteBookmark(\'' + b.id + '\')">删除</button>' +
+          '</div></div>';
+      }).join('');
+    }).catch(function (err) {
+      list.innerHTML = '<div class="text-danger text-center py-3">' + escapeHtml('加载失败: ' + err.message) + '</div>';
+    });
+  }
+
+  window.adminPageDeleteBookmark = function adminPageDeleteBookmark(id) {
+    if (!confirm('确定删除此收藏？')) return;
+    api('/bookmarks/' + id, { method: 'DELETE' }).then(function () {
+      adminPageLoadBookmarks();
+    }).catch(function (err) {
+      alert(err.message);
+    });
+  };
+
+  // ── Policy CRUD ──
+
+  window.adminPageEditPolicy = function adminPageEditPolicy(id) {
+    api('/admin/policies/' + id).then(function (policy) {
+      openPolicyModal(policy);
+    }).catch(function (err) {
+      alert(err.message);
+    });
+  };
+
+  window.adminPageDeletePolicy = function adminPageDeletePolicy(id) {
+    if (!confirm('确定删除此政策？')) return;
+    api('/admin/policies/' + id, { method: 'DELETE' }).then(function () {
+      adminPageLoadPolicies(document.getElementById('policySearchInput').value);
+    }).catch(function (err) {
+      alert(err.message);
+    });
+  };
+
+  function openPolicyModal(policy) {
+    if (!policy) return;
+    document.getElementById('pf_id').value = policy.id || '';
+    document.getElementById('pf_name').value = policy.name || '';
+    document.getElementById('pf_city').value = policy.city || '';
+    document.getElementById('pf_province').value = policy.province || '';
+    document.getElementById('pf_issuer').value = policy.issuer || '';
+    document.getElementById('pf_publish_date').value = policy.publish_date || '';
+    document.getElementById('pf_level').value = policy.level || 'city';
+    document.getElementById('pf_status').value = policy.status || 'active';
+    document.getElementById('pf_summary').value = policy.summary || '';
+    document.getElementById('pf_official_url').value = (policy.links && policy.links.official) || '';
+    document.getElementById('pf_news_url').value = (policy.links && policy.links.news && policy.links.news[0]) || '';
+    var container = document.getElementById('benefits-container');
+    container.innerHTML = '';
+    var benefits = policy.benefits || [];
+    if (benefits.length === 0) {
+      addPolicyBenefitRow(container);
+    } else {
+      benefits.forEach(function (b) {
+        addPolicyBenefitRow(container, b.item || '', b.amount || '', b.type || 'voucher');
+      });
+    }
+    $('#policyModal').modal('show');
+  }
+
+  var _cachedPolicies = [];
+  var CITY_CODES_POLICY = {
+    "上海": "310000", "北京": "110000", "天津": "120000", "重庆": "500000",
+    "南京": "320100", "苏州": "320500", "无锡": "320200", "常州": "320400",
+    "南通": "320600", "扬州": "321000", "徐州": "320300", "盐城": "320900",
+    "宿迁": "321300", "连云港": "320700",
+    "杭州": "330100", "宁波": "330200", "温州": "330300",
+    "广州": "440100", "深圳": "440300", "珠海": "440400", "佛山": "440600",
+    "东莞": "441900", "中山": "442000", "惠州": "441300",
+    "成都": "510100", "武汉": "420100", "长沙": "430100",
+    "郑州": "410100", "西安": "610100", "济南": "370100", "青岛": "370200",
+    "合肥": "340100", "福州": "350100", "厦门": "350200",
+    "昆明": "530100", "石家庄": "130100", "海口": "460100"
+  };
+
+  function addPolicyBenefitRow(container, item, amount, type) {
+    var row = document.createElement('div');
+    row.className = 'benefit-row d-flex gap-2 mb-1';
+    row.innerHTML =
+      '<input type="text" class="app-input app-input-sm" placeholder="项目名" style="width:30%;display:inline-block;" value="' + escapeHtml(item || '') + '">' +
+      '<input type="text" class="app-input app-input-sm" placeholder="金额/说明" style="width:40%;display:inline-block;" value="' + escapeHtml(amount || '') + '">' +
+      '<select class="app-select" style="width:20%;display:inline-block;height:32px;font-size:13px;">' +
+      '<option value="voucher"' + (type === 'voucher' ? ' selected' : '') + '>券</option>' +
+      '<option value="cash"' + (type === 'cash' ? ' selected' : '') + '>现金</option>' +
+      '<option value="loan"' + (type === 'loan' ? ' selected' : '') + '>贷款</option>' +
+      '<option value="other"' + (type === 'other' ? ' selected' : '') + '>其他</option>' +
+      '</select>' +
+      '<button type="button" class="app-btn app-btn-sm app-btn-danger benefit-remove">×</button>';
+    container.appendChild(row);
+    row.querySelector('.benefit-remove').addEventListener('click', function () { row.remove(); });
+  }
+
+  function collectPolicyBenefits() {
+    var rows = document.querySelectorAll('#benefits-container .benefit-row');
+    var benefits = [];
+    rows.forEach(function (row) {
+      var inputs = row.querySelectorAll('input');
+      var select = row.querySelector('select');
+      var item = inputs[0] ? inputs[0].value.trim() : '';
+      var amount = inputs[1] ? inputs[1].value.trim() : '';
+      var type = select ? select.value : 'voucher';
+      if (item || amount) {
+        benefits.push({ item: item, amount: amount, type: type });
+      }
+    });
+    return benefits;
+  }
+
+  function savePolicy() {
+    var id = document.getElementById('pf_id').value;
+    var data = {
+      name: document.getElementById('pf_name').value.trim(),
+      city: document.getElementById('pf_city').value.trim(),
+      province: document.getElementById('pf_province').value.trim(),
+      issuer: document.getElementById('pf_issuer').value.trim(),
+      publish_date: document.getElementById('pf_publish_date').value,
+      level: document.getElementById('pf_level').value,
+      status: document.getElementById('pf_status').value,
+      summary: document.getElementById('pf_summary').value.trim(),
+      benefits: collectPolicyBenefits(),
+      links: {}
+    };
+    var officialUrl = document.getElementById('pf_official_url').value.trim();
+    var newsUrl = document.getElementById('pf_news_url').value.trim();
+    if (officialUrl) data.links.official = officialUrl;
+    if (newsUrl) data.links.news = [newsUrl];
+    if (!data.name || !data.city) { alert('名称和城市为必填项'); return; }
+    var method = id ? 'PUT' : 'POST';
+    var url = id ? '/admin/policies/' + encodeURIComponent(id) : '/admin/policies';
+    if (!id) {
+      var code = CITY_CODES_POLICY[data.city];
+      if (!code) { alert('无法识别城市编码，请先选择有效城市'); return; }
+      var prefix = code + '-';
+      var maxSeq = 99;
+      (_cachedPolicies || []).forEach(function (p) {
+        if (p.id && p.id.indexOf(prefix) === 0) {
+          var num = parseInt(p.id.slice(prefix.length), 10);
+          if (!isNaN(num) && num > maxSeq) maxSeq = num;
+        }
+      });
+      data.id = prefix + (maxSeq + 1);
+    }
+    var btn = document.getElementById('policySaveBtn');
+    btn.disabled = true;
+    btn.textContent = '保存中...';
+    api(url, { method: method, body: data }).then(function () {
+      $('#policyModal').modal('hide');
+      adminPageLoadPolicies(document.getElementById('policySearchInput').value);
+    }).catch(function (err) {
+      alert(err.message);
+    }).finally(function () {
+      btn.disabled = false;
+      btn.textContent = '保存';
+    });
+  }
+
+  // ── Bind policy page events ──
+  function bindPolicyPageEvents() {
+    var searchBtn = document.getElementById('policySearchBtn');
+    if (!searchBtn) return;
+    searchBtn.addEventListener('click', function () {
+      adminPageLoadPolicies(document.getElementById('policySearchInput').value);
+    });
+    document.getElementById('policySearchInput').addEventListener('keyup', function (e) {
+      if (e.key === 'Enter') adminPageLoadPolicies(this.value);
+    });
+    document.getElementById('policyImportBtn').addEventListener('click', function () {
+      document.getElementById('policyFileInput').click();
+    });
+    document.getElementById('policyFileInput').addEventListener('change', function (e) {
+      var file = e.target.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function (ev) {
+        try {
+          var json = JSON.parse(ev.target.result);
+          var arr = Array.isArray(json) ? json : (json.policies || []);
+          if (arr.length === 0) { alert('JSON 格式错误'); return; }
+          api('/admin/policies/import', { method: 'POST', body: { policies: arr } }).then(function (res) {
+            alert('导入完成: ' + res.imported + '/' + res.total + ' 条');
+            adminPageLoadPolicies(document.getElementById('policySearchInput').value);
+          }).catch(function (err) { alert(err.message); });
+        } catch (err) { alert('JSON 解析失败: ' + err.message); }
+      };
+      reader.readAsText(file);
+      e.target.value = '';
+    });
+    document.getElementById('policyExportBtn').addEventListener('click', function () {
+      api('/admin/policies/export').then(function (data) {
+        var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'policies-' + new Date().toISOString().slice(0, 10) + '.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }).catch(function (err) { alert(err.message); });
+    });
+    document.getElementById('benefitAddBtn').addEventListener('click', function () {
+      addPolicyBenefitRow(document.getElementById('benefits-container'));
+    });
+    document.getElementById('policySaveBtn').addEventListener('click', savePolicy);
+    $('#policyModal').on('hidden.bs.modal', function () {
+      document.getElementById('pf_id').value = '';
+    });
+  }
+
+  function seedTestData() {
+    if (!localStorage.getItem('_test_data_seeded')) {
+      try {
+        localStorage.setItem('_test_data_seeded', '1');
+        var profiles = JSON.parse(localStorage.getItem('user_profiles') || '{}');
+        if (Object.keys(profiles).length === 0) {
+          profiles['2'] = { vip_level: 'vip', user_type: 'enterprise' };
+          profiles['3'] = { vip_level: 'svip', user_type: 'personal' };
+          profiles['4'] = { vip_level: 'vip', user_type: 'personal' };
+          localStorage.setItem('user_profiles', JSON.stringify(profiles));
+        }
+        if (!localStorage.getItem('permissions_config')) {
+          var config = {};
+          config.vip = (RBAC_ROLE_PERMISSIONS.vip || []).concat(['admin.users.view', 'admin.membership.manage']);
+          config.svip = Object.keys(RBAC_PERMISSIONS).filter(function (p) { return p !== 'admin.permissions.manage'; });
+          localStorage.setItem('permissions_config', JSON.stringify(config));
+        }
+      } catch (e) {}
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
+    seedTestData();
     initAuth();
     initSubmitPage();
+    initUserSection();
+    initAdminSection();
 
     document.querySelectorAll('.sidebar-menu-inner a[href^="#"]').forEach(function (a) {
       a.addEventListener('click', function (e) {
@@ -1307,4 +1832,8 @@
     });
 
   });
+
+  window.openAuthModal = function () {
+    window.location.href = '/user/login/';
+  };
 })();

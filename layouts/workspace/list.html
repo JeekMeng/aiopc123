@@ -24,173 +24,454 @@
 
     {{ partial "jsonld.html" . }}
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/iconfont-3.03029.1.css">
     <link rel="stylesheet" href="/assets/css/workspace-style.css">
+    <link rel="stylesheet" href="/assets/css/dynamic.css">
 </head>
-<body class="workspace-body">
+<body class="workspace-body" data-theme="dark">
     <div class="workspace-bg" id="workspace-bg"></div>
-    
-    <div class="workspace-container">
-        <header class="workspace-header">
-            <div class="search-box">
-                <i class="iconfont icon-search"></i>
-                <input type="text" placeholder="搜索应用、功能...">
-            </div>
-            <div class="header-actions">
-                <div class="bg-switcher">
-                    <button class="btn-icon bg-btn active" data-bg="/assets/images/workspace/workspace-simple.png" title="简约">
-                        <span>简</span>
-                    </button>
-                    <button class="btn-icon bg-btn" data-bg="/assets/images/workspace/workspace-ai.png" title="AI">
-                        <span>AI</span>
-                    </button>
-                    <button class="btn-icon bg-btn" data-bg="/assets/images/workspace/workspace-keji.png" title="科技">
-                        <span>科</span>
-                    </button>
-                </div>
-                <button class="btn-icon" title="消息">
-                    <i class="iconfont icon-notice"></i>
-                    <span class="badge">3</span>
-                </button>
-                <button class="btn-icon" title="设置">
-                    <i class="iconfont icon-set"></i>
-                </button>
-            </div>
-        </header>
 
-        <main class="workspace-main">
-            <section class="quick-apps">
-                <h1 class="mb-3">工作台</h1>
-                <h3>常用应用</h3>
-                <div class="apps-grid">
-                    <div class="app-item" data-url="/">
-                        <div class="app-icon">🏠</div>
-                        <span class="app-name">首页</span>
-                    </div>
-                    <div class="app-item" data-url="/blog/">
-                        <div class="app-icon">📝</div>
-                        <span class="app-name">博客</span>
-                    </div>
-                    <div class="app-item" data-url="/caozuozhinan/">
-                        <div class="app-icon">📖</div>
-                        <span class="app-name">指南</span>
-                    </div>
-                    <div class="app-item" data-url="/book/">
-                        <div class="app-icon">📚</div>
-                        <span class="app-name">资料</span>
-                    </div>
-                    <div class="app-item add-app" data-action="add">
-                        <div class="app-icon">➕</div>
-                        <span class="app-name">添加</span>
-                    </div>
-                </div>
-            </section>
-
-            <section class="widgets-row">
-                <div class="widget">
-                    <div class="widget-header">
-                        <h4>通知消息</h4>
-                        <button class="btn-link">全部已读</button>
-                    </div>
-                    <div class="widget-body">
-                        <div class="notification-item unread">
-                            <div class="notif-icon">📢</div>
-                            <div class="notif-content">
-                                <p class="notif-title">系统更新通知</p>
-                                <p class="notif-text">网站将于今晚23:00进行系统更新...</p>
-                                <time>10分钟前</time>
-                            </div>
-                        </div>
-                        <div class="notification-item unread">
-                            <div class="notif-icon">💬</div>
-                            <div class="notif-content">
-                                <p class="notif-title">新评论提醒</p>
-                                <p class="notif-text">您的文章有新评论...</p>
-                                <time>1小时前</time>
-                            </div>
-                        </div>
-                        <div class="notification-item">
-                            <div class="notif-icon">✅</div>
-                            <div class="notif-content">
-                                <p class="notif-title">任务完成</p>
-                                <p class="notif-text">您的网站ICP备案已完成审核</p>
-                                <time>昨天</time>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="widget">
-                    <div class="widget-header">
-                        <h4>快捷工具</h4>
-                    </div>
-                    <div class="widget-body tools-grid">
-                        <a href="/upload/" class="tool-item">
-                            <span class="tool-icon">🔗</span>
-                            <span class="tool-name">网站提交</span>
-                        </a>
-                        <a href="/about/" class="tool-item">
-                            <span class="tool-icon">ℹ️</span>
-                            <span class="tool-name">关于</span>
-                        </a>
-                        <a href="/introduce/" class="tool-item">
-                            <span class="tool-icon">📋</span>
-                            <span class="tool-name">介绍</span>
-                        </a>
-                        <a href="javascript:;" class="tool-item" data-action="custom">
-                            <span class="tool-icon">⚙️</span>
-                            <span class="tool-name">自定义</span>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="widget">
-                    <div class="widget-header">
-                        <h4>最近访问</h4>
-                    </div>
-                    <div class="widget-body">
-                        <div class="history-list">
-                            <a href="/" class="history-item">
-                                <span>AI 一人公司导航首页</span>
-                                <time>今天</time>
-                            </a>
-                            <a href="/blog/" class="history-item">
-                                <span>博客列表</span>
-                                <time>昨天</time>
-                            </a>
-                            <a href="/caozuozhinan/" class="history-item">
-                                <span>操作指南</span>
-                                <time>3天前</time>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
+    <div class="theme-toggle">
+        <button class="theme-btn" onclick="toggleTheme()">
+            <i class="fas fa-moon"></i>
+        </button>
     </div>
 
-    <script>
-        document.querySelectorAll('.app-item').forEach(item => {
-            item.addEventListener('click', () => {
-                const url = item.dataset.url;
-                if (url) window.location.href = url;
-            });
-        });
-        
-        document.querySelectorAll('.notification-item').forEach(item => {
-            item.addEventListener('click', () => {
-                item.classList.remove('unread');
-            });
-        });
+    <div class="desktop">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="company-info">
+                <div class="company-logo">A</div>
+                <span class="company-name">AI一人公司</span>
+            </div>
+            <div class="top-actions">
+                <button class="top-btn">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge"></span>
+                </button>
+                <button class="top-btn">
+                    <i class="fas fa-envelope"></i>
+                </button>
+                <button class="top-btn">
+                    <i class="fas fa-cog"></i>
+                </button>
+                <div id="userMenuContainer" style="position:relative;">
+                    <div class="top-btn" id="userMenuBtn" onclick="window.location.href='/user/login/'">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        document.querySelectorAll('.bg-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.bg-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                document.getElementById('workspace-bg').style.backgroundImage = 'url(' + btn.dataset.bg + ')';
-            });
-        });
-    </script>
+        <!-- Search Box -->
+        <div class="search-box">
+            <div class="search-container">
+                <div class="search-input-wrapper">
+                    <i class="fas fa-search"></i>
+                    <input type="text" class="search-input" id="globalSearchInput" placeholder="搜索网址、数据集、素材、文章..." oninput="handleSearch(this.value)">
+                </div>
+                <div class="search-type-select">
+                    <button class="search-type-btn active" data-type="all" onclick="setSearchType('all', this)">
+                        <i class="fas fa-th"></i> 全部
+                    </button>
+                    <button class="search-type-btn" data-type="url" onclick="setSearchType('url', this)">
+                        <i class="fas fa-globe"></i> 网址
+                    </button>
+                    <button class="search-type-btn" data-type="dataset" onclick="setSearchType('dataset', this)">
+                        <i class="fas fa-database"></i> 数据
+                    </button>
+                    <button class="search-type-btn" data-type="resource" onclick="setSearchType('resource', this)">
+                        <i class="fas fa-image"></i> 素材
+                    </button>
+                    <button class="search-type-btn" data-type="article" onclick="setSearchType('article', this)">
+                        <i class="fas fa-newspaper"></i> 文章
+                    </button>
+                    <button class="search-type-btn" data-type="web" onclick="setSearchType('web', this)">
+                        <i class="fas fa-external-link-alt"></i> 网页
+                    </button>
+                </div>
+                <div class="search-results" id="searchResults"></div>
+            </div>
+        </div>
+
+        <!-- Floating Cards -->
+        <div class="floating-card card-pos-1" id="card-url" data-title="网址导航" style="width: 280px;">
+            <div class="card-mini-view">
+                <div class="card-mini-icon"><i class="fas fa-globe"></i></div>
+                <div class="card-mini-title">网址导航</div>
+            </div>
+            <div class="card-header">
+                <div class="card-title" style="display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-globe" style="color: var(--accent-blue);"></i>
+                    网址导航
+                </div>
+                <div style="display: flex; gap: 4px;">
+                    <button class="card-minimize" onclick="minimizeCard('card-url', event)">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="card-minimize" onclick="deleteCard('card-url')" style="margin-left: 4px;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-content">
+                <div class="card-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <div class="card-title">网址导航</div>
+                <div class="card-desc">常用网站快速访问</div>
+                <div class="url-list-mini">
+                    <div class="url-item-mini" onclick="location.href='/'">
+                        <div class="url-icon-mini" style="background: #FF4757;">网</div>
+                        <span>网址导航</span>
+                    </div>
+                    <div class="url-item-mini" onclick="location.href='/site/'">
+                        <div class="url-icon-mini" style="background: #5c6bc0;">集</div>
+                        <span>工具大全</span>
+                    </div>
+                    <div class="url-item-mini" onclick="location.href='/book/'">
+                        <div class="url-icon-mini" style="background: #ff6b6b;">素</div>
+                        <span>资料中心</span>
+                    </div>
+                    <div class="url-item-mini" onclick="location.href='/blog/'">
+                        <div class="url-icon-mini" style="background: #43e97b;">文</div>
+                        <span>文章资讯</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="floating-card card-pos-2" id="card-article" data-title="文章资讯" style="width: 280px;">
+            <div class="card-mini-view">
+                <div class="card-mini-icon"><i class="fas fa-newspaper"></i></div>
+                <div class="card-mini-title">文章资讯</div>
+            </div>
+            <div class="card-header">
+                <div class="card-title" style="display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-newspaper" style="color: var(--accent-green);"></i>
+                    文章资讯
+                </div>
+                <div style="display: flex; gap: 4px;">
+                    <button class="card-minimize" onclick="minimizeCard('card-article', event)">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="card-minimize" onclick="deleteCard('card-article')" style="margin-left: 4px;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-content">
+                <div class="card-icon" style="background: linear-gradient(135deg, #43e97b, #38f9d7); color: #333;">
+                    <i class="fas fa-newspaper"></i>
+                </div>
+                <div class="card-title">文章资讯</div>
+                <div class="card-desc">最新行业动态与干货</div>
+                <div class="article-list-mini">
+                    <div class="article-item-mini" onclick="location.href='/blog/'">
+                        <div class="article-title-mini">2024年AI工具发展趋势深度报告</div>
+                        <div class="article-meta-mini">AI前沿 · 12,567阅读</div>
+                    </div>
+                    <div class="article-item-mini" onclick="location.href='/blog/'">
+                        <div class="article-title-mini">一个人如何完成自媒体全流程运营</div>
+                        <div class="article-meta-mini">运营技巧 · 5,234阅读</div>
+                    </div>
+                    <div class="article-item-mini" onclick="location.href='/blog/'">
+                        <div class="article-title-mini">5款免费AI工具让你效率翻倍</div>
+                        <div class="article-meta-mini">AI前沿 · 12,345阅读</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="floating-card card-pos-3" id="card-dataset" data-title="数据集市" style="width: 280px;">
+            <div class="card-mini-view">
+                <div class="card-mini-icon"><i class="fas fa-database"></i></div>
+                <div class="card-mini-title">数据集市</div>
+            </div>
+            <div class="card-header">
+                <div class="card-title" style="display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-database" style="color: var(--accent-purple);"></i>
+                    数据集市
+                </div>
+                <div style="display: flex; gap: 4px;">
+                    <button class="card-minimize" onclick="minimizeCard('card-dataset', event)">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="card-minimize" onclick="deleteCard('card-dataset')" style="margin-left: 4px;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-content">
+                <div class="card-icon" style="background: linear-gradient(135deg, #5c6bc0, #3949ab);">
+                    <i class="fas fa-database"></i>
+                </div>
+                <div class="card-title">数据集市</div>
+                <div class="card-desc">优质数据集在线交易</div>
+                <div class="dataset-list-mini">
+                    <div class="dataset-item-mini" onclick="location.href='/book/'">
+                        <div class="dataset-icon-mini" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="dataset-info-mini">
+                            <div class="dataset-name-mini">AI一人公司运营数据集</div>
+                            <div class="dataset-meta-mini">100万+条 · 免费</div>
+                        </div>
+                    </div>
+                    <div class="dataset-item-mini" onclick="location.href='/book/'">
+                        <div class="dataset-icon-mini" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="dataset-info-mini">
+                            <div class="dataset-name-mini">AI工具用户行为数据集</div>
+                            <div class="dataset-meta-mini">50万+条 · 199 Token</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="floating-card card-pos-4" id="card-resource" data-title="素材中心" style="width: 280px;">
+            <div class="card-mini-view">
+                <div class="card-mini-icon"><i class="fas fa-image"></i></div>
+                <div class="card-mini-title">素材中心</div>
+            </div>
+            <div class="card-header">
+                <div class="card-title" style="display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-image" style="color: var(--accent-orange);"></i>
+                    素材中心
+                </div>
+                <div style="display: flex; gap: 4px;">
+                    <button class="card-minimize" onclick="minimizeCard('card-resource', event)">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="card-minimize" onclick="deleteCard('card-resource')" style="margin-left: 4px;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-content">
+                <div class="card-icon" style="background: linear-gradient(135deg, #ff6b6b, #feca57);">
+                    <i class="fas fa-image"></i>
+                </div>
+                <div class="card-title">素材中心</div>
+                <div class="card-desc">电子书、模板、教程资源</div>
+                <div class="resource-list-mini">
+                    <div class="resource-item-mini" onclick="location.href='/book/'">
+                        <div class="resource-icon-mini"><i class="fas fa-book"></i></div>
+                        <div class="resource-name-mini">电子书</div>
+                    </div>
+                    <div class="resource-item-mini" onclick="location.href='/book/'">
+                        <div class="resource-icon-mini"><i class="fas fa-file-alt"></i></div>
+                        <div class="resource-name-mini">文档模板</div>
+                    </div>
+                    <div class="resource-item-mini" onclick="location.href='/book/'">
+                        <div class="resource-icon-mini"><i class="fas fa-database"></i></div>
+                        <div class="resource-name-mini">数据集</div>
+                    </div>
+                    <div class="resource-item-mini" onclick="location.href='/blog/'">
+                        <div class="resource-icon-mini"><i class="fas fa-video"></i></div>
+                        <div class="resource-name-mini">视频教程</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Roadmap Trigger Card -->
+        <div class="floating-card roadmap-trigger-card feature-locked" id="card-roadmap" data-title="一人公司路线图" style="width: 220px; bottom: 200px; left: calc(50% - 110px);">
+            <div class="locked-overlay" id="roadmapLocked">
+                <div class="locked-icon"><i class="fas fa-lock"></i></div>
+                <div class="locked-text">升级VIP解锁</div>
+                <div class="locked-sub">创办一人公司</div>
+                <button class="locked-btn" onclick="window.location.href='/user/login/'">查看会员权益</button>
+            </div>
+            <div class="card-mini-view">
+                <div class="card-mini-icon"><i class="fas fa-rocket"></i></div>
+                <div class="card-mini-title">路线图</div>
+            </div>
+            <div class="card-header">
+                <div class="card-title" style="display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-map-signs" style="color: #FF6B6B;"></i>
+                    一人公司路线图
+                </div>
+                <div style="display: flex; gap: 4px;">
+                    <button class="card-minimize" onclick="minimizeCard('card-roadmap', event)">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-content" style="text-align: center;">
+                <div class="card-icon" style="background: linear-gradient(135deg, #FF6B6B, #EE5A24); margin: 0 auto 12px; width: 48px; height: 48px; font-size: 22px;">
+                    <i class="fas fa-route"></i>
+                </div>
+                <div class="card-title" style="font-size: 14px;">一人公司路线图</div>
+                <div class="card-desc" style="font-size: 11px;">8 步创建你的公司</div>
+                <div style="margin-top: 10px; padding: 6px 16px; border-radius: 20px; background: linear-gradient(135deg, #FF6B6B, #EE5A24); color: #fff; font-size: 12px; display: inline-block; font-weight: 600;">开始旅程 →</div>
+            </div>
+        </div>
+
+        <!-- AI Chat Dialog -->
+        <div class="ai-dialog">
+            <div class="ai-dialog-header">
+                <div class="ai-dialog-title">
+                    <i class="fas fa-robot"></i>
+                    AI 智能助手
+                </div>
+                <button class="ai-dialog-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="ai-dialog-messages">
+                <div class="ai-message ai">
+                    <div class="ai-avatar-sm"><i class="fas fa-robot"></i></div>
+                    <div class="ai-bubble">你好！我是AI智能助手，有什么可以帮助你的？</div>
+                </div>
+                <div class="ai-message user">
+                    <div class="ai-avatar-sm"><i class="fas fa-user"></i></div>
+                    <div class="ai-bubble">帮我写一篇关于AI的文章</div>
+                </div>
+                <div class="ai-message ai">
+                    <div class="ai-avatar-sm"><i class="fas fa-robot"></i></div>
+                    <div class="ai-bubble">好的，我可以帮你撰写一篇AI相关文章。请告诉我：<br>1. 文章主题是什么？<br>2. 需要多少字？<br>3. 主要面向哪类读者？</div>
+                </div>
+            </div>
+            <div class="ai-dialog-input">
+                <input type="text" class="ai-input" placeholder="输入你的问题...">
+                <button class="ai-send-btn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Context Menu -->
+        <div class="context-menu" id="contextMenu">
+            <button class="context-menu-item" onclick="addCard('url')">
+                <i class="fas fa-globe"></i>
+                <span>添加网址导航</span>
+            </button>
+            <button class="context-menu-item" onclick="addCard('article')">
+                <i class="fas fa-newspaper"></i>
+                <span>添加文章资讯</span>
+            </button>
+            <button class="context-menu-item" onclick="addCard('dataset')">
+                <i class="fas fa-database"></i>
+                <span>添加数据集市</span>
+            </button>
+            <button class="context-menu-item" onclick="addCard('resource')">
+                <i class="fas fa-image"></i>
+                <span>添加素材中心</span>
+            </button>
+            <div class="context-menu-divider"></div>
+            <button class="context-menu-item" onclick="restoreAllCards()">
+                <i class="fas fa-expand"></i>
+                <span>恢复所有卡片</span>
+            </button>
+            <button class="context-menu-item" onclick="deleteAllCards()">
+                <i class="fas fa-trash-alt"></i>
+                <span>删除所有卡片</span>
+            </button>
+        </div>
+
+        <!-- Dock Context Menu -->
+        <div class="context-menu" id="dockContextMenu">
+            <button class="context-menu-item" onclick="addDockItem()">
+                <i class="fas fa-plus"></i>
+                <span>添加到 Dock</span>
+            </button>
+            <div class="context-menu-divider"></div>
+            <button class="context-menu-item" onclick="removeDockItem()">
+                <i class="fas fa-trash-alt"></i>
+                <span>从 Dock 移除</span>
+            </button>
+        </div>
+
+        <!-- Dock -->
+        <div class="dock" id="dock">
+            <div class="dock-item fixed" data-tooltip="首页" data-type="link" onclick="location.href='/'" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white;">
+                <i class="fas fa-home"></i>
+            </div>
+            <div class="dock-item fixed" data-tooltip="工具导航" data-type="link" onclick="location.href='/site/'" style="background: linear-gradient(135deg, #f093fb, #f5576c); color: white;">
+                <i class="fas fa-tools"></i>
+            </div>
+            <div class="dock-item fixed" data-tooltip="文章" data-type="link" onclick="location.href='/blog/'" style="background: linear-gradient(135deg, #4facfe, #00f2fe); color: white;">
+                <i class="fas fa-newspaper"></i>
+            </div>
+            <div class="dock-item fixed" data-tooltip="资料" data-type="link" onclick="location.href='/book/'" style="background: linear-gradient(135deg, #43e97b, #38f9d7); color: #333;">
+                <i class="fas fa-book"></i>
+            </div>
+            <div class="dock-divider"></div>
+            <div class="dock-item" data-tooltip="关于" data-type="link" onclick="location.href='/about/'" style="background: var(--bg-secondary);">
+                <i class="fas fa-info-circle"></i>
+            </div>
+            <div class="dock-item" data-tooltip="提交收录" data-type="link" onclick="location.href='/upload/'" style="background: var(--bg-secondary);">
+                <i class="fas fa-upload"></i>
+            </div>
+            <div class="dock-item" data-tooltip="联系" data-type="link" onclick="location.href='/contact/'" style="background: var(--bg-secondary);">
+                <i class="fas fa-envelope"></i>
+            </div>
+            <div class="dock-item" data-tooltip="设置" data-type="placeholder" style="background: var(--bg-secondary);">
+                <i class="fas fa-cog"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Roadmap Overlay ── -->
+    <div class="roadmap-overlay" id="roadmapOverlay">
+        <div class="roadmap-bg"></div>
+        <canvas id="particle-canvas"></canvas>
+        <div class="roadmap-container">
+            <div class="roadmap-sidebar">
+                <div class="roadmap-progress-ring">
+                    <svg viewBox="0 0 100 100">
+                        <defs>
+                            <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#007AFF" />
+                                <stop offset="100%" stop-color="#AF52DE" />
+                            </linearGradient>
+                        </defs>
+                        <circle class="ring-bg" cx="50" cy="50" r="45" />
+                        <circle class="ring-progress" cx="50" cy="50" r="45" id="progressCircle" />
+                    </svg>
+                    <div class="roadmap-progress-text" id="progressText">0%</div>
+                </div>
+                <div class="roadmap-steps-list" id="stepList"></div>
+            </div>
+            <div class="roadmap-main">
+                <div class="roadmap-header">
+                    <h2 id="stepTitle">产品灵感</h2>
+                    <button class="roadmap-close" onclick="closeRoadmap()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="roadmap-steps-container" id="stepsContainer"></div>
+                <div class="roadmap-nav">
+                    <button class="btn-nav btn-nav-prev" id="btnPrev" onclick="prevStep()">
+                        <i class="fas fa-arrow-left"></i> 上一步
+                    </button>
+                    <span class="step-counter" id="stepCounter">1 / 8</span>
+                    <button class="btn-nav btn-nav-next" id="btnNext" onclick="nextStep()">
+                        下一步 <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Auth Guard ── -->
+    <div class="workspace-guard" id="workspaceGuard">
+        <div class="workspace-guard-card">
+            <div class="guard-icon"><i class="fas fa-lock"></i></div>
+            <h2>请先登录</h2>
+            <p>登录后即可使用 AI 一人公司工作台</p>
+            <button class="workspace-guard-btn" onclick="window.location.href='/user/login/'">登录 / 注册</button>
+        </div>
+    </div>
+    <script>try{if(localStorage.getItem('auth_user')){document.getElementById('workspaceGuard').style.display='none';} }catch(e){}</script>
+
+    <canvas id="confetti-canvas"></canvas>
+
+<script src="/assets/js/workspace.js"></script>
 </body>
 </html>

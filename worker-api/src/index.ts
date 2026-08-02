@@ -1,7 +1,7 @@
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { requireAuth } from './middleware';
-import { register, login, logout, changePassword, getMe } from './auth';
+import { register, login, logout, changePassword, getMe, forgotPassword, resetPassword } from './auth';
 import { list as listBookmarks, create as createBookmark, update as updateBookmark, remove as removeBookmark } from './bookmarks';
 import { list as listComments, create as createComment, remove as removeComment } from './comments';
 import { requireAdmin } from './admin-middleware';
@@ -25,6 +25,8 @@ auth.post('/register', register);
 auth.post('/login', login);
 auth.post('/logout', logout);
 auth.post('/change-password', changePassword);
+auth.post('/forgot-password', forgotPassword);
+auth.post('/reset-password', resetPassword);
 auth.get('/me', getMe);
 app.route('/api/auth', auth);
 

@@ -1,7 +1,7 @@
 <div class="top-nav">
     <div class="top-nav-inner">
         <a href="{{ "/" | relLangURL }}" class="top-nav-logo">
-            <img src="{{ absURL $.Site.Params.images.logoExpandLight }}" height="36" alt="{{ .Site.Title }}">
+            <img src="{{ absURL $.Site.Params.images.logoExpandLight }}" alt="{{ .Site.Title }}">
         </a>
         <ul class="top-nav-menu">
         {{ range .Site.Data.headers }}
@@ -36,8 +36,8 @@
                 <i class="iconfont icon-classification icon-2x"></i>
             </button>
             <div class="user-menu mr-3" id="user-menu">
-                <a href="#" class="mr-3" data-toggle="modal" data-target="#authModal">登录</a>
-                <a href="#" data-toggle="modal" data-target="#authModal">注册</a>
+                <a href="/user/login/" class="mr-3">登录</a>
+                <a href="/user/register/">注册</a>
             </div>
         </div>
     </div>

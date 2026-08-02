@@ -2,6 +2,19 @@ import { Context } from 'hono';
 import { getSessionCookie, getUserIdFromSession } from './middleware';
 
 export async function requireAdmin(c: Context, next: () => Promise<void>): Promise<Response | void> {
+  const headerUserId = c.req.header('X-Auth-User-Id');
+  if (headerUserId) {
+    c.set('userId', parseInt(headerUserId, 10));
+    const user = await c.env.DB.prepare(
+      'SELECT role FROM users WHERE id = ?'
+    ).bind(parseInt(headerUserId, 10)).first() as { role: string } | null;
+    if (!user || user.role !== 'admin') {
+      return c.json({ error: '权限不足' }, 403);
+    }
+    await next();
+    return;
+  }
+
   const sessionId = getSessionCookie(c);
   const userId = await getUserIdFromSession(c.env.SESSIONS, sessionId);
   if (!userId) {
