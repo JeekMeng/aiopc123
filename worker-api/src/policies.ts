@@ -56,7 +56,6 @@ export async function getPolicyStats(c: Context): Promise<Response> {
       DB.prepare('SELECT category, COUNT(*) as count FROM policies GROUP BY category ORDER BY count DESC').all(),
       DB.prepare('SELECT level, COUNT(*) as count FROM policies GROUP BY level ORDER BY count DESC').all(),
       DB.prepare('SELECT landing_status, COUNT(*) as count FROM policies GROUP BY landing_status').all(),
-      DB.prepare("SELECT landing_difficulty, COUNT(*) as count FROM policies WHERE landing_difficulty != '' GROUP BY landing_difficulty").all(),
       DB.prepare('SELECT city, province, COUNT(*) as count FROM policies GROUP BY city ORDER BY count DESC LIMIT 20').all(),
       DB.prepare('SELECT benefits, requirements, tags FROM policies').all(),
     ]);
@@ -68,9 +67,8 @@ export async function getPolicyStats(c: Context): Promise<Response> {
     const categoryResult = results[4] as any;
     const levelResult = results[5] as any;
     const landingResult = results[6] as any;
-    const difficultyResult = results[7] as any;
-    const cityTopResult = results[8] as any;
-    const allPolicies = results[9] as any;
+    const cityTopResult = results[7] as any;
+    const allPolicies = results[8] as any;
 
     const itemCounts = new Map<string, number>();
     const fundingItems: { policy: string; item: string; amount: number; city: string }[] = [];
@@ -118,7 +116,6 @@ export async function getPolicyStats(c: Context): Promise<Response> {
       category_stats: categoryResult.results,
       level_stats: levelResult.results,
       landing_stats: landingResult.results,
-      difficulty_stats: difficultyResult.results,
       city_top: cityTopResult.results,
       benefit_tags: benefitTags,
       funding_top: fundingItems.slice(0, 10),
