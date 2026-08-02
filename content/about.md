@@ -1,5 +1,5 @@
 ---
-title: 关于我们 - AI一人公司导航网站介绍
+title: 关于我们 
 date: 2026-05-16
 draft: false
 simple: true

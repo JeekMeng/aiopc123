@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}AI一人公司导航网{{ end }}">
+    <title>{{ .Title }} | AI一人公司导航网</title>
+    <link rel="canonical" href="{{ .Permalink }}" />
+    <link rel="shortcut icon" href="{{ absURL $.Site.Params.images.favicon }}" />
+
+    <meta property="og:title" content="{{ .Title }} | AI一人公司导航网" />
+    <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}AI一人公司导航网{{ end }}" />
+    <meta property="og:url" content="{{ .Permalink }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="{{ .Site.Title }}" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:image" content="{{ absURL "/assets/images/bi-favicon.png" }}" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ .Title }} | AI一人公司导航网" />
+    <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}AI一人公司导航网{{ end }}" />
+    <meta name="twitter:image" content="{{ absURL "/assets/images/bi-favicon.png" }}" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/iconfont-3.03029.1.css">
+    <link rel="stylesheet" href="/assets/css/content.css">
+    <link rel="stylesheet" href="/assets/css/dynamic.css">
+    <script>!function(){try{if(!localStorage.getItem('auth_user')){window.location.href='/user/login/';}}catch(e){}}();</script>
+    <script type="text/javascript" src="{{ absURL "assets/js/jquery.min-3.2.1.js" }}" id="jquery-js"></script>
+</head>
+<body class="app-page">
+    <!-- Top Bar -->
+    <header class="app-topbar">
+        <button class="app-sidebar-toggle" id="sidebarToggle" onclick="toggleAppSidebar()">
+            <i class="fas fa-bars"></i>
+        </button>
+        <a href="/" class="topbar-logo">
+            <img src="{{ absURL $.Site.Params.images.logoExpandLight }}" height="28" alt="AI一人公司导航">
+            <span>AI一人公司导航</span>
+        </a>
+        <div class="topbar-right">
+            <div class="user-menu-wrap" id="appUserMenu">
+                <a href="/user/login/" class="top-btn" style="width:36px;height:36px;border-radius:8px;border:none;background:transparent;color:var(--text-primary);cursor:pointer;display:flex;align-items:center;justify-content:center;text-decoration:none;">
+                    <i class="fas fa-user"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar + Content -->
+    <div class="app-body">
+        <aside class="app-sidebar" id="appSidebar">
+            {{ if hasPrefix .RelPermalink "/admin" }}
+            <div class="sidebar-section">管理后台</div>
+            <a href="/admin/" class="sidebar-item{{ if eq .RelPermalink "/admin/" }} active{{ end }}">
+                <i class="fas fa-chart-pie"></i><span>仪表盘</span>
+            </a>
+            <a href="/admin/users/" class="sidebar-item{{ if eq .RelPermalink "/admin/users/" }} active{{ end }}">
+                <i class="fas fa-users"></i><span>用户管理</span>
+            </a>
+            <a href="/admin/roles/" class="sidebar-item{{ if eq .RelPermalink "/admin/roles/" }} active{{ end }}">
+                <i class="fas fa-user-tag"></i><span>角色管理</span>
+            </a>
+            <a href="/admin/permissions/" class="sidebar-item{{ if eq .RelPermalink "/admin/permissions/" }} active{{ end }}">
+                <i class="fas fa-shield-alt"></i><span>权限管理</span>
+            </a>
+            <a href="/admin/bookmarks/" class="sidebar-item{{ if eq .RelPermalink "/admin/bookmarks/" }} active{{ end }}">
+                <i class="fas fa-bookmark"></i><span>收藏管理</span>
+            </a>
+            <a href="/admin/comments/" class="sidebar-item{{ if eq .RelPermalink "/admin/comments/" }} active{{ end }}">
+                <i class="fas fa-comment-dots"></i><span>评论管理</span>
+            </a>
+            <a href="/admin/submissions/" class="sidebar-item{{ if eq .RelPermalink "/admin/submissions/" }} active{{ end }}">
+                <i class="fas fa-rocket"></i><span>入驻管理</span>
+            </a>
+            <a href="/admin/policies/" class="sidebar-item{{ if eq .RelPermalink "/admin/policies/" }} active{{ end }}">
+                <i class="fas fa-gavel"></i><span>政策管理</span>
+            </a>
+            {{ else if hasPrefix .RelPermalink "/user" }}
+            <div class="sidebar-section">用户中心</div>
+            <a href="/user/" class="sidebar-item{{ if eq .RelPermalink "/user/" }} active{{ end }}">
+                <i class="fas fa-home"></i><span>个人首页</span>
+            </a>
+            <a href="/user/profile/" class="sidebar-item{{ if eq .RelPermalink "/user/profile/" }} active{{ end }}">
+                <i class="fas fa-user-cog"></i><span>个人设置</span>
+            </a>
+            <a href="/user/bookmarks/" class="sidebar-item{{ if eq .RelPermalink "/user/bookmarks/" }} active{{ end }}">
+                <i class="fas fa-bookmark"></i><span>我的收藏</span>
+            </a>
+            <a href="/user/comments/" class="sidebar-item{{ if eq .RelPermalink "/user/comments/" }} active{{ end }}">
+                <i class="fas fa-comment-dots"></i><span>我的评论</span>
+            </a>
+            {{ end }}
+        </aside>
+
+        <div class="app-sidebar-overlay" id="sidebarOverlay" onclick="toggleAppSidebar()"></div>
+
+        <main class="app-content">
+            {{ .Content }}
+        </main>
+    </div>
+
+    <script>
+        function toggleAppSidebar() {
+            document.getElementById('appSidebar').classList.toggle('open');
+            document.getElementById('sidebarOverlay').classList.toggle('show');
+        }
+    </script>
+    {{ partial "footer.html" . }}
+</body>
+</html>
