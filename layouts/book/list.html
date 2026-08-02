@@ -24,17 +24,17 @@
                                     </h4>
                                 </div>
                                 <div class="book-card-grid">
-                                    {{ range .links }}
-                                    <a href="{{ .url }}" class="book-link-card" target="_blank">
-                                        <div class="book-link-cover">
-                                            <img src="/assets/images/{{ .logo }}" alt="{{ .title }}">
-                                            <span class="book-tag 免费">免费</span>
-                                        </div>
-                                        <div class="book-link-info">
-                                            <div class="book-link-title">{{ .title }}</div>
-                                        </div>
-                                    </a>
-                                    {{ end }}
+                                {{ range .links }}
+                                <a href="{{ .url }}" class="book-link-card" target="_blank">
+                                    <div class="book-link-cover">
+                                        <img src="{{ if .cover }}{{ .cover }}{{ else }}/assets/images/book/default_book_cover.png{{ end }}" alt="{{ .title }}">
+                                        <span class="book-tag 免费">免费</span>
+                                    </div>
+                                    <div class="book-link-info">
+                                        <div class="book-link-title">{{ .title }}</div>
+                                    </div>
+                                </a>
+                                {{ end }}
                                 </div>
                             </div>
                             {{ end }}
@@ -50,7 +50,7 @@
                                 {{ range .links }}
                                 <a href="{{ .url }}" class="book-link-card" target="_blank">
                                     <div class="book-link-cover">
-                                        <img src="/assets/images/{{ .logo }}" alt="{{ .title }}">
+                                        <img src="{{ if .cover }}{{ .cover }}{{ else }}/assets/images/book/default_book_cover.png{{ end }}" alt="{{ .title }}">
                                         <span class="book-tag 免费">免费</span>
                                     </div>
                                     <div class="book-link-info">

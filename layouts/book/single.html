@@ -14,7 +14,7 @@
                 <article id="book-single" class="detail-card">
                     <div class="book-detail">
                         <div class="book-cover-large">
-                            {{ with .Params.cover }}
+                            {{ with .Params.page_cover }}
                             <img src="{{ . }}" alt="{{ $.Title }}">
                             {{ else }}
                             <img src="/book/images/10000.png" alt="{{ $.Title }}">
