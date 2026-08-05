@@ -1,0 +1,54 @@
+# 广告位配置 —— 按页面分组，可独立设置效果与宽高
+# type:  "carousel" 轮播 | "marquee" 跑马灯
+# width / height: 横幅宽高(px)。width 缺省则铺满容器全宽。
+#   轮播建议行业横幅比例 8:1（width:height = 8:1）
+# image: 广告图路径（放 static/assets/images/ads/ 下）
+# link:  推广落地链接
+# alt:   替代文本
+
+# OPC 专栏（/blog/）
+blog:
+  type: "carousel"
+  width: 1400
+  height: 260
+  ads:
+    - image: "/assets/images/ads/blog_10000.jpg"
+      link: "https://loomy.cgref.cn/s/p3kq3rwnol"
+      alt: "Loomy"
+    - image: "/assets/images/ads/blog_10001.jpg"
+      link: "https://volcengine.cgref.cn/s/rpex7p4k90"
+      alt: "讯飞绘图"
+    - image: "/assets/images/ads/blog_10002.jpg"
+      link: "https://turbodesk.cgref.cn/s/1le05ovnoq"
+      alt: "蛙蛙写作"
+
+# OPC 资料（/book/）
+book:
+  type: "marquee"
+  width: 1400
+  height: 260
+  ads:
+    - image: "/assets/images/ads/book_10000.png"
+      link: "https://pan.quark.cn/s/d241ff7d8788?pwd=vh2u"
+      alt: "一人公司起步的思维"
+    - image: "/assets/images/ads/book_10001.png"
+      link: "https://pan.quark.cn/s/a44aa9f90d29?pwd=5sE8"
+      alt: "一人公司：失业潮中的高新技术工作者"
+    - image: "/assets/images/ads/book_10002.png"
+      link: "https://pan.quark.cn/s/f1ceacd9c8bf?pwd=2sYb"
+      alt: "一人公司_AI时代赚钱新方向"
+    - image: "/assets/images/ads/book_10003.png"
+      link: "https://pan.quark.cn/s/1bd185d42bf4?pwd=aHfd"
+      alt: "AI新个体：用DeepSeek重塑一人公司"
+    - image: "/assets/images/ads/book_10011.png"
+      link: "https://pan.quark.cn/s/291123ef5266?pwd=LHvx"
+      alt: "2026中国OPC发展政策研究报告"
+    - image: "/assets/images/ads/book_10013.png"
+      link: "https://pan.quark.cn/s/12a84e088381?pwd=YXGe"
+      alt: "AI+OPC 入市陪伴手册"
+    - image: "/assets/images/ads/book_10014.png"
+      link: "https://pan.quark.cn/s/b5c5ca2ac5b8?pwd=VLh8"
+      alt: "AI+OPC政务服务手册"
+    - image: "/assets/images/ads/book_10015.png"
+      link: "https://pan.quark.cn/s/683cc83fb55f?pwd=GwHe"
+      alt: "AI+OPC风控法务手册"

@@ -1,0 +1,55 @@
+{{ $group := index .Site.Data.ads .Section }}
+{{ $ads := $group.ads }}
+{{ if $ads }}
+{{ $type := $group.type | default "carousel" }}
+{{ $vars := slice }}
+{{ if $group.width }}{{ $vars = $vars | append (printf "--ad-width:%dpx" $group.width) }}{{ end }}
+{{ if $group.height }}{{ $vars = $vars | append (printf "--ad-height:%dpx" $group.height) }}{{ end }}
+{{ $style := printf "style=\"%s\"" (delimit $vars ";") | safeHTMLAttr }}
+
+{{ if eq $type "marquee" }}
+<div class="marquee-bar" {{ $style }}>
+    <span class="marquee-icon"><i class="fas fa-bullhorn"></i></span>
+    <div class="marquee-track">
+        <div class="marquee-content">
+            {{ range $ads }}
+            <a href="{{ .link }}" class="marquee-ad" target="_blank" rel="noopener">
+                <img src="{{ .image }}" alt="{{ .alt }}" loading="lazy">
+            </a>
+            {{ end }}
+            {{ range $ads }}
+            <a href="{{ .link }}" class="marquee-ad" target="_blank" rel="noopener" aria-hidden="true">
+                <img src="{{ .image }}" alt="{{ .alt }}" loading="lazy">
+            </a>
+            {{ end }}
+        </div>
+    </div>
+</div>
+{{ else }}
+<div id="ad-carousel" class="carousel slide carousel-fade ad-carousel" data-ride="carousel" data-interval="4000" data-pause="hover" {{ $style }}>
+    <ol class="carousel-indicators">
+        {{ range $i, $ad := $ads }}
+        <li data-target="#ad-carousel" data-slide-to="{{ $i }}"{{ if eq $i 0 }} class="active"{{ end }}></li>
+        {{ end }}
+    </ol>
+    <div class="carousel-inner">
+        {{ range $i, $ad := $ads }}
+        <div class="carousel-item{{ if eq $i 0 }} active{{ end }}">
+            <a href="{{ $ad.link }}" target="_blank" rel="noopener">
+                <div class="ad-blur" style="background-image:url('{{ $ad.image }}')"></div>
+                <img src="{{ $ad.image }}" class="d-block ad-carousel-img" alt="{{ $ad.alt }}">
+            </a>
+        </div>
+        {{ end }}
+    </div>
+    <a class="carousel-control-prev" href="#ad-carousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">上一张</span>
+    </a>
+    <a class="carousel-control-next" href="#ad-carousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">下一张</span>
+    </a>
+</div>
+{{ end }}
+{{ end }}

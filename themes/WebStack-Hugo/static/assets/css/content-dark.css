@@ -475,3 +475,10 @@
 .io-black-mode .faq-answer {
     color: #a1a1a6;
 }
+
+/* ========== 广告位暗黑模式 ========== */
+.io-black-mode .ad-carousel,
+.io-black-mode .marquee-bar {
+    background: #2c2c2e;
+    border-bottom-color: #3a3a3c;
+}
