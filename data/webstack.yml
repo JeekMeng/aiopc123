@@ -84,6 +84,10 @@
       logo: 200054.webp
       url: /site/200054/
       description: 站酷，千万设计师的创意家园。
+    - title: 音述AI -  AI视频工具
+      logo: 200489.webp
+      url: /site/200489/
+      description: 低门槛创作体验：通过一句话、一个故事或一个情绪，即可快速生成完整音乐或声音作品。
     - title: AiPPT-AI办公工具-智能PPT生成
       logo: 200310.webp
       url: /site/200310/
@@ -92,6 +96,10 @@
       logo: default.webp
       url: /site/200440/
       description: 一键安装，24小时全能AI机器人随身带
+    - title: 讯飞智作 -  AI音频工具
+      logo: 200488.webp
+      url: /site/200488/
+      description: 科大讯飞官方数字人 SaaS，教育 / 企业 / 媒体刚需。
     - title: AstronClaw - AI智能体
       logo: 200455.webp
       url: /site/200455/
@@ -344,6 +352,22 @@
           logo: 200470.webp
           url: /site/200470/
           description: 点字成画，秒变大师。
+    - term:  AI音频工具
+      links:
+        - title: 立刻MV -  AI音频工具
+          logo: 200487.webp
+          url: /site/200487/
+          description: 让歌词灵感一键变身AI音乐视频
+        - title: 讯飞智作 -  AI音频工具
+          logo: 200488.webp
+          url: /site/200488/
+          description: 科大讯飞官方数字人 SaaS，教育 / 企业 / 媒体刚需。
+    - term:  AI视频工具
+      links:
+        - title: 音述AI -  AI视频工具
+          logo: 200489.webp
+          url: /site/200489/
+          description: 低门槛创作体验：通过一句话、一个故事或一个情绪，即可快速生成完整音乐或声音作品。
     - term: AI搜索工具
       links:
         - title: 纳米AI - AI搜索工具
@@ -1083,6 +1107,10 @@
           logo: 200450.webp
           url: /site/200450/
           description: 国内网站首选，必须先备案。
+        - title: 悟空数据统计 - 数据统计
+          logo: 200490.webp
+          url: /site/200490/
+          description: 小而美的网站流量统计工具
         - title: 51LA - 数据统计 - 新站手选
           logo: 200449.webp
           url: /site/200449/

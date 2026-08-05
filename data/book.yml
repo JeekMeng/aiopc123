@@ -21,6 +21,14 @@
       cover: /assets/images/book/10013.png
       url: /book/10013
       description: 这是杭州市市场监督管理局发布的全国首份AI+OPC一人公司的操作手册，从入市准备，极简审批，知识产权，创新监管，质量标准等全方位的为AI一人公司的入驻杭州市最完备的手册。
+    - title: ' AI+OPC 政务服务手册-杭州市首发'
+      cover: /assets/images/book/10014.png
+      url: /book/10014
+      description: 杭州市市场监督总局发布全国首份针杭州市对促近一人公司发展的 《AI+OPC政务服务手册》，是一人公司办理的最实用参考资料，下载即用，高效便捷。
+    - title: AI+OPC风控法务手册-杭州市首发-OPC必备手册
+      cover: /assets/images/book/10015.png
+      url: /book/10015
+      description: 杭州市市场监督总局首发的《AI+OPC入市陪伴手册》之二《AI+OPC风控法务手册》，解决一人公司在法务上的相关问题。
 - taxonomy: 一人公司
   icon: fas fa-book
   links:
@@ -56,6 +64,14 @@
       cover: /assets/images/book/10013.png
       url: /book/10013
       description: 这是杭州市市场监督管理局发布的全国首份AI+OPC一人公司的操作手册，从入市准备，极简审批，知识产权，创新监管，质量标准等全方位的为AI一人公司的入驻杭州市最完备的手册。
+    - title: ' AI+OPC 政务服务手册-杭州市首发'
+      cover: /assets/images/book/10014.png
+      url: /book/10014
+      description: 杭州市市场监督总局发布全国首份针杭州市对促近一人公司发展的 《AI+OPC政务服务手册》，是一人公司办理的最实用参考资料，下载即用，高效便捷。
+    - title: AI+OPC风控法务手册-杭州市首发-OPC必备手册
+      cover: /assets/images/book/10015.png
+      url: /book/10015
+      description: 杭州市市场监督总局首发的《AI+OPC入市陪伴手册》之二《AI+OPC风控法务手册》，解决一人公司在法务上的相关问题。
 - taxonomy: OpenClaw专区
   icon: fas fa-book
   links:
