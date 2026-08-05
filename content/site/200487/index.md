@@ -1,4 +1,16 @@
-# 立刻MV - https://www.lickmv.com/
+---
+title: 立刻MV -  AI音频工具
+date: '2026-08-05'
+draft: false
+schema_type: SoftwareApplication
+category: [OPC-AI赋能, ' AI音频工具']
+score: 9.5
+description: 让歌词灵感一键变身AI音乐视频
+official_url: "https://lickmv.cgref.cn/s/ogewm87np2"
+mobile_url: "https://lickmv.cgref.cn/s/ogewm87np2"
+company: 立刻MV
+---
+
 
 ## 🎯 网站介绍
 
