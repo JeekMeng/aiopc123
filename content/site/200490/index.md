@@ -1,4 +1,18 @@
-# 悟空数据统计 - https://www.wukongtongji.com/
+---
+title: 悟空数据统计 - 数据统计
+date: '2026-08-05'
+draft: false
+schema_type: SoftwareApplication
+category: [OPC推广运营, 数据统计]
+score: 9.5
+description: 悟空统计是安全无暗弹的网站数据
+official_url: https://www.wukongtongji.com/
+mobile_url: https://www.wukongtongji.com/
+company: 悟空数据统计
+tags: [悟空统计, 网站统计, 站长统计, 流量统计]
+keywords: [悟空统计, 网站统计, 站长统计, 流量统计]
+---
+
 
 ## 🎯 网站介绍
 

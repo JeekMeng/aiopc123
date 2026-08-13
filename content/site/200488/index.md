@@ -1,4 +1,18 @@
-# 讯飞智作 - https://www.xfzhizuo.cn/
+---
+title: 讯飞智作 -  AI音频工具
+date: '2026-08-05'
+draft: false
+schema_type: SoftwareApplication
+category: [OPC-AI赋能, ' AI音频工具']
+score: 9.5
+description: 科大讯飞官方数字人 SaaS，教育 / 企业 / 媒体刚需。
+official_url: "https://xfzhizuo.cgref.cn/s/1oe711me23"
+mobile_url: "https://xfzhizuo.cgref.cn/s/1oe711me23"
+company: 讯飞智作
+tags: [讯飞智作, 讯飞配音, 配音网站, 语音合成, 文字转语音, 在线配音, 短视频配音, AI虚拟人]
+keywords: [讯飞智作, 讯飞配音, 配音网站, 语音合成, 文字转语音, 在线配音, 短视频配音, AI虚拟人, 虚拟主播, 虚拟人视频制作]
+---
+
 
 ## 🎯 网站介绍
 

@@ -1125,10 +1125,30 @@
           description: Web和APP都能统计
     - term: 多平台分发
       links:
+        - title: 易撰 - 多平台分发 - 老牌的内容分发
+          logo: 200496.webp
+          url: /site/200496/
+          description: 老牌的内容分发，支持平台多，让写作更简单高效
+        - title: 新媒加矩阵软件 - 多平台分发 - “多平台一键分发
+          logo: 200494.webp
+          url: /site/200494/
+          description: “多平台一键分发，矩阵管理更高效”
         - title: 易媒助手 - OPC推广运营 - 多平台内容分发
           logo: 200155.webp
           url: /site/200155/
           description: 一键发布，全网营销，轻松打造品牌矩阵
+        - title: 聚媒通 - 多平台分发 - 一键分发
+          logo: 200495.webp
+          url: /site/200495/
+          description: 一键分发，轻松管理多平台账号。
+        - title: 小豆芽 - 多平台分发 - 多账号一键发布
+          logo: 200491.webp
+          url: /site/200491/
+          description: 多账号一键发布，自媒体运营神器。
+        - title: 易媒助手 - 多平台分发 - 一键多发
+          logo: 200492.webp
+          url: /site/200492/
+          description: 一键多发，矩阵运营，让品牌全网触达！
         - title: 微小宝 - OPC推广运营 - 新媒体运营工具
           logo: 200158.webp
           url: /site/200158/

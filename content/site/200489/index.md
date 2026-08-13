@@ -1,4 +1,16 @@
-# 音述AI - https://www.yinshu.me/
+---
+title: 音述AI -  AI视频工具
+date: '2026-08-05'
+draft: false
+schema_type: SoftwareApplication
+category: [OPC-AI赋能, ' AI视频工具']
+score: 9.5
+description: 音述AI，一句话即可生成完整AI歌曲。智能词曲创作，快速生成专属音乐作品，让每个人都能轻松体验AI音乐创作的乐趣。
+official_url: "https://yinshu.cgref.cn/s/1oe7p5re23"
+mobile_url: "https://yinshu.cgref.cn/s/1oe7p5re23"
+company: 音述AI
+---
+
 
 ## 🎯 网站介绍
 
