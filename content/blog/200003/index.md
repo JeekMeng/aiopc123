@@ -5,7 +5,6 @@ draft: false
 tags: ["AI工具", "一人公司", "教程"]
 categories: ["技术教程"]
 description: " 编写你的第一个 OpenClaw Skill， Skill 是什么？简单来说，它是给 AI 助手的\"插件\"——通过编写 Skill，你可以扩展 OpenClaw 的能力，让它掌握特定领域的专业知识、工作流程和工具使用方法。"
-featuredImage: "/static/images/posts/cover.png"
 toc: true
 schema_type: "Article"
 keywords: ["OpenClaw", "智能体", "SKILL", "编写你的第一个", "Skill", "技术教程"]

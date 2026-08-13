@@ -5,7 +5,6 @@ draft: false
 tags: ["运营", "一人公司", "教程"]
 categories: ["网站运营"]
 description: "一人公司逃避不了要给自己建一个官方网站，建好了之后怎么能够快速被搜索引擎收录呢，今天介绍的 Bing ，主要靠 IndexNow（微软官方、免费、支持批量）"
-featuredImage: "/static/images/posts/cover.png"
 toc: true
 schema_type: "Article"
 keywords: ["一人公司", "网站运营", "Bing收录", "批量收录", "快速提升Bing收录"]

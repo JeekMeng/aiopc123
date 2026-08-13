@@ -5,7 +5,6 @@ draft: false
 tags: ["网站", "教程"]
 categories: ["技术教程"]
 description: "Cloudflare作为全球主流的网站加速、安全防护与部署平台，免费版即可实现无限流量CDN、免费SSL证书、DDoS防护、静态网站托管等核心功能，适配个人博客、企业官网、小型应用等各类站点"
-featuredImage: "/static/images/posts/cover.png"
 toc: true
 schema_type: "Article"
 keywords: ["OpenClaw", "智能体", "SKILL", "网站上线"]

@@ -5,7 +5,6 @@ draft: false
 tags: ["运营", "一人公司", "教程"]
 categories: ["网站运营"]
 description: "如何利用Google Indexing API完整开通配置流程，搭配 curl 命令实现一键批量提交收录，大幅缩短页面收录周期。"
-featuredImage: "/assets/images/blog/blog-indexing-api.png"
 toc: true
 schema_type: "Article"
 keywords: ["手把手搭建谷歌批量自动收录方案", "Indexing", "API", "教程", "网站运营"]

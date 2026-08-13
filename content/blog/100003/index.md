@@ -4,7 +4,6 @@ date: 2026-07-29
 draft: false
 tags: ["一人公司", "政策解读"]
 description: "在新《公司法》松绑与 AI 创业热潮推动下，一人公司（OPC，一人有限责任公司）成为政策重点支持对象。国家层面统一税收优惠延续至 2027年底，北京、深圳、杭州、海南等省市密集出台专项补贴、算力支持、注册绿色通道等政策，形成 普惠减税 + 地方加码 的扶持体系。"
-featuredImage: "/assets/images/blog/blog-default-cover.png"
 toc: true
 schema_type: "Article"
 keywords: ["一人公司", "操作指南", "AI工具", "一站式服务", "政策解读", "2026", "年一人公司", "OPC", "最新优惠政策深度解读"]

@@ -5,7 +5,6 @@ draft: false
 tags: ["AI工具", "一人公司", "教程"]
 categories: ["技术教程"]
 description: "OpenClaw 是基于 Node.js 的 AI 自动化与任务编排框架，支持本地/云端模型接入、Web 管理与命令行调度。本手册覆盖 Ubuntu 20.04/22.04/24.04 环境的完整安装、配置、验证与排障流程。"
-featuredImage: "cover.png"
 toc: true
 schema_type: "Article"
 keywords: ["OpenClaw", "智能体", "AI", "Ubuntu", "安装手册", "2026", "最新版", "13", "技术教程"]

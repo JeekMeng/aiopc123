@@ -5,7 +5,6 @@ draft: false
 tags: ["AI工具", "一人公司", "教程"]
 categories: ["技术教程"]
 description: "OpenClaw 是一款**本地部署、全平台打通**的 AI 助手网关，能让大模型（Claude/GPT/本地模型）直接操控你的电脑、处理文件、对接聊天软件、执行自动化任务，新手也能快速上手。"
-featuredImage: "/static/images/posts/cover.png"
 toc: true
 schema_type: "Article"
 keywords: ["OpenClaw", "智能体", "使用手册", "完全使用手册", "新手版", "技术教程"]

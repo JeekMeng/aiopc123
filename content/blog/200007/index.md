@@ -5,7 +5,6 @@ draft: false
 tags: ["运营", "教程"]
 categories: ["网站运营"]
 description: "很多独立站长、一人公司创业者都会遇到同一个难题，网页搜录慢，只知道优化关键词，殊不知外链也是提升网站信任度、抓取频率、权重排名的唯一外部核心手段。"
-featuredImage: "/static/images/posts/cover.png"
 toc: true
 schema_type: "Article"
 keywords: ["一人公司", "网站运营", "反向链接", "自媒体", "一人公司建站运营干货|可落地反链搭建清单", "暴涨网站收录与权重", "实测可用"]

@@ -4,7 +4,6 @@ date: 2026-07-29
 draft: false
 tags: ["AI工具", "创业", "一人公司", "AI创业"]
 description: " AI OPC(AI赋能一人有限公司)成为大众创业的主流新模式，AI OPC依托人工智能替代人工运营、生产、获客、售后等环节，实现单人操盘、AI干活、公司合规经营的轻量化创业形态。"
-featuredImage: "/assets/images/blog/blog-default-cover.png"
 toc: true
 schema_type: "Article"
 keywords: ["一人公司", "OPC案例", "OPC合集", "创业复盘", "政策解读", "2026AI", "OPC实战案例合集｜从小单盈利到千万营收", "一人公司创业全复盘", "案例集锦"]

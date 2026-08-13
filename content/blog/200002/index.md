@@ -5,7 +5,6 @@ draft: false
 tags: ["AI工具", "一人公司", "教程"]
 categories: ["技术教程"]
 description: "OpenClaw 不仅仅是一个聊天机器人，它是一个**多 Agent 系统**。你可以创建多个专门的 Agent，每个 Agent 都有自己的 workspace、技能集和个性，负责处理特定的任务。"
-featuredImage: "/static/images/posts/cover.png"
 toc: true
 schema_type: "Article"
 keywords: ["OpenClaw", "智能体", "Agent助力", "实现一个帮你干活的", "Agent", "助理", "技术教程"]

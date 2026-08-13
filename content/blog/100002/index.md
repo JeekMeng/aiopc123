@@ -4,7 +4,6 @@ date: 2026-07-29
 draft: false
 tags: ["创业", "一人公司", "AI创业"]
 description: "很多初次创业的人，常常把一人公司（OPC）、个体工商户、个人独资企业混为一谈，看似都是 “一个人创业”，但在法律身份、承担责任、交税方式、合规要求、后期发展上差异巨大。本文清晰拆解三者核心区别，帮你一次性看懂该怎么选"
-featuredImage: "/assets/images/blog/blog-default-cover.png"
 toc: true
 schema_type: "Article"
 keywords: ["一人公司", "个体工商户", "个人独资企业", "一人公司税收", "一人公司政策", "如何区分一人公司", "OPC", "个人独资企业？", "推荐文章"]
