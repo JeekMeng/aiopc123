@@ -72,6 +72,10 @@
       logo: 200456.webp
       url: /site/200456/
       description: 超级学术智能体
+    - title: Seko -  AI视频工具
+      logo: 200497.webp
+      url: /site/200497/
+      description: 让创意秒变专业视频，AI短片创作Agent, 多场景角色库助你创作短剧漫剧!
     - title: 阶跃AI-智能助手
       logo: 200413.webp
       url: /site/200413/
@@ -364,6 +368,14 @@
           description: 科大讯飞官方数字人 SaaS，教育 / 企业 / 媒体刚需。
     - term:  AI视频工具
       links:
+        - title: vibeknow -  AI视频工具
+          logo: 200498.webp
+          url: /site/200498/
+          description: Vibeknow 让文档一键变短视频
+        - title: Seko -  AI视频工具
+          logo: 200497.webp
+          url: /site/200497/
+          description: 让创意秒变专业视频，AI短片创作Agent, 多场景角色库助你创作短剧漫剧!
         - title: 音述AI -  AI视频工具
           logo: 200489.webp
           url: /site/200489/
