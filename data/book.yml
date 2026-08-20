@@ -29,6 +29,17 @@
       cover: /assets/images/book/10015.png
       url: /book/10015
       description: 杭州市市场监督总局首发的《AI+OPC入市陪伴手册》之二《AI+OPC风控法务手册》，解决一人公司在法务上的相关问题。
+- taxonomy: 热门推荐
+  icon: fas fa-fire
+  links:
+    - title: 【清华大学出品DeepSeek系列-第01版】DeepSeek从入门到精通
+      cover: /assets/images/book/10016.png
+      url: /book/10016
+      description: 清华大学出品DeepSeek系列第01版《DeepSeek从入门到精通》PDF，系统讲解AI工具应用技巧，从基础操作到高级实战，适合新手快速提升，免费下载学习必备。
+    - title: 【清华大学出品DeepSeek系列-第04版】DeepSeek+DeepResearch：让科研像聊天一样简单
+      cover: /assets/images/book/10019.png
+      url: /book/10019
+      description: 清华大学出品的DeepSeek系列第04版《DeepSeek+DeepResearch：让科研像聊天一样简单》PDF，涵盖AI辅助文献阅读、实验设计、论文撰写，助力科研效率提升，适合研究生、高校师生下载使用。
 - taxonomy: 一人公司
   icon: fas fa-book
   links:
@@ -99,3 +110,22 @@
       cover: /assets/images/book/10010.png
       url: /book/10010
       description: 《2026年OpenClaw自我研究1.0报告.pdf》深度解析开源AI框架自我进化机制，涵盖算法优化与实战案例，是开发者掌握前沿技术的必备资料。
+- taxonomy: DeepSeek专区
+  icon: fas fa-book
+  links:
+    - title: 【清华大学出品DeepSeek系列-第01版】DeepSeek从入门到精通
+      cover: /assets/images/book/10016.png
+      url: /book/10016
+      description: 清华大学出品DeepSeek系列第01版《DeepSeek从入门到精通》PDF，系统讲解AI工具应用技巧，从基础操作到高级实战，适合新手快速提升，免费下载学习必备。
+    - title: 【清华大学出品DeepSeek系列-第02版】DeepSeek赋能职场
+      cover: /assets/images/book/10017.png
+      url: /book/10017
+      description: 《清华大学出品DeepSeek系列-第02版·DeepSeek赋能职场》PDF，清华团队打造，系统讲解DeepSeek在职场中的实战应用，涵盖智能办公、数据分析、报告撰写等核心技能，助你提升AI办公效率，职场进阶必备。
+    - title: 【清华大学出品DeepSeek系列-第03版】普通人如何抓住DeepSeek红利
+      cover: /assets/images/book/10018.png
+      url: /book/10018
+      description: 清华大学DeepSeek系列第03版《普通人如何抓住DeepSeek红利》PDF实用指南，详细介绍了AI工具应用与个人变现方法，帮助普通用户快速上手，掌握实操技巧，牢牢抓住时代红利。
+    - title: 【清华大学出品DeepSeek系列-第04版】DeepSeek+DeepResearch：让科研像聊天一样简单
+      cover: /assets/images/book/10019.png
+      url: /book/10019
+      description: 清华大学出品的DeepSeek系列第04版《DeepSeek+DeepResearch：让科研像聊天一样简单》PDF，涵盖AI辅助文献阅读、实验设计、论文撰写，助力科研效率提升，适合研究生、高校师生下载使用。
