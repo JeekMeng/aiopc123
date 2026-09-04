@@ -5,7 +5,7 @@ draft: false
 schema_type: SoftwareApplication
 category: [OPC-AI赋能, ' AI视频工具']
 score: 9.5
-description: 让创意秒变专业视频,一键制作短剧漫剧。
+description: 让创意秒变专业视频
 official_url: "https://seko.cgref.cn/s/1zn534reqm"
 mobile_url: "https://seko.cgref.cn/s/1zn534reqm"
 company: Seko

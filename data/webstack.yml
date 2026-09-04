@@ -151,6 +151,14 @@
       logo: 200398.webp
       url: /site/200398/
       description: 国产大模型的中转站
+    - title: ModelScope - AI词元Token - 一站式模型社区
+      logo: 200563.webp
+      url: /site/200563/
+      description: 一站式模型社区，让AI触手可及
+    - title: OpenRouter - AI词元Token
+      logo: 200499.webp
+      url: /site/200499/
+      description: 知名的大模型集合站
     - title: OpenClaw - AI龙虾助手
       logo: 200305.webp
       url: https://openclaw.ai/
@@ -380,6 +388,72 @@
           logo: 200489.webp
           url: /site/200489/
           description: 低门槛创作体验：通过一句话、一个故事或一个情绪，即可快速生成完整音乐或声音作品。
+    - term: AI词元Token
+      links:
+        - title: Hyperbolic - AI词元Token - 开放AI云
+          logo: default.webp
+          url: /site/200509/
+          description: 开放AI云，按需GPU，训练直达
+        - title: Models Lab - AI词元Token
+          logo: 200506.webp
+          url: /site/200506/
+          description: 号称支持10000+ Models
+        - title: DMXAPI - AI词元Token
+          logo: default.webp
+          url: /site/200555/
+          description: 在中国就用中国大模型，国内大模型集合。
+        - title: PoloAPI - AI词元Token - 全球大模型中转站
+          logo: 200557.webp
+          url: /site/200557/
+          description: 全球大模型中转站
+        - title: API易 - AI词元Token - 稳定专业
+          logo: 200551.webp
+          url: /site/200551/
+          description: 稳定专业，AI API 长期信赖之选
+        - title: BigModel - AI词元Token
+          logo: 200559.webp
+          url: /site/200559/
+          description: 企业级AI供应商,限时免费体验
+        - title: AI/ML API - AI词元Token - 一个API
+          logo: 200504.webp
+          url: /site/200504/
+          description: 一个API，解锁千种AI可能
+        - title: Eden AI - AI词元Token - 一个API
+          logo: 200541.webp
+          url: /site/200541/
+          description: 一个API，调用500+AI模型
+        - title: PPAI - AI词元Token
+          logo: 200561.webp
+          url: /site/200561/
+          description: PPAI 统一网关快速接入全球主流 AI 模型
+        - title: Replicate - AI词元Token
+          logo: 200508.webp
+          url: /site/200508/
+          description: 云端运行开源AI模型，轻松开发！
+        - title: Groq - AI词元Token - 毫秒级推理
+          logo: 200503.webp
+          url: /site/200503/
+          description: 毫秒级推理，让开发快人一步！
+        - title: Fireworks - AI词元Token - 超越前沿
+          logo: 200502.webp
+          url: /site/200502/
+          description: 超越前沿，打造你的专属智能。
+        - title: AIHub智慧代理API - AI词元Token
+          logo: 200553.webp
+          url: /site/200553/
+          description: 聚合全球600+多模态大模型
+        - title: ModelScope - AI词元Token - 一站式模型社区
+          logo: 200563.webp
+          url: /site/200563/
+          description: 一站式模型社区，让AI触手可及
+        - title: APICore.ai  - AI词元Token
+          logo: 200562.webp
+          url: /site/200562/
+          description: 一站式 AI 模型接口聚合平台（低价、快速、稳定）
+        - title: OpenRouter - AI词元Token
+          logo: 200499.webp
+          url: /site/200499/
+          description: 知名的大模型集合站
     - term: AI搜索工具
       links:
         - title: 纳米AI - AI搜索工具
