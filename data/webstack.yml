@@ -9,6 +9,10 @@
       logo: 200415.webp
       url: /site/200415/
       description: 谷歌站长工具，揭秘搜索数据。
+    - title: SocialEcho - AI龙虾助手
+      logo: 200570.webp
+      url: /site/200570/
+      description: AI社交媒体营销与视频本地化平台
     - title: 简书 - OPC推广运营 - 中文创作社区
       logo: 200288.webp
       url: /site/200288/
@@ -131,6 +135,10 @@
       logo: 200295.webp
       url: https://doubao.com
       description: 豆包：AI全能助手，免费视频生成新体验
+    - title: BeePOP - AI图像工具
+      logo: 200571.webp
+      url: /site/200571/
+      description: 上传一张 SKU 图片，几分钟内生成完整 Amazon Listing 图片与 A+ Content
     - title: 墨刀 - AI办公工具 - 智能协同
       logo: 200482.webp
       url: /site/200482/
@@ -356,6 +364,10 @@
           logo: 200477.webp
           url: /site/200477/
           description: 堆友，让每个设计师都能轻松创造高品质作品！
+        - title: BeePOP - AI图像工具
+          logo: 200571.webp
+          url: /site/200571/
+          description: 上传一张 SKU 图片，几分钟内生成完整 Amazon Listing 图片与 A+ Content
         - title: Image to Prompt - AI图像工具
           logo: 200458.webp
           url: /site/200458/
@@ -494,6 +506,10 @@
           description: 告别广告，直达答案的纯净搜索。
     - term: AI龙虾助手
       links:
+        - title: SocialEcho - AI龙虾助手
+          logo: 200570.webp
+          url: /site/200570/
+          description: AI社交媒体营销与视频本地化平台
         - title: Kimi Claw - AI龙虾助手
           logo: 200306.webp
           url: https://www.kimi.com/bot
