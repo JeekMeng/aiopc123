@@ -1,4 +1,18 @@
-# SocialEcho - https://www.socialecho.cn
+---
+title: SocialEcho - AI龙虾助手
+date: '2026-09-05'
+draft: false
+schema_type: SoftwareApplication
+category: [OPC-AI赋能, AI龙虾助手]
+score: 9.5
+description: SocialEcho是一款社交媒体管理工具，支持跨平台内容发布、互动管理、社交聆听、数据分析及AI自动化，助力团队高效运营主流社交平台。
+official_url: https://www.socialecho.cn
+mobile_url: https://www.socialecho.cn
+company: SocialEcho
+tags: [社交媒体管理, AI 营销, 跨平台发布, 社交聆听, 社交媒体分析]
+keywords: [社交媒体管理, AI 营销, 跨平台发布, 社交聆听, 社交媒体分析]
+---
+
 
 ## 🎯 网站介绍
 

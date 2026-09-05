@@ -1,4 +1,16 @@
-# BeePOP - https://beepop.ai
+---
+title: BeePOP - AI图像工具
+date: '2026-09-05'
+draft: false
+schema_type: SoftwareApplication
+category: [OPC-AI赋能, AI图像工具]
+score: 9.5
+description: 上传一张 SKU 图片，几分钟内生成完整 Amazon Listing 图片与 A+ Content
+official_url: https://beepop.ai
+mobile_url: https://beepop.ai
+company: BeePOP
+---
+
 
 ## 🎯 网站介绍
 
