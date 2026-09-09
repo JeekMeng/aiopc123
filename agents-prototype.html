@@ -1,0 +1,2087 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一人公司工作台</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: rgba(255, 255, 255, 0.85);
+            --bg-secondary: rgba(255, 255, 255, 0.65);
+            --bg-card: rgba(255, 255, 255, 0.75);
+            --bg-dock: rgba(255, 255, 255, 0.55);
+            --text-primary: #1d1d1f;
+            --text-secondary: #86868b;
+            --text-tertiary: #a1a1a6;
+            --accent-blue: #007AFF;
+            --accent-purple: #AF52DE;
+            --accent-green: #34C759;
+            --accent-orange: #FF9500;
+            --accent-red: #FF3B30;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --shadow-light: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: rgba(30, 30, 30, 0.85);
+            --bg-secondary: rgba(30, 30, 30, 0.65);
+            --bg-card: rgba(40, 40, 40, 0.75);
+            --bg-dock: rgba(40, 40, 40, 0.55);
+            --text-primary: #f5f5f7;
+            --text-secondary: #98989d;
+            --text-tertiary: #6e6e73;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --shadow-light: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans SC', -apple-system, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+            overflow: hidden;
+        }
+
+        /* Desktop Canvas */
+        .desktop {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            padding: 16px;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 24px;
+            background: var(--bg-primary);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            box-shadow: var(--shadow-light);
+            margin-bottom: 16px;
+            border: var(--glass-border);
+            position: relative;
+            z-index: 100;
+        }
+
+        .company-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .company-logo {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .company-name {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .top-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .top-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            border: none;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .top-btn:hover {
+            background: var(--accent-blue);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .badge {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-red);
+            border-radius: 50%;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 12px 6px 6px;
+            background: var(--bg-secondary);
+            border-radius: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .user-menu:hover {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .user-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .user-name {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .vip-badge {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #333;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        /* Floating Cards */
+        .floating-card {
+            position: absolute;
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: var(--shadow-card);
+            border: var(--glass-border);
+            cursor: move;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .floating-card:hover {
+            box-shadow: var(--shadow-light);
+        }
+
+        .floating-card.minimized {
+            width: 72px;
+            height: 48px;
+            padding: 6px 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        .floating-card.minimized .card-mini-icon {
+            width: 100%;
+            height: 24px;
+            background: var(--bg-secondary);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: var(--text-secondary);
+        }
+
+        .floating-card.minimized .card-mini-title {
+            font-size: 9px;
+            color: var(--text-primary);
+            margin-top: 3px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+            text-align: center;
+        }
+
+        .floating-card.minimized:hover {
+            transform: scale(1.05);
+            background: var(--accent-blue);
+        }
+
+        .floating-card.minimized:hover .card-mini-icon,
+        .floating-card.minimized:hover .card-mini-title {
+            color: white;
+        }
+
+        .floating-card.minimized:hover .card-mini-icon {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .floating-card .card-header {
+            display: none;
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--bg-primary);
+        }
+
+        .floating-card.minimized .card-header {
+            display: none;
+        }
+
+        .floating-card:not(.minimized) .card-header {
+            display: flex;
+        }
+
+        .card-minimize {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            border: none;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .card-minimize:hover {
+            background: var(--accent-orange);
+            color: white;
+        }
+
+        .card-content {
+            padding: 16px;
+        }
+
+        .minimized .card-content {
+            display: none;
+        }
+
+        /* Card Content Styles */
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .card-desc {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            margin-bottom: 12px;
+        }
+
+        .card-stats {
+            display: flex;
+            gap: 12px;
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
+        .card-stats span {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* URL Card Specific */
+        .url-list-mini {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            max-height: 160px;
+            overflow-y: auto;
+        }
+
+        .url-item-mini {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 10px;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .url-item-mini:hover {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .url-icon-mini {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            color: white;
+        }
+
+        /* Article Card Specific */
+        .article-list-mini {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 180px;
+            overflow-y: auto;
+        }
+
+        .article-item-mini {
+            padding: 10px;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .article-item-mini:hover {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .article-title-mini {
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .article-meta-mini {
+            font-size: 10px;
+            color: var(--text-tertiary);
+        }
+
+        .article-item-mini:hover .article-meta-mini {
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Dataset Card Specific */
+        .dataset-list-mini {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 180px;
+            overflow-y: auto;
+        }
+
+        .dataset-item-mini {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dataset-item-mini:hover {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .dataset-icon-mini {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .dataset-info-mini {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .dataset-name-mini {
+            font-size: 12px;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .dataset-meta-mini {
+            font-size: 10px;
+            color: var(--text-tertiary);
+        }
+
+        .dataset-item-mini:hover .dataset-meta-mini {
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Resource Card Specific */
+        .resource-list-mini {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            max-height: 180px;
+            overflow-y: auto;
+        }
+
+        .resource-item-mini {
+            padding: 10px;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .resource-item-mini:hover {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .resource-icon-mini {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        .resource-name-mini {
+            font-size: 11px;
+        }
+
+        /* Search Box */
+        .search-box {
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 45%;
+            max-width: 600px;
+            z-index: 60;
+        }
+
+        .search-container {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            box-shadow: var(--shadow-light);
+            border: var(--glass-border);
+            padding: 16px;
+        }
+
+        .search-input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 10px 16px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .search-input-wrapper:focus-within {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+        }
+
+        .search-icon {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            color: var(--text-primary);
+            font-size: 15px;
+            outline: none;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        .search-type-select {
+            display: flex;
+            gap: 6px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .search-type-btn {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .search-type-btn:hover {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        .search-type-btn.active {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            color: white;
+        }
+
+        .search-type-btn i {
+            font-size: 11px;
+        }
+
+        .search-results {
+            margin-top: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .search-results.show {
+            display: block;
+        }
+
+        .search-result-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .search-result-item:hover {
+            background: var(--bg-secondary);
+        }
+
+        .search-result-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .search-result-info {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .search-result-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .search-result-desc {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .search-result-type {
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            flex-shrink: 0;
+        }
+
+        /* AI Chat Dialog */
+        .ai-dialog {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 45%;
+            max-width: 600px;
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            box-shadow: var(--shadow-light);
+            border: var(--glass-border);
+            overflow: hidden;
+            z-index: 50;
+        }
+
+        .ai-dialog-header {
+            padding: 16px 20px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .ai-dialog-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .ai-dialog-title i {
+            font-size: 20px;
+        }
+
+        .ai-dialog-close {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            border: none;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .ai-dialog-messages {
+            height: 280px;
+            padding: 16px;
+            overflow-y: auto;
+            background: var(--bg-secondary);
+        }
+
+        .ai-message {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .ai-message.ai {
+            align-items: flex-start;
+        }
+
+        .ai-message.user {
+            flex-direction: row-reverse;
+        }
+
+        .ai-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .ai-message.ai .ai-avatar {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            color: white;
+        }
+
+        .ai-message.user .ai-avatar {
+            background: var(--accent-green);
+            color: white;
+        }
+
+        .ai-bubble {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 16px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .ai-message.ai .ai-bubble {
+            background: var(--bg-card);
+            border-bottom-left-radius: 4px;
+        }
+
+        .ai-message.user .ai-bubble {
+            background: var(--accent-blue);
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .ai-dialog-input {
+            padding: 16px;
+            display: flex;
+            gap: 12px;
+            background: var(--bg-primary);
+        }
+
+        .ai-input {
+            flex: 1;
+            padding: 12px 16px;
+            border-radius: 24px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-size: 14px;
+            outline: none;
+        }
+
+        .ai-input:focus {
+            border-color: var(--accent-blue);
+        }
+
+        .ai-send-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: none;
+            background: var(--accent-blue);
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .ai-send-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        .theme-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: none;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            cursor: pointer;
+            box-shadow: var(--shadow-card);
+            font-size: 18px;
+        }
+
+        /* Dock */
+        .dock {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: var(--bg-dock);
+            backdrop-filter: blur(30px);
+            border-radius: 24px;
+            box-shadow: var(--shadow-light);
+            border: var(--glass-border);
+            z-index: 100;
+        }
+
+        .dock-item {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .dock-item:hover {
+            transform: translateY(-8px) scale(1.15);
+        }
+
+        .dock-item::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 6px 12px;
+            background: var(--bg-primary);
+            border-radius: 8px;
+            font-size: 11px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-card);
+        }
+
+        .dock-item:hover::after {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-4px);
+        }
+
+        .dock-divider {
+            width: 1px;
+            height: 40px;
+            background: var(--border-color);
+            margin: 0 8px;
+        }
+
+        /* Minimized Cards Position */
+        .card-pos-1 { top: 120px; left: 40px; }
+        .card-pos-2 { top: 120px; right: 40px; }
+        .card-pos-3 { bottom: 120px; left: 40px; }
+        .card-pos-4 { bottom: 120px; right: 40px; }
+
+        /* Mini View */
+        .card-mini-view {
+            display: none;
+        }
+
+        .floating-card.minimized .card-mini-view {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .floating-card.minimized .card-header,
+        .floating-card.minimized .card-content {
+            display: none;
+        }
+
+        /* Context Menu */
+        .context-menu {
+            position: fixed;
+            background: var(--bg-primary);
+            backdrop-filter: blur(20px);
+            border-radius: 12px;
+            box-shadow: var(--shadow-light);
+            border: var(--glass-border);
+            padding: 8px 0;
+            min-width: 160px;
+            z-index: 10000;
+            display: none;
+        }
+
+        .context-menu-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px;
+            font-size: 13px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .context-menu-item:hover {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .context-menu-item i {
+            width: 16px;
+            text-align: center;
+        }
+
+        .context-menu-divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: 6px 0;
+        }
+
+        /* Card delete animation */
+        @keyframes cardDelete {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0.8); opacity: 0; }
+        }
+
+        .card-deleting {
+            animation: cardDelete 0.3s ease forwards;
+        }
+
+        /* Dock drag preview */
+        .dock-drag-preview {
+            position: fixed;
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+            pointer-events: none;
+            z-index: 10001;
+            opacity: 0.8;
+            transform: translate(-50%, -50%);
+        }
+
+    </style>
+</head>
+<body data-theme="light">
+    <div class="theme-toggle">
+        <button class="theme-btn" onclick="toggleTheme()">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+
+    <div class="desktop">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="company-info">
+                <div class="company-logo">A</div>
+                <span class="company-name">一人科技公司</span>
+            </div>
+            <div class="top-actions">
+                <button class="top-btn">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge"></span>
+                </button>
+                <button class="top-btn">
+                    <i class="fas fa-envelope"></i>
+                </button>
+                <button class="top-btn">
+                    <i class="fas fa-cog"></i>
+                </button>
+                <div class="user-menu" onclick="location.href='profile.html'" style="cursor: pointer;">
+                    <div class="user-avatar">张</div>
+                    <span class="user-name">张三</span>
+                    <span class="vip-badge">VIP</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Cards -->
+        <!-- URL Card -->
+        <div class="floating-card card-pos-1" id="card-url" data-title="网址导航" style="width: 280px;">
+            <div class="card-mini-view">
+                <div class="card-mini-icon"><i class="fas fa-globe"></i></div>
+                <div class="card-mini-title">网址导航</div>
+            </div>
+            <div class="card-header">
+                <div class="card-title" style="display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-globe" style="color: var(--accent-blue);"></i>
+                    网址导航
+                </div>
+                <button class="card-minimize" onclick="minimizeCard('card-url', event)">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="card-minimize" onclick="deleteCard('card-url')" style="margin-left: 4px;">
+                        <i class="fas fa-times"></i>
+                    </button>
+            </div>
+            <div class="card-content">
+                <div class="card-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <div class="card-title">网址导航</div>
+                <div class="card-desc">常用网站快速访问</div>
+                <div class="url-list-mini">
+                    <div class="url-item-mini" onclick="location.href='urls.html'">
+                        <div class="url-icon-mini" style="background: #FF4757;">网</div>
+                        <span>网址导航</span>
+                    </div>
+                    <div class="url-item-mini" onclick="location.href='datasets.html'">
+                        <div class="url-icon-mini" style="background: #5c6bc0;">集</div>
+                        <span>数据集市</span>
+                    </div>
+                    <div class="url-item-mini" onclick="location.href='resources.html'">
+                        <div class="url-icon-mini" style="background: #ff6b6b;">素</div>
+                        <span>素材中心</span>
+                    </div>
+                    <div class="url-item-mini" onclick="location.href='articles.html'">
+                        <div class="url-icon-mini" style="background: #43e97b;">文</div>
+                        <span>文章资讯</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Article Card -->
+        <div class="floating-card card-pos-2" id="card-article" data-title="文章资讯" style="width: 280px;">
+            <div class="card-mini-view">
+                <div class="card-mini-icon"><i class="fas fa-newspaper"></i></div>
+                <div class="card-mini-title">文章资讯</div>
+            </div>
+            <div class="card-header">
+                <div class="card-title" style="display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-newspaper" style="color: var(--accent-green);"></i>
+                    文章资讯
+                </div>
+                <button class="card-minimize" onclick="minimizeCard('card-article', event)">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="card-minimize" onclick="deleteCard('card-article')" style="margin-left: 4px;">
+                        <i class="fas fa-times"></i>
+                    </button>
+            </div>
+            <div class="card-content">
+                <div class="card-icon" style="background: linear-gradient(135deg, #43e97b, #38f9d7); color: #333;">
+                    <i class="fas fa-newspaper"></i>
+                </div>
+                <div class="card-title">文章资讯</div>
+                <div class="card-desc">最新行业动态与干货</div>
+                <div class="article-list-mini">
+                    <div class="article-item-mini" onclick="location.href='articles.html'">
+                        <div class="article-title-mini">2024年AI工具发展趋势深度报告</div>
+                        <div class="article-meta-mini">AI前沿 · 12,567阅读</div>
+                    </div>
+                    <div class="article-item-mini" onclick="location.href='articles.html'">
+                        <div class="article-title-mini">一个人如何完成自媒体全流程运营</div>
+                        <div class="article-meta-mini">运营技巧 · 5,234阅读</div>
+                    </div>
+                    <div class="article-item-mini" onclick="location.href='articles.html'">
+                        <div class="article-title-mini">5款免费AI工具让你效率翻倍</div>
+                        <div class="article-meta-mini">AI前沿 · 12,345阅读</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dataset Card -->
+        <div class="floating-card card-pos-3" id="card-dataset" data-title="数据集市" style="width: 280px;">
+            <div class="card-mini-view">
+                <div class="card-mini-icon"><i class="fas fa-database"></i></div>
+                <div class="card-mini-title">数据集市</div>
+            </div>
+            <div class="card-header">
+                <div class="card-title" style="display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-database" style="color: var(--accent-purple);"></i>
+                    数据集市
+                </div>
+                <button class="card-minimize" onclick="minimizeCard('card-dataset', event)">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="card-minimize" onclick="deleteCard('card-dataset')" style="margin-left: 4px;">
+                        <i class="fas fa-times"></i>
+                    </button>
+            </div>
+            <div class="card-content">
+                <div class="card-icon" style="background: linear-gradient(135deg, #5c6bc0, #3949ab);">
+                    <i class="fas fa-database"></i>
+                </div>
+                <div class="card-title">数据集市</div>
+                <div class="card-desc">优质数据集在线交易</div>
+                <div class="dataset-list-mini">
+                    <div class="dataset-item-mini" onclick="location.href='datasets.html'">
+                        <div class="dataset-icon-mini" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="dataset-info-mini">
+                            <div class="dataset-name-mini">中文社交媒体评论数据集</div>
+                            <div class="dataset-meta-mini">100万+条 · 免费</div>
+                        </div>
+                    </div>
+                    <div class="dataset-item-mini" onclick="location.href='datasets.html'">
+                        <div class="dataset-icon-mini" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="dataset-info-mini">
+                            <div class="dataset-name-mini">电商用户行为数据集</div>
+                            <div class="dataset-meta-mini">50万+条 · 199 Token</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resource Card -->
+        <div class="floating-card card-pos-4" id="card-resource" data-title="素材中心" style="width: 280px;">
+            <div class="card-mini-view">
+                <div class="card-mini-icon"><i class="fas fa-image"></i></div>
+                <div class="card-mini-title">素材中心</div>
+            </div>
+            <div class="card-header">
+                <div class="card-title" style="display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-image" style="color: var(--accent-orange);"></i>
+                    素材中心
+                </div>
+                <button class="card-minimize" onclick="minimizeCard('card-resource', event)">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="card-minimize" onclick="deleteCard('card-resource')" style="margin-left: 4px;">
+                        <i class="fas fa-times"></i>
+                    </button>
+            </div>
+            <div class="card-content">
+                <div class="card-icon" style="background: linear-gradient(135deg, #ff6b6b, #feca57);">
+                    <i class="fas fa-image"></i>
+                </div>
+                <div class="card-title">素材中心</div>
+                <div class="card-desc">电子书、模板、教程资源</div>
+                <div class="resource-list-mini">
+                    <div class="resource-item-mini" onclick="location.href='resources.html'">
+                        <div class="resource-icon-mini"><i class="fas fa-book"></i></div>
+                        <div class="resource-name-mini">电子书</div>
+                    </div>
+                    <div class="resource-item-mini" onclick="location.href='resources.html'">
+                        <div class="resource-icon-mini"><i class="fas fa-file-alt"></i></div>
+                        <div class="resource-name-mini">文档模板</div>
+                    </div>
+                    <div class="resource-item-mini" onclick="location.href='resources.html'">
+                        <div class="resource-icon-mini"><i class="fas fa-database"></i></div>
+                        <div class="resource-name-mini">数据集</div>
+                    </div>
+                    <div class="resource-item-mini" onclick="location.href='resources.html'">
+                        <div class="resource-icon-mini"><i class="fas fa-video"></i></div>
+                        <div class="resource-name-mini">视频教程</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Box -->
+        <div class="search-box">
+            <div class="search-container">
+                <div class="search-input-wrapper">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" id="globalSearchInput" placeholder="搜索网址、数据集、素材、文章..." oninput="handleSearch(this.value)">
+                </div>
+                <div class="search-type-select">
+                    <button class="search-type-btn active" data-type="all" onclick="setSearchType('all', this)">
+                        <i class="fas fa-th"></i> 全部
+                    </button>
+                    <button class="search-type-btn" data-type="url" onclick="setSearchType('url', this)">
+                        <i class="fas fa-globe"></i> 网址
+                    </button>
+                    <button class="search-type-btn" data-type="dataset" onclick="setSearchType('dataset', this)">
+                        <i class="fas fa-database"></i> 数据
+                    </button>
+                    <button class="search-type-btn" data-type="resource" onclick="setSearchType('resource', this)">
+                        <i class="fas fa-image"></i> 素材
+                    </button>
+                    <button class="search-type-btn" data-type="article" onclick="setSearchType('article', this)">
+                        <i class="fas fa-newspaper"></i> 文章
+                    </button>
+                    <button class="search-type-btn" data-type="web" onclick="setSearchType('web', this)">
+                        <i class="fas fa-external-link-alt"></i> 网页
+                    </button>
+                </div>
+                <div class="search-results" id="searchResults"></div>
+            </div>
+        </div>
+
+        <!-- AI Chat Dialog -->
+        <div class="ai-dialog">
+            <div class="ai-dialog-header">
+                <div class="ai-dialog-title">
+                    <i class="fas fa-robot"></i>
+                    AI 智能助手
+                </div>
+                <button class="ai-dialog-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="ai-dialog-messages">
+                <div class="ai-message ai">
+                    <div class="ai-avatar"><i class="fas fa-robot"></i></div>
+                    <div class="ai-bubble">你好！我是AI智能助手，有什么可以帮助你的？</div>
+                </div>
+                <div class="ai-message user">
+                    <div class="ai-avatar"><i class="fas fa-user"></i></div>
+                    <div class="ai-bubble">帮我写一篇关于AI的文章</div>
+                </div>
+                <div class="ai-message ai">
+                    <div class="ai-avatar"><i class="fas fa-robot"></i></div>
+                    <div class="ai-bubble">好的，我可以帮你撰写一篇AI相关文章。请告诉我：<br>1. 文章主题是什么？<br>2. 需要多少字？<br>3. 主要面向哪类读者？</div>
+                </div>
+            </div>
+            <div class="ai-dialog-input">
+                <input type="text" class="ai-input" placeholder="输入你的问题...">
+                <button class="ai-send-btn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Dock -->
+        <!-- Context Menu -->
+        <div class="context-menu" id="contextMenu">
+            <div class="context-menu-item" onclick="addCard('url')">
+                <i class="fas fa-globe"></i>
+                <span>添加网址导航</span>
+            </div>
+            <div class="context-menu-item" onclick="addCard('article')">
+                <i class="fas fa-newspaper"></i>
+                <span>添加文章资讯</span>
+            </div>
+            <div class="context-menu-item" onclick="addCard('dataset')">
+                <i class="fas fa-database"></i>
+                <span>添加数据集市</span>
+            </div>
+            <div class="context-menu-item" onclick="addCard('resource')">
+                <i class="fas fa-image"></i>
+                <span>添加素材中心</span>
+            </div>
+            <div class="context-menu-divider"></div>
+            <div class="context-menu-item" onclick="restoreAllCards()">
+                <i class="fas fa-expand"></i>
+                <span>恢复所有卡片</span>
+            </div>
+            <div class="context-menu-item" onclick="deleteAllCards()">
+                <i class="fas fa-trash-alt"></i>
+                <span>删除所有卡片</span>
+            </div>
+        </div>
+
+        <!-- Dock Context Menu -->
+        <div class="context-menu" id="dockContextMenu">
+            <div class="context-menu-item" onclick="addDockItem()">
+                <i class="fas fa-plus"></i>
+                <span>添加到 Dock</span>
+            </div>
+            <div class="context-menu-divider"></div>
+            <div class="context-menu-item" onclick="removeDockItem()">
+                <i class="fas fa-trash-alt"></i>
+                <span>从 Dock 移除</span>
+            </div>
+        </div>
+
+        <!-- Dock -->
+        <div class="dock" id="dock">
+            <div class="dock-item fixed" data-tooltip="采集部" data-type="employee" data-dept="caiji" onclick="location.href='employees.html'" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white;">
+                <i class="fas fa-spider"></i>
+            </div>
+            <div class="dock-item fixed" data-tooltip="内容部" data-type="employee" data-dept="neirong" onclick="location.href='employees.html'" style="background: linear-gradient(135deg, #f093fb, #f5576c); color: white;">
+                <i class="fas fa-pen-nib"></i>
+            </div>
+            <div class="dock-item fixed" data-tooltip="运营部" data-type="employee" data-dept="yunying" onclick="location.href='employees.html'" style="background: linear-gradient(135deg, #4facfe, #00f2fe); color: white;">
+                <i class="fas fa-chart-pie"></i>
+            </div>
+            <div class="dock-item fixed" data-tooltip="财务部" data-type="employee" data-dept="caiwu" onclick="location.href='employees.html'" style="background: linear-gradient(135deg, #43e97b, #38f9d7); color: #333;">
+                <i class="fas fa-coins"></i>
+            </div>
+            <div class="dock-divider"></div>
+            <div class="dock-item" data-tooltip="知识库" data-type="link" data-href="profile.html" data-title="知识库" style="background: var(--bg-secondary);">
+                <i class="fas fa-book"></i>
+            </div>
+            <div class="dock-item" data-tooltip="工具箱" data-type="placeholder" data-title="工具箱" style="background: var(--bg-secondary);">
+                <i class="fas fa-tools"></i>
+            </div>
+            <div class="dock-item" data-tooltip="资产中心" data-type="link" data-href="profile.html" data-title="资产中心" style="background: var(--bg-secondary);">
+                <i class="fas fa-wallet"></i>
+            </div>
+            <div class="dock-item" data-tooltip="智能客服" data-type="placeholder" data-title="智能客服" style="background: var(--bg-secondary);">
+                <i class="fas fa-headset"></i>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const theme = body.getAttribute('data-theme');
+            body.setAttribute('data-theme', theme === 'light' ? 'dark' : 'light');
+        }
+
+        // Global Search
+        let currentSearchType = 'all';
+
+        const searchData = {
+            url: [
+                { title: '网址导航', desc: '常用网站快速访问', icon: 'fa-globe', bg: '#667eea', href: 'urls.html' },
+                { title: 'GitHub', desc: '代码托管平台', icon: 'fa-github', bg: '#333', href: 'https://github.com' },
+                { title: 'Stack Overflow', desc: '程序员问答社区', icon: 'fa-stack-overflow', bg: '#f48024', href: 'https://stackoverflow.com' },
+                { title: '掘金', desc: '开发者社区', icon: 'fa-code', bg: '#1E80C1', href: 'https://juejin.cn' }
+            ],
+            dataset: [
+                { title: '中文社交媒体评论数据集', desc: '100万+条 · 免费', icon: 'fa-comments', bg: '#667eea', href: 'datasets.html' },
+                { title: '电商用户行为数据集', desc: '50万+条 · 199 Token', icon: 'fa-shopping-cart', bg: '#f5576c', href: 'datasets.html' },
+                { title: '新闻文章数据集', desc: '10万+篇 · 免费', icon: 'fa-newspaper', bg: '#43e97b', href: 'datasets.html' },
+                { title: '图像标注数据集', desc: '5万+张 · 299 Token', icon: 'fa-image', bg: '#ff6b6b', href: 'datasets.html' }
+            ],
+            resource: [
+                { title: '电子书', desc: '技术书籍与教程', icon: 'fa-book', bg: '#667eea', href: 'resources.html' },
+                { title: '文档模板', desc: '办公与设计模板', icon: 'fa-file-alt', bg: '#f093fb', href: 'resources.html' },
+                { title: '数据集', desc: '各类数据集资源', icon: 'fa-database', bg: '#5c6bc0', href: 'resources.html' },
+                { title: '视频教程', desc: '教学视频资源', icon: 'fa-video', bg: '#ff6b6b', href: 'resources.html' }
+            ],
+            article: [
+                { title: '2024年AI工具发展趋势深度报告', desc: 'AI前沿 · 12,567阅读', icon: 'fa-chart-line', bg: '#667eea', href: 'articles.html' },
+                { title: '一个人如何完成自媒体全流程运营', desc: '运营技巧 · 5,234阅读', icon: 'fa-bullhorn', bg: '#f093fb', href: 'articles.html' },
+                { title: '5款免费AI工具让你效率翻倍', desc: 'AI前沿 · 12,345阅读', icon: 'fa-magic', bg: '#43e97b', href: 'articles.html' },
+                { title: '新手入门ChatGPT完全指南', desc: 'AI前沿 · 8,901阅读', icon: 'fa-robot', bg: '#5c6bc0', href: 'articles.html' }
+            ]
+        };
+
+        function setSearchType(type, btn) {
+            currentSearchType = type;
+            document.querySelectorAll('.search-type-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            handleSearch(document.getElementById('globalSearchInput').value);
+        }
+
+        function handleSearch(query) {
+            const resultsContainer = document.getElementById('searchResults');
+            
+            if (!query.trim()) {
+                resultsContainer.classList.remove('show');
+                resultsContainer.innerHTML = '';
+                return;
+            }
+
+            const results = [];
+            const q = query.toLowerCase();
+
+            if (currentSearchType === 'all' || currentSearchType === 'url') {
+                searchData.url.forEach(item => {
+                    if (item.title.toLowerCase().includes(q) || item.desc.toLowerCase().includes(q)) {
+                        results.push({ ...item, type: '网址' });
+                    }
+                });
+            }
+
+            if (currentSearchType === 'all' || currentSearchType === 'dataset') {
+                searchData.dataset.forEach(item => {
+                    if (item.title.toLowerCase().includes(q) || item.desc.toLowerCase().includes(q)) {
+                        results.push({ ...item, type: '数据' });
+                    }
+                });
+            }
+
+            if (currentSearchType === 'all' || currentSearchType === 'resource') {
+                searchData.resource.forEach(item => {
+                    if (item.title.toLowerCase().includes(q) || item.desc.toLowerCase().includes(q)) {
+                        results.push({ ...item, type: '素材' });
+                    }
+                });
+            }
+
+            if (currentSearchType === 'all' || currentSearchType === 'article') {
+                searchData.article.forEach(item => {
+                    if (item.title.toLowerCase().includes(q) || item.desc.toLowerCase().includes(q)) {
+                        results.push({ ...item, type: '文章' });
+                    }
+                });
+            }
+
+            if (currentSearchType === 'web') {
+                results.push({
+                    title: '搜索: ' + query,
+                    desc: '使用百度搜索',
+                    icon: 'fa-search',
+                    bg: '#2932e1',
+                    href: 'https://www.baidu.com/s?wd=' + encodeURIComponent(query),
+                    type: '网页'
+                });
+                results.push({
+                    title: '搜索: ' + query,
+                    desc: '使用Google搜索',
+                    icon: 'fa-google',
+                    bg: '#4285f4',
+                    href: 'https://www.google.com/search?q=' + encodeURIComponent(query),
+                    type: '网页'
+                });
+            }
+
+            if (results.length > 0) {
+                resultsContainer.innerHTML = results.map(item => `
+                    <div class="search-result-item" onclick="location.href='${item.href}'">
+                        <div class="search-result-icon" style="background: ${item.bg};">
+                            <i class="fas ${item.icon}"></i>
+                        </div>
+                        <div class="search-result-info">
+                            <div class="search-result-title">${item.title}</div>
+                            <div class="search-result-desc">${item.desc}</div>
+                        </div>
+                        <span class="search-result-type">${item.type}</span>
+                    </div>
+                `).join('');
+                resultsContainer.classList.add('show');
+            } else {
+                resultsContainer.innerHTML = '<div class="search-result-item"><div class="search-result-info"><div class="search-result-title" style="color: var(--text-tertiary);">未找到相关结果</div></div></div>';
+                resultsContainer.classList.add('show');
+            }
+        }
+
+        // Click outside to close search results
+        document.addEventListener('click', function(e) {
+            const searchBox = document.querySelector('.search-box');
+            const resultsContainer = document.getElementById('searchResults');
+            if (!searchBox.contains(e.target)) {
+                resultsContainer.classList.remove('show');
+            }
+        });
+
+        // Card drag functionality
+        const cards = document.querySelectorAll('.floating-card');
+        
+        cards.forEach(card => {
+            let isDragging = false;
+            let startX, startY, initialX, initialY;
+            
+            card.addEventListener('mousedown', (e) => {
+                if (e.target.classList.contains('card-minimize')) return;
+                isDragging = true;
+                startX = e.clientX;
+                startY = e.clientY;
+                const rect = card.getBoundingClientRect();
+                initialX = rect.left;
+                initialY = rect.top;
+                card.style.zIndex = 1000;
+            });
+            
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                const dx = e.clientX - startX;
+                const dy = e.clientY - startY;
+                card.style.left = `${initialX + dx}px`;
+                card.style.top = `${initialY + dy}px`;
+                card.style.right = 'auto';
+                card.style.bottom = 'auto';
+            });
+            
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+                card.style.zIndex = '';
+            });
+        });
+
+        // Minimize card - click to restore
+        function minimizeCard(cardId, event) {
+            if (event) event.stopPropagation();
+            const card = document.getElementById(cardId);
+            card.classList.toggle('minimized');
+            
+            // Change position when minimized
+            if (card.classList.contains('minimized')) {
+                switch(cardId) {
+                    case 'card-url':
+                        card.style.left = '20px';
+                        card.style.top = 'auto';
+                        card.style.right = 'auto';
+                        card.style.bottom = '140px';
+                        break;
+                    case 'card-article':
+                        card.style.right = '20px';
+                        card.style.top = 'auto';
+                        card.style.left = 'auto';
+                        card.style.bottom = '140px';
+                        break;
+                    case 'card-dataset':
+                        card.style.left = '20px';
+                        card.style.top = 'auto';
+                        card.style.right = 'auto';
+                        card.style.bottom = '140px';
+                        break;
+                    case 'card-resource':
+                        card.style.right = '20px';
+                        card.style.top = 'auto';
+                        card.style.left = 'auto';
+                        card.style.bottom = '140px';
+                        break;
+                }
+            } else {
+                // Reset to original positions
+                switch(cardId) {
+                    case 'card-url':
+                        card.style.left = '40px';
+                        card.style.top = '120px';
+                        break;
+                    case 'card-article':
+                        card.style.right = '40px';
+                        card.style.top = '120px';
+                        break;
+                    case 'card-dataset':
+                        card.style.left = '40px';
+                        card.style.bottom = '120px';
+                        card.style.top = 'auto';
+                        break;
+                    case 'card-resource':
+                        card.style.right = '40px';
+                        card.style.bottom = '120px';
+                        card.style.top = 'auto';
+                        break;
+                    default:
+                        card.style.left = '50%';
+                        card.style.top = '50%';
+                        card.style.transform = 'translate(-50%, -50%)';
+                        card.style.right = 'auto';
+                        card.style.bottom = 'auto';
+                        break;
+                }
+            }
+        }
+
+        // Add click handler for minimized cards to restore
+        document.querySelectorAll('.floating-card.minimized').forEach(card => {
+            card.addEventListener('click', function(e) {
+                if (!this.classList.contains('minimized')) return;
+                minimizeCard(this.id);
+            });
+        });
+
+        // Context Menu
+        const contextMenu = document.getElementById('contextMenu');
+        
+        document.querySelector('.desktop').addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            contextMenu.style.display = 'block';
+            contextMenu.style.left = e.clientX + 'px';
+            contextMenu.style.top = e.clientY + 'px';
+        });
+
+        document.addEventListener('click', () => {
+            contextMenu.style.display = 'none';
+        });
+
+        // Card templates
+        const cardTemplates = {
+            url: {
+                id: 'card-url-new',
+                title: '网址导航',
+                icon: 'fa-globe',
+                content: `
+                    <div class="card-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="card-title">网址导航</div>
+                    <div class="card-desc">常用网站快速访问</div>
+                    <div class="url-list-mini">
+                        <div class="url-item-mini" onclick="location.href='urls.html'">
+                            <div class="url-icon-mini" style="background: #FF4757;">网</div>
+                            <span>网址导航</span>
+                        </div>
+                    </div>
+                `
+            },
+            article: {
+                id: 'card-article-new',
+                title: '文章资讯',
+                icon: 'fa-newspaper',
+                content: `
+                    <div class="card-icon" style="background: linear-gradient(135deg, #43e97b, #38f9d7); color: #333;">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <div class="card-title">文章资讯</div>
+                    <div class="card-desc">最新行业动态与干货</div>
+                    <div class="article-list-mini">
+                        <div class="article-item-mini" onclick="location.href='articles.html'">
+                            <div class="article-title-mini">最新文章资讯</div>
+                            <div class="article-meta-mini">运营技巧 · 1,234阅读</div>
+                        </div>
+                    </div>
+                `
+            },
+            dataset: {
+                id: 'card-dataset-new',
+                title: '数据集市',
+                icon: 'fa-database',
+                content: `
+                    <div class="card-icon" style="background: linear-gradient(135deg, #5c6bc0, #3949ab);">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="card-title">数据集市</div>
+                    <div class="card-desc">优质数据集在线交易</div>
+                    <div class="dataset-list-mini">
+                        <div class="dataset-item-mini" onclick="location.href='datasets.html'">
+                            <div class="dataset-icon-mini" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <div class="dataset-info-mini">
+                                <div class="dataset-name-mini">数据集</div>
+                                <div class="dataset-meta-mini">免费</div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            resource: {
+                id: 'card-resource-new',
+                title: '素材中心',
+                icon: 'fa-image',
+                content: `
+                    <div class="card-icon" style="background: linear-gradient(135deg, #ff6b6b, #feca57);">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <div class="card-title">素材中心</div>
+                    <div class="card-desc">电子书、模板、教程资源</div>
+                    <div class="resource-list-mini">
+                        <div class="resource-item-mini" onclick="location.href='resources.html'">
+                            <div class="resource-icon-mini"><i class="fas fa-book"></i></div>
+                            <div class="resource-name-mini">电子书</div>
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        function addCard(type) {
+            const template = cardTemplates[type];
+            const existingCard = document.getElementById(template.id);
+            if (existingCard) {
+                alert('该卡片已存在！');
+                return;
+            }
+
+            const desktop = document.querySelector('.desktop');
+            const allCards = document.querySelectorAll('.floating-card');
+            const positionIndex = allCards.length;
+
+            const card = document.createElement('div');
+            card.className = 'floating-card';
+            card.id = template.id;
+            card.dataset.title = template.title;
+            card.style.width = '280px';
+            
+            // Calculate position
+            const positions = [
+                { left: '40px', top: '120px' },
+                { right: '40px', top: '120px' },
+                { left: '40px', bottom: '120px' },
+                { right: '40px', bottom: '120px' },
+                { left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }
+            ];
+            const pos = positions[positionIndex] || positions[4];
+            Object.assign(card.style, pos);
+
+            card.innerHTML = `
+                <div class="card-mini-view">
+                    <div class="card-mini-icon"><i class="fas ${template.icon}"></i></div>
+                    <div class="card-mini-title">${template.title}</div>
+                </div>
+                <div class="card-header">
+                    <div class="card-title" style="display: flex; align-items: center; gap: 8px;">
+                        <i class="fas ${template.icon}" style="color: var(--accent-blue);"></i>
+                        ${template.title}
+                    </div>
+                    <button class="card-minimize" onclick="minimizeCard('${template.id}', event)">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="card-minimize" onclick="deleteCard('${template.id}')" style="margin-left: 4px;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="card-content">
+                    ${template.content}
+                </div>
+            `;
+
+            desktop.insertBefore(card, document.querySelector('.ai-dialog'));
+            
+            // Re-enable drag for new card
+            enableCardDrag(card);
+        }
+
+        function enableCardDrag(card) {
+            let isDragging = false;
+            let startX, startY, initialX, initialY;
+            
+            card.addEventListener('mousedown', (e) => {
+                if (e.target.classList.contains('card-minimize')) return;
+                isDragging = true;
+                startX = e.clientX;
+                startY = e.clientY;
+                const rect = card.getBoundingClientRect();
+                initialX = rect.left;
+                initialY = rect.top;
+                card.style.zIndex = 1000;
+            });
+            
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                const dx = e.clientX - startX;
+                const dy = e.clientY - startY;
+                card.style.left = `${initialX + dx}px`;
+                card.style.top = `${initialY + dy}px`;
+                card.style.right = 'auto';
+                card.style.bottom = 'auto';
+            });
+            
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+                card.style.zIndex = '';
+            });
+        }
+
+        function deleteCard(cardId) {
+            const card = document.getElementById(cardId);
+            if (card) {
+                card.classList.add('card-deleting');
+                setTimeout(() => card.remove(), 300);
+            }
+        }
+
+        function restoreAllCards() {
+            document.querySelectorAll('.floating-card.minimized').forEach(card => {
+                card.classList.remove('minimized');
+                const id = card.id;
+                switch(id) {
+                    case 'card-url':
+                        card.style.left = '40px';
+                        card.style.top = '120px';
+                        break;
+                    case 'card-article':
+                        card.style.right = '40px';
+                        card.style.top = '120px';
+                        break;
+                    case 'card-dataset':
+                        card.style.left = '40px';
+                        card.style.bottom = '120px';
+                        card.style.top = 'auto';
+                        break;
+                    case 'card-resource':
+                        card.style.right = '40px';
+                        card.style.bottom = '120px';
+                        card.style.top = 'auto';
+                        break;
+                }
+            });
+        }
+
+        function deleteAllCards() {
+            document.querySelectorAll('.floating-card').forEach(card => {
+                card.classList.add('card-deleting');
+            });
+            setTimeout(() => {
+                document.querySelectorAll('.floating-card').forEach(card => card.remove());
+            }, 300);
+        }
+
+        // AI send button animation
+        document.querySelector('.ai-send-btn').addEventListener('click', function() {
+            const input = document.querySelector('.ai-input');
+            if (input.value.trim()) {
+                const messages = document.querySelector('.ai-dialog-messages');
+                const userMsg = document.createElement('div');
+                userMsg.className = 'ai-message user';
+                userMsg.innerHTML = `
+                    <div class="ai-avatar"><i class="fas fa-user"></i></div>
+                    <div class="ai-bubble">${input.value}</div>
+                `;
+                messages.appendChild(userMsg);
+                
+                // Simulate AI response
+                setTimeout(() => {
+                    const aiMsg = document.createElement('div');
+                    aiMsg.className = 'ai-message ai';
+                    aiMsg.innerHTML = `
+                        <div class="ai-avatar"><i class="fas fa-robot"></i></div>
+                        <div class="ai-bubble">收到！正在为你处理，请稍候...</div>
+                    `;
+                    messages.appendChild(aiMsg);
+                    messages.scrollTop = messages.scrollHeight;
+                }, 1000);
+                
+                input.value = '';
+                messages.scrollTop = messages.scrollHeight;
+            }
+        });
+
+        // Enter to send
+        document.querySelector('.ai-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.querySelector('.ai-send-btn').click();
+            }
+        });
+
+        // Dock drag to desktop
+        const dock = document.getElementById('dock');
+        const dockItems = dock.querySelectorAll('.dock-item');
+        let draggedDockItem = null;
+        let dockDragPreview = null;
+        let dockItemRect = null;
+
+        dockItems.forEach(item => {
+            item.draggable = true;
+            
+            item.addEventListener('dragstart', (e) => {
+                draggedDockItem = item;
+                dockItemRect = item.getBoundingClientRect();
+                
+                // Create preview
+                dockDragPreview = document.createElement('div');
+                dockDragPreview.className = 'dock-drag-preview';
+                dockDragPreview.style.background = item.style.background;
+                dockDragPreview.style.color = item.style.color || 'white';
+                dockDragPreview.innerHTML = item.innerHTML;
+                document.body.appendChild(dockDragPreview);
+                
+                e.dataTransfer.setDragImage(new Image(), 0, 0);
+                e.dataTransfer.effectAllowed = 'copy';
+            });
+
+            item.addEventListener('drag', (e) => {
+                if (dockDragPreview && e.clientX && e.clientY) {
+                    dockDragPreview.style.left = e.clientX + 'px';
+                    dockDragPreview.style.top = e.clientY + 'px';
+                }
+            });
+
+            item.addEventListener('dragend', (e) => {
+                if (dockDragPreview) {
+                    dockDragPreview.remove();
+                    dockDragPreview = null;
+                }
+
+                if (draggedDockItem && e.clientY < window.innerHeight - 100) {
+                    createCardFromDockItem(draggedDockItem, e.clientX, e.clientY);
+                }
+                draggedDockItem = null;
+            });
+
+            // Dock item right-click
+            item.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const dockContextMenu = document.getElementById('dockContextMenu');
+                dockContextMenu.style.display = 'block';
+                dockContextMenu.style.left = e.clientX + 'px';
+                dockContextMenu.style.top = e.clientY + 'px';
+                
+                // Store clicked item for removal
+                dockContextMenu.dataset.targetId = item.id || '';
+                if (!item.id) {
+                    item.id = 'dock-item-' + Date.now();
+                    dockContextMenu.dataset.targetId = item.id;
+                }
+            });
+        });
+
+        // Hide dock context menu on click elsewhere
+        document.addEventListener('click', () => {
+            document.getElementById('dockContextMenu').style.display = 'none';
+        });
+
+        function createCardFromDockItem(item, x, y) {
+            const tooltip = item.getAttribute('data-tooltip');
+            const type = item.getAttribute('data-type');
+            const href = item.getAttribute('data-href');
+            const title = item.getAttribute('data-title') || tooltip;
+            const iconClass = item.querySelector('i').className;
+            const bgStyle = item.style.background;
+
+            const cardId = 'card-dock-' + Date.now();
+            
+            const card = document.createElement('div');
+            card.className = 'floating-card';
+            card.id = cardId;
+            card.dataset.title = title;
+            card.style.width = '280px';
+            card.style.left = (x - 140) + 'px';
+            card.style.top = (y - 100) + 'px';
+
+            const iconName = iconClass.replace('fas ', '');
+
+            card.innerHTML = `
+                <div class="card-mini-view">
+                    <div class="card-mini-icon"><i class="fas ${iconName}"></i></div>
+                    <div class="card-mini-title">${title}</div>
+                </div>
+                <div class="card-header">
+                    <div class="card-title" style="display: flex; align-items: center; gap: 8px;">
+                        <i class="fas ${iconName}" style="color: var(--accent-blue);"></i>
+                        ${title}
+                    </div>
+                    <button class="card-minimize" onclick="minimizeCard('${cardId}', event)">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="card-minimize" onclick="deleteCard('${cardId}')" style="margin-left: 4px;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="card-content">
+                    <div class="card-icon" style="${bgStyle.includes('linear-gradient') ? 'background:' + bgStyle : 'background: var(--accent-blue);'}">
+                        <i class="fas ${iconName}"></i>
+                    </div>
+                    <div class="card-title">${title}</div>
+                    <div class="card-desc">快捷访问</div>
+                    ${type === 'link' ? `
+                    <div class="url-list-mini">
+                        <div class="url-item-mini" onclick="location.href='${href || 'profile.html'}'">
+                            <div class="url-icon-mini" style="background: var(--accent-blue);">访</div>
+                            <span>点击访问</span>
+                        </div>
+                    </div>
+                    ` : ''}
+                    ${type === 'employee' ? `
+                    <div class="url-list-mini">
+                        <div class="url-item-mini" onclick="location.href='employees.html'">
+                            <div class="url-icon-mini" style="background: var(--accent-purple);">部</div>
+                            <span>查看部门</span>
+                        </div>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+
+            document.querySelector('.desktop').insertBefore(card, document.querySelector('.ai-dialog'));
+            enableCardDrag(card);
+            
+            // Add click handler for minimized cards
+            card.addEventListener('click', function(e) {
+                if (this.classList.contains('minimized')) {
+                    minimizeCard(this.id);
+                }
+            });
+        }
+
+        function addDockItem() {
+            const types = [
+                { icon: 'fa-globe', title: '网址导航', type: 'url', href: 'urls.html' },
+                { icon: 'fa-newspaper', title: '文章资讯', type: 'article', href: 'articles.html' },
+                { icon: 'fa-database', title: '数据集市', type: 'dataset', href: 'datasets.html' },
+                { icon: 'fa-image', title: '素材中心', type: 'resource', href: 'resources.html' },
+                { icon: 'fa-book', title: '知识库', type: 'link', href: 'profile.html' },
+                { icon: 'fa-wallet', title: '资产中心', type: 'link', href: 'profile.html' }
+            ];
+            
+            const choice = prompt('选择添加到Dock的项目:\n1-网址导航\n2-文章资讯\n3-数据集市\n4-素材中心\n5-知识库\n6-资产中心\n\n请输入数字:');
+            
+            if (choice && choice >= 1 && choice <= 6) {
+                const item = types[choice - 1];
+                const divider = dock.querySelector('.dock-divider');
+                
+                const newItem = document.createElement('div');
+                newItem.className = 'dock-item';
+                newItem.id = 'dock-' + Date.now();
+                newItem.setAttribute('data-tooltip', item.title);
+                newItem.setAttribute('data-type', item.type);
+                if (item.href) {
+                    newItem.setAttribute('data-href', item.href);
+                }
+                newItem.setAttribute('data-title', item.title);
+                newItem.style.background = 'var(--bg-secondary)';
+                newItem.innerHTML = `<i class="fas ${item.icon}"></i>`;
+                newItem.onclick = item.href ? () => location.href = item.href : null;
+                
+                dock.insertBefore(newItem, divider.nextSibling);
+                
+                // Re-enable drag on new item
+                enableDockItemDrag(newItem);
+            }
+        }
+
+        function enableDockItemDrag(item) {
+            item.draggable = true;
+            
+            item.addEventListener('dragstart', (e) => {
+                draggedDockItem = item;
+                dockItemRect = item.getBoundingClientRect();
+                
+                dockDragPreview = document.createElement('div');
+                dockDragPreview.className = 'dock-drag-preview';
+                dockDragPreview.style.background = item.style.background;
+                dockDragPreview.style.color = item.style.color || 'white';
+                dockDragPreview.innerHTML = item.innerHTML;
+                document.body.appendChild(dockDragPreview);
+                
+                e.dataTransfer.setDragImage(new Image(), 0, 0);
+                e.dataTransfer.effectAllowed = 'copy';
+            });
+
+            item.addEventListener('drag', (e) => {
+                if (dockDragPreview && e.clientX && e.clientY) {
+                    dockDragPreview.style.left = e.clientX + 'px';
+                    dockDragPreview.style.top = e.clientY + 'px';
+                }
+            });
+
+            item.addEventListener('dragend', (e) => {
+                if (dockDragPreview) {
+                    dockDragPreview.remove();
+                    dockDragPreview = null;
+                }
+
+                if (draggedDockItem && e.clientY < window.innerHeight - 100) {
+                    createCardFromDockItem(draggedDockItem, e.clientX, e.clientY);
+                }
+                draggedDockItem = null;
+            });
+            
+            item.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const dockContextMenu = document.getElementById('dockContextMenu');
+                dockContextMenu.style.display = 'block';
+                dockContextMenu.style.left = e.clientX + 'px';
+                dockContextMenu.style.top = e.clientY + 'px';
+                
+                if (!item.id) {
+                    item.id = 'dock-item-' + Date.now();
+                }
+                dockContextMenu.dataset.targetId = item.id;
+            });
+        }
+
+        function removeDockItem() {
+            const dockContextMenu = document.getElementById('dockContextMenu');
+            const targetId = dockContextMenu.dataset.targetId;
+            const item = document.getElementById(targetId);
+            
+            if (item && !item.classList.contains('fixed')) {
+                item.remove();
+            } else if (item && item.classList.contains('fixed')) {
+                alert('系统图标无法移除');
+            }
+        }
+
+        // Enable drag for initial dock items
+        dockItems.forEach(item => enableDockItemDrag(item));
+    </script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+-- 007: OPC 默认公司字段
+
+ALTER TABLE opcs ADD COLUMN is_default INTEGER DEFAULT 0;

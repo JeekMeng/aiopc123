@@ -269,4 +269,39 @@
   background: rgba(255,255,255,0.2) !important;
 }
 
+/* ── 反馈方式单选 ── */
+.feedback-options {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.feedback-option {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: 1px solid #dcdfe6;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #333;
+  transition: all .2s;
+  background: #fff;
+}
+.feedback-option:hover {
+  border-color: #667eea;
+  background: #f5f3ff;
+}
+.feedback-option input[type="radio"] {
+  accent-color: #667eea;
+}
+.feedback-option input[type="radio"]:checked + .feedback-label {
+  color: #667eea;
+  font-weight: 600;
+}
+.feedback-label i {
+  margin-right: 2px;
+  width: 14px;
+  text-align: center;
+}
 

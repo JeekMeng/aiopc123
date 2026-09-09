@@ -1870,7 +1870,7 @@ body {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-right: 1px solid var(--border-light);
-    padding: 16px 8px;
+    padding: 8px;
     position: sticky;
     top: var(--topbar-height);
     height: calc(100vh - var(--topbar-height));
@@ -1914,10 +1914,50 @@ body {
     flex-shrink: 0;
 }
 
+/* Sidebar Sub-menu */
+.sidebar-group .sidebar-arrow {
+    margin-left: auto;
+    font-size: 10px;
+    transition: transform 0.2s ease;
+    color: var(--text-tertiary);
+}
+.sidebar-group.open .sidebar-arrow {
+    transform: rotate(90deg);
+}
+.sidebar-submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease;
+}
+.sidebar-group.open .sidebar-submenu {
+    max-height: 300px;
+}
+.sidebar-subitem {
+    display: block;
+    padding: 0 12px 0 44px;
+    height: 36px;
+    line-height: 36px;
+    border-radius: var(--radius-md);
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.15s ease;
+}
+.sidebar-subitem:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+    text-decoration: none;
+}
+.sidebar-subitem.active {
+    background: var(--bg-active);
+    color: var(--accent-blue);
+    font-weight: 600;
+}
+
 /* Content Area */
 .app-content {
     flex: 1;
-    padding: 32px;
+    padding: 8px;
     max-width: 100%;
     overflow-x: hidden;
 }
@@ -2694,4 +2734,134 @@ body {
     .marquee-bar {
         padding: 12px 14px;
     }
+}
+
+/* ── 通用弹窗（workspace / detail 页共用） ── */
+.ws-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ws-modal-card {
+    background: rgba(28,28,30,.95);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 16px;
+    width: 600px;
+    max-width: 94vw;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.ws-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px 0;
+}
+.ws-modal-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+.ws-modal-close {
+    width: 28px; height: 28px;
+    border-radius: 6px; border: none;
+    background: rgba(255,255,255,.08);
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .15s;
+}
+.ws-modal-close:hover { background: rgba(255,255,255,.15); }
+.ws-modal-body {
+    padding: 14px 20px;
+    overflow-y: auto;
+    flex: 1;
+    min-height: 80px;
+}
+.ws-todo-empty {
+    text-align: center;
+    padding: 24px 16px;
+    color: var(--text-tertiary);
+    font-size: 13px;
+}
+.ws-search-input {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,.12);
+    background: rgba(255,255,255,.06);
+    color: var(--text-primary);
+    font-size: 14px;
+    outline: none;
+    transition: border-color .15s;
+}
+.ws-search-input:focus { border-color: rgba(0,122,255,.5); }
+.ws-search-input::placeholder { color: var(--text-tertiary); }
+.tool-picker-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    border-radius: 10px;
+    transition: background .15s;
+    gap: 8px;
+}
+.tool-picker-item:hover { background: rgba(255,255,255,.06); }
+.tool-picker-add-btn {
+    flex-shrink: 0;
+    padding: 6px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(0,122,255,.3);
+    background: rgba(0,122,255,.1);
+    color: #007AFF;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .15s;
+    white-space: nowrap;
+}
+.tool-picker-add-btn:hover { background: rgba(0,122,255,.2); border-color: rgba(0,122,255,.5); }
+/* ── light mode overrides ── */
+body.io-grey-mode .ws-modal-card {
+    background: #fff;
+    border: 1px solid #e5e5ea;
+}
+body.io-grey-mode .ws-modal-close { background: #f0f0f0; color: #666; }
+body.io-grey-mode .ws-modal-close:hover { background: #e0e0e0; }
+body.io-grey-mode .ws-search-input { background: #f5f5f5; border-color: #e5e5ea; color: #333; }
+body.io-grey-mode .ws-search-input::placeholder { color: #999; }
+body.io-grey-mode .tool-picker-item:hover { background: #f5f5f5; }
+body.io-grey-mode .tool-picker-add-btn { background: rgba(0,122,255,.08); color: #007AFF; }
+
+/* ── admin submissions card spacing ── */
+.sub-section {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0 0 12px;
+  line-height: 1.7;
+}
+.sub-info-row {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin: 0 0 10px;
+  line-height: 1.7;
+}
+.sub-info-row:last-child { margin-bottom: 4px; }
+.sub-divider {
+  border: none;
+  border-top: 1px dashed #e5e5ea;
+  margin: 4px 0 12px;
 }

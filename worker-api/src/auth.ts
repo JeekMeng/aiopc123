@@ -95,7 +95,7 @@ export async function login(c: Context): Promise<Response> {
     }
 
     const user = await c.env.DB.prepare(
-      'SELECT id, email, password_hash, nickname, avatar, role FROM users WHERE email = ?'
+      'SELECT id, email, password_hash, nickname, avatar, role, vip_level FROM users WHERE email = ?'
     ).bind(email).first() as User | null;
 
     if (!user) {
@@ -116,7 +116,7 @@ export async function login(c: Context): Promise<Response> {
     setSessionCookie(c, sessionId);
 
     return c.json({
-      user: { id: user.id, email: user.email, nickname: user.nickname, avatar: user.avatar, role: user.role },
+      user: { id: user.id, email: user.email, nickname: user.nickname, avatar: user.avatar, role: user.role, vip_level: user.vip_level || '' },
     });
   } catch (err) {
     console.error('login error:', err);
@@ -185,7 +185,7 @@ export async function getMe(c: Context): Promise<Response> {
   }
 
   const user = await c.env.DB.prepare(
-    'SELECT id, email, nickname, avatar, role FROM users WHERE id = ?'
+    'SELECT id, email, nickname, avatar, role, vip_level, city, province, industries, company_type, interests, bio, notify_prefs FROM users WHERE id = ?'
   ).bind(userId).first() as User | null;
 
   if (!user) {
@@ -193,7 +193,7 @@ export async function getMe(c: Context): Promise<Response> {
   }
 
   return c.json({
-    user: { id: user.id, email: user.email, nickname: user.nickname, avatar: user.avatar, role: user.role },
+    user: { id: user.id, email: user.email, nickname: user.nickname, avatar: user.avatar, role: user.role, vip_level: user.vip_level || '', city: user.city || '', province: user.province || '', industries: user.industries || '[]', company_type: user.company_type || '', interests: user.interests || '[]', bio: user.bio || '', notify_prefs: user.notify_prefs || '{}' },
   });
 }
 
@@ -249,5 +249,45 @@ export async function resetPassword(c: Context): Promise<Response> {
   } catch (err) {
     console.error('resetPassword error:', err);
     return c.json({ error: '密码重置失败，请稍后重试' }, 500);
+  }
+}
+
+export async function getProfile(c: Context): Promise<Response> {
+  try {
+    const userId = c.get('userId') as number;
+    const user = await c.env.DB.prepare(
+      'SELECT id, email, nickname, avatar, role, vip_level, city, province, industries, company_type, interests, bio, notify_prefs FROM users WHERE id = ?'
+    ).bind(userId).first();
+    if (!user) return c.json({ error: '用户不存在' }, 404);
+    return c.json({ user });
+  } catch (err) {
+    console.error('getProfile error:', err);
+    return c.json({ error: '获取画像失败' }, 500);
+  }
+}
+
+export async function updateProfile(c: Context): Promise<Response> {
+  try {
+    const userId = c.get('userId') as number;
+    const body = await c.req.json() as Record<string, string>;
+    const allowed = ['nickname', 'city', 'province', 'industries', 'company_type', 'interests', 'bio', 'notify_prefs'];
+    const updates: string[] = [];
+    const values: string[] = [];
+    for (const key of allowed) {
+      if (body[key] !== undefined) {
+        updates.push(`${key} = ?`);
+        values.push(body[key]);
+      }
+    }
+    if (updates.length === 0) return c.json({ error: '没有需要更新的字段' }, 400);
+    values.push(String(userId));
+    await c.env.DB.prepare(`UPDATE users SET ${updates.join(', ')} WHERE id = ?`).bind(...values).run();
+    const user = await c.env.DB.prepare(
+      'SELECT id, email, nickname, avatar, role, vip_level, city, province, industries, company_type, interests, bio, notify_prefs FROM users WHERE id = ?'
+    ).bind(userId).first();
+    return c.json({ user });
+  } catch (err) {
+    console.error('updateProfile error:', err);
+    return c.json({ error: '更新画像失败' }, 500);
   }
 }

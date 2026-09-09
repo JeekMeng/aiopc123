@@ -85,6 +85,7 @@
         }
 
         function escapeHtml(str) {
+            if (str == null) return '';
             var d = document.createElement('div');
             d.appendChild(document.createTextNode(str));
             return d.innerHTML;
@@ -128,6 +129,7 @@
                 '<div class="workspace-user-dropdown" id="userDropdown">' +
                 '  <a class="dropdown-item" href="/profile/"><i class="fas fa-user-circle"></i> 个人中心</a>' +
                 adminLink +
+                '  <a class="dropdown-item" href="/workspace/"><i class="fas fa-desktop"></i> OPC工作台</a>' +
                 '  <div class="dropdown-divider"></div>' +
                 '  <button class="dropdown-item" onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> 退出登录</button>' +
                 '</div>';
@@ -196,18 +198,6 @@
         });
 
         // ── Load saved company name into top bar ──
-        (function() {
-            var cn = '';
-            try {
-                var params = new URLSearchParams(window.location.search);
-                cn = params.get('company') || localStorage.getItem('roadmap_company') || '';
-            } catch(e) {}
-            if (cn) {
-                var el = document.querySelector('.company-name');
-                if (el) el.textContent = cn;
-            }
-        })();
-
         // Theme Toggle
         function toggleTheme() {
             const body = document.body;
@@ -215,6 +205,7 @@
             const newTheme = theme === 'light' ? 'dark' : 'light';
             body.setAttribute('data-theme', newTheme);
             document.querySelector('.theme-btn i').className = newTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+            try { localStorage.setItem('ws_theme', newTheme); } catch(e){}
         }
 
         // Global Search
@@ -579,192 +570,256 @@
                 '<div class="step-recs-grid">' + items + '</div></div>';
         }
 
+        // ═══════════════════════════════════════════
+        // ── 行业分类数据 ──
+        // ═══════════════════════════════════════════
+
+        var INDUSTRY_DATA = {
+            '自媒体': [
+                { id: 'tech-media', name: '科技自媒体', tpl: '推荐产品评测、AI工具分享' },
+                { id: 'ai-media', name: 'AI自媒体', tpl: 'AI应用教学、行业洞察' },
+                { id: 'resource-media', name: '资料分享自媒体', tpl: '资料整理、课程分享' }
+            ],
+            '独立站(境内)': [
+                { id: '境内-电商网站', name: '电商网站', tpl: '产品销售、品牌展示' },
+                { id: '境内-博客网站', name: '博客网站', tpl: '内容创作、SEO获客' },
+                { id: '境内-导航网站', name: '导航网站', tpl: '工具导航、资源聚合' },
+                { id: '境内-GEO获客系统', name: 'GEO获客系统', tpl: 'AI搜索优化、流量获取' }
+            ],
+            '独立站(境外)': [
+                { id: '境外-电商网站', name: '电商网站', tpl: '跨境电商、海外销售' },
+                { id: '境外-博客网站', name: '博客网站', tpl: '英文内容、联盟营销' },
+                { id: '境外-导航网站', name: '导航网站', tpl: '海外工具导航' },
+                { id: '境外-GEO获客系统', name: 'GEO获客系统', tpl: '海外AI搜索优化' }
+            ],
+            'AI产品': [
+                { id: '办公智能体', name: '办公智能体', tpl: 'AI助手、效率工具' },
+                { id: '代码智能体', name: '代码智能体', tpl: 'AI编程、开发工具' }
+            ]
+        };
+
+        var DEPT_DEFAULTS = [
+            { name: 'CEO', icon: 'fa-crown', bg: 'linear-gradient(135deg,#FF6B6B,#EE5A24)',
+              tools: [
+                { name:'豆包', icon:'fa-robot', url:'https://doubao.com', bg:'#007AFF', logo:'200295.webp' },
+                { name:'千问', icon:'fa-robot', url:'https://tongyi.aliyun.com', bg:'#6236FF', logo:'200300.webp' },
+                { name:'腾讯元宝', icon:'fa-robot', url:'https://yuanbao.tencent.com', bg:'#07C160', logo:'200297.webp' },
+                { name:'DeepSeek', icon:'fa-robot', url:'https://chat.deepseek.com', bg:'#4D6BFE' }
+              ]},
+            { name: '技术部', icon: 'fa-code', bg: 'linear-gradient(135deg,#007AFF,#5856D6)',
+              tools: [
+                { name:'Claude', icon:'fa-robot', url:'https://claude.ai', bg:'#10A37F' },
+                { name:'Codex', icon:'fa-robot', url:'https://openai.com', bg:'#10A37F' },
+                { name:'OpenCode', icon:'fa-terminal', url:'https://opencode.ai', bg:'#333' },
+                { name:'GitHub', icon:'fa-code-branch', url:'https://github.com', bg:'#24292e' }
+              ]},
+            { name: '产品部', icon: 'fa-lightbulb', bg: 'linear-gradient(135deg,#FF9500,#FF6B00)',
+              tools: [
+                { name:'ProductHunt', icon:'fa-rocket', url:'https://producthunt.com', bg:'#DA552F' },
+                { name:'36氪', icon:'fa-newspaper', url:'https://36kr.com', bg:'#1E1E2F' },
+                { name:'人人PM', icon:'fa-users', url:'http://woshipm.com', bg:'#2C7BE5' },
+                { name:'Namechk', icon:'fa-search', url:'https://namechk.com', bg:'#00A67E' }
+              ]},
+            { name: '运营部', icon: 'fa-chart-line', bg: 'linear-gradient(135deg,#34C759,#30D158)',
+              tools: [
+                { name:'微信', icon:'fa-weixin', url:'https://mp.weixin.qq.com', bg:'#07C160' },
+                { name:'抖音', icon:'fa-film', url:'https://open.douyin.com', bg:'#000' },
+                { name:'小红书', icon:'fa-book', url:'https://www.xiaohongshu.com', bg:'#FE2C55', logo:'200119.webp' },
+                { name:'新榜', icon:'fa-chart-bar', url:'https://newrank.cn', bg:'#FF6B00' }
+              ]},
+            { name: '市场部', icon: 'fa-bullhorn', bg: 'linear-gradient(135deg,#5856D6,#AF52DE)',
+              tools: [
+                { name:'巨量引擎', icon:'fa-chart-line', url:'https://oceanengine.com', bg:'#1E8BFF' },
+                { name:'百度营销', icon:'fa-ad', url:'https://yj.baidu.com', bg:'#2932E1' },
+                { name:'SEO', icon:'fa-search', url:'https://ahrefs.com', bg:'#2D333F' },
+                { name:'HubSpot', icon:'fa-tasks', url:'https://hubspot.com', bg:'#FF7A59' }
+              ]},
+            { name: '剪辑部', icon: 'fa-film', bg: 'linear-gradient(135deg,#FD79A8,#E84393)',
+              tools: [
+                { name:'剪映', icon:'fa-video', url:'https://www.capcut.cn', bg:'#000' },
+                { name:'Canva', icon:'fa-palette', url:'https://canva.com', bg:'#00C4CC' },
+                { name:'CapCut', icon:'fa-film', url:'https://capcut.com', bg:'#000' },
+                { name:'Descript', icon:'fa-microphone', url:'https://descript.com', bg:'#4D6BFE' }
+              ]},
+            { name: '行政部', icon: 'fa-building', bg: 'linear-gradient(135deg,#5856D6,#007AFF)',
+              tools: [
+                { name:'天眼查', icon:'fa-search', url:'https://tianyancha.com', bg:'#1890FF', logo:'200012.webp' },
+                { name:'企查查', icon:'fa-building', url:'https://qichacha.com', bg:'#FF6B00', logo:'200011.webp' },
+                { name:'一网通办', icon:'fa-laptop', url:'https://zwfw.gjbsj.gov.cn', bg:'#007AFF' },
+                { name:'信用公示', icon:'fa-balance-scale', url:'http://gsxt.gov.cn', bg:'#C0392B' }
+              ]}
+        ];
+
+        // ═══════════════════════════════════════════
+        // ── 创建流程（7 步） ──
+        // ═══════════════════════════════════════════
+
         var roadmapData = {
             currentStep: 0,
-            totalSteps: 8,
+            totalSteps: 7,
             formData: {},
             steps: [
+                // 步骤 1：选择行业类型
                 {
-                    title: '产品灵感',
-                    icon: 'fa-lightbulb',
+                    title: '选择行业类型',
+                    icon: 'fa-th-large',
                     color: '#FF6B6B',
                     gradient: 'linear-gradient(135deg, #FF6B6B, #EE5A24)',
-                    desc: '你的产品创意是什么？描述一下你想要做的方向',
-                    recs: [
-                        { name: 'ProductHunt', icon: 'fa-rocket', bg: '#DA552F', url: 'https://producthunt.com' },
-                        { name: '36氪', icon: 'fa-newspaper', bg: '#1E1E2F', url: 'https://36kr.com' },
-                        { name: '人人都是产品经理', icon: 'fa-book', bg: '#2C7BE5', url: 'http://woshipm.com' },
-                    ],
+                    desc: '选择你要创办的一人公司行业方向',
                     template: function(d) {
-                        return '<div class="step-card">' +
-                            '<div class="step-icon-wrap" style="background:' + this.gradient + ';"><i class="fas ' + this.icon + '"></i></div>' +
-                            '<h3>' + this.title + '</h3>' +
-                            '<div class="step-desc">' + this.desc + '</div>' +
-                            '<textarea placeholder="例如：一款面向自由职业者的AI项目管理工具…" id="rInput0" oninput="saveStep(0)">' + (d[0] || '') + '</textarea>' +
-                            '<div style="font-size:11px;color:rgba(255,255,255,0.25);">💡 提示：想想你日常工作中最想解决的痛点</div>' +
-                            renderRecs(this.recs) +
-                            '</div>';
-                    }
-                },
-                {
-                    title: '产品名称',
-                    icon: 'fa-pen-fancy',
-                    color: '#A29BFE',
-                    gradient: 'linear-gradient(135deg, #A29BFE, #6C5CE7)',
-                    desc: '给你的产品取一个响亮的名字',
-                    recs: [
-                        { name: 'Namechk', icon: 'fa-globe', bg: '#00A67E', url: 'https://namechk.com' },
-                        { name: '商标查询', icon: 'fa-trademark', bg: '#E74C3C', url: 'http://sbj.cnipa.gov.cn' },
-                        { name: 'Namecheap', icon: 'fa-shopping-cart', bg: '#E3722E', url: 'https://namecheap.com' },
-                    ],
-                    template: function(d) {
-                        var suggestions = ['创享AI', '智联工坊', '灵犀办公', '慧聚云'];
-                        var sugHtml = suggestions.map(function(s) { return '<span class="suggestion-tag" onclick="fillSuggestion(\'' + s + '\')">' + s + '</span>'; }).join('');
-                        return '<div class="step-card">' +
-                            '<div class="step-icon-wrap" style="background:' + this.gradient + ';"><i class="fas ' + this.icon + '"></i></div>' +
-                            '<h3>' + this.title + '</h3>' +
-                            '<div class="step-desc">' + this.desc + '</div>' +
-                            '<input type="text" placeholder="输入产品名称…" id="rInput1" value="' + (d[1] || '') + '" oninput="saveStep(1)">' +
-                            '<button class="btn-ai-gen" onclick="generateNames()"><i class="fas fa-magic"></i> AI 生成建议</button>' +
-                            '<div class="suggestion-list">' + sugHtml + '</div>' +
-                            renderRecs(this.recs) +
-                            '</div>';
-                    }
-                },
-                {
-                    title: '公司注册',
-                    icon: 'fa-building',
-                    color: '#74B9FF',
-                    gradient: 'linear-gradient(135deg, #74B9FF, #0984E3)',
-                    desc: '填写公司基本信息，打造你的品牌形象',
-                    recs: [
-                        { name: '天眼查', icon: 'fa-search', bg: '#1890FF', url: 'https://tianyancha.com' },
-                        { name: '企查查', icon: 'fa-building', bg: '#FF6B00', url: 'https://qichacha.com' },
-                        { name: '国家企业信用公示', icon: 'fa-balance-scale', bg: '#C0392B', url: 'http://gsxt.gov.cn' },
-                    ],
-                    template: function(d) {
-                        return '<div class="step-card">' +
-                            '<div class="step-icon-wrap" style="background:' + this.gradient + ';"><i class="fas ' + this.icon + '"></i></div>' +
-                            '<h3>' + this.title + '</h3>' +
-                            '<div class="step-desc">' + this.desc + '</div>' +
-                            '<div class="logo-upload" onclick="alert(\'Logo上传功能待集成\')"><i class="fas fa-camera"></i></div>' +
-                            '<input type="text" placeholder="公司全称" id="rInput2a" value="' + (d[2] && d[2].a || '') + '" oninput="saveStep(2)">' +
-                            '<input type="text" placeholder="公司标语 / Slogan" id="rInput2b" value="' + (d[2] && d[2].b || '') + '" oninput="saveStep(2)">' +
-                            renderRecs(this.recs) +
-                            '</div>';
-                    }
-                },
-                {
-                    title: '政策查询',
-                    icon: 'fa-clipboard-check',
-                    color: '#55EFC4',
-                    gradient: 'linear-gradient(135deg, #55EFC4, #00B894)',
-                    desc: '选择你的行业分类，查看相关政策要求',
-                    recs: [
-                        { name: '中国政府网', icon: 'fa-flag', bg: '#E74C3C', url: 'https://gov.cn' },
-                        { name: '国家税务总局', icon: 'fa-calculator', bg: '#2C3E50', url: 'https://chinatax.gov.cn' },
-                        { name: '国家知识产权局', icon: 'fa-copyright', bg: '#2980B9', url: 'https://cnipa.gov.cn' },
-                    ],
-                    template: function(d) {
-                        var industries = ['信息技术', '文化传媒', '电子商务', '教育咨询', '设计创意', '其他'];
-                        var items = industries.map(function(ind, i) {
-                            var checked = d[4] && d[4].indexOf(ind) !== -1;
-                            return '<div class="checklist-item' + (checked ? ' checked' : '') + '" onclick="toggleIndustry(this, \'' + ind + '\')">' +
-                                '<div class="ck-icon"><i class="fas fa-check"></i></div>' +
-                                '<span>' + ind + '</span></div>';
+                        var tabs = Object.keys(INDUSTRY_DATA);
+                        var activeTab = d._industryTab || tabs[0];
+                        var tabHtml = tabs.map(function(t) {
+                            return '<div class="industry-tab' + (t === activeTab ? ' active' : '') + '" onclick="switchIndustryTab(\'' + t + '\')">' + t + '</div>';
+                        }).join('');
+                        var subs = INDUSTRY_DATA[activeTab] || [];
+                        var subHtml = subs.map(function(s) {
+                            var checked = d._subCategory === s.id;
+                            return '<div class="industry-item' + (checked ? ' selected' : '') + '" onclick="selectSubCategory(\'' + s.id + '\',\'' + s.name + '\',\'' + activeTab + '\')">' +
+                                '<div class="industry-item-name">' + s.name + '</div>' +
+                                '<div class="industry-item-desc">' + s.tpl + '</div>' +
+                                '</div>';
                         }).join('');
                         return '<div class="step-card">' +
                             '<div class="step-icon-wrap" style="background:' + this.gradient + ';"><i class="fas ' + this.icon + '"></i></div>' +
                             '<h3>' + this.title + '</h3>' +
                             '<div class="step-desc">' + this.desc + '</div>' +
-                            '<div class="checklist-grid">' + items + '</div>' +
-                            '<div style="font-size:11px;color:rgba(255,255,255,0.25);">📋 选择后系统将匹配注册政策和补贴信息</div>' +
-                            renderRecs(this.recs) +
+                            '<div class="industry-tabs">' + tabHtml + '</div>' +
+                            '<div class="industry-list">' + subHtml + '</div>' +
+                            '<input type="text" placeholder="或手动输入行业类型…" id="rInputIndustry" value="' + (d._industryManual || '') + '" oninput="roadmapForm._industryManual=this.value" style="margin-top:12px;">' +
                             '</div>';
                     }
                 },
+                // 步骤 2：公司地址
+                {
+                    title: '公司地址',
+                    icon: 'fa-map-marker-alt',
+                    color: '#74B9FF',
+                    gradient: 'linear-gradient(135deg, #74B9FF, #0984E3)',
+                    desc: '填写公司注册地址，用于匹配本地政策',
+                    template: function(d) {
+                        var cities = ['北京', '上海', '杭州', '深圳', '广州', '成都', '武汉', '南京', '西安', '苏州'];
+                        var cityHtml = cities.map(function(c) {
+                            return '<span class="suggestion-tag" onclick="fillAddress(&quot;' + c + '市&quot;)">' + c + '</span>';
+                        }).join('');
+                        return '<div class="step-card">' +
+                            '<div class="step-icon-wrap" style="background:' + this.gradient + ';"><i class="fas ' + this.icon + '"></i></div>' +
+                            '<h3>' + this.title + '</h3>' +
+                            '<div class="step-desc">' + this.desc + '</div>' +
+                            '<input type="text" placeholder="例：杭州市西湖区" id="rInputAddress" value="' + (d._address || '') + '" oninput="saveStepAddr()">' +
+                            '<div class="suggestion-list">' + cityHtml + '</div>' +
+                            '</div>';
+                    }
+                },
+                // 步骤 3：公司信息（名称+Slogan+Logo+联系方式）
+                {
+                    title: '公司信息',
+                    icon: 'fa-building',
+                    color: '#34C759',
+                    gradient: 'linear-gradient(135deg, #34C759, #30D158)',
+                    desc: '填写公司基本信息，打造品牌形象',
+                    template: function(d) {
+                        var co = d._company || {};
+                        return '<div class="step-card">' +
+                            '<div class="step-icon-wrap" style="background:' + this.gradient + ';"><i class="fas ' + this.icon + '"></i></div>' +
+                            '<h3>' + this.title + '</h3>' +
+                            '<div class="step-desc">' + this.desc + '</div>' +
+                            '<div class="logo-upload" onclick="triggerLogoUpload()"><i class="fas fa-camera"></i><span>上传Logo</span></div>' +
+                            '<input type="file" id="logoFileInput" accept="image/*" style="display:none" onchange="handleLogoUpload(event)">' +
+                            '<div id="logoPreview" style="display:none;text-align:center;margin-bottom:12px;"><img id="logoPreviewImg" style="max-width:80px;max-height:80px;border-radius:8px;"></div>' +
+                            '<input type="text" placeholder="公司全称 *" id="rInputCoName" value="' + (co.name || '') + '" oninput="saveStepCompany()">' +
+                            '<input type="text" placeholder="公司标语 / Slogan" id="rInputSlogan" value="' + (co.slogan || '') + '" oninput="saveStepCompany()">' +
+                            '<input type="text" placeholder="手机号（选填）" id="rInputPhone" value="' + (co.phone || '') + '" oninput="saveStepCompany()">' +
+                            '<input type="email" placeholder="邮箱（选填）" id="rInputEmail" value="' + (co.email || '') + '" oninput="saveStepCompany()">' +
+                            '</div>';
+                    }
+                },
+                // 步骤 4：工商注册
                 {
                     title: '工商注册',
                     icon: 'fa-file-contract',
                     color: '#FDCB6E',
                     gradient: 'linear-gradient(135deg, #FDCB6E, #F39C12)',
-                    desc: '填写工商注册所需的核心信息',
+                    desc: '填写工商注册所需信息',
                     recs: [
-                        { name: '一网通办', icon: 'fa-laptop', bg: '#007AFF', url: 'https://zwfw.gjbsj.gov.cn' },
-                        { name: '电子营业执照', icon: 'fa-qrcode', bg: '#8E44AD', url: 'https://dzswj.gsxt.gov.cn' },
-                        { name: '银行开户预约', icon: 'fa-university', bg: '#27AE60', url: 'https://icbc.com.cn' },
+                        { name: '天眼查', icon: 'fa-search', bg: '#1890FF', url: 'https://tianyancha.com' },
+                        { name: '企查查', icon: 'fa-building', bg: '#FF6B00', url: 'https://qichacha.com' },
+                        { name: '信用公示', icon: 'fa-balance-scale', bg: '#C0392B', url: 'http://gsxt.gov.cn' },
                     ],
                     template: function(d) {
+                        var biz = d._business || {};
+                        var addr = d._address || '';
                         return '<div class="step-card">' +
                             '<div class="step-icon-wrap" style="background:' + this.gradient + ';"><i class="fas ' + this.icon + '"></i></div>' +
                             '<h3>' + this.title + '</h3>' +
                             '<div class="step-desc">' + this.desc + '</div>' +
-                            '<input type="text" placeholder="法人代表姓名" id="rInput5a" value="' + (d[5] && d[5].a || '') + '" oninput="saveStep(5)">' +
-                            '<input type="text" placeholder="注册地址" id="rInput5b" value="' + (d[5] && d[5].b || '') + '" oninput="saveStep(5)">' +
-                            '<input type="text" placeholder="注册资本（万元）" id="rInput5c" value="' + (d[5] && d[5].c || '') + '" oninput="saveStep(5)">' +
+                            '<input type="text" placeholder="法人代表姓名" id="rInputLegal" value="' + (biz.legal || '') + '" oninput="saveStepBiz()">' +
+                            '<input type="text" placeholder="注册地址" id="rInputRegAddr" value="' + (biz.regAddr || addr) + '" oninput="saveStepBiz()">' +
+                            '<input type="text" placeholder="注册资本（万元）" id="rInputCapital" value="' + (biz.capital || '') + '" oninput="saveStepBiz()">' +
                             renderRecs(this.recs) +
                             '</div>';
                     }
                 },
+                // 步骤 5：创建部门
                 {
-                    title: '线上运营',
-                    icon: 'fa-rocket',
-                    color: '#FD79A8',
-                    gradient: 'linear-gradient(135deg, #FD79A8, #E84393)',
-                    desc: '选择你计划开通的线上运营平台',
-                    recs: [
-                        { name: '微信公众平台', icon: 'fa-weixin', bg: '#07C160', url: 'https://mp.weixin.qq.com' },
-                        { name: '抖音开放平台', icon: 'fa-film', bg: '#000', url: 'https://open.douyin.com' },
-                        { name: '支付宝开放平台', icon: 'fa-hand-holding-usd', bg: '#1677FF', url: 'https://open.alipay.com' },
-                    ],
+                    title: '创建部门',
+                    icon: 'fa-sitemap',
+                    color: '#5856D6',
+                    gradient: 'linear-gradient(135deg, #5856D6, #007AFF)',
+                    desc: '选择要创建的部门和默认 AI 工具',
                     template: function(d) {
-                        var platforms = ['官方网站', '微信公众号', '抖音号', '小红书', 'B站', '知乎专栏', '小程序', '淘宝店铺'];
-                        var items = platforms.map(function(p, i) {
-                            var checked = d[6] && d[6].indexOf(p) !== -1;
-                            return '<div class="checklist-item' + (checked ? ' checked' : '') + '" onclick="togglePlatform(this, \'' + p + '\')">' +
-                                '<div class="ck-icon"><i class="fas fa-check"></i></div>' +
-                                '<span>' + p + '</span></div>';
+                        var depts = (d._tplDepts && d._tplDepts.length) ? d._tplDepts : DEPT_DEFAULTS;
+                        var selected = d._depts || depts.map(function(dd){return dd.name;});
+                        var html = '<div class="step-card">' +
+                            '<div class="step-icon-wrap" style="background:' + this.gradient + ';"><i class="fas ' + this.icon + '"></i></div>' +
+                            '<h3>' + this.title + '</h3>' +
+                            '<div class="step-desc">' + this.desc + '</div>' +
+                            '<div class="dept-select-grid">';
+                        depts.forEach(function(dept) {
+                            var checked = selected.indexOf(dept.name) !== -1;
+                            var toolsHtml = (dept.tools||[]).map(function(t) {
+                                return '<span class="dept-tool-tag" style="background:' + (t.bg||'#007AFF') + '20;color:' + (t.bg||'#007AFF') + ';">' + (t.name||'') + '</span>';
+                            }).join('');
+                            html += '<div class="dept-select-item' + (checked ? ' selected' : '') + '" onclick="toggleDept(\'' + dept.name + '\', this)">' +
+                                '<div class="dept-select-check"><i class="fas fa-check"></i></div>' +
+                                '<div class="dept-select-info"><div class="dept-select-name">' + dept.name + '</div>' +
+                                '<div class="dept-select-tools">' + toolsHtml + '</div></div></div>';
+                        });
+                        html += '</div>' +
+                            '<div style="margin-top:12px;"><input type="text" placeholder="自定义部门名称" id="rInputCustomDept" class="app-input-sm">' +
+                            '<button class="btn-ai-gen" onclick="addCustomDept()" style="margin-left:8px;"><i class="fas fa-plus"></i> 添加</button></div>' +
+                            '</div>';
+                        return html;
+                    }
+                },
+                // 步骤 6：创建产品
+                {
+                    title: '创建产品',
+                    icon: 'fa-cubes',
+                    color: '#FF9500',
+                    gradient: 'linear-gradient(135deg, #FF9500, #FF6B00)',
+                    desc: '添加你要推出的产品（可创建多个）',
+                    template: function(d) {
+                        var products = d._products || [];
+                        var prodHtml = products.map(function(p, i) {
+                            return '<div class="product-entry" data-idx="' + i + '">' +
+                                '<div class="product-entry-header"><span class="product-entry-num">#' + (i + 1) + '</span>' +
+                                '<button class="product-del-btn" onclick="removeProduct(' + i + ')"><i class="fas fa-times"></i></button></div>' +
+                                '<input type="text" placeholder="产品名称 *" class="prod-name" value="' + (p.name || '') + '" oninput="syncProducts()">' +
+                                '<textarea placeholder="产品描述…" class="prod-desc" rows="2" oninput="syncProducts()">' + (p.description || '') + '</textarea>' +
+                                '<input type="url" placeholder="产品链接（选填）" class="prod-url" value="' + (p.url || '') + '" oninput="syncProducts()">' +
+                                '</div>';
                         }).join('');
                         return '<div class="step-card">' +
                             '<div class="step-icon-wrap" style="background:' + this.gradient + ';"><i class="fas ' + this.icon + '"></i></div>' +
                             '<h3>' + this.title + '</h3>' +
                             '<div class="step-desc">' + this.desc + '</div>' +
-                            '<div class="checklist-grid">' + items + '</div>' +
-                            renderRecs(this.recs) +
+                            '<div id="productEntries">' + prodHtml + '</div>' +
+                            '<button class="btn-ai-gen" onclick="addProductEntry()"><i class="fas fa-plus"></i> 添加产品</button>' +
                             '</div>';
                     }
                 },
-                {
-                    title: '营销推广',
-                    icon: 'fa-bullhorn',
-                    color: '#A29BFE',
-                    gradient: 'linear-gradient(135deg, #A29BFE, #6C5CE7)',
-                    desc: '规划你的初期推广策略和预算',
-                    recs: [
-                        { name: '巨量引擎', icon: 'fa-chart-line', bg: '#1E8BFF', url: 'https://oceanengine.com' },
-                        { name: '百度营销', icon: 'fa-ad', bg: '#2932E1', url: 'https://yj.baidu.com' },
-                        { name: '新榜', icon: 'fa-chart-bar', bg: '#FF6B00', url: 'https://newrank.cn' },
-                    ],
-                    template: function(d) {
-                        var budget = d[7] && d[7].budget || 5000;
-                        return '<div class="step-card">' +
-                            '<div class="step-icon-wrap" style="background:' + this.gradient + ';"><i class="fas ' + this.icon + '"></i></div>' +
-                            '<h3>' + this.title + '</h3>' +
-                            '<div class="step-desc">' + this.desc + '</div>' +
-                            '<div class="checklist-grid">' +
-                            '<div class="checklist-item' + (d[7] && d[7].seo ? ' checked' : '') + '" onclick="toggleMarketing(this, \'seo\')"><div class="ck-icon"><i class="fas fa-check"></i></div><span>SEO 优化</span></div>' +
-                            '<div class="checklist-item' + (d[7] && d[7].social ? ' checked' : '') + '" onclick="toggleMarketing(this, \'social\')"><div class="ck-icon"><i class="fas fa-check"></i></div><span>社交媒体</span></div>' +
-                            '<div class="checklist-item' + (d[7] && d[7].ads ? ' checked' : '') + '" onclick="toggleMarketing(this, \'ads\')"><div class="ck-icon"><i class="fas fa-check"></i></div><span>付费广告</span></div>' +
-                            '<div class="checklist-item' + (d[7] && d[7].kol ? ' checked' : '') + '" onclick="toggleMarketing(this, \'kol\')"><div class="ck-icon"><i class="fas fa-check"></i></div><span>KOL 合作</span></div>' +
-                            '</div>' +
-                            '<div class="budget-slider-wrap">' +
-                            '<input type="range" min="1000" max="100000" step="1000" value="' + budget + '" oninput="updateBudget(this.value)">' +
-                            '<div class="budget-val">¥<span id="budgetDisplay">' + budget.toLocaleString() + '</span></div>' +
-                            '</div>' +
-                            renderRecs(this.recs) +
-                            '</div>';
-                    }
-                },
+                // 步骤 7：公司成立 / 保存
                 {
                     title: '公司成立！🎉',
                     icon: 'fa-glass-cheers',
@@ -776,33 +831,38 @@
                         { name: '本工作台', icon: 'fa-desktop', bg: '#AF52DE', url: '/workspace/', dynamic: true },
                     ],
                     template: function(d) {
+                        var isEdit = !!roadmapData._editOpcId;
+                        var co = d._company || {};
+                        var depts = d._depts || [];
+                        var prods = d._products || [];
                         var summary = [
-                            { label: '产品灵感', key: 0 },
-                            { label: '产品名称', key: 1 },
-                            { label: '公司全称', key: '2a' },
-                            { label: '标语', key: '2b' },
-                            { label: '行业方向', key: 4 },
-                            { label: '运营平台', key: 6 },
+                            { label: '行业类型', val: d._industry || '-' },
+                            { label: '子分类', val: d._subCategoryName || '-' },
+                            { label: '公司地址', val: d._address || '-' },
+                            { label: '公司名称', val: co.name || '-' },
+                            { label: 'Slogan', val: co.slogan || '-' },
+                            { label: '联系手机', val: co.phone || '-' },
+                            { label: '联系邮箱', val: co.email || '-' },
+                            { label: (isEdit ? '部门' : '创建部门'), val: depts.length ? depts.join('、') : '-' },
+                            { label: (isEdit ? '产品' : '产品数量'), val: isEdit ? (prods.map(function(p){return p.name}).join('、') || '-') : (prods.length + ' 个') },
                         ];
                         var items = summary.map(function(s) {
-                            var val = '-';
-                            if (s.key === 0) val = d[0] || '-';
-                            else if (s.key === 1) val = d[1] || '-';
-                            else if (s.key === '2a') val = (d[2] && d[2].a) || '-';
-                            else if (s.key === '2b') val = (d[2] && d[2].b) || '-';
-                            else if (s.key === 4) val = (d[4] && d[4].join(', ')) || '-';
-                            else if (s.key === 6) val = (d[6] && d[6].join(', ')) || '-';
-                            return '<div class="summary-item"><span>' + s.label + '</span><span class="sv">' + val + '</span></div>';
+                            return '<div class="summary-item"><span>' + s.label + '</span><span class="sv">' + s.val + '</span></div>';
                         }).join('');
-                        var coName = d[2] && d[2].a || '';
-                        var coHtml = coName ? '<span style="color:#FFD700;font-size:1.2em;font-weight:800;">' + coName + '</span> 公司' : '公司';
+                        var coHtml = co.name ? '<span style="color:#FFD700;font-size:1.2em;font-weight:800;">' + co.name + '</span>' : '';
+                        var heading = isEdit
+                            ? '确认修改 ' + coHtml + ' 的信息'
+                            : '恭喜您，您的 ' + coHtml + ' 公司正式成立了！';
+                        var subText = isEdit
+                            ? '确认以下信息无误后，点击保存'
+                            : '你已完成全部 7 个步骤，以下是你的创业蓝图';
                         return '<div class="step-card celebration">' +
-                            '<span class="big-icon">🎊</span>' +
-                            '<h2>恭喜您，您的 ' + coHtml + ' 正式成立了！</h2>' +
-                            '<div class="sub-text">你已完成全部 8 个步骤，以下是你的创业蓝图</div>' +
+                            '<span class="big-icon">' + (isEdit ? '✏️' : '🎊') + '</span>' +
+                            '<h2>' + heading + '</h2>' +
+                            '<div class="sub-text">' + subText + '</div>' +
                             '<div class="summary-card">' + items + '</div>' +
-                            renderRecs(this.recs, d) +
-                            '<div style="margin-top:16px;font-size:13px;color:rgba(255,255,255,0.35);">🌟 保存这份蓝图，开始你的创业之旅吧！</div>' +
+                            (isEdit ? '' : renderRecs(this.recs, d)) +
+                            '<div style="margin-top:16px;font-size:13px;color:rgba(255,255,255,0.35);">' + (isEdit ? '修改后所有信息将同步更新' : '🌟 保存这份蓝图，开始你的创业之旅吧！') + '</div>' +
                             '</div>';
                     }
                 }
@@ -811,15 +871,86 @@
 
         var roadmapForm = {};
 
-        function openRoadmap() {
+        function openRoadmap(editOpcId) {
             var overlay = document.getElementById('roadmapOverlay');
             overlay.classList.add('active');
             document.body.style.overflow = 'hidden';
-            roadmapForm = {};
+            roadmapForm = { _industryTab: '自媒体', _depts: ['CEO', '技术部'], _products: [] };
+            roadmapData._editOpcId = editOpcId || null;
             roadmapData.currentStep = 0;
             renderStepList();
             goToStep(0);
             startParticles();
+            if (editOpcId) loadOpcToForm(editOpcId);
+        }
+
+        function loadOpcToForm(opcId) {
+            var u = null;
+            try { u = JSON.parse(localStorage.getItem('auth_user')); } catch(e) {}
+            if (!u || !u.id) return;
+            // 加载 OPC 基本信息
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', API_BASE + '/opc/' + opcId, true);
+            xhr.setRequestHeader('X-Auth-User-Id', u.id);
+            xhr.withCredentials = true;
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var res = JSON.parse(xhr.responseText);
+                    var opc = res.opc;
+                    if (!opc) return;
+                    roadmapForm._industry = opc.industry || '';
+                    roadmapForm._subCategoryName = opc.sub_category || '';
+                    roadmapForm._address = opc.address || '';
+                    roadmapForm._logo = opc.logo || '';
+                    roadmapForm._company = {
+                        name: opc.name || '',
+                        slogan: opc.slogan || '',
+                        phone: opc.contact_phone || '',
+                        email: opc.contact_email || ''
+                    };
+                    // 加载部门
+                    loadDeptsToForm(opcId, u.id);
+                    // 加载产品
+                    loadProductsToForm(opcId, u.id);
+                }
+            };
+            xhr.send();
+        }
+
+        function loadDeptsToForm(opcId, userId) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', API_BASE + '/opc/' + opcId + '/departments', true);
+            xhr.setRequestHeader('X-Auth-User-Id', userId);
+            xhr.withCredentials = true;
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var res = JSON.parse(xhr.responseText);
+                    var items = res.items || [];
+                    roadmapForm._depts = items.map(function(d) { return d.name; });
+                    roadmapForm._deptIds = items.map(function(d) { return d.id; });
+                    goToStep(roadmapData.currentStep);
+                }
+            };
+            xhr.send();
+        }
+
+        function loadProductsToForm(opcId, userId) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', API_BASE + '/opc/' + opcId + '/products', true);
+            xhr.setRequestHeader('X-Auth-User-Id', userId);
+            xhr.withCredentials = true;
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var res = JSON.parse(xhr.responseText);
+                    var items = res.items || [];
+                    roadmapForm._products = items.map(function(p) {
+                        return { name: p.name, description: p.description || '', url: p.url || '' };
+                    });
+                    roadmapForm._productIds = items.map(function(p) { return p.id; });
+                    goToStep(roadmapData.currentStep);
+                }
+            };
+            xhr.send();
         }
 
         function closeRoadmap() {
@@ -901,9 +1032,12 @@
             // Update nav buttons
             document.getElementById('btnPrev').style.visibility = idx === 0 ? 'hidden' : 'visible';
             var nextBtn = document.getElementById('btnNext');
+            var isEdit = !!roadmapData._editOpcId;
             if (idx === total - 1) {
-                nextBtn.innerHTML = '<i class="fas fa-check"></i> 完成';
-                nextBtn.onclick = function() { closeRoadmap(); fireConfetti(); };
+                nextBtn.innerHTML = isEdit
+                    ? '<i class="fas fa-save"></i> 保存公司信息'
+                    : '<i class="fas fa-check"></i> 完成创建';
+                nextBtn.onclick = function() { submitOpcCreation(); };
             } else {
                 nextBtn.innerHTML = '下一步 <i class="fas fa-arrow-right"></i>';
                 nextBtn.onclick = function() { nextStep(); };
@@ -933,70 +1067,108 @@
         }
 
         function saveStep(idx) {
-            var el = document.getElementById('rInput' + idx);
-            if (el) {
-                roadmapForm[idx] = el.value;
-            }
-            // Composite fields (like step 2: company info)
-            var elA = document.getElementById('rInput2a');
-            var elB = document.getElementById('rInput2b');
-            if (elA && elB) {
-                roadmapForm[2] = { a: elA.value, b: elB.value };
-                try { localStorage.setItem('roadmap_company', elA.value || ''); } catch(e) {}
-            }
-            var el5a = document.getElementById('rInput5a');
-            var el5b = document.getElementById('rInput5b');
-            var el5c = document.getElementById('rInput5c');
-            if (el5a && el5b && el5c) {
-                roadmapForm[5] = { a: el5a.value, b: el5b.value, c: el5c.value };
-            }
+            // Generic save — individual steps use specific save functions
         }
 
-        function fillSuggestion(name) {
-            var inp = document.getElementById('rInput1');
-            if (inp) { inp.value = name; roadmapForm[1] = name; }
+        function switchIndustryTab(tab) {
+            roadmapForm._industryTab = tab;
+            goToStep(roadmapData.currentStep);
         }
 
-        function generateNames() {
-            var names = ['智造未来', 'AI创想家', '云帆启航', '独角兽工场', '灵感引擎'];
-            var list = document.querySelector('.suggestion-list');
-            if (list) {
-                list.innerHTML = names.map(function(n) {
-                    return '<span class="suggestion-tag" onclick="fillSuggestion(\'' + n + '\')">' + n + '</span>';
-                }).join('');
-            }
+        function selectSubCategory(id, name, industry) {
+            roadmapForm._subCategory = id;
+            roadmapForm._subCategoryName = name;
+            roadmapForm._industry = industry;
+            goToStep(roadmapData.currentStep);
         }
 
-        function toggleIndustry(el, name) {
-            el.classList.toggle('checked');
-            if (!roadmapForm[4]) roadmapForm[4] = [];
-            var arr = roadmapForm[4];
+        function fillAddress(val) {
+            var inp = document.getElementById('rInputAddress');
+            if (inp) { inp.value = val; roadmapForm._address = val; }
+        }
+
+        function saveStepAddr() {
+            var el = document.getElementById('rInputAddress');
+            if (el) roadmapForm._address = el.value;
+        }
+
+        function triggerLogoUpload() {
+            document.getElementById('logoFileInput').click();
+        }
+
+        function handleLogoUpload(e) {
+            var file = e.target.files[0];
+            if (!file) return;
+            if (file.size > 2 * 1024 * 1024) { alert('Logo 文件不能超过 2MB'); return; }
+            if (!/^image\/(jpeg|png|gif|webp)/.test(file.type)) { alert('仅支持 JPG/PNG/GIF/WebP'); return; }
+            var reader = new FileReader();
+            reader.onload = function(ev) {
+                roadmapForm._logo = ev.target.result;
+                var preview = document.getElementById('logoPreview');
+                var img = document.getElementById('logoPreviewImg');
+                if (preview && img) { img.src = ev.target.result; preview.style.display = 'block'; }
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function saveStepCompany() {
+            roadmapForm._company = {
+                name: (document.getElementById('rInputCoName') || {}).value || '',
+                slogan: (document.getElementById('rInputSlogan') || {}).value || '',
+                phone: (document.getElementById('rInputPhone') || {}).value || '',
+                email: (document.getElementById('rInputEmail') || {}).value || ''
+            };
+        }
+
+        function saveStepBiz() {
+            roadmapForm._business = {
+                legal: (document.getElementById('rInputLegal') || {}).value || '',
+                regAddr: (document.getElementById('rInputRegAddr') || {}).value || '',
+                capital: (document.getElementById('rInputCapital') || {}).value || ''
+            };
+        }
+
+        function toggleDept(name, el) {
+            if (!roadmapForm._depts) roadmapForm._depts = ['CEO', '技术部'];
+            var arr = roadmapForm._depts;
             var idx = arr.indexOf(name);
-            if (idx === -1) arr.push(name);
-            else arr.splice(idx, 1);
-            saveStep(4);
+            if (idx === -1) arr.push(name); else arr.splice(idx, 1);
+            el.classList.toggle('selected');
         }
 
-        function togglePlatform(el, name) {
-            el.classList.toggle('checked');
-            if (!roadmapForm[6]) roadmapForm[6] = [];
-            var arr = roadmapForm[6];
-            var idx = arr.indexOf(name);
-            if (idx === -1) arr.push(name);
-            else arr.splice(idx, 1);
+        function addCustomDept() {
+            var inp = document.getElementById('rInputCustomDept');
+            if (!inp || !inp.value.trim()) return;
+            var name = inp.value.trim();
+            if (!roadmapForm._depts) roadmapForm._depts = ['CEO', '技术部'];
+            if (roadmapForm._depts.indexOf(name) === -1) roadmapForm._depts.push(name);
+            inp.value = '';
+            goToStep(roadmapData.currentStep);
         }
 
-        function toggleMarketing(el, key) {
-            el.classList.toggle('checked');
-            if (!roadmapForm[7]) roadmapForm[7] = {};
-            roadmapForm[7][key] = !roadmapForm[7][key];
+        function addProductEntry() {
+            if (!roadmapForm._products) roadmapForm._products = [];
+            roadmapForm._products.push({ name: '', description: '', url: '' });
+            goToStep(roadmapData.currentStep);
         }
 
-        function updateBudget(val) {
-            if (!roadmapForm[7]) roadmapForm[7] = {};
-            roadmapForm[7].budget = parseInt(val);
-            var display = document.getElementById('budgetDisplay');
-            if (display) display.textContent = parseInt(val).toLocaleString();
+        function removeProduct(idx) {
+            if (!roadmapForm._products) return;
+            roadmapForm._products.splice(idx, 1);
+            goToStep(roadmapData.currentStep);
+        }
+
+        function syncProducts() {
+            var entries = document.querySelectorAll('.product-entry');
+            var prods = [];
+            entries.forEach(function(entry) {
+                prods.push({
+                    name: (entry.querySelector('.prod-name') || {}).value || '',
+                    description: (entry.querySelector('.prod-desc') || {}).value || '',
+                    url: (entry.querySelector('.prod-url') || {}).value || ''
+                });
+            });
+            roadmapForm._products = prods;
         }
 
         function updateProgress() {
@@ -1177,6 +1349,281 @@
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
                 }
             }
+        }
+
+        // ═══════════════════════════════════════════
+        // ── OPC 创建提交 ──
+        // ═══════════════════════════════════════════
+
+        function submitOpcCreation() {
+            var d = roadmapForm;
+            var co = d._company || {};
+            if (!co.name || !co.name.trim()) { alert('请填写公司名称'); goToStep(2); return; }
+            if (!d._industry && !d._industryManual) { alert('请选择行业类型'); goToStep(0); return; }
+
+            // 构建 departments 数组
+            var deptNames = d._depts || [];
+            var deptSource = (d._tplDepts && d._tplDepts.length) ? d._tplDepts : DEPT_DEFAULTS;
+            var departments = [];
+            deptNames.forEach(function(name) {
+                var def = deptSource.find(function(dd) { return dd.name === name; });
+                departments.push({
+                    name: name,
+                    description: '',
+                    leader: '',
+                    tools: def ? (def.tools || []) : []
+                });
+            });
+
+            // 构建 products 数组
+            var products = (d._products || []).filter(function(p) { return p.name && p.name.trim(); });
+
+            var body = {
+                name: co.name.trim(),
+                description: '',
+                logo: d._logo || '',
+                address: d._address || '',
+                slogan: co.slogan || '',
+                contact_phone: co.phone || '',
+                contact_email: co.email || '',
+                industry: d._industry || d._industryManual || '',
+                sub_category: d._subCategoryName || '',
+                departments: departments,
+                products: products
+            };
+
+            var u = null;
+            try { u = JSON.parse(localStorage.getItem('auth_user')); } catch(e) {}
+            var isEdit = !!roadmapData._editOpcId;
+
+            // API 提交
+            var xhr = new XMLHttpRequest();
+            if (isEdit) {
+                xhr.open('PUT', API_BASE + '/opc/' + roadmapData._editOpcId, true);
+            } else {
+                xhr.open('POST', API_BASE + '/opc', true);
+            }
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            if (u && u.id) xhr.setRequestHeader('X-Auth-User-Id', u.id);
+            xhr.withCredentials = true;
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    var ok = isEdit ? 200 : 201;
+                    if (xhr.status === ok) {
+                        var res = JSON.parse(xhr.responseText);
+                        var opcId = isEdit ? roadmapData._editOpcId : res.opc.id;
+                        // 编辑模式：同步更新部门和产品
+                        if (isEdit) {
+                            syncDeptsAndProducts(opcId, u.id, departments, products, opcId);
+                        } else {
+                            fireConfetti();
+                            setTimeout(function() {
+                                closeRoadmap();
+                                window.location.href = '/workspace/?opc_id=' + opcId;
+                            }, 1500);
+                        }
+                    } else {
+                        try {
+                            var err = JSON.parse(xhr.responseText);
+                            alert((isEdit ? '保存' : '创建') + '失败: ' + (err.error || '未知错误'));
+                        } catch(e) {
+                            alert((isEdit ? '保存' : '创建') + '失败: ' + xhr.statusText);
+                        }
+                    }
+                }
+            };
+            xhr.send(JSON.stringify(body));
+        }
+
+        function syncDeptsAndProducts(opcId, userId, departments, products, finalOpcId) {
+            var headers = { 'Content-Type': 'application/json', 'X-Auth-User-Id': String(userId) };
+            // 先删除旧部门，再批量创建新部门
+            var oldDeptIds = roadmapForm._deptIds || [];
+            var oldProdIds = roadmapForm._productIds || [];
+            var doneCount = 0;
+            var totalOps = oldDeptIds.length + oldProdIds.length + departments.length + products.length;
+            if (totalOps === 0) { finishSave(finalOpcId); return; }
+
+            function checkDone() {
+                doneCount++;
+                if (doneCount >= totalOps) finishSave(finalOpcId);
+            }
+
+            // 删除旧部门
+            oldDeptIds.forEach(function(id) {
+                var x = new XMLHttpRequest();
+                x.open('DELETE', API_BASE + '/opc/' + opcId + '/departments/' + id, true);
+                x.setRequestHeader('X-Auth-User-Id', String(userId));
+                x.withCredentials = true;
+                x.onreadystatechange = function() { if (x.readyState === 4) checkDone(); };
+                x.send();
+            });
+            // 创建新部门
+            departments.forEach(function(dept) {
+                var x = new XMLHttpRequest();
+                x.open('POST', API_BASE + '/opc/' + opcId + '/departments', true);
+                x.setRequestHeader('Content-Type', 'application/json');
+                x.setRequestHeader('X-Auth-User-Id', String(userId));
+                x.withCredentials = true;
+                x.onreadystatechange = function() { if (x.readyState === 4) checkDone(); };
+                x.send(JSON.stringify(dept));
+            });
+            // 删除旧产品
+            oldProdIds.forEach(function(id) {
+                var x = new XMLHttpRequest();
+                x.open('DELETE', API_BASE + '/opc/' + opcId + '/products/' + id, true);
+                x.setRequestHeader('X-Auth-User-Id', String(userId));
+                x.withCredentials = true;
+                x.onreadystatechange = function() { if (x.readyState === 4) checkDone(); };
+                x.send();
+            });
+            // 创建新产品
+            products.forEach(function(prod) {
+                var x = new XMLHttpRequest();
+                x.open('POST', API_BASE + '/opc/' + opcId + '/products', true);
+                x.setRequestHeader('Content-Type', 'application/json');
+                x.setRequestHeader('X-Auth-User-Id', String(userId));
+                x.withCredentials = true;
+                x.onreadystatechange = function() { if (x.readyState === 4) checkDone(); };
+                x.send(JSON.stringify(prod));
+            });
+        }
+
+        function finishSave(opcId) {
+            fireConfetti();
+            setTimeout(function() {
+                closeRoadmap();
+                // 刷新公司信息卡片和部门网格
+                loadOpcInfoCard(opcId);
+                if (typeof loadWsSummary === 'function') loadWsSummary();
+            }, 1000);
+        }
+
+        // ═══════════════════════════════════════════
+        // ── 右侧卡片切换 ──
+        // ═══════════════════════════════════════════
+
+        function switchOpcCard(view) {
+            var createCard = document.getElementById('card-create-opc');
+            var infoCard = document.getElementById('card-opc-info');
+            if (!createCard || !infoCard) return;
+            if (view === 'info') {
+                createCard.style.display = 'none';
+                infoCard.style.display = 'block';
+            } else {
+                createCard.style.display = 'block';
+                infoCard.style.display = 'none';
+            }
+        }
+
+        function loadOpcInfoCard(opcId) {
+            var u = null;
+            try { u = JSON.parse(localStorage.getItem('auth_user')); } catch(e) {}
+            if (!u || !u.id || !opcId) { switchOpcCard('create'); return; }
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', API_BASE + '/opc/' + opcId, true);
+            xhr.setRequestHeader('X-Auth-User-Id', u.id);
+            xhr.withCredentials = true;
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var res = JSON.parse(xhr.responseText);
+                    var opc = res.opc;
+                    if (!opc) { switchOpcCard('create'); return; }
+                    // 填充信息卡片
+                    var nameEl = document.getElementById('opcInfoName');
+                    var logoEl = document.getElementById('opcInfoLogo');
+                    if (nameEl) nameEl.textContent = opc.name || '';
+                    if (logoEl) {
+                        if (opc.logo) { logoEl.src = opc.logo; logoEl.style.display = 'block'; }
+                        else { logoEl.style.display = 'none'; }
+                    }
+                    // 加载部门
+                    loadOpcInfoDepts(opcId);
+                    // 加载产品
+                    loadOpcInfoProducts(opcId);
+                    switchOpcCard('info');
+                }
+            };
+            xhr.send();
+        }
+
+        function loadOpcInfoDepts(opcId) {
+            var u = null;
+            try { u = JSON.parse(localStorage.getItem('auth_user')); } catch(e) {}
+            if (!u || !u.id) return;
+            var deptEl = document.getElementById('opcInfoDepts');
+            if (!deptEl) return;
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', API_BASE + '/opc/' + opcId + '/departments', true);
+            xhr.setRequestHeader('X-Auth-User-Id', u.id);
+            xhr.withCredentials = true;
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var res = JSON.parse(xhr.responseText);
+                    var items = res.items || [];
+                    if (items.length === 0) { deptEl.textContent = '暂无部门'; return; }
+                    var names = items.map(function(d) { return d.name || ''; });
+                    deptEl.textContent = names.join('、');
+                }
+            };
+            xhr.send();
+        }
+
+        function loadOpcInfoProducts(opcId) {
+            var u = null;
+            try { u = JSON.parse(localStorage.getItem('auth_user')); } catch(e) {}
+            if (!u || !u.id) return;
+            var prodEl = document.getElementById('opcInfoProducts');
+            if (!prodEl) return;
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', API_BASE + '/opc/' + opcId + '/products', true);
+            xhr.setRequestHeader('X-Auth-User-Id', u.id);
+            xhr.withCredentials = true;
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var res = JSON.parse(xhr.responseText);
+                    var items = res.items || [];
+                    if (items.length === 0) { prodEl.textContent = '暂无产品'; return; }
+                    var names = items.map(function(p) { return p.name || ''; });
+                    prodEl.textContent = names.join('、');
+                }
+            };
+            xhr.send();
+        }
+
+        function shareOpcTemplate() {
+            var u = null;
+            try { u = JSON.parse(localStorage.getItem('auth_user')); } catch(e) {}
+            if (!u || !u.id) { alert('请先登录'); return; }
+            var opcId = null;
+            try { opcId = new URLSearchParams(window.location.search).get('opc_id'); } catch(e) {}
+            if (!opcId) {
+                try { var cached = JSON.parse(localStorage.getItem('opc_list')||'[]'); if (cached.length) opcId = cached[0].id; } catch(e) {}
+            }
+            if (!opcId) { alert('请先创建一人公司'); return; }
+            var defaultName = (document.getElementById('wsCompanyName').textContent || '我的公司') + '模板';
+            var tplName = prompt('请输入模板名称', defaultName);
+            if (!tplName) return;
+            if (!confirm('将当前公司配置分享为公开模板？')) return;
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', API_BASE + '/opc/' + opcId + '/share-template', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.setRequestHeader('X-Auth-User-Id', u.id);
+            xhr.withCredentials = true;
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 201) {
+                        var resp = {};
+                        try { resp = JSON.parse(xhr.responseText); } catch(e) {}
+                        var msg = '模板分享成功！';
+                        if (resp.earned > 0) msg += '\n+' + resp.earned + ' 积分';
+                        alert(msg);
+                        if (typeof loadPoints === 'function') loadPoints();
+                    } else alert('分享失败，请重试');
+                }
+            };
+            xhr.send(JSON.stringify({ step_data: JSON.stringify(roadmapForm), template_name: tplName }));
         }
 
         // Handle resize for canvases

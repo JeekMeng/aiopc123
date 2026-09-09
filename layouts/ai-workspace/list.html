@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}AI一人公司工作台 — 快捷工具、消息通知、最近访问一站式管理{{ end }}">
+    <title>AI工作台</title>
+    <link rel="canonical" href="{{ .Permalink }}" />
+    <link rel="shortcut icon" href="{{ absURL $.Site.Params.images.favicon }}" />
+
+    <meta property="og:title" content="{{ .Title }} | AI一人公司导航网" />
+    <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}AI一人公司工作台 — 快捷工具、消息通知、最近访问一站式管理{{ end }}" />
+    <meta property="og:url" content="{{ .Permalink }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="{{ .Site.Title }}" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:image" content="{{ absURL "/assets/images/bi-favicon.png" }}" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ .Title }} | AI一人公司导航网" />
+    <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}AI一人公司工作台 — 快捷工具、消息通知、最近访问一站式管理{{ end }}" />
+    <meta name="twitter:image" content="{{ absURL "/assets/images/bi-favicon.png" }}" />
+
+    {{ partial "jsonld.html" . }}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/iconfont-3.03029.1.css">
+    <link rel="stylesheet" href="/assets/css/workspace-style.css">
+    <link rel="stylesheet" href="/assets/css/dynamic.css">
+    <link rel="stylesheet" href="/assets/css/ai-chat.css">
+    <style>
+        .desktop { padding: 0; }
+
+        /* ── 顶部栏 ── */
+        .top-bar {
+            background: var(--bg-topbar) !important;
+            backdrop-filter: blur(20px) !important;
+            -webkit-backdrop-filter: blur(20px) !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            border: none !important;
+            border-bottom: 1px solid var(--border-panel) !important;
+            margin-bottom: 0;
+            padding: 0;
+            gap: 0;
+            flex-wrap: nowrap;
+        }
+        .top-bar .company-info { padding: 8px 12px; flex-shrink: 0; display: flex; align-items: center; gap: 8px; }
+
+        /* ── 工作台切换按钮（macOS 风格滑块） ── */
+        .ws-switcher {
+            display: flex;
+            gap: 0;
+            background: var(--bg-primary);
+            border-radius: 8px;
+            padding: 3px;
+            flex-shrink: 0;
+            position: relative;
+        }
+        .ws-switcher-btn {
+            padding: 6px 16px;
+            border-radius: 6px;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all .2s ease;
+            white-space: nowrap;
+            text-decoration: none;
+            position: relative;
+            z-index: 1;
+        }
+        .ws-switcher-btn:hover { color: var(--text-primary); }
+        .ws-switcher-btn.active {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            box-shadow: var(--shadow-card);
+            font-weight: 600;
+        }
+        .top-bar .ws-search { flex: 0 1 auto; width: 180px; margin-right: 12px; }
+        .top-bar .ws-search .search-container { background: transparent; backdrop-filter: none; border: none; box-shadow: none; padding: 0; }
+        .top-bar .ws-search .search-input-wrapper { padding: 5px 10px; border-radius: 6px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.08); }
+        .top-bar .ws-search .search-input-wrapper input { font-size: 12px; padding: 0; }
+        .top-bar .ws-search .search-input-wrapper i { font-size: 12px; }
+        .top-bar .ws-search .search-type-select { display: none; }
+        .top-bar .ws-search .search-results { position: absolute; top: 100%; left: 0; right: 0; background: var(--bg-card); border-radius: 8px; box-shadow: var(--shadow-light); border: var(--glass-border); z-index: 200; }
+        .top-bar .top-actions { display: flex; gap: 4px; padding: 0; }
+        .top-bar .top-btn { padding: 8px 10px; margin: 0; }
+
+        /* ── 三栏主体 ── */
+        .ws-body {
+            display: flex;
+            height: calc(100vh - 44px);
+            overflow: hidden;
+            padding: 10px;
+            gap: 10px;
+            background: var(--bg-body-overlay);
+        }
+
+        /* ── 左侧 Dock 栏 ── */
+        .ws-dock-sidebar {
+            width: 100px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 16px 0;
+            gap: 8px;
+            overflow-y: auto;
+            background: var(--bg-dock-panel);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-right: 1px solid var(--border-panel);
+            border-radius: 14px;
+        }
+        .ws-dock-sidebar::-webkit-scrollbar { width: 0; }
+        .ws-dock-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-dock-title);
+            text-align: center;
+            padding: 4px 0 8px;
+            letter-spacing: .5px;
+        }
+        .ws-dock-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dock-icon);
+            font-size: 20px;
+            cursor: pointer;
+            transition: all .2s ease;
+            position: relative;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+        .ws-dock-icon:hover {
+            transform: scale(1.12);
+            text-decoration: none;
+        }
+        .ws-dock-icon.active {
+            outline: 2px solid var(--accent-blue);
+            outline-offset: 2px;
+        }
+        .ws-dock-icon[data-tooltip]::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            left: 60px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,.85);
+            color: #fff;
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .15s;
+            z-index: 100;
+        }
+        .ws-dock-icon:hover[data-tooltip]::after { opacity: 1; }
+        .ws-dock-divider {
+            width: 32px;
+            height: 1px;
+            background: var(--border-panel);
+            margin: 6px 0;
+            flex-shrink: 0;
+        }
+
+        /* ── 背景设置弹出面板 ── */
+        .ws-settings-panel {
+            display: none;
+            position: fixed;
+            left: 108px;
+            bottom: 60px;
+            background: var(--bg-primary);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 14px;
+            z-index: 200;
+            box-shadow: 0 8px 32px rgba(0,0,0,.3);
+        }
+        .ws-settings-panel.show { display: block; }
+        .ws-settings-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+        .ws-settings-colors {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+        .ws-settings-color {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all .15s;
+        }
+        .ws-settings-color:hover { transform: scale(1.1); }
+        .ws-settings-color.active { border-color: var(--accent-blue); }
+
+        /* ── 中间主内容 ── */
+        .ws-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            min-width: 0;
+            background: var(--bg-panel);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-panel);
+            border-radius: 14px;
+        }
+
+        /* ── AI 助手 ── */
+        .ws-ai-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 24px;
+            overflow: hidden;
+        }
+        .ws-ai-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+            flex-shrink: 0;
+        }
+        .ws-ai-header-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #007AFF, #5856D6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 18px;
+        }
+        .ws-ai-header-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .ws-ai-header-sub {
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+        .ws-ai-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 12px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .ws-ai-messages::-webkit-scrollbar { width: 4px; }
+        .ws-ai-messages::-webkit-scrollbar-thumb { background: var(--border-panel); border-radius: 2px; }
+        .ws-ai-msg {
+            display: flex;
+            gap: 10px;
+            max-width: 80%;
+        }
+        .ws-ai-msg.user { align-self: flex-end; flex-direction: row-reverse; }
+        .ws-ai-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+        .ws-ai-avatar.bot { background: linear-gradient(135deg, #007AFF, #5856D6); color: #fff; }
+        .ws-ai-avatar.human { background: rgba(255,255,255,.12); color: var(--text-primary); }
+        .ws-ai-bubble {
+            padding: 10px 14px;
+            border-radius: 14px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+        .ws-ai-msg:not(.user) .ws-ai-bubble { background: rgba(255,255,255,.06); }
+        .ws-ai-msg.user .ws-ai-bubble { background: rgba(0,122,255,.2); }
+        .ws-ai-input-bar {
+            display: flex;
+            gap: 10px;
+            padding: 12px 0 0;
+            border-top: 1px solid rgba(255,255,255,.06);
+            flex-shrink: 0;
+        }
+        .ws-ai-input {
+            flex: 1;
+            background: rgba(255,255,255,.06);
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 10px;
+            padding: 10px 14px;
+            color: var(--text-primary);
+            font-size: 14px;
+            outline: none;
+            transition: border-color .2s;
+        }
+        .ws-ai-input:focus { border-color: rgba(0,122,255,.4); }
+        .ws-ai-input::placeholder { color: var(--text-tertiary); }
+        .ws-ai-send {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            border: none;
+            background: linear-gradient(135deg, #007AFF, #5856D6);
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform .15s;
+            flex-shrink: 0;
+        }
+        .ws-ai-send:hover { transform: scale(1.05); }
+
+        /* ── 加载动画适配 ── */
+        .ws-ai-bubble .loading-dot { background: var(--accent-blue); }
+
+        /* ── 右侧卡片栏 ── */
+        .ws-right-sidebar {
+            width: 300px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 16px 12px;
+            overflow-y: auto;
+            background: var(--bg-panel);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-left: 1px solid var(--border-panel);
+            border-radius: 14px;
+        }
+        .ws-right-sidebar::-webkit-scrollbar { width: 0; }
+        .ws-right-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-panel);
+            border-radius: 14px;
+            padding: 16px;
+            flex-shrink: 0;
+        }
+        .ws-right-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+        .ws-right-card-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .ws-right-card-title i { font-size: 14px; }
+        .ws-right-card-action {
+            font-size: 12px;
+            color: var(--accent-blue);
+            cursor: pointer;
+            text-decoration: none;
+            transition: opacity .15s;
+        }
+        .ws-right-card-action:hover { opacity: .8; text-decoration: none; }
+        .ws-right-card-body {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* 待办事项 */
+        .ws-todo-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-panel);
+        }
+        .ws-todo-item:last-child { border-bottom: none; }
+        .ws-todo-check {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 2px solid var(--border-panel);
+            flex-shrink: 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all .2s;
+        }
+        .ws-todo-check.done { background: #34C759; border-color: #34C759; }
+        .ws-todo-check.done::after { content: '✓'; color: #fff; font-size: 11px; }
+        .ws-todo-text { flex: 1; color: var(--text-primary); font-size: 13px; }
+        .ws-todo-text.done { text-decoration: line-through; color: var(--text-tertiary); }
+        .ws-todo-empty { text-align: center; color: var(--text-tertiary); padding: 16px 0; font-size: 13px; }
+
+        /* 通知消息 */
+        .ws-notice-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 0;
+            border-bottom: 1px solid var(--border-panel);
+            cursor: pointer;
+        }
+        .ws-notice-item:last-child { border-bottom: none; }
+        .ws-notice-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .ws-notice-tag {
+            font-size: 10px;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-weight: 600;
+            flex-shrink: 0;
+            line-height: 1.3;
+        }
+        .ws-notice-text { flex: 1; color: var(--text-primary); font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+        /* 一键创建OPC */
+        .ws-create-opc {
+            text-align: center;
+            padding: 20px 12px;
+        }
+        .ws-create-opc-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #FF6B6B, #EE5A24);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 24px;
+            margin: 0 auto 12px;
+        }
+        .ws-create-opc-title { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 6px; }
+        .ws-create-opc-desc { font-size: 12px; color: var(--text-tertiary); margin-bottom: 14px; line-height: 1.5; }
+        .ws-create-opc-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 24px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #FF6B6B, #EE5A24);
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: transform .15s;
+            text-decoration: none;
+        }
+        .ws-create-opc-btn:hover { transform: scale(1.03); text-decoration: none; color: #fff; }
+
+        /* ── 工具箱 ── */
+        .ws-toolbox-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .ws-toolbox-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            padding: 14px 8px;
+            border-radius: 10px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-panel);
+            text-decoration: none;
+            transition: background .15s;
+            position: relative;
+        }
+        .ws-toolbox-item:hover { background: var(--bg-hover); text-decoration: none; }
+        .ws-toolbox-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 16px;
+        }
+        .ws-toolbox-item span:not(.ws-toolbox-badge) {
+            font-size: 12px;
+            color: var(--text-primary);
+        }
+        .ws-toolbox-badge {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            font-size: 9px;
+            padding: 1px 5px;
+            border-radius: 4px;
+            background: var(--bg-hover);
+            color: var(--text-tertiary);
+        }
+
+        /* ── 行业选择弹窗 ── */
+        .ws-modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .ws-modal-card {
+            background: var(--bg-primary);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            width: 520px;
+            max-width: 90vw;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .ws-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 20px 0;
+        }
+        .ws-modal-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .ws-modal-close {
+            width: 28px; height: 28px;
+            border-radius: 6px; border: none;
+            background: var(--bg-hover);
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: background .15s;
+        }
+        .ws-modal-close:hover { background: var(--bg-hover); }
+        .ws-modal-tabs {
+            display: flex;
+            gap: 6px;
+            padding: 14px 20px 0;
+            flex-wrap: wrap;
+        }
+        .ws-modal-tab {
+            padding: 6px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border-panel);
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all .15s;
+        }
+        .ws-modal-tab:hover { background: var(--bg-hover); color: var(--text-primary); }
+        .ws-modal-tab.active { background: rgba(0,122,255,.2); border-color: rgba(0,122,255,.4); color: #fff; }
+        .ws-modal-body {
+            padding: 14px 20px;
+            overflow-y: auto;
+            flex: 1;
+            min-height: 80px;
+        }
+        .ws-modal-divider {
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+            color: var(--text-tertiary);
+            font-size: 12px;
+        }
+        .ws-modal-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 20px; right: 20px;
+            height: 1px;
+            background: var(--border-panel);
+        }
+        .ws-modal-divider span {
+            position: relative;
+            background: var(--bg-primary);
+            padding: 0 10px;
+        }
+        .ws-modal-footer {
+            padding: 12px 20px 18px;
+        }
+        .ws-tpl-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 14px;
+            border-radius: 10px;
+            background: rgba(255,255,255,.04);
+            border: 1px solid rgba(255,255,255,.06);
+            margin-bottom: 8px;
+            transition: background .15s;
+        }
+        .ws-tpl-item:hover { background: rgba(255,255,255,.08); }
+        .ws-tpl-info { flex: 1; min-width: 0; }
+        .ws-tpl-name { font-size: 14px; font-weight: 500; color: var(--text-primary); }
+        .ws-tpl-desc { font-size: 12px; color: var(--text-tertiary); margin-top: 2px; }
+        .ws-tpl-use {
+            padding: 6px 14px;
+            border-radius: 8px;
+            border: none;
+            background: rgba(0,122,255,.2);
+            color: #fff;
+            font-size: 12px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background .15s;
+        }
+        .ws-tpl-use:hover { background: rgba(0,122,255,.35); }
+
+        /* ── 面板展开（兼容JS） ── */
+        .ws-panel { display: none; }
+
+        /* ── 响应式 ── */
+        @media (max-width: 1024px) {
+            .ws-right-sidebar { width: 260px; }
+        }
+        @media (max-width: 768px) {
+            .ws-body { flex-direction: column; height: auto; }
+            .ws-dock-sidebar {
+                width: 100%;
+                flex-direction: row;
+                overflow-x: auto;
+                overflow-y: hidden;
+                border-right: none;
+                border-bottom: 1px solid rgba(255,255,255,.06);
+                padding: 8px 12px;
+                gap: 8px;
+            }
+            .ws-dock-icon[data-tooltip]::after { display: none; }
+            .ws-dock-divider { width: 1px; height: 32px; margin: 0 4px; }
+            .ws-right-sidebar {
+                width: 100%;
+                border-left: none;
+                border-top: 1px solid rgba(255,255,255,.06);
+                flex-direction: row;
+                overflow-x: auto;
+                padding: 12px;
+            }
+            .ws-right-card { min-width: 240px; }
+        }
+    </style>
+</head>
+<body class="workspace-body" data-theme="dark">
+    <div class="workspace-bg" id="workspace-bg"></div>
+
+    <div class="desktop">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="company-info">
+                <div class="company-logo">A</div>
+                <span class="company-name" id="wsCompanyName">AI一人公司</span>
+                <div class="ws-switcher">
+                    <a href="/ai-workspace/" class="ws-switcher-btn active">🤖 AI工作台</a>
+                    <a href="/workspace/" class="ws-switcher-btn">🏢 工作台</a>
+                </div>
+            </div>
+            <div class="ws-search">
+                <div class="search-container">
+                    <div class="search-input-wrapper">
+                        <i class="fas fa-search"></i>
+                        <input type="text" class="search-input" id="globalSearchInput" placeholder="搜索..." oninput="handleSearch(this.value)">
+                    </div>
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+            </div>
+            <div class="top-actions">
+                <button class="top-btn theme-btn" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
+                <div id="userMenuContainer" style="position:relative;">
+                    <div class="top-btn" id="userMenuBtn" onclick="window.location.href='/user/login/'"><i class="fas fa-user"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 三栏主体 -->
+        <div class="ws-body">
+
+            <!-- ═══ 左侧 Dock 栏 ═══ -->
+            <div class="ws-dock-sidebar" id="wsDockSidebar">
+                <div class="ws-dock-title">快捷入口</div>
+                <div class="ws-dock-icon" data-tooltip="网址导航" data-panel="panel-url" style="background:linear-gradient(135deg,#667eea,#764ba2);" onclick="toggleWsPanel('panel-url',this)"><i class="fas fa-globe"></i></div>
+                <div class="ws-dock-icon" data-tooltip="文章资讯" data-panel="panel-article" style="background:linear-gradient(135deg,#43e97b,#38f9d7);" onclick="toggleWsPanel('panel-article',this)"><i class="fas fa-newspaper"></i></div>
+                <div class="ws-dock-icon" data-tooltip="数据集市" data-panel="panel-dataset" style="background:linear-gradient(135deg,#5c6bc0,#3949ab);" onclick="toggleWsPanel('panel-dataset',this)"><i class="fas fa-database"></i></div>
+                <div class="ws-dock-icon" data-tooltip="素材中心" data-panel="panel-resource" style="background:linear-gradient(135deg,#ff6b6b,#feca57);" onclick="toggleWsPanel('panel-resource',this)"><i class="fas fa-image"></i></div>
+                <div class="ws-dock-divider"></div>
+                <a href="/user/opc/products/" class="ws-dock-icon" data-tooltip="OPC产品" style="background:linear-gradient(135deg,#34C759,#30D158);"><i class="fas fa-cubes"></i></a>
+                <a href="/user/opc/departments/" class="ws-dock-icon" data-tooltip="OPC部门" style="background:linear-gradient(135deg,#FF9500,#FF6B00);"><i class="fas fa-sitemap"></i></a>
+                <a href="/user/opc/tools/" class="ws-dock-icon" data-tooltip="工具中心" style="background:linear-gradient(135deg,#5856D6,#007AFF);"><i class="fas fa-toolbox"></i></a>
+                <div style="flex:1;"></div>
+                <div class="ws-dock-divider"></div>
+                <div class="ws-dock-icon" data-tooltip="设置" style="background:rgba(255,255,255,.08);" onclick="toggleSettingsPanel()"><i class="fas fa-cog" style="color:var(--text-secondary);"></i></div>
+            </div>
+
+            <!-- 背景设置弹出面板 -->
+            <div class="ws-settings-panel" id="settingsPanel">
+                <div class="ws-settings-title">背景设置</div>
+                <div class="ws-settings-colors">
+                    <div class="ws-settings-color" data-bg="#ffffff" onclick="setWsBg(this,'#ffffff')" style="background:linear-gradient(135deg,#ffffff,#f0f0f0);border:1px solid rgba(0,0,0,.1);" title="白底黑字"></div>
+                    <div class="ws-settings-color active" data-bg="" onclick="setWsBg(this,'')" style="background:linear-gradient(135deg,#1a1a2e,#16213e);" title="默认"></div>
+                    <div class="ws-settings-color" data-bg="#0f0c29" onclick="setWsBg(this,'#0f0c29')" style="background:linear-gradient(135deg,#0f0c29,#302b63);" title="深紫"></div>
+                    <div class="ws-settings-color" data-bg="#0a1628" onclick="setWsBg(this,'#0a1628')" style="background:linear-gradient(135deg,#0a1628,#1a3a5c);" title="深蓝"></div>
+                    <div class="ws-settings-color" data-bg="#1a0a2e" onclick="setWsBg(this,'#1a0a2e')" style="background:linear-gradient(135deg,#1a0a2e,#2d1b69);" title="暗紫"></div>
+                    <div class="ws-settings-color" data-bg="#0d1117" onclick="setWsBg(this,'#0d1117')" style="background:linear-gradient(135deg,#0d1117,#161b22);" title="GitHub"></div>
+                    <div class="ws-settings-color" data-bg="#1e3a5f" onclick="setWsBg(this,'#1e3a5f')" style="background:linear-gradient(135deg,#1e3a5f,#2d5a8e);" title="海洋"></div>
+                </div>
+            </div>
+
+            <!-- ═══ 中间：AI 助手 ═══ -->
+            <div class="ws-main">
+                <div class="ws-ai-panel" id="panel-ai">
+                    <div class="ws-ai-header">
+                        <div class="ws-ai-header-icon"><i class="fas fa-robot"></i></div>
+                        <div>
+                            <div class="ws-ai-header-title">AI 智能助手</div>
+                            <div class="ws-ai-header-sub">有什么可以帮你的？</div>
+                        </div>
+                    </div>
+                    <div class="ws-ai-messages" id="aiMessages">
+                        <div class="ws-ai-msg">
+                            <div class="ws-ai-avatar bot"><i class="fas fa-robot"></i></div>
+                            <div class="ws-ai-bubble">你好！我是AI智能助手，有什么可以帮助你的？</div>
+                        </div>
+                    </div>
+                    <div class="ws-ai-input-bar">
+                        <input type="text" class="ws-ai-input" id="aiInput" placeholder="输入你的问题..." onkeydown="if(event.key==='Enter')sendAiMsg()">
+                        <button class="ws-ai-send" onclick="sendAiMsg()"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ 右侧卡片栏 ═══ -->
+            <div class="ws-right-sidebar">
+
+                <!-- 待办事项 -->
+                <div class="ws-right-card" id="card-todos">
+                    <div class="ws-right-card-header">
+                        <div class="ws-right-card-title"><i class="fas fa-tasks" style="color:#FF3B30;"></i> 待办事项</div>
+                        <a id="addTodoBtn" href="/user/opc/todos/" class="ws-right-card-action" style="font-size:16px;font-weight:700;">+</a>
+                    </div>
+                    <div class="ws-right-card-body" id="wsTodosBody">
+                        <div class="ws-todo-empty">加载中...</div>
+                    </div>
+                </div>
+
+                <!-- 通知消息 -->
+                <div class="ws-right-card" id="card-notices">
+                    <div class="ws-right-card-header">
+                        <div class="ws-right-card-title"><i class="fas fa-bell" style="color:#AF52DE;"></i> 通知消息</div>
+                        <a href="/user/opc/notices/" class="ws-right-card-action">查看全部</a>
+                    </div>
+                    <div class="ws-right-card-body" id="wsNoticesBody">
+                        <div class="ws-todo-empty">加载中...</div>
+                    </div>
+                </div>
+
+                <!-- 一键创建OPC公司 -->
+                <div class="ws-right-card" id="card-create-opc">
+                    <div class="ws-create-opc">
+                        <div class="ws-create-opc-icon"><i class="fas fa-rocket"></i></div>
+                        <div class="ws-create-opc-title">一键创建OPC公司</div>
+                        <div class="ws-create-opc-desc">8步流程，快速创办你的AI一人公司</div>
+                        <a href="javascript:void(0)" class="ws-create-opc-btn" onclick="openIndustryModal()"><i class="fas fa-plus"></i> 开始创建</a>
+                    </div>
+                </div>
+
+                <div class="ws-right-card" id="card-toolbox">
+                    <div class="ws-right-card-header">
+                        <div class="ws-right-card-title"><i class="fas fa-toolbox" style="color:#5856D6;"></i> 工具箱</div>
+                        <a href="/user/opc/tools/" class="ws-right-card-action">查看全部</a>
+                    </div>
+                    <div class="ws-right-card-body">
+                        <div class="ws-toolbox-grid">
+                            <div class="ws-toolbox-item" style="opacity:.5;cursor:default;">
+                                <div class="ws-toolbox-icon" style="background:linear-gradient(135deg,#007AFF,#5856D6);"><i class="fas fa-search-location"></i></div>
+                                <span>GEO检查</span>
+                                <span class="ws-toolbox-badge">即将上线</span>
+                            </div>
+                            <div class="ws-toolbox-item" style="opacity:.5;cursor:default;">
+                                <div class="ws-toolbox-icon" style="background:linear-gradient(135deg,#34C759,#30D158);"><i class="fas fa-calculator"></i></div>
+                                <span>税收计算</span>
+                                <span class="ws-toolbox-badge">即将上线</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════ 展开面板（兼容旧JS） ═══════ -->
+    <div class="ws-panel" id="panel-url">
+        <div class="ws-panel-header">
+            <div class="ws-panel-title"><i class="fas fa-globe" style="color:var(--accent-blue);"></i> 网址导航</div>
+            <button class="ws-panel-close" onclick="toggleWsPanel('panel-url')"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="url-list-mini">
+            <div class="url-item-mini" onclick="location.href='/'"><div class="url-icon-mini" style="background:#FF4757;">网</div><span>网址导航</span></div>
+            <div class="url-item-mini" onclick="location.href='/site/'"><div class="url-icon-mini" style="background:#5c6bc0;">集</div><span>工具大全</span></div>
+            <div class="url-item-mini" onclick="location.href='/book/'"><div class="url-icon-mini" style="background:#ff6b6b;">素</div><span>资料中心</span></div>
+            <div class="url-item-mini" onclick="location.href='/blog/'"><div class="url-icon-mini" style="background:#43e97b;">文</div><span>文章资讯</span></div>
+        </div>
+    </div>
+    <div class="ws-panel" id="panel-article">
+        <div class="ws-panel-header">
+            <div class="ws-panel-title"><i class="fas fa-newspaper" style="color:#43e97b;"></i> 文章资讯</div>
+            <button class="ws-panel-close" onclick="toggleWsPanel('panel-article')"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="article-list-mini">
+            <div class="article-item-mini" onclick="location.href='/blog/'"><div class="article-title-mini">2024年AI工具发展趋势深度报告</div><div class="article-meta-mini">AI前沿 · 12,567阅读</div></div>
+            <div class="article-item-mini" onclick="location.href='/blog/'"><div class="article-title-mini">一个人如何完成自媒体全流程运营</div><div class="article-meta-mini">运营技巧 · 5,234阅读</div></div>
+        </div>
+    </div>
+    <div class="ws-panel" id="panel-dataset">
+        <div class="ws-panel-header">
+            <div class="ws-panel-title"><i class="fas fa-database" style="color:var(--accent-purple);"></i> 数据集市</div>
+            <button class="ws-panel-close" onclick="toggleWsPanel('panel-dataset')"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="dataset-list-mini">
+            <div class="dataset-item-mini" onclick="location.href='/book/'"><div class="dataset-icon-mini" style="background:linear-gradient(135deg,#667eea,#764ba2);"><i class="fas fa-comments"></i></div><div class="dataset-info-mini"><div class="dataset-name-mini">AI一人公司运营数据集</div><div class="dataset-meta-mini">100万+条 · 免费</div></div></div>
+        </div>
+    </div>
+    <div class="ws-panel" id="panel-resource">
+        <div class="ws-panel-header">
+            <div class="ws-panel-title"><i class="fas fa-image" style="color:var(--accent-orange);"></i> 素材中心</div>
+            <button class="ws-panel-close" onclick="toggleWsPanel('panel-resource')"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="resource-list-mini">
+            <div class="resource-item-mini" onclick="location.href='/book/'"><div class="resource-icon-mini"><i class="fas fa-book"></i></div><div class="resource-name-mini">电子书</div></div>
+            <div class="resource-item-mini" onclick="location.href='/book/'"><div class="resource-icon-mini"><i class="fas fa-file-alt"></i></div><div class="resource-name-mini">文档模板</div></div>
+        </div>
+    </div>
+
+    <!-- 隐藏浮动卡片（JS兼容） -->
+    <div style="display:none;">
+        <div class="floating-card" id="card-url" data-title="网址导航"></div>
+        <div class="floating-card" id="card-article" data-title="文章资讯"></div>
+        <div class="floating-card" id="card-dataset" data-title="数据集市"></div>
+        <div class="floating-card" id="card-resource" data-title="素材中心"></div>
+        <div class="floating-card roadmap-trigger-card" id="card-roadmap" data-title="一人公司路线图"></div>
+    </div>
+
+    <!-- 右键菜单 -->
+    <div class="context-menu" id="contextMenu">
+        <button class="context-menu-item" onclick="addCard('url')"><i class="fas fa-globe"></i><span>添加网址导航</span></button>
+        <button class="context-menu-item" onclick="addCard('article')"><i class="fas fa-newspaper"></i><span>添加文章资讯</span></button>
+        <button class="context-menu-item" onclick="addCard('dataset')"><i class="fas fa-database"></i><span>添加数据集市</span></button>
+        <button class="context-menu-item" onclick="addCard('resource')"><i class="fas fa-image"></i><span>添加素材中心</span></button>
+        <div class="context-menu-divider"></div>
+        <button class="context-menu-item" onclick="restoreAllCards()"><i class="fas fa-expand"></i><span>恢复所有卡片</span></button>
+        <button class="context-menu-item" onclick="deleteAllCards()"><i class="fas fa-trash-alt"></i><span>删除所有卡片</span></button>
+    </div>
+    <div class="context-menu" id="dockContextMenu">
+        <button class="context-menu-item" onclick="addDockItem()"><i class="fas fa-plus"></i><span>添加到 Dock</span></button>
+        <div class="context-menu-divider"></div>
+        <button class="context-menu-item" onclick="removeDockItem()"><i class="fas fa-trash-alt"></i><span>从 Dock 移除</span></button>
+    </div>
+
+    <!-- Roadmap Overlay -->
+    <div class="roadmap-overlay" id="roadmapOverlay">
+        <div class="roadmap-bg"></div>
+        <canvas id="particle-canvas"></canvas>
+        <div class="roadmap-container">
+            <div class="roadmap-sidebar">
+                <div class="roadmap-progress-ring">
+                    <svg viewBox="0 0 100 100">
+                        <defs><linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#007AFF" /><stop offset="100%" stop-color="#AF52DE" /></linearGradient></defs>
+                        <circle class="ring-bg" cx="50" cy="50" r="45" />
+                        <circle class="ring-progress" cx="50" cy="50" r="45" id="progressCircle" />
+                    </svg>
+                    <div class="roadmap-progress-text" id="progressText">0%</div>
+                </div>
+                <div class="roadmap-steps-list" id="stepList"></div>
+            </div>
+            <div class="roadmap-main">
+                <div class="roadmap-header">
+                    <h2 id="stepTitle">产品灵感</h2>
+                    <button class="roadmap-close" onclick="closeRoadmap()"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="roadmap-steps-container" id="stepsContainer"></div>
+                <div class="roadmap-nav">
+                    <button class="btn-nav btn-nav-prev" id="btnPrev" onclick="prevStep()"><i class="fas fa-arrow-left"></i> 上一步</button>
+                    <span class="step-counter" id="stepCounter">1 / 8</span>
+                    <button class="btn-nav btn-nav-next" id="btnNext" onclick="nextStep()">下一步 <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── 行业选择弹窗 ── -->
+    <div class="ws-modal-overlay" id="industryModal" style="display:none;">
+        <div class="ws-modal-card">
+            <div class="ws-modal-header">
+                <div class="ws-modal-title"><i class="fas fa-th-large" style="color:var(--accent-blue);"></i> 选择行业类型</div>
+                <button class="ws-modal-close" onclick="closeIndustryModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="ws-modal-tabs" id="industryTabs"></div>
+            <div class="ws-modal-body" id="industryTplList">
+                <div class="ws-todo-empty">加载中...</div>
+            </div>
+            <div class="ws-modal-divider"><span>或</span></div>
+            <div class="ws-modal-footer">
+                <a href="javascript:void(0)" class="ws-create-opc-btn" onclick="closeIndustryModal();openRoadmap();" style="width:100%;justify-content:center;"><i class="fas fa-pen"></i> 自定义创建</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Guard -->
+    <div class="workspace-guard" id="workspaceGuard">
+        <div class="workspace-guard-card">
+            <div class="guard-icon"><i class="fas fa-lock"></i></div>
+            <h2>请先登录</h2>
+            <p>登录后即可使用 AI 一人公司工作台</p>
+            <button class="workspace-guard-btn" onclick="window.location.href='/user/login/'">登录 / 注册</button>
+        </div>
+    </div>
+    <script>try{if(localStorage.getItem('auth_user')){document.getElementById('workspaceGuard').style.display='none';}}catch(e){}</script>
+
+    <canvas id="confetti-canvas"></canvas>
+
+    <script>
+    function toggleWsPanel(panelId, iconEl) {
+        var panel = document.getElementById(panelId);
+        if (!panel) return;
+        var isOpen = panel.classList.contains('show');
+        document.querySelectorAll('.ws-panel').forEach(function(p) { p.classList.remove('show'); });
+        document.querySelectorAll('.ws-dock-icon').forEach(function(c) { c.classList.remove('active'); });
+        if (!isOpen) {
+            panel.classList.add('show');
+            if (iconEl) iconEl.classList.add('active');
+            panel.style.cssText='display:block;position:fixed;top:44px;left:110px;bottom:0;width:320px;overflow-y:auto;background:rgba(18,18,20,.95);backdrop-filter:blur(20px);border-right:1px solid rgba(255,255,255,.06);z-index:50;padding:16px;box-sizing:border-box;';
+        } else {
+            panel.style.cssText='';
+        }
+    }
+
+    function sendAiMsg() {
+        var input = document.getElementById('aiInput');
+        var text = input.value.trim();
+        if (!text) return;
+        var msgs = document.getElementById('aiMessages');
+        msgs.innerHTML += '<div class="ws-ai-msg user"><div class="ws-ai-avatar human"><i class="fas fa-user"></i></div><div class="ws-ai-bubble">' + text.replace(/</g,'&lt;') + '</div></div>';
+        input.value = '';
+        msgs.scrollTop = msgs.scrollHeight;
+
+        var loadingId = 'loading_' + Date.now();
+        msgs.innerHTML += '<div class="ws-ai-msg" id="' + loadingId + '"><div class="ws-ai-avatar bot"><i class="fas fa-robot"></i></div><div class="ws-ai-bubble ai-chat-loading"><div class="loading-dots"><div class="loading-dot"></div><div class="loading-dot"></div><div class="loading-dot"></div></div></div></div>';
+        msgs.scrollTop = msgs.scrollHeight;
+
+        var API = (location.port === '1313' || location.port === '1317') ? 'http://localhost:8787/api' : '/api';
+        var user = null;
+        try { user = JSON.parse(localStorage.getItem('auth_user') || '{}'); } catch(e) {}
+        var hdrs = {'Content-Type': 'application/json'};
+        if (user && user.id) hdrs['X-Auth-User-Id'] = String(user.id);
+
+        fetch(API + '/ai/chat', {
+            method: 'POST',
+            headers: hdrs,
+            credentials: 'include',
+            body: JSON.stringify({ message: text, deep_thinking: false })
+        }).then(function(r) { return r.json(); }).then(function(d) {
+            var el = document.getElementById(loadingId);
+            if (el) el.remove();
+            var reply = d.response || d.error || '抱歉，发生了错误';
+            msgs.innerHTML += '<div class="ws-ai-msg"><div class="ws-ai-avatar bot"><i class="fas fa-robot"></i></div><div class="ws-ai-bubble">' + reply.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') + '</div></div>';
+            msgs.scrollTop = msgs.scrollHeight;
+        }).catch(function() {
+            var el = document.getElementById(loadingId);
+            if (el) el.remove();
+            msgs.innerHTML += '<div class="ws-ai-msg"><div class="ws-ai-avatar bot"><i class="fas fa-robot"></i></div><div class="ws-ai-bubble">网络错误，请稍后重试</div></div>';
+            msgs.scrollTop = msgs.scrollHeight;
+        });
+    }
+
+    /* ── 行业选择弹窗 ── */
+    var INDUSTRIES = ['自媒体', 'GEO获客系统', '独立站', '导航站'];
+    var allTemplates = [];
+    var currentIndustry = '';
+
+    function openIndustryModal() {
+        var modal = document.getElementById('industryModal');
+        modal.style.display = 'flex';
+        renderIndustryTabs();
+        loadAllTemplates();
+    }
+    function closeIndustryModal() {
+        document.getElementById('industryModal').style.display = 'none';
+    }
+
+    function renderIndustryTabs() {
+        var tabs = document.getElementById('industryTabs');
+        var h = '';
+        INDUSTRIES.forEach(function(ind) {
+            h += '<button class="ws-modal-tab' + (ind === currentIndustry ? ' active' : '') + '" onclick="switchIndustry(\'' + ind + '\')">' + ind + '</button>';
+        });
+        tabs.innerHTML = h;
+    }
+
+    function switchIndustry(ind) {
+        currentIndustry = ind;
+        renderIndustryTabs();
+        renderTplList();
+    }
+
+    function loadAllTemplates() {
+        var API = (location.port === '1313' || location.port === '1317') ? 'http://localhost:8787/api' : '/api';
+        var body = document.getElementById('industryTplList');
+        body.innerHTML = '<div class="ws-todo-empty">加载中...</div>';
+        fetch(API + '/templates').then(function(r) { return r.json(); }).then(function(d) {
+            allTemplates = d.templates || [];
+            if (!currentIndustry && allTemplates.length) {
+                currentIndustry = allTemplates[0].industry || INDUSTRIES[0];
+                renderIndustryTabs();
+            }
+            renderTplList();
+        }).catch(function() {
+            body.innerHTML = '<div class="ws-todo-empty">加载失败</div>';
+        });
+    }
+
+    function renderTplList() {
+        var body = document.getElementById('industryTplList');
+        var filtered = allTemplates.filter(function(t) { return t.industry === currentIndustry; });
+        if (!filtered.length) {
+            body.innerHTML = '<div class="ws-todo-empty">该分类下暂无模板，请自定义创建</div>';
+            return;
+        }
+        var h = '';
+        filtered.forEach(function(t) {
+            h += '<div class="ws-tpl-item">'
+               + '  <div class="ws-tpl-info">'
+               + '    <div class="ws-tpl-name">' + escH(t.name) + '</div>'
+               + (t.description ? '    <div class="ws-tpl-desc">' + escH(t.description) + '</div>' : '')
+               + '  </div>'
+               + '  <button class="ws-tpl-use" onclick="selectTemplate(' + t.id + ')"><i class="fas fa-check"></i> 选用</button>'
+               + '</div>';
+        });
+        body.innerHTML = h;
+    }
+
+    function selectTemplate(tplId) {
+        var tpl = null;
+        for (var i = 0; i < allTemplates.length; i++) {
+            if (allTemplates[i].id === tplId) { tpl = allTemplates[i]; break; }
+        }
+        if (!tpl) return;
+        var stepData = {};
+        try { stepData = JSON.parse(tpl.step_data || '{}'); } catch(e) {}
+        if (typeof roadmapData !== 'undefined') {
+            for (var k in stepData) {
+                if (stepData.hasOwnProperty(k)) roadmapData.formData[k] = stepData[k];
+            }
+        }
+        closeIndustryModal();
+        openRoadmap();
+    }
+
+    function escH(e) { var t = document.createElement('div'); t.appendChild(document.createTextNode(e || '')); return t.innerHTML; }
+
+    function loadWsSummary() {
+        var API = (location.port==='1313'||location.port==='1317') ? 'http://localhost:8787/api' : '/api';
+        var u = null;
+        try { u = JSON.parse(localStorage.getItem('auth_user')); } catch(e) {}
+        if (!u || !u.id) return;
+        var hdrs = {'X-Auth-User-Id': String(u.id)};
+        var params = new URLSearchParams(window.location.search);
+        var opcId = params.get('opc_id');
+        if (!opcId) {
+            try { var cached = JSON.parse(localStorage.getItem('opc_list')||'[]'); if (cached.length) opcId = cached[0].id; } catch(e) {}
+        }
+        if (!opcId) return;
+
+        var addTodoBtn = document.getElementById('addTodoBtn');
+        if (addTodoBtn) addTodoBtn.href = '/user/opc/todos/?opc_id=' + opcId + '&action=add';
+
+        fetch(API+'/opc/'+opcId, {headers:hdrs,credentials:'include'}).then(function(r){return r.json();}).then(function(d){
+            var opc = d.opc;
+            if (opc && opc.name) {
+                document.getElementById('wsCompanyName').textContent = opc.name;
+                document.title = opc.name + ' - AI工作台';
+            }
+        }).catch(function(){});
+
+        fetch(API+'/opc/'+opcId+'/todos', {headers:hdrs,credentials:'include'}).then(function(r){return r.json();}).then(function(d){
+            var todos = d.items || d.todos || d || [];
+            var el = document.getElementById('wsTodosBody');
+            if (!todos.length) { el.innerHTML='<div class="ws-todo-empty">暂无待办事项</div>'; return; }
+            var h = '';
+            var pi={high:'#FF3B30',medium:'#FF9500',low:'#34C759'};
+            todos.slice(0,5).forEach(function(t){
+                var label = t.due_date ? '<span style="color:var(--accent-blue);margin-right:4px;">[' + t.due_date + ']</span>' : '';
+                var pc=t.done?'#34C759':(pi[t.priority]||'#FF9500');
+                h += '<div class="ws-todo-item"><div class="ws-todo-check'+(t.done?' done':'')+'" style="border-color:'+pc+';'+(t.done?'background:'+pc+';':'')+'"></div><div class="ws-todo-text'+(t.done?' done':'')+'">' + label + (t.text||'').replace(/</g,'&lt;') + '</div></div>';
+            });
+            el.innerHTML = h;
+        }).catch(function(){});
+
+        fetch(API+'/opc/'+opcId+'/notices', {headers:hdrs,credentials:'include'}).then(function(r){return r.json();}).then(function(d){
+            var notices = d.items || d.notices || d || [];
+            var el = document.getElementById('wsNoticesBody');
+            if (!notices.length) { el.innerHTML='<div class="ws-todo-empty">暂无通知消息</div>'; return; }
+            var h = '';
+            notices.slice(0,4).forEach(function(n){
+                h += '<div class="ws-notice-item"><div class="ws-notice-dot'+(n.is_read?' read':'')+'"></div><div><div class="ws-notice-text">'+(n.title||n.content||'').replace(/</g,'&lt;')+'</div><div class="ws-notice-time">'+(n.created_at||'')+'</div></div></div>';
+            });
+            el.innerHTML = h;
+        }).catch(function(){});
+
+        fetch(API+'/user/notifications/generate', {method:'POST',headers:hdrs,credentials:'include'}).catch(function(){});
+
+        fetch(API+'/user/notifications', {headers:hdrs,credentials:'include'}).then(function(r){return r.json();}).then(function(d){
+            var notices = d.items || [];
+            var el = document.getElementById('wsNoticesBody');
+            if (!notices.length) { if(!el.querySelector('.ws-notice-item')) el.innerHTML='<div class="ws-todo-empty">暂无通知消息</div>'; return; }
+            var TI={policy:'#007AFF',tool:'#34C759',book:'#AF52DE',news:'#FF9500',system:'#8E8E93'};
+            var TL={policy:'政策',tool:'工具',book:'资料',news:'新闻',system:'系统'};
+            var h = '';
+            notices.slice(0,5).forEach(function(n){
+                var color=TI[n.type]||'#8E8E93',label=TL[n.type]||n.type;
+                h += '<div class="ws-notice-item" onclick="window.open(\'/user/opc/notices/\',\'_self\')">';
+                h += '<div class="ws-notice-dot" style="background:'+color+';"></div>';
+                h += '<span class="ws-notice-tag" style="background:'+color+'18;color:'+color+';">'+label+'</span>';
+                h += '<div class="ws-notice-text">'+(n.title||'').replace(/</g,'&lt;')+'</div></div>';
+            });
+            el.innerHTML = h;
+        }).catch(function(){});
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var params = new URLSearchParams(window.location.search);
+        var opcId = params.get('opc_id');
+        if (opcId) {
+            document.querySelectorAll('[href]').forEach(function(el) {
+                var href = el.getAttribute('href');
+                if (href && href.indexOf('/user/opc/') !== -1) {
+                    el.setAttribute('href', href + (href.indexOf('?') === -1 ? '?' : '&') + 'opc_id=' + opcId);
+                }
+            });
+        }
+        loadWsSummary();
+    });
+
+    function toggleSettingsPanel() {
+        var p = document.getElementById('settingsPanel');
+        p.classList.toggle('show');
+    }
+
+    function setWsBg(el, color) {
+        document.querySelectorAll('.ws-settings-color').forEach(function(c){ c.classList.remove('active'); });
+        el.classList.add('active');
+        var bg = document.getElementById('workspace-bg');
+        var body = document.body;
+        var icon = document.querySelector('.theme-btn i');
+        if (color) {
+            bg.style.background = color;
+            try { localStorage.setItem('ws_bg', color); } catch(e){}
+        } else {
+            bg.style.background = '';
+            try { localStorage.removeItem('ws_bg'); } catch(e){}
+        }
+        var isLight = (color === '#ffffff');
+        body.setAttribute('data-theme', isLight ? 'light' : 'dark');
+        if (icon) icon.className = isLight ? 'fas fa-sun' : 'fas fa-moon';
+        try { localStorage.setItem('ws_theme', isLight ? 'light' : 'dark'); } catch(e){}
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        try {
+            var savedTheme = localStorage.getItem('ws_theme') || 'dark';
+            var savedBg = localStorage.getItem('ws_bg');
+            document.body.setAttribute('data-theme', savedTheme);
+            var icon = document.querySelector('.theme-btn i');
+            if (icon) icon.className = savedTheme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
+            if (savedBg) {
+                document.getElementById('workspace-bg').style.background = savedBg;
+                document.querySelectorAll('.ws-settings-color').forEach(function(c){
+                    c.classList.toggle('active', c.getAttribute('data-bg') === savedBg);
+                });
+            }
+        } catch(e){}
+    });
+
+    document.addEventListener('click', function(e) {
+        var panel = document.getElementById('settingsPanel');
+        var cog = e.target.closest('.fa-cog');
+        if (!panel.contains(e.target) && !cog) {
+            panel.classList.remove('show');
+        }
+    });
+    </script>
+
+    <script src="/assets/js/workspace.js"></script>
+</body>
+</html>

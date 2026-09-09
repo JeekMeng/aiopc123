@@ -1,8 +1,27 @@
+
+本地调试worker-api：
+
 # 终端 1：Worker
 cd worker-api && npx wrangler dev --port 8787
+
 # 终端 2：Hugo
 hugo server -D --bind 0.0.0.0 --port 1317 --baseURL http://localhost:1317
-▣  Build · deepseek-v4-flash-free · 10.9s
-管理员账号是啥
+注意修改: config.toml 里面baseurl
+
+
+本地管理员账号是啥
 Thinking: The user is asking for the admin account credentials again.
 admin@aiopc123.com / admin123
+
+
+## 调试远程worker-api:
+1. 注意修改: config.toml 里面baseurl
+2. cd worker-api && npx wrangler dev --remote, # 连生产 D1 跑本地 
+   修改配置: wrangler.jsonc, 配置数据库名称和数据库ID，不是密钥，本地不需要配置。 
+
+
+3. 访问测试：
+    curl -s "http://localhost:8787/api/policies/stats"
+4. 远程访问数据库：
+   npx wrangler d1 execute aiopc-db --remote --command "SELECT COUNT(*) as total FROM policies"
+   直接控制台访问也行

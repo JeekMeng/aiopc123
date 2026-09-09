@@ -34,7 +34,7 @@
   function api(path, options) {
     options = options || {};
     options.credentials = 'include';
-    if (currentUser) {
+    if (currentUser && currentUser.id) {
       options.headers = options.headers || {};
       options.headers['X-Auth-User-Id'] = currentUser.id;
     }
@@ -75,11 +75,12 @@
       var html =
         '<div class="dropdown d-inline-block">' +
         '  <a href="#" class="dropdown-toggle" data-toggle="dropdown">' +
-        '    <i class="fas fa-user-circle mr-1"></i>' + escapeHtml(currentUser.nickname) +
+        '    <i class="fas fa-user-circle mr-1"></i>' + escapeHtml(currentUser.nickname || currentUser.email || '用户') +
         '  </a>' +
         '  <div class="dropdown-menu dropdown-menu-right">' +
         '    <a class="dropdown-item" href="/user/"><i class="fas fa-user mr-2"></i>个人中心</a>' +
         adminLink +
+        '    <a class="dropdown-item" href="/workspace/"><i class="fas fa-desktop mr-2"></i>OPC工作台</a>' +
         '    <div class="dropdown-divider"></div>' +
         '    <a class="dropdown-item" href="#" id="logoutBtn"><i class="fas fa-sign-out-alt mr-2"></i>退出登录</a>' +
         '  </div>' +
@@ -109,6 +110,7 @@
   }
 
   function escapeHtml(str) {
+    if (str == null) return '';
     var div = document.createElement('div');
     div.appendChild(document.createTextNode(str));
     return div.innerHTML;
@@ -124,12 +126,8 @@
 
     api('/auth/me').then(function (data) {
       if (data.user) {
-        if (cached && data.user.id !== cached.id) {
-          currentUser = cached;
-        } else {
-          currentUser = data.user;
-          saveAuth(data.user);
-        }
+        currentUser = data.user;
+        saveAuth(data.user);
       } else if (cached) {
         currentUser = cached;
       } else {
@@ -153,7 +151,7 @@
       window._authStorageBound = true;
       window.addEventListener('storage', function (e) {
         if (e.key !== AUTH_KEY) return;
-        currentUser = e.newValue ? JSON.parse(e.newValue) : null;
+        try { currentUser = e.newValue ? JSON.parse(e.newValue) : null; } catch (err) { currentUser = null; }
         updateUI();
         initUserSection();
         initAdminSection();
@@ -493,8 +491,8 @@
 
     var nicknameEl = document.getElementById('profile-nickname');
     var emailEl = document.getElementById('profile-email');
-    if (nicknameEl) nicknameEl.textContent = currentUser.nickname;
-    if (emailEl) emailEl.textContent = currentUser.email;
+    if (nicknameEl) nicknameEl.textContent = currentUser.nickname || currentUser.email || '用户';
+    if (emailEl) emailEl.textContent = currentUser.email || '';
 
     switch (section) {
       case 'home':
@@ -511,6 +509,9 @@
         var cl = pageEl.querySelector('.my-comments-list');
         if (!cl) break;
         loadUserComments(cl, pageEl);
+        break;
+      case 'my-opc':
+        loadMyOpcs();
         break;
     }
   }
@@ -530,15 +531,16 @@
             logo = (window.logosPath || '/assets/images/logos/') + logo.replace(/^\//, '');
           }
           html +=
-            '<div class="bookmark-item d-flex justify-content-between align-items-center p-3 mb-2" style="background:#f8f9fa;border-radius:8px">' +
+            '<div class="bookmark-item d-flex justify-content-between align-items-center p-3 mb-2" style="background:var(--bg-card);border-radius:8px;border:1px solid var(--border-light)">' +
             '  <div class="d-flex align-items-center" style="min-width:0">' +
             (logo ? '    <img src="' + logo + '" alt="" class="mr-3" style="width:32px;height:32px;border-radius:4px;object-fit:contain;flex-shrink:0">' : '') +
             '    <div style="min-width:0">' +
-            '      <a href="' + b.url + '" target="_blank" class="text-dark font-weight-bold text-truncate d-block">' + escapeHtml(b.title) + '</a>' +
-            '      <p class="small text-muted mb-0 text-truncate">' + escapeHtml(b.description || '') + '</p>' +
+            '      <a href="' + b.url + '" target="_blank" class="font-weight-bold text-truncate d-block" style="color:var(--accent-blue);text-decoration:none">' + escapeHtml(b.title) + '</a>' +
+            (b.url ? '      <div class="text-truncate" style="font-size:12px;color:var(--text-tertiary);max-width:400px">' + escapeHtml(b.url) + '</div>' : '') +
+            '      <p class="mb-0 text-truncate" style="font-size:13px;color:var(--text-secondary)">' + escapeHtml(b.description || '') + '</p>' +
             '    </div>' +
             '  </div>' +
-            '  <button class="btn btn-sm btn-outline-danger ml-2 delete-bookmark flex-shrink-0" data-id="' + b.id + '">删除</button>' +
+            '  <button class="app-btn app-btn-sm app-btn-danger flex-shrink-0 ml-2 delete-bookmark" data-id="' + b.id + '"><i class="fas fa-trash-alt"></i> 删除</button>' +
             '</div>';
         });
         container.innerHTML = html;
@@ -1135,6 +1137,37 @@
         return;
       }
 
+      var feedbackMethod = (form.querySelector('input[name="feedback_method"]:checked') || {}).value || 'page';
+      var emailVal = document.querySelector('input[name="email"]').value.trim();
+      var phoneVal = document.querySelector('input[name="contact_phone"]').value.trim();
+
+      if (feedbackMethod === 'email') {
+        if (!emailVal) {
+          errEl.textContent = '选择邮箱通知请填写电子邮箱';
+          errEl.style.display = 'block';
+          return;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+          errEl.textContent = '电子邮箱格式不正确';
+          errEl.style.display = 'block';
+          return;
+        }
+      }
+
+      if (feedbackMethod === 'sms') {
+        if (!phoneVal) {
+          errEl.textContent = '选择短信通知请填写联系电话';
+          errEl.style.display = 'block';
+          return;
+        }
+        var cleanPhone = phoneVal.replace(/[\s\-]/g, '');
+        if (!/^1[3-9]\d{9}$/.test(cleanPhone) && !/^0\d{2,3}-?\d{7,8}$/.test(cleanPhone)) {
+          errEl.textContent = '联系电话格式不正确（手机号11位，或座机区号-号码）';
+          errEl.style.display = 'block';
+          return;
+        }
+      }
+
       var categories = [];
       checked.forEach(function (cb) { categories.push(cb.value); });
 
@@ -1154,7 +1187,9 @@
           website: document.querySelector('input[name="website"]').value.trim(),
           wechat: document.querySelector('input[name="wechat"]').value.trim(),
           contact_name: document.querySelector('input[name="contact_name"]').value.trim(),
-          contact_phone: document.querySelector('input[name="contact_phone"]').value.trim(),
+          contact_phone: phoneVal,
+          email: emailVal,
+          feedback_method: feedbackMethod,
           notes: document.querySelector('textarea[name="notes"]').value.trim(),
         },
       })
@@ -1353,6 +1388,12 @@
         break;
       case 'bookmarks':
         adminPageLoadBookmarks();
+        var bookmarkSearchInput = document.getElementById('adminBookmarkSearch');
+        if (bookmarkSearchInput) {
+          bookmarkSearchInput.addEventListener('keyup', function (e) {
+            if (e.key === 'Enter') adminPageLoadBookmarks(this.value);
+          });
+        }
         break;
       case 'policies':
         adminPageLoadPolicies();
@@ -1360,6 +1401,15 @@
         break;
       case 'roles':
         window.renderRolesPanel('adminRolesContainer');
+        break;
+      case 'opcs':
+        adminPageLoadOpcs();
+        var opcSearchInput = document.getElementById('adminOpcSearch');
+        if (opcSearchInput) {
+          opcSearchInput.addEventListener('keyup', function (e) {
+            if (e.key === 'Enter') adminPageLoadOpcs(this.value);
+          });
+        }
         break;
     }
   }
@@ -1376,13 +1426,9 @@
     var levels = ['', 'vip', 'svip'];
     var idx = levels.indexOf(currentLevel);
     var nextLevel = levels[(idx + 1) % levels.length];
-    try {
-      var p = JSON.parse(localStorage.getItem('user_profiles') || '{}');
-      if (!p[userId]) p[userId] = {};
-      p[userId].vip_level = nextLevel;
-      localStorage.setItem('user_profiles', JSON.stringify(p));
-    } catch (e) {}
-    adminPageLoadUsers();
+    api('/admin/users/' + userId + '/vip', { method: 'PATCH', body: { vip_level: nextLevel } })
+      .then(function () { adminPageLoadUsers(); })
+      .catch(function (err) { alert(err.message); });
   };
 
   window.cycleUserType = function cycleUserType(userId, currentType) {
@@ -1500,19 +1546,49 @@
         var date = s.created_at ? new Date(s.created_at + 'Z').toLocaleDateString('zh-CN') : '-';
         var statusMap = { approved: '已通过', rejected: '已拒绝', pending: '待审核' };
         var statusBadgeCls = s.status === 'approved' ? 'app-badge-success' : s.status === 'rejected' ? 'app-badge-danger' : 'app-badge-warning';
-        return '<div class="app-card app-card-sm mb-2">' +
-          '<div class="d-flex justify-content-between align-items-start">' +
-          '<div><strong>' + escapeHtml(s.name) + '</strong>' +
-          ' <span class="app-badge ' + statusBadgeCls + '">' + (statusMap[s.status] || s.status) + '</span>' +
-          '<p class="small text-muted mb-1 mt-1">' + escapeHtml(s.summary) + '</p>' +
-          '<small class="text-muted">' + escapeHtml(s.city) + ' · ' + escapeHtml(s.contact_name) + ' · ' + date + '</small></div>' +
-          '<div class="ml-2 flex-shrink-0">' +
+        var categories = '';
+        try { categories = JSON.parse(s.categories || '[]').join(', '); } catch(e) { categories = s.categories || ''; }
+        var logoHtml = s.logo ? '<img src="' + escapeHtml(s.logo) + '" style="width:40px;height:40px;border-radius:8px;object-fit:contain;background:#f0f0f0;flex-shrink:0;">' : '';
+        var noteHtml = s.review_note ? '<div style="margin-top:6px;padding:6px 10px;background:rgba(0,122,255,.06);border-radius:6px;font-size:12px;color:var(--text-secondary);">审核备注: ' + escapeHtml(s.review_note) + '</div>' : '';
+        var reviewInfoHtml = s.reviewed_at ? '<div class="sub-info-row" style="color:var(--text-tertiary);font-size:11px;margin-top:6px;">审核时间: ' + new Date(s.reviewed_at).toLocaleString('zh-CN') + (s.reviewed_by ? ' · 审核人员: ' + escapeHtml(s.reviewed_by) : '') + '</div>' : '';
+        return '<div class="app-card app-card-sm mb-2" style="padding:16px;">' +
+          '<div style="display:flex;align-items:flex-start;gap:12px;">' +
+          logoHtml +
+          '<div style="flex:1;min-width:0;">' +
+          '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">' +
+          '<strong style="font-size:15px;">' + escapeHtml(s.name) + '</strong>' +
+          '<span class="app-badge ' + statusBadgeCls + '">' + (statusMap[s.status] || s.status) + '</span>' +
+          '</div>' +
+          '<p class="sub-section">' + escapeHtml(s.summary) + '</p>' +
+          (s.detail ? '<p class="sub-section" style="color:var(--text-tertiary);">' + escapeHtml(s.detail) + '</p>' : '') +
+          '<div class="sub-info-row" style="display:flex;flex-wrap:wrap;gap:6px 16px;">' +
+          '<span>城市: ' + escapeHtml(s.city) + '</span>' +
+          (categories ? '<span>分类: ' + escapeHtml(categories) + '</span>' : '') +
+          '<span><a href="' + escapeHtml(s.website) + '" target="_blank" style="color:var(--accent-blue);text-decoration:none;">' + escapeHtml(s.website) + '</a></span>' +
+          '</div>' +
+          '<div class="sub-divider"></div>' +
+          '<div class="sub-info-row" style="display:flex;flex-wrap:wrap;gap:6px 16px;">' +
+          '<span>联系人: ' + escapeHtml(s.contact_name) + '</span>' +
+          '<span>电话: ' + escapeHtml(s.contact_phone) + '</span>' +
+          (s.email ? '<span>邮箱: ' + escapeHtml(s.email) + '</span>' : '') +
+          (s.wechat ? '<span>微信: ' + escapeHtml(s.wechat) + '</span>' : '') +
+          '</div>' +
+          '<div class="sub-info-row" style="display:flex;flex-wrap:wrap;gap:6px 16px;">' +
+          '<span>反馈方式: ' + ({page:'页面查询',email:'邮箱通知',sms:'短信通知'}[s.feedback_method] || '页面查询') + '</span>' +
+          '</div>' +
+          (s.notes ? '<div class="sub-info-row">补充: ' + escapeHtml(s.notes) + '</div>' : '') +
+          '<div class="sub-info-row" style="color:var(--text-tertiary);font-size:11px;">' + date + ' 提交</div>' +
+          noteHtml +
+          reviewInfoHtml +
+          '</div>' +
+          '<div style="flex-shrink:0;display:flex;flex-direction:column;gap:6px;">' +
           (s.status === 'pending'
-            ? '<button class="app-btn app-btn-sm app-btn-success mr-1" onclick="adminPageApproveSub(\'' + s.id + '\')">通过</button>' +
-              '<button class="app-btn app-btn-sm app-btn-danger mr-1" onclick="adminPageRejectSub(\'' + s.id + '\')">拒绝</button>'
+            ? '<button class="app-btn app-btn-sm app-btn-success" onclick="adminPageApproveSub(\'' + s.id + '\')">通过</button>' +
+              '<button class="app-btn app-btn-sm app-btn-danger" onclick="adminPageRejectSub(\'' + s.id + '\')">拒绝</button>'
             : '') +
           '<button class="app-btn app-btn-sm app-btn-secondary" onclick="adminPageDeleteSub(\'' + s.id + '\')">删除</button>' +
-          '</div></div></div>';
+          '</div>' +
+          '</div></div>';
       }).join('');
     }).catch(function (err) {
       list.innerHTML = '<div class="text-danger text-center py-3">' + escapeHtml('加载失败: ' + err.message) + '</div>';
@@ -1520,10 +1596,14 @@
   }
 
   window.adminPageApproveSub = function adminPageApproveSub(id) {
-    api('/admin/submissions/' + id + '/status', { method: 'PATCH', body: { status: 'approved' } }).then(adminPageLoadSubmissions);
+    var note = prompt('审核备注（选填）：');
+    if (note === null) return;
+    api('/admin/submissions/' + id + '/status', { method: 'PATCH', body: { status: 'approved', review_note: note } }).then(adminPageLoadSubmissions);
   };
   window.adminPageRejectSub = function adminPageRejectSub(id) {
-    api('/admin/submissions/' + id + '/status', { method: 'PATCH', body: { status: 'rejected' } }).then(adminPageLoadSubmissions);
+    var note = prompt('拒绝原因（选填）：');
+    if (note === null) return;
+    api('/admin/submissions/' + id + '/status', { method: 'PATCH', body: { status: 'rejected', review_note: note } }).then(adminPageLoadSubmissions);
   };
   window.adminPageDeleteSub = function adminPageDeleteSub(id) {
     if (!confirm('确定删除此申请？')) return;
@@ -1568,21 +1648,49 @@
     var list = document.getElementById('adminBookmarksList');
     if (!list) return;
     list.innerHTML = '<div class="text-muted text-center py-3">' + escapeHtml('加载中...') + '</div>';
-    api('/bookmarks').then(function (data) {
+    api('/admin/bookmarks').then(function (data) {
       var bookmarks = data.bookmarks || data || [];
+      var countEl = document.getElementById('adminBookmarkCount');
+      if (countEl) countEl.textContent = bookmarks.length + ' 条';
+      if (search) {
+        var q = search.toLowerCase();
+        bookmarks = bookmarks.filter(function (b) {
+          return (b.title && b.title.toLowerCase().indexOf(q) !== -1) ||
+                 (b.description && b.description.toLowerCase().indexOf(q) !== -1) ||
+                 (b.url && b.url.toLowerCase().indexOf(q) !== -1) ||
+                 (b.nickname && b.nickname.toLowerCase().indexOf(q) !== -1) ||
+                 (b.email && b.email.toLowerCase().indexOf(q) !== -1);
+        });
+      }
       if (!bookmarks.length) {
-        list.innerHTML = '<div class="text-muted text-center py-3">' + escapeHtml('暂无收藏') + '</div>';
+        list.innerHTML = '<div class="text-muted text-center py-3">' + escapeHtml(search ? '未找到匹配的收藏' : '暂无收藏记录') + '</div>';
         return;
       }
-      list.innerHTML = bookmarks.map(function (b) {
+      var html = '';
+      bookmarks.forEach(function (b) {
+        var logo = b.logo || '';
+        if (logo && !/^https?:\/\//i.test(logo)) {
+          logo = (window.logosPath || '/assets/images/logos/') + logo.replace(/^\//, '');
+        }
         var date = b.created_at ? new Date(b.created_at + 'Z').toLocaleDateString('zh-CN') : '';
-        return '<div class="app-card app-card-sm mb-2">' +
-          '<div class="d-flex justify-content-between align-items-center">' +
-          '<div><strong>' + escapeHtml(b.title) + '</strong>' +
-          '<br><small class="text-muted">' + escapeHtml(b.description || '') + (date ? ' · ' + date : '') + '</small></div>' +
-          '<button class="app-btn app-btn-sm app-btn-danger" onclick="adminPageDeleteBookmark(\'' + b.id + '\')">删除</button>' +
-          '</div></div>';
-      }).join('');
+        var userName = b.nickname || b.email || '未知用户';
+        html +=
+          '<div class="bookmark-item d-flex justify-content-between align-items-center p-3 mb-2" style="background:var(--bg-card);border-radius:8px;border:1px solid var(--border-light)">' +
+          '  <div class="d-flex align-items-center" style="min-width:0">' +
+          (logo ? '    <img src="' + logo + '" alt="" class="mr-3" style="width:32px;height:32px;border-radius:4px;object-fit:contain;flex-shrink:0">' : '') +
+          '    <div style="min-width:0">' +
+          '      <a href="' + (b.url || '#') + '" target="_blank" class="font-weight-bold text-truncate d-block" style="color:var(--accent-blue);text-decoration:none">' + escapeHtml(b.title) + '</a>' +
+          (b.url ? '      <div class="text-truncate" style="font-size:12px;color:var(--text-tertiary);max-width:320px">' + escapeHtml(b.url) + '</div>' : '') +
+          '      <div class="d-flex align-items-center mt-1" style="font-size:13px;color:var(--text-secondary)">' +
+          '        <span style="color:var(--accent-blue);font-weight:500">' + escapeHtml(userName) + '</span>' +
+          (date ? '        <span style="margin-left:8px">' + date + '</span>' : '') +
+          '      </div>' +
+          '    </div>' +
+          '  </div>' +
+          '  <button class="app-btn app-btn-sm app-btn-danger flex-shrink-0 ml-2" onclick="adminPageDeleteBookmark(\'' + b.id + '\')"><i class="fas fa-trash-alt"></i> 删除</button>' +
+          '</div>';
+      });
+      list.innerHTML = html;
     }).catch(function (err) {
       list.innerHTML = '<div class="text-danger text-center py-3">' + escapeHtml('加载失败: ' + err.message) + '</div>';
     });
@@ -1590,8 +1698,169 @@
 
   window.adminPageDeleteBookmark = function adminPageDeleteBookmark(id) {
     if (!confirm('确定删除此收藏？')) return;
-    api('/bookmarks/' + id, { method: 'DELETE' }).then(function () {
-      adminPageLoadBookmarks();
+    api('/admin/bookmarks/' + id, { method: 'DELETE' }).then(function () {
+      var searchInput = document.getElementById('adminBookmarkSearch');
+      adminPageLoadBookmarks(searchInput ? searchInput.value : '');
+    }).catch(function (err) {
+      alert(err.message);
+    });
+  };
+
+  // ── User OPC ──
+
+  var _opcVipLimits = { '': 1, 'vip': 3, 'svip': 10, 'admin': 999 };
+
+  function loadMyOpcs() {
+    var list = document.getElementById('myOpcList');
+    if (!list) return;
+    list.innerHTML = '<div class="text-muted text-center py-3">' + escapeHtml('加载中...') + '</div>';
+    api('/opc').then(function (data) {
+      var opcs = data.opcs || [];
+      var vipLevel = (currentUser && currentUser.vip_level) || '';
+      var limit = _opcVipLimits[vipLevel] || 1;
+      var countEl = document.getElementById('opcCount');
+      if (countEl) countEl.textContent = opcs.length + ' / ' + limit;
+      if (!opcs.length) {
+        list.innerHTML = '<div class="text-muted text-center py-3">' + escapeHtml('暂未创建一人公司') + '</div>';
+        return;
+      }
+      var html = '';
+      opcs.forEach(function (o) {
+        var logo = o.logo || '';
+        if (logo && !/^https?:\/\//i.test(logo)) {
+          logo = (window.logosPath || '/assets/images/logos/') + logo.replace(/^\//, '');
+        }
+        html +=
+          '<div class="bookmark-item d-flex justify-content-between align-items-center p-3 mb-2" style="background:var(--bg-card);border-radius:8px;border:1px solid var(--border-light)">' +
+          '  <div class="d-flex align-items-center" style="min-width:0">' +
+          (logo ? '    <img src="' + logo + '" alt="" class="mr-3" style="width:40px;height:40px;border-radius:8px;object-fit:contain;flex-shrink:0">' : '    <div class="mr-3" style="width:40px;height:40px;border-radius:8px;background:var(--bg-hover);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fas fa-building" style="color:var(--text-tertiary)"></i></div>') +
+          '    <div style="min-width:0">' +
+          '      <div class="font-weight-bold text-truncate" style="color:var(--text-primary)">' + escapeHtml(o.name) + '</div>' +
+          (o.description ? '      <div class="text-truncate" style="font-size:13px;color:var(--text-secondary);max-width:400px">' + escapeHtml(o.description) + '</div>' : '') +
+          '      <div style="font-size:12px;color:var(--text-tertiary)">' +
+          (o.address ? '<span><i class="fas fa-map-marker-alt mr-1"></i>' + escapeHtml(o.address) + '</span> ' : '') +
+          (o.website ? '<a href="' + o.website + '" target="_blank" style="color:var(--accent-blue);text-decoration:none"><i class="fas fa-link mr-1"></i>官网</a>' : '') +
+          '      </div>' +
+          '    </div>' +
+          '  </div>' +
+          '  <div class="d-flex flex-shrink-0 ml-2">' +
+          '    <a href="/workspace/?opc_id=' + o.id + '" class="app-btn app-btn-sm app-btn-primary mr-2"><i class="fas fa-sign-in-alt"></i> 工作台</a>' +
+          '    <button class="app-btn app-btn-sm app-btn-secondary mr-2" onclick="editOpc(' + o.id + ')"><i class="fas fa-edit"></i> 编辑</button>' +
+          '    <button class="app-btn app-btn-sm app-btn-danger" onclick="deleteOpc(' + o.id + ')"><i class="fas fa-trash-alt"></i></button>' +
+          '  </div>' +
+          '</div>';
+      });
+      list.innerHTML = html;
+    }).catch(function (err) {
+      list.innerHTML = '<div class="text-danger text-center py-3">' + escapeHtml('加载失败: ' + err.message) + '</div>';
+    });
+  }
+
+  window.showOpcModal = function showOpcModal(opc) {
+    document.getElementById('opcEditId').value = opc ? opc.id : '';
+    document.getElementById('opcName').value = opc ? opc.name : '';
+    document.getElementById('opcDescription').value = opc ? (opc.description || '') : '';
+    document.getElementById('opcLogo').value = opc ? (opc.logo || '') : '';
+    document.getElementById('opcAddress').value = opc ? (opc.address || '') : '';
+    document.getElementById('opcWebsite').value = opc ? (opc.website || '') : '';
+    document.getElementById('opcModalTitle').textContent = opc ? '编辑一人公司' : '创建一人公司';
+    if (typeof jQuery !== 'undefined') {
+      jQuery('#opcModal').modal('show');
+    } else {
+      document.getElementById('opcModal').style.display = 'block';
+    }
+  };
+
+  window.editOpc = function editOpc(id) {
+    api('/opc/' + id).then(function (data) {
+      showOpcModal(data.opc);
+    }).catch(function (err) {
+      alert(err.message);
+    });
+  };
+
+  window.saveOpc = function saveOpc() {
+    var id = document.getElementById('opcEditId').value;
+    var name = document.getElementById('opcName').value.trim();
+    if (!name) { alert('公司名称不能为空'); return; }
+    var body = {
+      name: name,
+      description: document.getElementById('opcDescription').value.trim(),
+      logo: document.getElementById('opcLogo').value.trim(),
+      address: document.getElementById('opcAddress').value.trim(),
+      website: document.getElementById('opcWebsite').value.trim()
+    };
+    var promise = id
+      ? api('/opc/' + id, { method: 'PUT', body: body })
+      : api('/opc', { method: 'POST', body: body });
+    promise.then(function () {
+      if (typeof jQuery !== 'undefined') jQuery('#opcModal').modal('hide');
+      else document.getElementById('opcModal').style.display = 'none';
+      loadMyOpcs();
+    }).catch(function (err) {
+      alert(err.message);
+    });
+  };
+
+  window.deleteOpc = function deleteOpc(id) {
+    if (!confirm('确定删除此一人公司？')) return;
+    api('/opc/' + id, { method: 'DELETE' }).then(function () {
+      loadMyOpcs();
+    }).catch(function (err) {
+      alert(err.message);
+    });
+  };
+
+  // ── Admin OPC ──
+
+  function adminPageLoadOpcs(search) {
+    var list = document.getElementById('adminOpcList');
+    if (!list) return;
+    list.innerHTML = '<div class="text-muted text-center py-3">' + escapeHtml('加载中...') + '</div>';
+    api('/admin/opcs').then(function (data) {
+      var opcs = data.opcs || [];
+      var countEl = document.getElementById('adminOpcCount');
+      if (countEl) countEl.textContent = opcs.length + ' 条';
+      if (search) {
+        var q = search.toLowerCase();
+        opcs = opcs.filter(function (o) {
+          return (o.name && o.name.toLowerCase().indexOf(q) !== -1) ||
+                 (o.description && o.description.toLowerCase().indexOf(q) !== -1) ||
+                 (o.nickname && o.nickname.toLowerCase().indexOf(q) !== -1) ||
+                 (o.email && o.email.toLowerCase().indexOf(q) !== -1);
+        });
+      }
+      if (!opcs.length) {
+        list.innerHTML = '<div class="text-muted text-center py-3">' + escapeHtml(search ? '未找到匹配的记录' : '暂无一人公司') + '</div>';
+        return;
+      }
+      var html = '';
+      opcs.forEach(function (o) {
+        var userName = o.nickname || o.email || '未知用户';
+        html +=
+          '<div class="bookmark-item d-flex justify-content-between align-items-center p-3 mb-2" style="background:var(--bg-card);border-radius:8px;border:1px solid var(--border-light)">' +
+          '  <div style="min-width:0">' +
+          '    <div class="font-weight-bold" style="color:var(--text-primary)">' + escapeHtml(o.name) + '</div>' +
+          '    <div style="font-size:13px;color:var(--text-secondary)">' +
+          '      <span style="color:var(--accent-blue)">' + escapeHtml(userName) + '</span>' +
+          (o.address ? ' · <i class="fas fa-map-marker-alt mr-1"></i>' + escapeHtml(o.address) : '') +
+          (o.website ? ' · <a href="' + o.website + '" target="_blank" style="color:var(--accent-blue)"><i class="fas fa-link mr-1"></i>官网</a>' : '') +
+          '    </div>' +
+          '  </div>' +
+          '  <button class="app-btn app-btn-sm app-btn-danger flex-shrink-0 ml-2" onclick="adminPageDeleteOpc(' + o.id + ')"><i class="fas fa-trash-alt"></i> 删除</button>' +
+          '</div>';
+      });
+      list.innerHTML = html;
+    }).catch(function (err) {
+      list.innerHTML = '<div class="text-danger text-center py-3">' + escapeHtml('加载失败: ' + err.message) + '</div>';
+    });
+  }
+
+  window.adminPageDeleteOpc = function adminPageDeleteOpc(id) {
+    if (!confirm('确定删除此一人公司？')) return;
+    api('/admin/opcs/' + id, { method: 'DELETE' }).then(function () {
+      var searchInput = document.getElementById('adminOpcSearch');
+      adminPageLoadOpcs(searchInput ? searchInput.value : '');
     }).catch(function (err) {
       alert(err.message);
     });

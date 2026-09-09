@@ -100,13 +100,21 @@ export async function listAllSubmissions(c: Context): Promise<Response> {
 export async function updateSubmissionStatus(c: Context): Promise<Response> {
   try {
     const id = parseInt(c.req.param('id')!, 10);
-    const body = await c.req.json() as { status: string };
+    const body = await c.req.json() as { status: string; review_note?: string };
     if (!['pending', 'approved', 'rejected'].includes(body.status)) {
       return c.json({ error: '无效的状态' }, 400);
     }
+    const userId = c.get('userId') as number;
+    let reviewedAt = '';
+    let reviewedBy = '';
+    if (body.status !== 'pending') {
+      reviewedAt = new Date().toISOString();
+      const admin = await c.env.DB.prepare('SELECT nickname, email FROM users WHERE id = ?').bind(userId).first() as { nickname: string; email: string } | null;
+      reviewedBy = admin?.nickname || admin?.email || '';
+    }
     const result = await c.env.DB.prepare(
-      'UPDATE submissions SET status = ? WHERE id = ?'
-    ).bind(body.status, id).run();
+      'UPDATE submissions SET status = ?, review_note = ?, reviewed_at = ?, reviewed_by = ? WHERE id = ?'
+    ).bind(body.status, body.review_note || '', reviewedAt, reviewedBy, id).run();
     if (result.meta.changes === 0) {
       return c.json({ error: '申请不存在' }, 404);
     }
@@ -142,5 +150,83 @@ export async function deleteComment(c: Context): Promise<Response> {
   } catch (err) {
     console.error('admin delete comment error:', err);
     return c.json({ error: '删除评论失败' }, 500);
+  }
+}
+
+export async function listAllBookmarks(c: Context): Promise<Response> {
+  try {
+    const bookmarks = await c.env.DB.prepare(
+      `SELECT b.id, b.user_id, b.site_id, b.title, b.url, b.description, b.logo, b.is_public, b.created_at,
+              u.nickname, u.email
+       FROM bookmarks b
+       LEFT JOIN users u ON b.user_id = u.id
+       ORDER BY b.created_at DESC`
+    ).all();
+    return c.json({ bookmarks: bookmarks.results });
+  } catch (err) {
+    console.error('admin list bookmarks error:', err);
+    return c.json({ error: '获取收藏列表失败' }, 500);
+  }
+}
+
+export async function adminDeleteBookmark(c: Context): Promise<Response> {
+  try {
+    const id = parseInt(c.req.param('id')!, 10);
+    if (isNaN(id)) return c.json({ error: '无效的收藏ID' }, 400);
+    const info = await c.env.DB.prepare('DELETE FROM bookmarks WHERE id = ?').bind(id).run();
+    if (info.meta.changes === 0) return c.json({ error: '收藏不存在' }, 404);
+    return c.json({ message: '收藏已删除' });
+  } catch (err) {
+    console.error('admin delete bookmark error:', err);
+    return c.json({ error: '删除收藏失败' }, 500);
+  }
+}
+
+export async function listAllOpcs(c: Context): Promise<Response> {
+  try {
+    const opcs = await c.env.DB.prepare(
+      `SELECT o.id, o.user_id, o.name, o.description, o.logo, o.address, o.website, o.is_active, o.created_at, o.updated_at,
+              u.nickname, u.email
+       FROM opcs o
+       LEFT JOIN users u ON o.user_id = u.id
+       ORDER BY o.created_at DESC`
+    ).all();
+    return c.json({ opcs: opcs.results });
+  } catch (err) {
+    console.error('admin list opcs error:', err);
+    return c.json({ error: '获取一人公司列表失败' }, 500);
+  }
+}
+
+export async function adminDeleteOpc(c: Context): Promise<Response> {
+  try {
+    const id = parseInt(c.req.param('id')!, 10);
+    if (isNaN(id)) return c.json({ error: '无效的ID' }, 400);
+    const info = await c.env.DB.prepare('DELETE FROM opcs WHERE id = ?').bind(id).run();
+    if (info.meta.changes === 0) return c.json({ error: '一人公司不存在' }, 404);
+    return c.json({ message: '已删除' });
+  } catch (err) {
+    console.error('admin delete opc error:', err);
+    return c.json({ error: '删除一人公司失败' }, 500);
+  }
+}
+
+export async function setUserVipLevel(c: Context): Promise<Response> {
+  try {
+    const id = parseInt(c.req.param('id')!, 10);
+    const body = await c.req.json() as { vip_level: string };
+    if (!['', 'vip', 'svip'].includes(body.vip_level)) {
+      return c.json({ error: '无效的会员等级' }, 400);
+    }
+    const result = await c.env.DB.prepare(
+      'UPDATE users SET vip_level = ? WHERE id = ?'
+    ).bind(body.vip_level, id).run();
+    if (result.meta.changes === 0) {
+      return c.json({ error: '用户不存在' }, 404);
+    }
+    return c.json({ message: '会员等级已更新' });
+  } catch (err) {
+    console.error('set user vip level error:', err);
+    return c.json({ error: '更新会员等级失败' }, 500);
   }
 }
