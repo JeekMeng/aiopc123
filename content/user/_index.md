@@ -15,7 +15,11 @@ aliases: ["/profile"]
             </div>
         </div>
     </div>
-    <div class="admin-stats" style="grid-template-columns:repeat(2,1fr);">
+    <div class="admin-stats" style="grid-template-columns:repeat(3,1fr);">
+        <a href="/user/opc/" class="stat-card" style="text-decoration:none;cursor:pointer;">
+            <div class="stat-number"><i class="fas fa-building" style="color:var(--accent-purple);"></i></div>
+            <div class="stat-label">我的一人公司</div>
+        </a>
         <a href="/user/bookmarks/" class="stat-card" style="text-decoration:none;cursor:pointer;">
             <div class="stat-number"><i class="fas fa-bookmark" style="color:var(--accent-blue);"></i></div>
             <div class="stat-label">我的收藏</div>

@@ -63,6 +63,11 @@
                             <button class="action-btn bookmark-btn" data-site-id="{{ $siteId }}" data-title="{{ trim (index (split .Title "|") 0) " " }}" data-url="{{ $officialUrl }}" data-description="{{ .Description }}" data-logo="{{ $logo }}">
                                 <i class="far fa-bookmark"></i> 收藏
                             </button>
+                            {{ if $officialUrl }}
+                            <button class="action-btn add-to-company-btn" data-site-id="{{ $siteId }}" data-name="{{ trim (index (split .Title "-") 0) " " }}" data-url="{{ $officialUrl }}" data-logo="{{ $logo }}" data-desc="{{ .Description }}">
+                                <i class="fas fa-plus-circle"></i> 添加到我的公司
+                            </button>
+                            {{ end }}
                         </div>
                         {{ end }}
                     </div>
@@ -95,4 +100,123 @@
 
 {{ partial "content_footer.html" . }}
 {{ partial "modal_search.html" . }}
+
+<!-- 添加到我的公司弹窗 -->
+<div class="ws-modal-overlay" id="addToCompanyModal" style="display:none;">
+    <div class="ws-modal-card" style="max-width:420px;">
+        <div class="ws-modal-header">
+            <div class="ws-modal-title"><i class="fas fa-building" style="color:var(--accent-blue);"></i> 添加到我的公司</div>
+            <button class="ws-modal-close" onclick="document.getElementById('addToCompanyModal').style.display='none'"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="ws-modal-body" id="addToCompanyBody" style="padding:16px;">
+            <div class="ws-todo-empty">加载中...</div>
+        </div>
+    </div>
+</div>
+<script>
+(function(){
+    var API = (location.port==='1313'||location.port==='1317') ? 'http://localhost:8787/api' : '/api';
+    function getHeaders() {
+        var u = null; try { u = JSON.parse(localStorage.getItem('auth_user')); } catch(e) {}
+        return u && u.id ? { 'X-Auth-User-Id': String(u.id) } : {};
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.add-to-company-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var user = null; try { user = JSON.parse(localStorage.getItem('auth_user')); } catch(e) {}
+                if (!user) { window.location.href = '/user/login/'; return; }
+                var siteId = btn.getAttribute('data-site-id');
+                var name = btn.getAttribute('data-name');
+                var url = btn.getAttribute('data-url');
+                var logo = btn.getAttribute('data-logo');
+                var desc = btn.getAttribute('data-desc');
+                openAddToCompanyModal(siteId, name, url, logo, desc);
+            });
+        });
+    });
+
+    window.openAddToCompanyModal = function(siteId, name, url, logo, desc) {
+        var user = null; try { user = JSON.parse(localStorage.getItem('auth_user')); } catch(e) {}
+        if (!user) { window.location.href = '/user/login/'; return; }
+        var modal = document.getElementById('addToCompanyModal');
+        var body = document.getElementById('addToCompanyBody');
+        body.innerHTML = '<div class="ws-todo-empty">加载公司列表...</div>';
+        modal.style.display = 'flex';
+        var hdrs = getHeaders();
+        fetch(API + '/opc', { headers: hdrs, credentials: 'include' }).then(function(r) { return r.json(); }).then(function(d) {
+            var opcs = d.opcs || d.items || [];
+            if (!opcs.length) {
+                body.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-secondary);">暂无公司，请先 <a href="/workspace/?tab=roadmap" style="color:var(--accent-blue);">创建公司</a></div>';
+                return;
+            }
+            var h = '<div style="display:flex;flex-direction:column;gap:10px;">';
+            opcs.forEach(function(opc) {
+                h += '<div class="tool-picker-item" style="cursor:pointer;" onclick="showDeptPicker(' + opc.id + ',' + JSON.stringify(name).replace(/"/g, '&quot;') + ',' + JSON.stringify(url).replace(/"/g, '&quot;') + ',' + JSON.stringify(logo || '').replace(/"/g, '&quot;') + ')">'
+                   + '<div style="display:flex;align-items:center;gap:10px;flex:1;min-width:0;">'
+                   + '<div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#007AFF,#5856D6);display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:600;">' + (opc.name||'').charAt(0) + '</div>'
+                   + '<div style="min-width:0;"><div style="font-weight:600;font-size:14px;color:var(--text-primary);">' + (opc.name||'') + '</div>'
+                   + '<div style="font-size:12px;color:var(--text-secondary);">' + (opc.industry||'') + '</div></div></div>'
+                   + '<i class="fas fa-chevron-right" style="color:var(--text-tertiary);font-size:12px;"></i></div>';
+            });
+            h += '</div>';
+            body.innerHTML = h;
+        }).catch(function(e) {
+            body.innerHTML = '<div class="ws-todo-empty">加载失败: ' + e.message + '</div>';
+        });
+    };
+
+    window.showDeptPicker = function(opcId, name, url, logo) {
+        var body = document.getElementById('addToCompanyBody');
+        body.innerHTML = '<div class="ws-todo-empty">加载部门列表...</div>';
+        var hdrs = getHeaders();
+        fetch(API + '/opc/' + opcId + '/departments', { headers: hdrs, credentials: 'include' }).then(function(r) { return r.json(); }).then(function(d) {
+            var depts = d.items || [];
+            if (!depts.length) {
+                body.innerHTML = '<div class="ws-todo-empty">暂无部门</div><div style="text-align:center;margin-top:10px;"><button class="ws-modal-tab active" onclick="window.location.href=\'/workspace/?opc_id=' + opcId + '\'">去创建工作台</button></div>';
+                return;
+            }
+            var seen = {};
+            depts.forEach(function(item) { seen[item.name] = item; });
+            depts = [];
+            for (var k in seen) { if (seen.hasOwnProperty(k)) depts.push(seen[k]); }
+            var h = '<div style="margin-bottom:10px;"><button onclick="openAddToCompanyModal()" style="background:none;border:none;color:var(--accent-blue);cursor:pointer;font-size:13px;"><i class="fas fa-arrow-left"></i> 返回选择公司</button></div>'
+                  + '<div style="font-size:13px;color:var(--text-secondary);margin-bottom:10px;">将 <b>' + name + '</b> 添加到：</div>'
+                  + '<div style="display:flex;flex-direction:column;gap:8px;">';
+            depts.forEach(function(dept) {
+                h += '<div class="tool-picker-item" style="cursor:pointer;" onclick="confirmAddToCompany(' + opcId + ',' + dept.id + ',' + JSON.stringify(name).replace(/"/g, '&quot;') + ',' + JSON.stringify(url).replace(/"/g, '&quot;') + ',' + JSON.stringify(logo || '').replace(/"/g, '&quot;') + ')">'
+                   + '<div style="display:flex;align-items:center;gap:10px;flex:1;min-width:0;">'
+                   + '<div style="font-weight:600;font-size:14px;color:var(--text-primary);">' + dept.name + '</div>'
+                   + '</div>'
+                   + '<i class="fas fa-plus-circle" style="color:var(--accent-blue);"></i></div>';
+            });
+            h += '</div>';
+            body.innerHTML = h;
+        }).catch(function(e) {
+            body.innerHTML = '<div class="ws-todo-empty">加载失败: ' + e.message + '</div>';
+        });
+    };
+
+    window.confirmAddToCompany = function(opcId, deptId, name, url, logo) {
+        var body = document.getElementById('addToCompanyBody');
+        var TOOL_COLORS_FLAT = ['#FF6B6B','#007AFF','#34C759','#FF9500','#AF52DE','#5856D6','#FF2D55','#00C4CC'];
+        var color = TOOL_COLORS_FLAT[Math.floor(Math.random() * TOOL_COLORS_FLAT.length)];
+        var tool = { name: name, url: url, icon: 'fas fa-link', bg: color, logo: logo };
+        var hdrs = getHeaders();
+        hdrs['Content-Type'] = 'application/json';
+        body.innerHTML = '<div class="ws-todo-empty">添加中...</div>';
+        fetch(API + '/opc/' + opcId + '/departments/' + deptId + '/tools', {
+            method: 'POST', headers: hdrs, credentials: 'include', body: JSON.stringify(tool)
+        }).then(function(r) { return r.json(); }).then(function(d) {
+            if (d.error) { alert(d.error); return; }
+            body.innerHTML = '<div style="text-align:center;padding:24px;"><div style="font-size:36px;margin-bottom:12px;color:var(--accent-green);"><i class="fas fa-check-circle"></i></div>'
+                + '<div style="font-weight:600;font-size:16px;margin-bottom:8px;">添加成功</div>'
+                + '<div style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;">已将 ' + name + ' 添加到部门</div>'
+                + '<a href="/workspace/?opc_id=' + opcId + '" style="display:inline-block;padding:8px 20px;background:var(--accent-blue);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;">查看工作台</a></div>';
+        }).catch(function(e) {
+            body.innerHTML = '<div class="ws-todo-empty">添加失败: ' + e.message + '</div>';
+        });
+    };
+})();
+</script>
 {{ partial "footer.html" . }}

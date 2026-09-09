@@ -69,6 +69,12 @@
             <a href="/admin/bookmarks/" class="sidebar-item{{ if eq .RelPermalink "/admin/bookmarks/" }} active{{ end }}">
                 <i class="fas fa-bookmark"></i><span>收藏管理</span>
             </a>
+            <a href="/admin/opcs/" class="sidebar-item{{ if eq .RelPermalink "/admin/opcs/" }} active{{ end }}">
+                <i class="fas fa-building"></i><span>OPC管理</span>
+            </a>
+            <a href="/admin/templates/" class="sidebar-item{{ if eq .RelPermalink "/admin/templates/" }} active{{ end }}">
+                <i class="fas fa-copy"></i><span>模板管理</span>
+            </a>
             <a href="/admin/comments/" class="sidebar-item{{ if eq .RelPermalink "/admin/comments/" }} active{{ end }}">
                 <i class="fas fa-comment-dots"></i><span>评论管理</span>
             </a>
@@ -92,6 +98,19 @@
             <a href="/user/comments/" class="sidebar-item{{ if eq .RelPermalink "/user/comments/" }} active{{ end }}">
                 <i class="fas fa-comment-dots"></i><span>我的评论</span>
             </a>
+            <div class="sidebar-group{{ if hasPrefix .RelPermalink "/user/opc" }} open{{ end }}">
+                <a href="/user/opc/" class="sidebar-item sidebar-group-toggle{{ if eq .RelPermalink "/user/opc/" }} active{{ end }}">
+                    <i class="fas fa-building"></i><span>我的OPC</span><i class="fas fa-chevron-right sidebar-arrow"></i>
+                </a>
+                <div class="sidebar-submenu">
+                    <a href="/user/opc/info/" class="sidebar-subitem{{ if hasPrefix .RelPermalink "/user/opc/info" }} active{{ end }}">OPC信息</a>
+                    <a href="/user/opc/products/" class="sidebar-subitem{{ if hasPrefix .RelPermalink "/user/opc/products" }} active{{ end }}">OPC产品</a>
+                    <a href="/user/opc/departments/" class="sidebar-subitem{{ if hasPrefix .RelPermalink "/user/opc/departments" }} active{{ end }}">OPC部门</a>
+                    <a href="/user/opc/todos/" class="sidebar-subitem{{ if hasPrefix .RelPermalink "/user/opc/todos" }} active{{ end }}">待办事项</a>
+                    <a href="/user/opc/notices/" class="sidebar-subitem{{ if hasPrefix .RelPermalink "/user/opc/notices" }} active{{ end }}">通知消息</a>
+                    <a href="/user/opc/tools/" class="sidebar-subitem{{ if hasPrefix .RelPermalink "/user/opc/tools" }} active{{ end }}">工具中心</a>
+                </div>
+            </div>
             {{ end }}
         </aside>
 
@@ -107,6 +126,18 @@
             document.getElementById('appSidebar').classList.toggle('open');
             document.getElementById('sidebarOverlay').classList.toggle('show');
         }
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.sidebar-group-toggle').forEach(function(el) {
+                el.addEventListener('click', function(e) {
+                    var group = this.parentElement;
+                    if (group.classList.contains('open')) {
+                        group.classList.remove('open');
+                    } else {
+                        group.classList.add('open');
+                    }
+                });
+            });
+        });
     </script>
     {{ partial "footer.html" . }}
 </body>

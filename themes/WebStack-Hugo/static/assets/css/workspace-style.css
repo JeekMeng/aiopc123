@@ -3,9 +3,19 @@
     --bg-secondary: rgba(255, 255, 255, 0.65);
     --bg-card: rgba(255, 255, 255, 0.75);
     --bg-dock: rgba(255, 255, 255, 0.55);
+    --bg-panel: rgba(255, 255, 255, 0.92);
+    --bg-dock-panel: rgba(255, 255, 255, 0.88);
+    --bg-topbar: rgba(255, 255, 255, 0.85);
+    --bg-body-overlay: transparent;
+    --bg-hover: rgba(0, 0, 0, 0.04);
+    --border-panel: rgba(0, 0, 0, 0.06);
     --text-primary: #1d1d1f;
     --text-secondary: #86868b;
     --text-tertiary: #a1a1a6;
+    --text-dock-title: #86868b;
+    --text-dock-icon: #636366;
+    --text-tool-name: #1d1d1f;
+    --text-tool-icon: #007AFF;
     --accent-blue: #007AFF;
     --accent-purple: #AF52DE;
     --accent-green: #34C759;
@@ -22,9 +32,19 @@
     --bg-secondary: rgba(30, 30, 30, 0.65);
     --bg-card: rgba(40, 40, 40, 0.75);
     --bg-dock: rgba(40, 40, 40, 0.55);
+    --bg-panel: rgba(0, 0, 0, 0.3);
+    --bg-dock-panel: rgba(0, 0, 0, 0.4);
+    --bg-topbar: rgba(0, 0, 0, 0.5);
+    --bg-body-overlay: rgba(0, 0, 0, 0.15);
+    --bg-hover: rgba(255, 255, 255, 0.06);
+    --border-panel: rgba(255, 255, 255, 0.06);
     --text-primary: #f5f5f7;
     --text-secondary: #98989d;
     --text-tertiary: #6e6e73;
+    --text-dock-title: #ffffff;
+    --text-dock-icon: #ffffff;
+    --text-tool-name: rgba(255, 255, 255, 0.9);
+    --text-tool-icon: #ffffff;
     --border-color: rgba(255, 255, 255, 0.1);
     --shadow-light: 0 8px 32px rgba(0, 0, 0, 0.4);
     --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.3);
@@ -804,24 +824,7 @@ body.workspace-body {
 }
 
 /* Theme Toggle */
-.theme-toggle {
-    position: fixed;
-    bottom: 80px;
-    right: 20px;
-    z-index: 9999;
-}
-
-.theme-btn {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    border: none;
-    background: var(--bg-primary);
-    color: var(--text-primary);
-    cursor: pointer;
-    box-shadow: var(--shadow-card);
-    font-size: 18px;
-}
+.theme-btn { transition: all 0.3s ease; }
 
 /* Dock */
 .dock {
@@ -991,7 +994,7 @@ body.workspace-body {
 
 /* Light theme background override for workspace */
 [data-theme="light"] .workspace-bg {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    background: #ffffff;
 }
 
 /* ── Roadmap: Entry Card ── */

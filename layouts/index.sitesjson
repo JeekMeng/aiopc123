@@ -1,14 +1,33 @@
 [
 {{- $sites := where .Site.RegularPages "Section" "site" }}
-{{- range $i, $p := $sites }}
-{{- if $i }},{{ end }}
-  {
-    "title": {{ $p.Title | jsonify }},
-    "description": {{ $p.Description | jsonify }},
-    "category": {{ $p.Params.category | jsonify }},
-    "tags": {{ $p.Params.tags | jsonify }},
-    "score": {{ $p.Params.score | default 0 }},
-    "url": {{ $p.Permalink | jsonify }}
-  }
+{{- $first := true }}
+{{- range $sites }}
+{{- $id := .File.ContentBaseName }}
+{{- $name := index (split .Title "-") 0 }}
+{{- $name = trim $name " " }}
+{{- $url := "" }}{{- with .Params.official_url }}{{ $url = . }}{{ end }}
+{{- $sitePath := printf "/site/%s/" $id }}
+{{- $logo := "" }}
+{{- range $.Site.Data.webstack }}
+  {{- if .links }}
+    {{- range .links }}
+      {{- if eq .url $sitePath }}{{ $logo = .logo }}{{ end }}
+    {{- end }}
+  {{- else if .list }}
+    {{- range .list }}
+      {{- range .links }}
+        {{- if eq .url $sitePath }}{{ $logo = .logo }}{{ end }}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+{{- $company := "" }}{{- with .Params.company }}{{ $company = . }}{{ end }}
+{{- $cat := .Params.category | default slice }}
+{{- $tags := .Params.tags | default slice }}
+{{- $score := .Params.score | default 0 }}
+{{- $desc := .Description | default "" }}
+{{- if not $first }},{{ end -}}
+{{- $first = false }}
+{"id":{{ $id | jsonify }},"name":{{ $name | jsonify }},"url":{{ $url | jsonify }},"logo":{{ $logo | jsonify }},"company":{{ $company | jsonify }},"category":{{ $cat | jsonify }},"tags":{{ $tags | jsonify }},"score":{{ $score }},"description":{{ $desc | jsonify }}}
 {{- end }}
 ]

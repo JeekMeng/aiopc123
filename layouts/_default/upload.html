@@ -16,6 +16,7 @@
                             <div class="submit-hero">
                                 <h1><i class="fas fa-rocket mr-2"></i>免费入驻</h1>
                                 <p>免费展示您的一人公司，让更多的客户发现您</p>
+                                <a href="/submission-status/" style="display:inline-block;margin-top:16px;padding:10px 24px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);border-radius:8px;color:#fff;font-size:14px;text-decoration:none;backdrop-filter:blur(4px);transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,.3)'" onmouseout="this.style.background='rgba(255,255,255,.2)'"><i class="fas fa-search mr-1"></i>查询收录结果</a>
                             </div>
 
                             <form id="submitForm" class="submit-form">
@@ -96,6 +97,33 @@
                                 </div>
 
                                 <div class="form-row">
+                                    <label>电子邮箱 <small class="text-muted">选填</small></label>
+                                    <input type="email" name="email" class="form-control" placeholder="用于接收审核结果">
+                                </div>
+
+                                <div class="form-tip" style="background:#f0f7ff;border-radius:8px;padding:10px 14px;margin:-4px 0 16px;font-size:12px;color:#666;">
+                                    <i class="fas fa-info-circle" style="color:#007aff;margin-right:4px;"></i>以上联系方式仅用于接收审核结果反馈，不会公开展示
+                                </div>
+
+                                <div class="form-row">
+                                    <label>反馈方式 <span class="text-danger">*</span></label>
+                                    <div class="feedback-options">
+                                        <label class="feedback-option">
+                                            <input type="radio" name="feedback_method" value="page" checked>
+                                            <span class="feedback-label"><i class="fas fa-globe"></i> 页面查询</span>
+                                        </label>
+                                        <label class="feedback-option">
+                                            <input type="radio" name="feedback_method" value="email">
+                                            <span class="feedback-label"><i class="fas fa-envelope"></i> 邮箱通知</span>
+                                        </label>
+                                        <label class="feedback-option">
+                                            <input type="radio" name="feedback_method" value="sms">
+                                            <span class="feedback-label"><i class="fas fa-sms"></i> 短信通知</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
                                     <label>补充说明</label>
                                     <textarea name="notes" class="form-control" rows="2" placeholder="其他需要说明的内容..."></textarea>
                                 </div>
@@ -112,6 +140,7 @@
                                     <i class="fas fa-check-circle text-success" style="font-size:64px"></i>
                                     <h3 class="mt-3">入驻申请已提交！</h3>
                                     <p class="text-muted">我们将在1-3个工作日内完成审核，审核通过后你的信息将上线展示。</p>
+                                    <p class="text-muted" style="margin-top:8px;">你可以通过 <a href="/submission-status/" style="color:#667eea;">查询审核结果</a> 页面查看审核进度。</p>
                                     <a href="/" class="btn btn-outline-primary mt-3"><i class="fas fa-home mr-1"></i>返回首页</a>
                                 </div>
                             </div>

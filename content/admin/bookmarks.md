@@ -1,15 +1,19 @@
 ---
-title: "我的收藏"
+title: "收藏管理"
 layout: app-page
-description: "查看我的收藏"
+description: "管理所有用户的收藏记录"
 ---
 
 <div id="adminPage" data-section="bookmarks">
     <div class="app-card">
         <div class="app-card-header">
-            <h2 class="app-card-title">我的收藏</h2>
+            <h2 class="app-card-title">收藏管理</h2>
+            <span id="adminBookmarkCount" style="font-size:13px;color:var(--text-secondary);">0 条</span>
         </div>
-        <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;">管理员个人的收藏管理（后端暂无全站收藏统计接口）</p>
+        <div class="admin-toolbar">
+            <input type="text" class="app-input" id="adminBookmarkSearch" placeholder="搜索标题、描述或用户...">
+            <button class="app-btn app-btn-secondary app-btn-sm" onclick="adminPageLoadBookmarks(document.getElementById('adminBookmarkSearch').value)"><i class="fas fa-search"></i> 搜索</button>
+        </div>
         <div class="admin-bookmarks-list" id="adminBookmarksList"></div>
     </div>
 </div>

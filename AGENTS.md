@@ -175,6 +175,34 @@ download: "https://..."
 | 阴影 | `box-shadow: 0 1px 6px rgba(0,0,0,.04)`（微阴影） |
 | 间距 | `padding: 24px`（三栏主体）；`padding: 28px 32px`（详情卡片） |
 
+### macOS 设计系统（`content.css`）
+- **CSS 变量**：`--bg-primary`, `--bg-secondary`, `--bg-card`, `--text-primary`, `--text-secondary`, `--text-tertiary`, `--accent-blue (#007AFF)`, `--accent-green (#34C759)`, `--accent-red (#FF3B30)`, `--border-light`, `--shadow-sm`, `--shadow-md`, `--radius-sm (8px)`, `--radius-md (12px)`, `--radius-lg (16px)`, `--font-display ("SF Pro Display")`, `--font-body ("SF Pro Text")`
+- **暗黑模式**：`[data-theme="dark"]` 选择器覆盖所有 CSS 变量
+- **app-page 布局**：`.app-page` 主体使用 `display:flex` 左右布局，`.app-topbar` 固定顶部 60px 毛玻璃，`.app-sidebar` 固定 220px 宽，`.app-content` flex:1 自适应
+- **组件**：
+  - `.app-card` — 白色卡片，圆角 12px，阴影 0 1px 6px，padding 24px
+  - `.app-card-sm` — 紧凑卡片，padding 16px
+  - `.app-card-header` — 卡片标题栏，flex 左右布局
+  - `.app-btn` — 基础按钮，圆角 8px，padding 10px 20px
+    - `.app-btn-primary` — 蓝色主按钮
+    - `.app-btn-secondary` — 灰色次按钮
+    - `.app-btn-danger` — 红色危险按钮
+    - `.app-btn-ghost` — 透明幽灵按钮
+    - `.app-btn-sm` — 小型按钮（padding 6px 14px，字号 12px）
+  - `.app-input` — 输入框，圆角 8px，边框 1px solid var(--border-light)，padding 10px 14px
+  - `.app-input-sm` — 小型输入框
+  - `.app-select` — 下拉选择框
+  - `.app-table` — 完整表格样式（thead 灰底，tbody 行悬浮高亮）
+  - `.app-badge` — 标签，`.app-badge-success` 绿色标签，`.app-badge-warning` 橙色，`.app-badge-danger` 红色，`.app-badge-secondary` 灰色
+  - `.app-form-group` — 表单字段组（margin-bottom 16px）
+  - `.app-form-label` — 表单标签（font-weight 600，margin-bottom 6px）
+  - `.profile-card` — 用户头像 + 信息卡片
+  - `.auth-page` — 登录/注册居中布局（max-width 400px）
+  - `.admin-stats` / `.stat-card` — 仪表盘统计卡片网格
+  - `.admin-toolbar` — 管理工具栏（flex 排列，gap 8px）
+  - `.app-table-wrap` — 表格外层容器（overflow-x auto）
+- **移动端**：768px 以下 `.app-sidebar` 移出文档流、滑入覆盖，`.app-content` 全宽
+
 ---
 
 ## 开发命令
