@@ -191,7 +191,12 @@ function saveProfile(){
   };
   fetch(_apiBase+'/auth/profile',{method:'PATCH',headers:{'X-Auth-User-Id':String(uid()),'Content-Type':'application/json'},credentials:'include',body:JSON.stringify(body)})
   .then(function(r){return r.json();}).then(function(d){
-    if(d.user){var ok=document.getElementById('pfSaveOk');ok.style.display='block';setTimeout(function(){ok.style.display='none';},2000);}
+    if(d.user){
+      localStorage.setItem('auth_user', JSON.stringify(d.user));
+      var nickEl=document.getElementById('profile-nickname');
+      if(nickEl) nickEl.textContent=d.user.nickname||d.user.email||'用户';
+      var ok=document.getElementById('pfSaveOk');ok.style.display='block';setTimeout(function(){ok.style.display='none';},2000);
+    }
   }).catch(function(e){alert(e.message);});
 }
 

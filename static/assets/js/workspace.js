@@ -141,7 +141,13 @@
                 fetch(API_BASE + '/auth/me', { credentials: 'include' })
                     .then(function(r) { return r.json().then(function(d) { if (!r.ok) { throw new Error(d.error || 'expired'); } return d; }); })
                     .then(function(data) {
-                        var user = data.user || data;
+                        var user = data.user || null;
+                        if (!user) {
+                            localStorage.removeItem('auth_user');
+                            currentUser = null;
+                            document.getElementById('workspaceGuard').style.display = 'flex';
+                            return;
+                        }
                         user = loadProfileOverrides(user);
                         localStorage.setItem('auth_user', JSON.stringify(user));
                         currentUser = user;
