@@ -8,3 +8,4 @@ logs/
 worker-api/node_modules/
 worker-api/.wrangler/
 static/aiopc123-a16e999060f7.json
+tools/

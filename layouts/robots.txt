@@ -24,6 +24,8 @@ Disallow: /categories/
 
 # ── 防御性规则 ──
 Disallow: /private/
+Disallow: /check_bing.sh
+Disallow: /check_google.sh
 
 # 站点地图
 Sitemap: {{ .Site.BaseURL | absURL }}sitemap.xml
