@@ -4,6 +4,12 @@
     {{ if and (.Lastmod)
        (not (in .Permalink "/tags/"))
        (not (in .Permalink "/categories/"))
+       (not (in .Permalink "/admin/"))
+       (not (in .Permalink "/user/"))
+       (not (in .Permalink "/profile/"))
+       (not (in .Permalink "/workspace/"))
+       (not (in .Permalink "/ai-workspace/"))
+       (not (in .Permalink "/submission-status/"))
     }}
       <url>
         <loc>{{ .Permalink }}</loc>

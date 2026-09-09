@@ -1,11 +1,29 @@
 User-agent: *
 Allow: /
 
-# 禁止爬虫访问的目录
+# ── 管理后台（需管理员权限）──
 Disallow: /admin/
-Disallow: /private/
+
+# ── 用户中心（需登录）──
+Disallow: /user/
+Disallow: /profile/
+
+# ── 工作台（需登录）──
+Disallow: /workspace/
+Disallow: /ai-workspace/
+
+# ── 提交状态查询（表单页，无索引价值）──
+Disallow: /submission-status/
+
+# ── 静态数据文件 ──
+Disallow: /sites.json
+
+# ── Hugo 默认 taxonomy 页面（已禁用生成，防御性规则）──
 Disallow: /tags/
 Disallow: /categories/
+
+# ── 防御性规则 ──
+Disallow: /private/
 
 # 站点地图
 Sitemap: {{ .Site.BaseURL | absURL }}sitemap.xml
