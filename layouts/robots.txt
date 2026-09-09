@@ -27,3 +27,5 @@ Disallow: /private/
 
 # 站点地图
 Sitemap: {{ .Site.BaseURL | absURL }}sitemap.xml
+
+# LLMs: see /llms.txt
