@@ -1,5 +1,5 @@
 import { Context } from 'hono';
-import { getCookie } from 'hono/cookie';
+import { getCookie, setCookie, deleteCookie } from 'hono/cookie';
 
 const SESSION_PREFIX = 'session:';
 
@@ -39,17 +39,17 @@ export async function getUserIdFromSession(
 const SESSION_COOKIE = 'session_id';
 
 export function setSessionCookie(c: Context, sessionId: string): void {
-  c.header(
-    'Set-Cookie',
-    `${SESSION_COOKIE}=${sessionId}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${86400 * 7}`
-  );
+  setCookie(c, SESSION_COOKIE, sessionId, {
+    path: '/',
+    httpOnly: true,
+    secure: true,
+    sameSite: 'Lax',
+    maxAge: 86400 * 7,
+  });
 }
 
 export function clearSessionCookie(c: Context): void {
-  c.header(
-    'Set-Cookie',
-    `${SESSION_COOKIE}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0`
-  );
+  deleteCookie(c, SESSION_COOKIE, { path: '/' });
 }
 
 export function getSessionCookie(c: Context): string | undefined {

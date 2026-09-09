@@ -57,9 +57,11 @@
 
 
   function logoutUser() {
+    currentUser = null;
+    clearAuth();
     api('/auth/logout', { method: 'POST' }).then(function () {
-      currentUser = null;
-      clearAuth();
+      window.location.href = '/user/login/';
+    }).catch(function () {
       window.location.href = '/user/login/';
     });
   }

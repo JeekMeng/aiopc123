@@ -117,7 +117,7 @@ export async function login(c: Context): Promise<Response> {
 
     return c.json({
       user: { id: user.id, email: user.email, nickname: user.nickname, avatar: user.avatar, role: user.role, vip_level: user.vip_level || '' },
-    });
+    }, 200, { 'Cache-Control': 'no-store, no-cache, must-revalidate' });
   } catch (err) {
     console.error('login error:', err);
     return c.json({ error: '登录失败，请稍后重试' }, 500);
@@ -181,7 +181,7 @@ export async function getMe(c: Context): Promise<Response> {
       : null;
 
   if (!userId) {
-    return c.json({ user: null });
+    return c.json({ user: null }, 200, { 'Cache-Control': 'no-store, no-cache, must-revalidate' });
   }
 
   const user = await c.env.DB.prepare(
@@ -189,12 +189,12 @@ export async function getMe(c: Context): Promise<Response> {
   ).bind(userId).first() as User | null;
 
   if (!user) {
-    return c.json({ user: null });
+    return c.json({ user: null }, 200, { 'Cache-Control': 'no-store, no-cache, must-revalidate' });
   }
 
   return c.json({
     user: { id: user.id, email: user.email, nickname: user.nickname, avatar: user.avatar, role: user.role, vip_level: user.vip_level || '', city: user.city || '', province: user.province || '', industries: user.industries || '[]', company_type: user.company_type || '', interests: user.interests || '[]', bio: user.bio || '', notify_prefs: user.notify_prefs || '{}' },
-  });
+  }, 200, { 'Cache-Control': 'no-store, no-cache, must-revalidate' });
 }
 
 export async function forgotPassword(c: Context): Promise<Response> {
