@@ -490,8 +490,18 @@
 
     var nicknameEl = document.getElementById('profile-nickname');
     var emailEl = document.getElementById('profile-email');
+    var pointsEl = document.getElementById('profile-points');
+    var vipEl = document.getElementById('profile-vip');
     if (nicknameEl) nicknameEl.textContent = currentUser.nickname || currentUser.email || '用户';
     if (emailEl) emailEl.textContent = currentUser.email || '';
+    if (pointsEl) pointsEl.textContent = '积分 ' + (currentUser.points || 0);
+    if (vipEl) {
+      var vipMap = {'': '普通用户', 'vip': 'VIP会员', 'svip': 'SVIP会员'};
+      var vipText = vipMap[currentUser.vip_level] || '普通用户';
+      var vipCls = currentUser.vip_level === 'svip' ? 'vip-svip' : currentUser.vip_level === 'vip' ? 'vip-vip' : 'vip-normal';
+      vipEl.textContent = vipText;
+      vipEl.className = 'profile-vip ' + vipCls;
+    }
 
     switch (section) {
       case 'home':

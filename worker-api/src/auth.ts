@@ -185,7 +185,7 @@ export async function getMe(c: Context): Promise<Response> {
   }
 
   const user = await c.env.DB.prepare(
-    'SELECT id, email, nickname, avatar, role, vip_level, city, province, industries, company_type, interests, bio, notify_prefs FROM users WHERE id = ?'
+    'SELECT id, email, nickname, avatar, role, vip_level, points, city, province, industries, company_type, interests, bio, notify_prefs FROM users WHERE id = ?'
   ).bind(userId).first() as User | null;
 
   if (!user) {
@@ -193,7 +193,7 @@ export async function getMe(c: Context): Promise<Response> {
   }
 
   return c.json({
-    user: { id: user.id, email: user.email, nickname: user.nickname, avatar: user.avatar, role: user.role, vip_level: user.vip_level || '', city: user.city || '', province: user.province || '', industries: user.industries || '[]', company_type: user.company_type || '', interests: user.interests || '[]', bio: user.bio || '', notify_prefs: user.notify_prefs || '{}' },
+    user: { id: user.id, email: user.email, nickname: user.nickname, avatar: user.avatar, role: user.role, vip_level: user.vip_level || '', points: user.points || 0, city: user.city || '', province: user.province || '', industries: user.industries || '[]', company_type: user.company_type || '', interests: user.interests || '[]', bio: user.bio || '', notify_prefs: user.notify_prefs || '{}' },
   }, 200, { 'Cache-Control': 'no-store, no-cache, must-revalidate' });
 }
 

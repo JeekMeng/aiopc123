@@ -12,6 +12,10 @@ aliases: ["/profile"]
             <div>
                 <div class="profile-name" id="profile-nickname">加载中...</div>
                 <div class="profile-email" id="profile-email"></div>
+                <div class="profile-meta">
+                    <span class="profile-points" id="profile-points"></span>
+                    <span class="profile-vip" id="profile-vip"></span>
+                </div>
             </div>
         </div>
     </div>
