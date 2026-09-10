@@ -43,6 +43,7 @@ function pageLogin() {
     .then(function(r) { return r.json().then(function(d) { if (!r.ok) throw new Error(d.error || '登录失败'); return d; }); })
     .then(function(data) {
         var user = data.user || data;
+        localStorage.removeItem('auth_user');
         localStorage.setItem('auth_user', JSON.stringify(user));
         window.location.href = '/user/';
     })

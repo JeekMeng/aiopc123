@@ -130,16 +130,13 @@
       if (data.user) {
         currentUser = data.user;
         saveAuth(data.user);
-      } else if (cached) {
-        currentUser = cached;
       } else {
         currentUser = null;
         clearAuth();
       }
     }).catch(function () {
-      if (cached) {
-        currentUser = cached;
-      }
+      currentUser = null;
+      clearAuth();
     }).finally(function () {
       updateUI();
       initBookmarkButtons();

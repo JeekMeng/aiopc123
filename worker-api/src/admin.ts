@@ -1,4 +1,5 @@
 import { Context } from 'hono';
+import { destroySession, getSessionCookie, clearSessionCookie } from './middleware';
 
 const SETUP_SECRET = 'aiopc-admin-setup-2026';
 
@@ -56,12 +57,23 @@ export async function updateRole(c: Context): Promise<Response> {
 export async function deleteUser(c: Context): Promise<Response> {
   try {
     const id = parseInt(c.req.param('id')!, 10);
+    const callerId = c.get('userId') as number;
+
     await c.env.DB.prepare('DELETE FROM bookmarks WHERE user_id = ?').bind(id).run();
     await c.env.DB.prepare('DELETE FROM comments WHERE user_id = ?').bind(id).run();
     const result = await c.env.DB.prepare('DELETE FROM users WHERE id = ?').bind(id).run();
     if (result.meta.changes === 0) {
       return c.json({ error: '用户不存在' }, 404);
     }
+
+    if (id === callerId) {
+      const sessionId = getSessionCookie(c);
+      if (sessionId) {
+        await destroySession(c.env.SESSIONS, sessionId);
+      }
+      clearSessionCookie(c);
+    }
+
     return c.json({ message: '用户已删除' });
   } catch (err) {
     console.error('delete user error:', err);

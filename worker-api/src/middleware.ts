@@ -59,7 +59,12 @@ export function getSessionCookie(c: Context): string | undefined {
 export async function requireAuth(c: Context, next: () => Promise<void>): Promise<Response | void> {
   const headerUserId = c.req.header('X-Auth-User-Id');
   if (headerUserId) {
-    c.set('userId', parseInt(headerUserId, 10));
+    const userId = parseInt(headerUserId, 10);
+    const user = await c.env.DB.prepare('SELECT id FROM users WHERE id = ?').bind(userId).first();
+    if (!user) {
+      return c.json({ error: '用户不存在' }, 401);
+    }
+    c.set('userId', userId);
     await next();
     return;
   }
@@ -68,6 +73,12 @@ export async function requireAuth(c: Context, next: () => Promise<void>): Promis
   const userId = await getUserIdFromSession(c.env.SESSIONS, sessionId);
   if (!userId) {
     return c.json({ error: '请先登录' }, 401);
+  }
+  const user = await c.env.DB.prepare('SELECT id FROM users WHERE id = ?').bind(userId).first();
+  if (!user) {
+    await destroySession(c.env.SESSIONS, sessionId);
+    clearSessionCookie(c);
+    return c.json({ error: '用户不存在' }, 401);
   }
   c.set('userId', userId);
   await next();
