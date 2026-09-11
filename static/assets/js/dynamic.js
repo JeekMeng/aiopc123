@@ -123,6 +123,8 @@
     var appUserMenu = document.getElementById('appUserMenu');
     if (!userMenu && !appUserMenu) return;
 
+    var path = window.location.pathname;
+    if (/^\/user\/(login|register|forgot-password|reset-password)\/?$/.test(path)) return;
 
     var cached = loadAuth();
 
