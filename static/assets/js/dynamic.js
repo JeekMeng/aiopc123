@@ -59,11 +59,11 @@
   function logoutUser() {
     currentUser = null;
     clearAuth();
-    api('/auth/logout', { method: 'POST' }).then(function () {
-      window.location.href = '/user/login/';
-    }).catch(function () {
-      window.location.href = '/user/login/';
-    });
+    try { localStorage.removeItem('user_profiles'); } catch (e) {}
+    try { localStorage.removeItem('permissions_config'); } catch (e) {}
+    try { localStorage.removeItem('_test_data_seeded'); } catch (e) {}
+    try { navigator.sendBeacon(API_BASE + '/auth/logout', new Blob([''], { type: 'application/json' })); } catch (e) {}
+    window.location.href = '/user/login/';
   }
 
   function updateUI() {
@@ -127,6 +127,7 @@
     if (/^\/user\/(login|register|forgot-password|reset-password)\/?$/.test(path)) return;
 
     var cached = loadAuth();
+    if (cached && !currentUser) currentUser = cached;
 
     api('/auth/me').then(function (data) {
       if (data.user) {

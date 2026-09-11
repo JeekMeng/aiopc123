@@ -43,9 +43,12 @@ function pageLogin() {
     .then(function(r) { return r.json().then(function(d) { if (!r.ok) throw new Error(d.error || '登录失败'); return d; }); })
     .then(function(data) {
         var user = data.user || data;
-        localStorage.removeItem('auth_user');
+        try { localStorage.removeItem('auth_user'); } catch(e) {}
+        try { localStorage.removeItem('user_profiles'); } catch(e) {}
+        try { localStorage.removeItem('permissions_config'); } catch(e) {}
+        try { localStorage.removeItem('_test_data_seeded'); } catch(e) {}
         localStorage.setItem('auth_user', JSON.stringify(user));
-        window.location.href = '/user/';
+        setTimeout(function() { window.location.href = '/user/'; }, 50);
     })
     .catch(function(err) {
         showPageLoginError(err.message);

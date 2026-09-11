@@ -49,7 +49,12 @@ export function setSessionCookie(c: Context, sessionId: string): void {
 }
 
 export function clearSessionCookie(c: Context): void {
-  deleteCookie(c, SESSION_COOKIE, { path: '/' });
+  deleteCookie(c, SESSION_COOKIE, {
+    path: '/',
+    httpOnly: true,
+    secure: true,
+    sameSite: 'Lax',
+  });
 }
 
 export function getSessionCookie(c: Context): string | undefined {

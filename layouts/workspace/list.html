@@ -1763,7 +1763,7 @@
     document.addEventListener('click', function(e) {
         var panel = document.getElementById('settingsPanel');
         var cog = e.target.closest('.fa-cog');
-        if (!panel.contains(e.target) && !cog) {
+        if (panel && !panel.contains(e.target) && !cog) {
             panel.classList.remove('show');
         }
     });

@@ -429,14 +429,17 @@
         // Context Menu
         function showContextMenu(x, y) {
             const menu = document.getElementById('contextMenu');
+            if (!menu) return;
             menu.style.display = 'block';
             menu.style.left = x + 'px';
             menu.style.top = y + 'px';
         }
 
         function hideContextMenu() {
-            document.getElementById('contextMenu').style.display = 'none';
-            document.getElementById('dockContextMenu').style.display = 'none';
+            var cm = document.getElementById('contextMenu');
+            var dcm = document.getElementById('dockContextMenu');
+            if (cm) cm.style.display = 'none';
+            if (dcm) dcm.style.display = 'none';
         }
 
         document.addEventListener('contextmenu', function(e) {
@@ -444,9 +447,11 @@
             const dock = e.target.closest('.dock');
             if (dock) {
                 const menu = document.getElementById('dockContextMenu');
-                menu.style.display = 'block';
-                menu.style.left = e.clientX + 'px';
-                menu.style.top = e.clientY + 'px';
+                if (menu) {
+                    menu.style.display = 'block';
+                    menu.style.left = e.clientX + 'px';
+                    menu.style.top = e.clientY + 'px';
+                }
             } else {
                 showContextMenu(e.clientX, e.clientY);
             }
