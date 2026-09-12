@@ -117,7 +117,7 @@ export async function login(c: Context): Promise<Response> {
 
     return c.json({
       user: { id: user.id, email: user.email, nickname: user.nickname, avatar: user.avatar, role: user.role, vip_level: user.vip_level || '' },
-    }, 200, { 'Cache-Control': 'no-store, no-cache, must-revalidate' });
+    }, 200, { 'Cache-Control': 'no-store, no-cache, must-revalidate, private', 'CDN-Cache-Control': 'no-store', 'Surrogate-Control': 'no-store', 'Pragma': 'no-cache' });
   } catch (err) {
     console.error('login error:', err);
     return c.json({ error: '登录失败，请稍后重试' }, 500);
@@ -180,8 +180,15 @@ export async function getMe(c: Context): Promise<Response> {
       ? await getUserIdFromSession(c.env.SESSIONS, getSessionCookie(c))
       : null;
 
+  const NO_CACHE_HEADERS = {
+    'Cache-Control': 'no-store, no-cache, must-revalidate, private',
+    'CDN-Cache-Control': 'no-store',
+    'Surrogate-Control': 'no-store',
+    'Pragma': 'no-cache',
+  };
+
   if (!userId) {
-    return c.json({ user: null }, 200, { 'Cache-Control': 'no-store, no-cache, must-revalidate' });
+    return c.json({ user: null }, 200, NO_CACHE_HEADERS);
   }
 
   const user = await c.env.DB.prepare(
@@ -189,12 +196,12 @@ export async function getMe(c: Context): Promise<Response> {
   ).bind(userId).first() as User | null;
 
   if (!user) {
-    return c.json({ user: null }, 200, { 'Cache-Control': 'no-store, no-cache, must-revalidate' });
+    return c.json({ user: null }, 200, NO_CACHE_HEADERS);
   }
 
   return c.json({
     user: { id: user.id, email: user.email, nickname: user.nickname, avatar: user.avatar, role: user.role, vip_level: user.vip_level || '', points: user.points || 0, city: user.city || '', province: user.province || '', industries: user.industries || '[]', company_type: user.company_type || '', interests: user.interests || '[]', bio: user.bio || '', notify_prefs: user.notify_prefs || '{}' },
-  }, 200, { 'Cache-Control': 'no-store, no-cache, must-revalidate' });
+  }, 200, NO_CACHE_HEADERS);
 }
 
 export async function forgotPassword(c: Context): Promise<Response> {

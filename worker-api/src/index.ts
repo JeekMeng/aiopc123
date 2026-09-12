@@ -30,6 +30,14 @@ app.use('/api/*', cors({
   allowHeaders: ['Content-Type', 'X-Auth-User-Id'],
 }));
 
+app.use('/api/*', async (c, next) => {
+  await next();
+  c.header('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+  c.header('CDN-Cache-Control', 'no-store');
+  c.header('Surrogate-Control', 'no-store');
+  c.header('Pragma', 'no-cache');
+});
+
 app.get('/api/health', (c) => c.json({ status: 'ok' }));
 
 const auth = new Hono();
