@@ -138,7 +138,7 @@
         function checkAuth() {
             currentUser = getAuthUser();
             if (currentUser) {
-                fetch(API_BASE + '/auth/me', { credentials: 'include' })
+                fetch(API_BASE + '/auth/me?_=' + Date.now(), { credentials: 'include' })
                     .then(function(r) { return r.json().then(function(d) { if (!r.ok) { throw new Error(d.error || 'expired'); } return d; }); })
                     .then(function(data) {
                         var user = data.user || null;

@@ -38,6 +38,10 @@
       options.headers = options.headers || {};
       options.headers['X-Auth-User-Id'] = currentUser.id;
     }
+    if (!options.method || options.method === 'GET') {
+      var sep = path.indexOf('?') !== -1 ? '&' : '?';
+      path = path + sep + '_=' + Date.now();
+    }
     if (options.body && typeof options.body === 'object') {
       options.body = JSON.stringify(options.body);
       options.headers = options.headers || {};
