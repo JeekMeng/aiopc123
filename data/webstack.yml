@@ -52,6 +52,14 @@
 - taxonomy: OPC最新上线
   icon: fas fa-plus-circle
   links:
+    - title: Lovart 中文版 - AI智能体 - 国内直接访问
+      logo: 200573.webp
+      url: /site/200573/
+      description: 国内直接访问，无需魔法，设计师 / 运营 / 自媒体刚需
+    - title: Agent Space - AI编程工具
+      logo: 200574.webp
+      url: /site/200574/
+      description: 约 0.1 折的 Codex 使用成本,便宜
     - title: ChatExcel-AI办公工具-用AI聊天处理Excel
       logo: 200314.webp
       url: /site/200314/
@@ -108,6 +116,10 @@
       logo: 200488.webp
       url: /site/200488/
       description: 科大讯飞官方数字人 SaaS，教育 / 企业 / 媒体刚需。
+    - title: SkildArt - AI图像工具
+      logo: 200572.webp
+      url: /site/200572/
+      description: Image2无限生成，电商图和营销视频一站搞定
     - title: AstronClaw - AI智能体
       logo: 200455.webp
       url: /site/200455/
@@ -188,6 +200,10 @@
           logo: 200347.webp
           url: /site/200347/
           description: 用自然语言创造无限可能
+        - title: Lovart 中文版 - AI智能体 - 国内直接访问
+          logo: 200573.webp
+          url: /site/200573/
+          description: 国内直接访问，无需魔法，设计师 / 运营 / 自媒体刚需
         - title: Gnomic.ai-AI智能体-创作伴侣
           logo: 200369.webp
           url: /site/200369/
@@ -376,6 +392,10 @@
           logo: 200470.webp
           url: /site/200470/
           description: 点字成画，秒变大师。
+        - title: SkildArt - AI图像工具
+          logo: 200572.webp
+          url: /site/200572/
+          description: Image2无限生成，电商图和营销视频一站搞定
     - term:  AI音频工具
       links:
         - title: 立刻MV -  AI音频工具
@@ -630,6 +650,10 @@
           logo: 200301.webp
           url: /site/200301/
           description: AI编程，效率翻倍
+        - title: Agent Space - AI编程工具
+          logo: 200574.webp
+          url: /site/200574/
+          description: 约 0.1 折的 Codex 使用成本,便宜
         - title: Replicate - AI编程工具
           logo: 200469.webp
           url: /site/200469/
