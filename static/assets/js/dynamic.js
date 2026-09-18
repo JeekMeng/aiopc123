@@ -1558,7 +1558,8 @@
         list.innerHTML = '<div class="text-muted text-center py-3">' + escapeHtml('暂无入驻申请') + '</div>';
         return;
       }
-      list.innerHTML = data.submissions.map(function (s) {
+      window._adminSubCache = data.submissions;
+      list.innerHTML = data.submissions.map(function (s, idx) {
         var date = s.created_at ? new Date(s.created_at + 'Z').toLocaleDateString('zh-CN') : '-';
         var statusMap = { approved: '已通过', rejected: '已拒绝', pending: '待审核' };
         var statusBadgeCls = s.status === 'approved' ? 'app-badge-success' : s.status === 'rejected' ? 'app-badge-danger' : 'app-badge-warning';
@@ -1602,6 +1603,7 @@
             ? '<button class="app-btn app-btn-sm app-btn-success" onclick="adminPageApproveSub(\'' + s.id + '\')">通过</button>' +
               '<button class="app-btn app-btn-sm app-btn-danger" onclick="adminPageRejectSub(\'' + s.id + '\')">拒绝</button>'
             : '') +
+          '<button class="app-btn app-btn-sm app-btn-secondary" onclick="adminPagePreviewReply(' + idx + ')">查看回复内容</button>' +
           '<button class="app-btn app-btn-sm app-btn-secondary" onclick="adminPageDeleteSub(\'' + s.id + '\')">删除</button>' +
           '</div>' +
           '</div></div>';
@@ -2121,4 +2123,193 @@
   window.openAuthModal = function () {
     window.location.href = '/user/login/';
   };
+
+  // ========== 入驻审核回复内容预览 ==========
+
+  function renderReplyTemplates(sub, action) {
+    var siteName = escapeHtml(sub.name);
+    var siteUrl = escapeHtml(sub.website);
+    var siteSlug = sub.name.toLowerCase().replace(/[^a-z0-9\u4e00-\u9fa5]+/g, '-').replace(/^-+|-+$/g, '');
+    var category = '';
+    try {
+      var cats = typeof sub.categories === 'string' ? JSON.parse(sub.categories) : sub.categories;
+      if (Array.isArray(cats)) { category = cats.join('、'); }
+      else { category = escapeHtml(String(cats)); }
+    } catch(e) { category = escapeHtml(String(sub.categories || '其他')); }
+    var approvedAt = new Date().toLocaleString('zh-CN');
+    var contactName = escapeHtml(sub.contact_name || '用户');
+    var reviewNote = escapeHtml(sub.review_note || '');
+    var isApproved = action === 'approved';
+
+    var emailSubject = isApproved
+      ? '【aiopc123.com】您提交的「' + siteName + '」已正式收录'
+      : '【aiopc123.com】您提交的「' + siteName + '」审核未通过';
+
+    var emailHtml = ''
+      + '<div style="font-family:-apple-system,BlinkMacSystemFont,\'SF Pro Text\',sans-serif;max-width:600px;margin:0 auto;padding:24px;">'
+      + '<div style="background:linear-gradient(135deg,#007AFF,#5856D6);padding:32px 24px;border-radius:16px 16px 0 0;text-align:center;">'
+      + '<h1 style="color:white;margin:0;font-size:24px;font-weight:600;">AI一人公司导航网</h1>'
+      + '<p style="color:rgba(255,255,255,.9);margin:8px 0 0;font-size:14px;">入驻申请审核结果通知</p>'
+      + '</div>'
+      + '<div style="background:#fff;border:1px solid #e5e5ea;border-top:none;border-radius:0 0 16px 16px;padding:32px 24px;">'
+      + '<p style="font-size:16px;margin-top:0;">亲爱的 <strong>' + contactName + '</strong>，</p>'
+      + (isApproved
+        ? '<p>很高兴通知您，您提交的工具/网站 <strong>「' + siteName + '」</strong> 已通过审核，正式收录入 <strong>AI一人公司导航网 (aiopc123.com)</strong>。</p>'
+        : '<p>很遗憾通知您，您提交的工具/网站 <strong>「' + siteName + '」</strong> 经审核暂不符合收录标准，未能通过。</p>')
+      + (isApproved
+        ? '<div style="background:#f8f9fa;border-radius:12px;padding:20px;margin:24px 0;">'
+          + '<h3 style="margin:0 0 16px;font-size:14px;color:#86868b;letter-spacing:.5px;">收录详情</h3>'
+          + '<table style="width:100%;border-collapse:collapse;">'
+          + '<tr><td style="padding:8px 0;color:#86868b;font-size:14px;">工具名称</td><td style="padding:8px 0;text-align:right;font-weight:500;">' + siteName + '</td></tr>'
+          + '<tr><td style="padding:8px 0;color:#86868b;font-size:14px;">官网链接</td><td style="padding:8px 0;text-align:right;font-weight:500;"><a href="' + siteUrl + '" style="color:#007AFF;">' + siteUrl + '</a></td></tr>'
+          + '<tr><td style="padding:8px 0;color:#86868b;font-size:14px;">收录分类</td><td style="padding:8px 0;text-align:right;font-weight:500;">' + category + '</td></tr>'
+          + '<tr><td style="padding:8px 0;color:#86868b;font-size:14px;">收录时间</td><td style="padding:8px 0;text-align:right;font-weight:500;">' + approvedAt + '</td></tr>'
+          + '</table></div>'
+          + '<div style="background:#f0f7ff;border-radius:12px;padding:20px;margin:24px 0;border-left:4px solid #007AFF;">'
+          + '<h4 style="margin:0 0 12px;color:#007AFF;">快速访问您的收录页</h4>'
+          + '<p style="margin:0;"><a href="https://www.aiopc123.com/site/' + siteSlug + '/" style="display:inline-block;background:#007AFF;color:white;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:500;">查看收录详情</a></p>'
+          + '</div>'
+        : '<div style="background:#fff5f5;border-radius:12px;padding:20px;margin:24px 0;border-left:4px solid #FF3B30;">'
+          + '<h4 style="margin:0 0 12px;color:#FF3B30;">审核说明</h4>'
+          + '<p style="margin:0;color:#666;">' + (reviewNote || '未提供具体原因') + '</p>'
+          + '<p style="margin:12px 0 0;color:#86868b;font-size:13px;">如有疑问，可在优化后重新提交申请，我们将再次审核。</p>'
+          + '</div>')
+      + '<hr style="border:none;border-top:1px solid #e5e5ea;margin:24px 0;">'
+      + '<p style="font-size:13px;color:#86868b;margin:0;">如需更新信息，请在 <a href="https://www.aiopc123.com/upload/" style="color:#007AFF;">提交收录</a> 页面再次提交并注明「更新」。</p>'
+      + '<p style="font-size:13px;color:#86868b;margin:16px 0 0;">—— AI一人公司导航网 运营团队</p>'
+      + '<p style="font-size:12px;color:#86868b;margin:24px 0 0;"><a href="https://www.aiopc123.com" style="color:#86868b;">https://www.aiopc123.com</a></p>'
+      + '</div></div>';
+
+    var emailText = '亲爱的 ' + contactName + '：\n\n'
+      + (isApproved
+        ? '很高兴通知您，您提交的工具/网站「' + siteName + '」已通过审核，正式收录入 AI一人公司导航网 (aiopc123.com)。\n\n收录详情：\n- 工具名称：' + siteName + '\n- 官网链接：' + siteUrl + '\n- 收录分类：' + category + '\n- 收录时间：' + approvedAt + '\n\n查看收录页：https://www.aiopc123.com/site/' + siteSlug + '/\n\n'
+        : '很遗憾通知您，您提交的工具/网站「' + siteName + '」经审核暂不符合收录标准，未能通过。\n\n审核说明：' + (reviewNote || '未提供具体原因') + '\n\n如有疑问，可在优化后重新提交申请，我们将再次审核。\n\n')
+      + '—— AI一人公司导航网 运营团队\nhttps://www.aiopc123.com';
+
+    var smsText = isApproved
+      ? '【aiopc123】恭喜，「' + siteName + '」已收录上线 aiopc123.com，详见：https://www.aiopc123.com/site/' + siteSlug + '/'
+      : '【aiopc123】您提交的「' + siteName + '」审核未通过，原因：' + (reviewNote || '不符合标准') + '。优化后可重新提交。';
+
+    var notifyTitle = isApproved
+      ? '收录通过：' + siteName + ' 已上线'
+      : '收录未通过：' + siteName;
+
+    var notifyHtml = isApproved
+      ? '<p>恭喜！您提交的 <strong>「' + siteName + '」</strong> 已正式收录入 AI一人公司导航网。</p>'
+        + '<p>查看收录页：<a href="/site/' + siteSlug + '/">/site/' + siteSlug + '/</a></p>'
+        + '<p>所在分类：' + category + '</p>'
+        + '<p style="font-size:12px;color:#86868b;">如需更新信息，请在「提交收录」页面再次提交并注明「更新」。</p>'
+      : '<p>您提交的 <strong>「' + siteName + '」</strong> 经审核暂不符合收录标准。</p>'
+        + '<p>审核说明：' + (reviewNote || '未提供具体原因') + '</p>'
+        + '<p style="font-size:12px;color:#86868b;">如有疑问，可在优化后重新提交申请，我们将再次审核。</p>';
+
+    return {
+      email: { subject: emailSubject, html: emailHtml, text: emailText },
+      sms: { text: smsText },
+      notify: { title: notifyTitle, html: notifyHtml }
+    };
+  }
+
+  function renderReplyTabContent(tpl) {
+    return ''
+      + '<div style="margin-bottom:20px;">'
+      + '<label style="display:block;font-weight:600;margin-bottom:6px;font-size:12px;color:#86868b;">邮件主题</label>'
+      + '<input type="text" value="' + escapeHtml(tpl.email.subject) + '" readonly style="width:100%;padding:10px 12px;border:1px solid #e5e5ea;border-radius:8px;background:#fafafa;font-size:13px;box-sizing:border-box;" onclick="this.select()">'
+      + '</div>'
+      + '<div style="margin-bottom:20px;">'
+      + '<label style="display:block;font-weight:600;margin-bottom:6px;font-size:12px;color:#86868b;">邮件正文 (HTML)</label>'
+      + '<textarea readonly style="width:100%;min-height:180px;padding:12px;border:1px solid #e5e5ea;border-radius:8px;font-family:monospace;font-size:12px;line-height:1.6;background:#fafafa;box-sizing:border-box;resize:vertical;" onclick="this.select()">' + escapeHtml(tpl.email.html) + '</textarea>'
+      + '</div>'
+      + '<div style="margin-bottom:20px;">'
+      + '<label style="display:block;font-weight:600;margin-bottom:6px;font-size:12px;color:#86868b;">邮件正文 (纯文本)</label>'
+      + '<textarea readonly style="width:100%;min-height:140px;padding:12px;border:1px solid #e5e5ea;border-radius:8px;font-family:monospace;font-size:12px;line-height:1.6;background:#fafafa;box-sizing:border-box;resize:vertical;" onclick="this.select()">' + escapeHtml(tpl.email.text) + '</textarea>'
+      + '</div>'
+      + '<div style="margin-bottom:20px;padding:14px;background:#f0f7ff;border-radius:8px;border:1px solid #d0e4ff;">'
+      + '<label style="display:block;font-weight:600;margin-bottom:6px;font-size:12px;color:#007AFF;">短信内容</label>'
+      + '<textarea readonly style="width:100%;min-height:60px;padding:10px;border:1px solid #bdd8ff;border-radius:6px;font-size:13px;line-height:1.6;background:#fff;box-sizing:border-box;resize:vertical;" onclick="this.select()">' + escapeHtml(tpl.sms.text) + '</textarea>'
+      + '</div>'
+      + '<div style="margin-bottom:0;padding:14px;background:#f0fff4;border-radius:8px;border:1px solid #b7ebc6;">'
+      + '<label style="display:block;font-weight:600;margin-bottom:6px;font-size:12px;color:#34C759;">站内消息</label>'
+      + '<div style="font-weight:600;font-size:13px;margin-bottom:8px;">' + escapeHtml(tpl.notify.title) + '</div>'
+      + '<div style="padding:12px;background:#fff;border:1px solid #d4edda;border-radius:6px;font-size:13px;line-height:1.6;">' + tpl.notify.html + '</div>'
+      + '</div>';
+  }
+
+  window.adminPagePreviewReply = function adminPagePreviewReply(idx) {
+    var subs = window._adminSubCache || [];
+    var s = subs[idx];
+    if (!s) return;
+    var sub = { id: s.id, name: s.name, website: s.website, categories: s.categories || '[]', contact_name: s.contact_name, review_note: s.review_note || '' };
+    var approved = renderReplyTemplates(sub, 'approved');
+    var rejected = renderReplyTemplates(sub, 'rejected');
+
+    var html = ''
+      + '<div class="reply-preview-overlay" id="replyPreviewModal" onclick="if(event.target===this)closeReplyPreview()">'
+      + '<div class="reply-preview-container">'
+      + '<div class="reply-preview-header">'
+      + '<h3 style="margin:0;font-size:16px;">回复内容预览 — ' + escapeHtml(s.name) + '</h3>'
+      + '<button class="app-btn app-btn-ghost app-btn-sm" onclick="closeReplyPreview()" style="font-size:18px;padding:4px 8px;"><i class="fas fa-times"></i></button>'
+      + '</div>'
+      + '<div class="reply-preview-body">'
+      + '<div class="reply-tab-nav" id="replyTabNav">'
+      + '<button class="reply-tab-btn active" data-tab="approved" onclick="switchReplyTab(this)">通过回复</button>'
+      + '<button class="reply-tab-btn" data-tab="rejected" onclick="switchReplyTab(this)">拒绝回复</button>'
+      + '</div>'
+      + '<div class="reply-tab-content" id="replyTab-approved">' + renderReplyTabContent(approved) + '</div>'
+      + '<div class="reply-tab-content" id="replyTab-rejected" style="display:none;">' + renderReplyTabContent(rejected) + '</div>'
+      + '</div>'
+      + '<div class="reply-preview-footer">'
+      + '<button class="app-btn app-btn-sm app-btn-secondary" onclick="copyAllReplyContent(\'approved\')">复制通过全部内容</button>'
+      + '<button class="app-btn app-btn-sm app-btn-secondary" onclick="copyAllReplyContent(\'rejected\')">复制拒绝全部内容</button>'
+      + '<button class="app-btn app-btn-sm app-btn-primary" onclick="closeReplyPreview()">关闭</button>'
+      + '</div>'
+      + '</div></div>';
+
+    document.body.insertAdjacentHTML('beforeend', html);
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.switchReplyTab = function switchReplyTab(btn) {
+    var tab = btn.getAttribute('data-tab');
+    document.querySelectorAll('#replyTabNav .reply-tab-btn').forEach(function (b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    document.getElementById('replyTab-approved').style.display = tab === 'approved' ? '' : 'none';
+    document.getElementById('replyTab-rejected').style.display = tab === 'rejected' ? '' : 'none';
+  };
+
+  window.closeReplyPreview = function closeReplyPreview() {
+    var modal = document.getElementById('replyPreviewModal');
+    if (modal) modal.remove();
+    document.body.style.overflow = '';
+  };
+
+  window.copyAllReplyContent = function copyAllReplyContent(tab) {
+    var active = tab || 'approved';
+    var el = document.getElementById('replyTab-' + active);
+    if (!el) return;
+    var sections = [];
+    el.querySelectorAll('input, textarea').forEach(function (inp) {
+      var label = '';
+      var prev = inp.previousElementSibling;
+      if (!prev) { var parent = inp.closest('div'); if (parent) prev = parent.previousElementSibling; }
+      if (prev && prev.tagName === 'LABEL') label = prev.textContent.trim();
+      var val = inp.value || inp.textContent;
+      sections.push((label ? label + '：\n' : '') + val + '\n');
+    });
+    var allText = sections.join('\n---\n\n');
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(allText).then(function () {
+        alert('已复制全部内容到剪贴板');
+      });
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = allText;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+      alert('已复制全部内容到剪贴板');
+    }
+  };
+
 })();
