@@ -901,7 +901,7 @@
             if (!u || !u.id) return;
             // 加载 OPC 基本信息
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', API_BASE + '/opc/' + opcId, true);
+            xhr.open('GET', API_BASE + '/opc/' + opcId + '?_=' + Date.now(), true);
             xhr.setRequestHeader('X-Auth-User-Id', u.id);
             xhr.withCredentials = true;
             xhr.onreadystatechange = function() {
@@ -930,7 +930,7 @@
 
         function loadDeptsToForm(opcId, userId) {
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', API_BASE + '/opc/' + opcId + '/departments', true);
+            xhr.open('GET', API_BASE + '/opc/' + opcId + '/departments?_=' + Date.now(), true);
             xhr.setRequestHeader('X-Auth-User-Id', userId);
             xhr.withCredentials = true;
             xhr.onreadystatechange = function() {
@@ -947,7 +947,7 @@
 
         function loadProductsToForm(opcId, userId) {
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', API_BASE + '/opc/' + opcId + '/products', true);
+            xhr.open('GET', API_BASE + '/opc/' + opcId + '/products?_=' + Date.now(), true);
             xhr.setRequestHeader('X-Auth-User-Id', userId);
             xhr.withCredentials = true;
             xhr.onreadystatechange = function() {
@@ -1533,7 +1533,7 @@
             if (!u || !u.id || !opcId) { switchOpcCard('create'); return; }
 
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', API_BASE + '/opc/' + opcId, true);
+            xhr.open('GET', API_BASE + '/opc/' + opcId + '?_=' + Date.now(), true);
             xhr.setRequestHeader('X-Auth-User-Id', u.id);
             xhr.withCredentials = true;
             xhr.onreadystatechange = function() {
@@ -1566,7 +1566,7 @@
             var deptEl = document.getElementById('opcInfoDepts');
             if (!deptEl) return;
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', API_BASE + '/opc/' + opcId + '/departments', true);
+            xhr.open('GET', API_BASE + '/opc/' + opcId + '/departments?_=' + Date.now(), true);
             xhr.setRequestHeader('X-Auth-User-Id', u.id);
             xhr.withCredentials = true;
             xhr.onreadystatechange = function() {
@@ -1588,7 +1588,7 @@
             var prodEl = document.getElementById('opcInfoProducts');
             if (!prodEl) return;
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', API_BASE + '/opc/' + opcId + '/products', true);
+            xhr.open('GET', API_BASE + '/opc/' + opcId + '/products?_=' + Date.now(), true);
             xhr.setRequestHeader('X-Auth-User-Id', u.id);
             xhr.withCredentials = true;
             xhr.onreadystatechange = function() {
