@@ -72,6 +72,10 @@
       logo: default.webp
       url: /site/200485/
       description: 切问AI，秒速筛选论文，科研更高效。
+    - title: ImgAPI - AI词元Token
+      logo: 200578.webp
+      url: /site/200578/
+      description: 低价有保障的 AI 生图 API，支持批量商品图制作
     - title: 二狗PPT - AI办公工具
       logo: 200483.webp
       url: /site/200483/
@@ -88,6 +92,10 @@
       logo: 200456.webp
       url: /site/200456/
       description: 超级学术智能体
+    - title: HotBee - AI智能体
+      logo: 200577.webp
+      url: /site/200577/
+      description: 蒸馏社媒账号、拆解爆款内容、解析播放数据的一站式内容掘金系统
     - title: Seko -  AI视频工具
       logo: 200497.webp
       url: /site/200497/
@@ -280,6 +288,10 @@
           logo: 200456.webp
           url: /site/200456/
           description: 超级学术智能体
+        - title: HotBee - AI智能体
+          logo: 200577.webp
+          url: /site/200577/
+          description: 蒸馏社媒账号、拆解爆款内容、解析播放数据的一站式内容掘金系统
         - title: 攻壳智能体 - AI智能体 - 发现AI利器
           logo: default.webp
           url: /site/200436/
@@ -450,6 +462,10 @@
           logo: 200557.webp
           url: /site/200557/
           description: 全球大模型中转站
+        - title: ImgAPI - AI词元Token
+          logo: 200578.webp
+          url: /site/200578/
+          description: 低价有保障的 AI 生图 API，支持批量商品图制作
         - title: API易 - AI词元Token - 稳定专业
           logo: 200551.webp
           url: /site/200551/
