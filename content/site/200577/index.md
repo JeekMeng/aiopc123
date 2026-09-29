@@ -5,7 +5,7 @@ draft: false
 schema_type: SoftwareApplication
 category: [OPC-AI赋能, AI智能体]
 score: 9.5
-description: HotBee 面向内容团队和电商运营，可蒸馏社媒账号背后的定位与选题方法，拆解爆款内容的脚本结构和评论线索，解析抖音播放量等公开数据，并通过多维表沉淀账号资产与运营流程。
+description: HotBee 面向内容团队和电商运营，可蒸馏社媒账号背后的定位与选题方法，拆解爆款内容的脚本结构和评论线索，解析抖音播放量等公开数据，并通过多维表沉淀账号资产与
 official_url: https://www.hotbee.cn/
 mobile_url: https://www.hotbee.cn/
 company: HotBee

@@ -806,10 +806,10 @@
           logo: default.webp
           url: https://wssp.hainan.gov.cn
           description: 海南一人公司注册
-        - title: 百度一下，你就知道-AI编程工具-中文搜索引擎
+        - title: 浙里办 - 工商注册
           logo: 200321.webp
           url: https://www.zjzwfw.gov.cn
-          description: 浙江一人公司注册
+          description: 浙江一人公司注册官方平台
         - title: 慧算账 - OPC公司经营 - 智能财税服务平台
           logo: 200000.webp
           url: /site/200000/
@@ -880,10 +880,10 @@
           description: 天眼查，企业信息一目了然
     - term: 合同法务
       links:
-        - title: 【电子合同 - OPC公司经营 - 电子签名与合同管理
+        - title: 法大大 - 合同法务 - 法大大
           logo: 200015.webp
           url: /site/200015/
-          description: 法大大，让签约更智能高效
+          description: 法大大，让合同签约更智能高效
         - title: 12348 中国法网 - 合同法务
           logo: 200329.webp
           url: https://www.12348.gov.cn/

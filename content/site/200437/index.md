@@ -8,7 +8,7 @@ mobile_url: https://atypica.ai
 company: Atypica
 category: [OPC-AI赋能, AI智能体]
 score: 9.1
-description: "Atypica是AI驱动的商业研究平台，自动生成用户画像、智能访谈分析并模拟消费者决策，深度洞察市场认知与行为模式，助力产品验证与用户测试。"
+description: Atypica是AI驱动的商业研究平台，自动生成用户画像、智能访谈分析并模拟消费者决策，深度洞察市场认知与行为模式，助力产品验证与用户测试。
 tags: [商业研究, AI智能体, 消费者洞察, 市场分析, 决策支持]
 keywords: [商业研究, AI智能体, 消费者洞察, 市场分析, 决策支持]
 ---

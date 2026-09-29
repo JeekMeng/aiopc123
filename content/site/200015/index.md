@@ -1,5 +1,5 @@
 ---
-title: "【电子合同 - OPC公司经营 - 电子签名与合同管理"              
+title: "法大大 - 合同法务 - 法大大"
 date: 2026-03-01
 draft: false
 schema_type: "SoftwareApplication"

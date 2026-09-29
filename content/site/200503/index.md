@@ -5,12 +5,11 @@ draft: false
 schema_type: SoftwareApplication
 category: [OPC-AI赋能, AI词元Token]
 score: 9.5
-description: 毫秒级推理，让开发快人一步！
+description: "Groq是一家专注于 AI 推理加速的云服务商，它通过自研的 LPU芯片，为大规模生成式 AI 负载提供远胜于传统 GPU 的推理速度。"
 official_url: https://groq.com/
 mobile_url: https://groq.com/
 company: Groq is the premier neocloud for fast inference
 ---
-
 
 ## 🎯 网站介绍
 

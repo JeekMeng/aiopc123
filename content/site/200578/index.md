@@ -5,8 +5,7 @@ draft: false
 schema_type: SoftwareApplication
 category: [OPC-AI赋能, AI词元Token]
 score: 9.5
-description: ImgAPI 面向开发者和电商商家，支持 GPT Image 2.5、GPT Image 2、Banana Pro、Banana 2 等模型。提供
-  API 一键接入与任务查询，可用于批量制作商品主图和宣传素材。
+description: ImgAPI 面向开发者和电商商家，支持 GPT Image 2.5、GPT Image 2、Banana Pro、Banana 2 等模型。提供 API 一键
 official_url: https://imgapi.vip/
 mobile_url: https://imgapi.vip/
 company: ImgAPI

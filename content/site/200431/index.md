@@ -13,14 +13,13 @@ score: 9.5
 
 # SEO优化
 keywords: ["AI一人公司导航", "AI提示词", "提示词灵感", "提示词交流", "AI绘画提示词"]
-description: "探索AI提示词社区tiptip.art，获取海量创意灵感与交流平台，发现最新AI工具与提示词技巧，助力创作与学习。"
+description: 探索AI提示词社区tiptip.art，获取海量创意灵感与交流平台，发现最新AI工具与提示词技巧，助力创作与学习。
 
 # 标签
 tags: ["AI提示词", "提示词社区", "灵感分享"]
 
 # 相似网站推荐
 similar: ["PromptBase", "FlowGPT", "PromptHero"]
-
 ---
 
 ## 🎯 网站介绍

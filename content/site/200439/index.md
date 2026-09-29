@@ -8,7 +8,7 @@ mobile_url: https://longcat.chat
 company: LongCat AI
 category: [OPC-AI赋能, AI智能体]
 score: 9.0
-description: "LongCat AI 提供智能对话与内容生成服务，支持多轮交互与知识问答，助力高效办公与创意写作，让AI技术轻松融入日常。"
+description: LongCat AI 提供智能对话与内容生成服务，支持多轮交互与知识问答，助力高效办公与创意写作，让AI技术轻松融入日常。
 ---
 
 ## 🎯 网站介绍

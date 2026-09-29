@@ -8,7 +8,7 @@ mobile_url: https://molili.dangbei.com
 company: MoliliClaw
 category: [OPC-AI赋能, AI智能体]
 score: 9.5
-description: "Molili 莫哩哩AI Agents官网，提供一键安装部署的智能体服务，打造7×24小时全能AI Bot数字机器人，让AI真正做事，高效自动化办公。"
+description: Molili 莫哩哩AI Agents官网，提供一键安装部署的智能体服务，打造7×24小时全能AI Bot数字机器人，让AI真正做事，高效自动化办公。
 tags: [Molili, Molili 官网]
 keywords: [Molili, Molili 官网]
 ---
